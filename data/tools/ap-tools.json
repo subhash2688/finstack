@@ -1,0 +1,374 @@
+[
+  {
+    "id": "stampli",
+    "name": "Stampli",
+    "vendor": "Stampli",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market", "enterprise"],
+    "industries": ["Technology", "Manufacturing", "Healthcare", "Professional Services"],
+    "painPoints": [
+      "Manual invoice data entry",
+      "Slow approval workflows",
+      "Poor visibility into AP process"
+    ],
+    "integrations": ["NetSuite", "QuickBooks", "Sage Intacct", "Microsoft Dynamics", "SAP"],
+    "pricing": {
+      "model": "Per invoice processed",
+      "startingPrice": "$0.50-$1.50 per invoice",
+      "notes": "Volume discounts available"
+    },
+    "keyFeatures": [
+      "AI-powered invoice capture and data extraction",
+      "Collaborative AP workflow with email-based approvals",
+      "Automated 3-way matching",
+      "Real-time AP analytics dashboard",
+      "Vendor management portal"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "reconciliation-reporting"],
+    "tagline": "Collaborative AP Automation Platform",
+    "description": "Stampli combines AI-powered invoice processing with collaborative workflows, enabling AP teams to process invoices faster while maintaining control and visibility.",
+    "website": "https://www.stampli.com"
+  },
+  {
+    "id": "tipalti",
+    "name": "Tipalti",
+    "vendor": "Tipalti",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Technology", "E-commerce", "Media", "Marketplaces"],
+    "painPoints": [
+      "Complex global payment requirements",
+      "Vendor onboarding overhead",
+      "Tax compliance complexity"
+    ],
+    "integrations": ["NetSuite", "QuickBooks", "Xero", "Sage Intacct", "Microsoft Dynamics"],
+    "pricing": {
+      "model": "Per payment + platform fee",
+      "startingPrice": "$50K+ annually",
+      "notes": "Enterprise pricing"
+    },
+    "keyFeatures": [
+      "Global mass payments in 196 countries",
+      "Automated vendor onboarding and tax compliance",
+      "Multi-entity invoice management",
+      "Payment fraud detection",
+      "Supplier portal with self-service"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "approval-routing", "fraud-duplicate-detection", "payment-scheduling", "payment-execution"],
+    "tagline": "Global AP & Payment Automation",
+    "description": "Tipalti provides end-to-end AP automation with a focus on global payments, tax compliance, and supplier management for high-growth companies.",
+    "website": "https://www.tipalti.com"
+  },
+  {
+    "id": "bill",
+    "name": "Bill.com",
+    "vendor": "Bill.com",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Professional Services", "Real Estate", "Non-Profit", "Technology"],
+    "painPoints": [
+      "Manual check writing",
+      "Lack of payment approval controls",
+      "Poor cash flow visibility"
+    ],
+    "integrations": ["QuickBooks", "Xero", "NetSuite", "Sage Intacct", "Microsoft Dynamics"],
+    "pricing": {
+      "model": "Subscription + per transaction",
+      "startingPrice": "$45/month + $0.49-$1.99 per payment",
+      "notes": "Tiered pricing based on volume"
+    },
+    "keyFeatures": [
+      "AI-powered invoice data capture",
+      "Approval workflows with mobile app",
+      "Integrated payments (ACH, check, card)",
+      "Cash flow forecasting",
+      "Vendor network for faster payments"
+    ],
+    "workflowSteps": ["invoice-capture", "approval-routing", "payment-scheduling", "payment-execution", "reconciliation-reporting"],
+    "tagline": "SMB-Focused AP & Payment Platform",
+    "description": "Bill.com streamlines AP and payments for SMBs with intuitive workflows, integrated payments, and strong accounting system integration.",
+    "website": "https://www.bill.com"
+  },
+  {
+    "id": "coupa",
+    "name": "Coupa",
+    "vendor": "Coupa Software",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["enterprise"],
+    "industries": ["Manufacturing", "Retail", "Healthcare", "Financial Services"],
+    "painPoints": [
+      "Disconnected procurement and AP processes",
+      "Lack of spend visibility",
+      "Complex approval hierarchies"
+    ],
+    "integrations": ["SAP", "Oracle", "Workday", "NetSuite", "Microsoft Dynamics"],
+    "pricing": {
+      "model": "Subscription based on company size",
+      "startingPrice": "$100K+ annually",
+      "notes": "Enterprise pricing, typically multi-year contracts"
+    },
+    "keyFeatures": [
+      "Unified procurement-to-pay platform",
+      "AI-powered spend analysis",
+      "Supplier risk management",
+      "Contract lifecycle management",
+      "Advanced analytics and reporting"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "payment-scheduling"],
+    "tagline": "Enterprise Procurement & AP Suite",
+    "description": "Coupa provides a comprehensive business spend management platform combining procurement, invoicing, and payments with AI-driven insights.",
+    "website": "https://www.coupa.com"
+  },
+  {
+    "id": "airbase",
+    "name": "Airbase",
+    "vendor": "Airbase",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Technology", "Professional Services", "E-commerce"],
+    "painPoints": [
+      "Lack of spend control before purchases",
+      "Manual expense and invoice management",
+      "Disconnected procurement processes"
+    ],
+    "integrations": ["NetSuite", "QuickBooks", "Xero", "Sage Intacct", "Workday"],
+    "pricing": {
+      "model": "Per employee per month",
+      "startingPrice": "$20-30/employee/month",
+      "notes": "Includes expense and procurement features"
+    },
+    "keyFeatures": [
+      "Unified spend management (AP, expenses, procurement)",
+      "Pre-purchase approval workflows",
+      "Virtual and physical card issuance",
+      "Automated invoice processing",
+      "Real-time spend visibility"
+    ],
+    "workflowSteps": ["invoice-capture", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Modern Spend Management Platform",
+    "description": "Airbase combines AP automation with expense management and procurement in a single platform, providing complete spend visibility and control.",
+    "website": "https://www.airbase.com"
+  },
+  {
+    "id": "centime",
+    "name": "Centime",
+    "vendor": "Centime",
+    "category": "ap",
+    "aiMaturity": "ai-native",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Technology", "Manufacturing", "Professional Services", "Healthcare"],
+    "painPoints": [
+      "Poor cash flow forecasting",
+      "Missed early payment discounts",
+      "Manual payment scheduling"
+    ],
+    "integrations": ["QuickBooks", "Xero", "NetSuite", "Sage Intacct"],
+    "pricing": {
+      "model": "Subscription based on company size",
+      "startingPrice": "$500-1,500/month",
+      "notes": "Includes cash flow and payment optimization"
+    },
+    "keyFeatures": [
+      "AI-powered cash flow forecasting",
+      "Intelligent payment optimization",
+      "Automated invoice processing",
+      "Early payment discount capture",
+      "Bank integration and reconciliation"
+    ],
+    "workflowSteps": ["invoice-capture", "payment-scheduling", "payment-execution", "reconciliation-reporting"],
+    "tagline": "AI-Powered AP & Cash Management",
+    "description": "Centime uses AI to optimize payment timing and cash flow, helping finance teams maximize working capital while automating AP processes.",
+    "website": "https://www.centime.com"
+  },
+  {
+    "id": "medius",
+    "name": "Medius",
+    "vendor": "Medius",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Healthcare", "Retail", "Construction"],
+    "painPoints": [
+      "Fraud and duplicate payments",
+      "Complex multi-entity AP workflows",
+      "Lack of spend analytics"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "Infor", "IFS"],
+    "pricing": {
+      "model": "Subscription + implementation",
+      "startingPrice": "$75K+ annually",
+      "notes": "Enterprise pricing"
+    },
+    "keyFeatures": [
+      "AI-powered fraud detection",
+      "Automated invoice capture and matching",
+      "Multi-entity and multi-currency support",
+      "Advanced spend analytics",
+      "Supplier collaboration portal"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "exception-handling", "fraud-duplicate-detection", "payment-execution"],
+    "tagline": "Enterprise AP Automation with Fraud Prevention",
+    "description": "Medius provides comprehensive AP automation for mid-market and enterprise companies with a focus on fraud prevention and spend analytics.",
+    "website": "https://www.medius.com"
+  },
+  {
+    "id": "basware",
+    "name": "Basware",
+    "vendor": "Basware",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["enterprise"],
+    "industries": ["Manufacturing", "Retail", "Public Sector", "Healthcare"],
+    "painPoints": [
+      "Complex global procurement requirements",
+      "E-invoicing compliance",
+      "Supplier network management"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "Workday", "Infor"],
+    "pricing": {
+      "model": "Subscription + network fees",
+      "startingPrice": "$100K+ annually",
+      "notes": "Enterprise pricing with supplier network access"
+    },
+    "keyFeatures": [
+      "Global e-invoicing network",
+      "AI-powered invoice processing",
+      "Procurement-to-pay integration",
+      "Supplier onboarding and management",
+      "Compliance and tax automation"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "payment-execution"],
+    "tagline": "Global P2P & E-Invoicing Network",
+    "description": "Basware offers enterprise-grade AP automation with the world's largest e-invoicing network, ideal for global companies with complex procurement needs.",
+    "website": "https://www.basware.com"
+  },
+  {
+    "id": "navan",
+    "name": "Navan (formerly TripActions)",
+    "vendor": "Navan",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market", "enterprise"],
+    "industries": ["Technology", "Professional Services", "Financial Services"],
+    "painPoints": [
+      "Disconnected travel and expense management",
+      "Manual expense report creation",
+      "Poor policy compliance"
+    ],
+    "integrations": ["NetSuite", "QuickBooks", "Xero", "Sage Intacct", "Workday"],
+    "pricing": {
+      "model": "Per employee per month",
+      "startingPrice": "$10-15/employee/month",
+      "notes": "Volume discounts available"
+    },
+    "keyFeatures": [
+      "Integrated travel and expense management",
+      "AI-powered expense categorization",
+      "Real-time policy enforcement",
+      "Corporate card issuance",
+      "Automated expense report creation"
+    ],
+    "workflowSteps": ["invoice-capture", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Travel & Expense Management Platform",
+    "description": "Navan combines travel booking with expense and AP management, using AI to automate expense categorization and policy enforcement.",
+    "website": "https://www.navan.com"
+  },
+  {
+    "id": "happay",
+    "name": "Happay",
+    "vendor": "Happay (CRED)",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Technology", "E-commerce", "Professional Services", "Manufacturing"],
+    "painPoints": [
+      "Manual expense reimbursement process",
+      "Lack of spend visibility",
+      "Complex multi-level approvals"
+    ],
+    "integrations": ["QuickBooks", "Xero", "Zoho Books", "Tally", "SAP"],
+    "pricing": {
+      "model": "Per employee per month",
+      "startingPrice": "$5-10/employee/month",
+      "notes": "Affordable for emerging markets"
+    },
+    "keyFeatures": [
+      "Automated expense management",
+      "Corporate card program",
+      "AI-powered receipt scanning",
+      "Multi-level approval workflows",
+      "GST compliance (India-focused)"
+    ],
+    "workflowSteps": ["invoice-capture", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Expense & AP Automation for Growth Companies",
+    "description": "Happay provides affordable expense and AP automation with a focus on emerging markets, offering strong compliance features for India and Southeast Asia.",
+    "website": "https://www.happay.com"
+  },
+  {
+    "id": "procurify",
+    "name": "Procurify",
+    "vendor": "Procurify",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Healthcare", "Education", "Non-Profit", "Government"],
+    "painPoints": [
+      "Lack of pre-purchase approval controls",
+      "Budget overruns",
+      "Manual PO creation"
+    ],
+    "integrations": ["QuickBooks", "Xero", "NetSuite", "Sage Intacct", "Microsoft Dynamics"],
+    "pricing": {
+      "model": "Per user per month",
+      "startingPrice": "$30-50/user/month",
+      "notes": "Minimum user requirements apply"
+    },
+    "keyFeatures": [
+      "Purchase order management",
+      "Budget tracking and controls",
+      "Approval workflows",
+      "Supplier management",
+      "Invoice matching and payment"
+    ],
+    "workflowSteps": ["invoice-capture", "po-matching", "coding-gl-allocation", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Procurement & AP Automation",
+    "description": "Procurify focuses on pre-purchase controls and budget management, helping organizations prevent unauthorized spending while streamlining AP.",
+    "website": "https://www.procurify.com"
+  },
+  {
+    "id": "corpay",
+    "name": "Corpay AP Automation",
+    "vendor": "Corpay (formerly AvidXchange)",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Real Estate", "Healthcare", "Financial Services", "Hospitality"],
+    "painPoints": [
+      "Complex multi-entity AP workflows",
+      "Manual invoice processing",
+      "Limited payment method options"
+    ],
+    "integrations": ["Yardi", "MRI", "QuickBooks", "NetSuite", "Sage Intacct"],
+    "pricing": {
+      "model": "Per invoice + subscription",
+      "startingPrice": "$50K+ annually",
+      "notes": "Volume-based pricing"
+    },
+    "keyFeatures": [
+      "Industry-specific AP workflows (real estate, healthcare)",
+      "Automated invoice capture and routing",
+      "Payment execution (ACH, check, virtual card)",
+      "Supplier portal",
+      "Audit trail and compliance reporting"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "coding-gl-allocation", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Industry-Specific AP Automation",
+    "description": "Corpay provides AP automation tailored to specific industries like real estate and healthcare, with deep ERP integrations and flexible payment options.",
+    "website": "https://www.corpay.com"
+  }
+]

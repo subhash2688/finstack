@@ -1,0 +1,276 @@
+{
+  "id": "ap",
+  "name": "Accounts Payable",
+  "steps": [
+    {
+      "id": "invoice-capture",
+      "title": "Invoice Receipt & Capture",
+      "stepNumber": 1,
+      "abbreviation": "Capture",
+      "description": "Convert paper and digital invoices into structured data",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI-powered OCR and data extraction can automate 90%+ of manual data entry, reducing errors and processing time from hours to seconds."
+      },
+      "painPoints": [
+        "Manual data entry from paper invoices",
+        "Poor OCR accuracy with traditional tools",
+        "Multiple invoice formats and layouts",
+        "Email attachments scattered across inboxes"
+      ],
+      "beforeAfter": {
+        "before": "Staff manually key invoice data from PDFs, emails, and paper — averaging 4-6 minutes per invoice with 8-12% error rates. Invoices pile up in shared inboxes.",
+        "after": "AI captures invoices from any channel in seconds with 95%+ accuracy. Data is auto-extracted, validated, and ready for matching before a human touches it."
+      },
+      "impactMetrics": {
+        "timeSavings": "85% reduction in capture time",
+        "errorReduction": "90% fewer data entry errors",
+        "costImpact": "$3-5 saved per invoice",
+        "throughput": "10x more invoices processed per day"
+      }
+    },
+    {
+      "id": "data-validation",
+      "title": "Data Validation & Enrichment",
+      "stepNumber": 2,
+      "abbreviation": "Validate",
+      "description": "Verify invoice data accuracy and completeness",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can cross-reference POs, contracts, and historical data to automatically validate invoices and flag anomalies with 95%+ accuracy."
+      },
+      "painPoints": [
+        "Missing purchase order numbers",
+        "Mismatched vendor information",
+        "Incomplete line item details",
+        "Manual cross-referencing with multiple systems"
+      ],
+      "beforeAfter": {
+        "before": "AP clerks toggle between ERP, email, and spreadsheets to verify vendor info, tax IDs, and line-item details — often missing errors that surface downstream.",
+        "after": "AI auto-enriches records by cross-referencing master data, flags missing fields instantly, and suggests corrections based on historical patterns."
+      },
+      "impactMetrics": {
+        "timeSavings": "70% faster validation cycles",
+        "errorReduction": "95% anomaly detection rate",
+        "costImpact": "$2-4 saved per invoice",
+        "throughput": "3x throughput improvement"
+      }
+    },
+    {
+      "id": "po-matching",
+      "title": "3-Way PO Matching",
+      "stepNumber": 3,
+      "abbreviation": "PO Match",
+      "description": "Match invoices to purchase orders and receipts",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can perform fuzzy matching across POs, receipts, and invoices even with discrepancies, automating 80%+ of matches that previously required manual review."
+      },
+      "painPoints": [
+        "Time-consuming manual matching process",
+        "Tolerance exceptions requiring review",
+        "Complex multi-line PO matching",
+        "Non-PO invoices requiring special handling"
+      ],
+      "beforeAfter": {
+        "before": "Staff manually compare invoice lines against POs and goods receipts in separate screens, handling tolerance mismatches one by one.",
+        "after": "AI performs fuzzy matching across documents, auto-resolves tolerance variances within policy, and routes only true exceptions for review."
+      },
+      "impactMetrics": {
+        "timeSavings": "80% reduction in matching time",
+        "errorReduction": "75% fewer false exceptions",
+        "costImpact": "$4-6 saved per invoice",
+        "throughput": "5x faster match rate"
+      }
+    },
+    {
+      "id": "coding-gl-allocation",
+      "title": "Coding & GL Allocation",
+      "stepNumber": 4,
+      "abbreviation": "GL Coding",
+      "description": "Assign general ledger codes, cost centers, and department allocations",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can learn from historical coding patterns to auto-suggest GL accounts, cost centers, and allocation splits with 85%+ accuracy."
+      },
+      "painPoints": [
+        "Inconsistent GL coding across team members",
+        "Complex multi-department allocations",
+        "Frequent miscoding requiring journal corrections",
+        "New vendors with no coding history"
+      ],
+      "beforeAfter": {
+        "before": "AP staff manually look up GL accounts and cost centers, often guessing on unfamiliar categories. Miscodes discovered at month-end require correcting journal entries.",
+        "after": "AI suggests GL codes and allocations based on vendor history, invoice content, and organizational rules — reducing miscodes and month-end corrections."
+      },
+      "impactMetrics": {
+        "timeSavings": "60% faster coding",
+        "errorReduction": "70% fewer miscodes",
+        "costImpact": "$1-3 saved per invoice",
+        "throughput": "2x coding throughput"
+      }
+    },
+    {
+      "id": "approval-routing",
+      "title": "Approval Routing & Workflow",
+      "stepNumber": 5,
+      "abbreviation": "Approvals",
+      "description": "Route invoices to appropriate approvers",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can learn approval patterns and automatically route invoices to the right approvers, predict approval likelihood, and suggest optimal routing paths."
+      },
+      "painPoints": [
+        "Invoices stuck in approval queues",
+        "Unclear approval hierarchies",
+        "Approvers on vacation or unavailable",
+        "Rush approvals bypassing controls"
+      ],
+      "beforeAfter": {
+        "before": "Invoices sit in email-based approval chains for days. When an approver is out, no one knows where the invoice is or who should act.",
+        "after": "AI routes invoices to the right approver instantly, auto-escalates stalled items, and reroutes around unavailable approvers based on delegation rules."
+      },
+      "impactMetrics": {
+        "timeSavings": "50% shorter approval cycles",
+        "errorReduction": "60% fewer routing errors",
+        "costImpact": "2-3% more early pay discounts captured",
+        "throughput": "3x faster approvals"
+      }
+    },
+    {
+      "id": "exception-handling",
+      "title": "Exception Management",
+      "stepNumber": 6,
+      "abbreviation": "Exceptions",
+      "description": "Resolve invoice discrepancies and exceptions",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can categorize exceptions, suggest resolutions based on historical patterns, and even auto-resolve common exception types."
+      },
+      "painPoints": [
+        "High volume of exceptions requiring manual review",
+        "Inconsistent exception resolution processes",
+        "Difficulty tracking exception status",
+        "Delayed payments due to unresolved exceptions"
+      ],
+      "beforeAfter": {
+        "before": "Exceptions pile up in queues. Staff research each one from scratch, often re-solving the same type of issue they resolved last week.",
+        "after": "AI categorizes exceptions, surfaces similar resolved cases, and auto-resolves routine discrepancies — freeing staff for complex negotiations."
+      },
+      "impactMetrics": {
+        "timeSavings": "55% faster resolution",
+        "errorReduction": "40% auto-resolved exceptions",
+        "costImpact": "$2-5 saved per exception",
+        "throughput": "2x exception handling capacity"
+      }
+    },
+    {
+      "id": "fraud-duplicate-detection",
+      "title": "Fraud & Duplicate Detection",
+      "stepNumber": 7,
+      "abbreviation": "Fraud Check",
+      "description": "Detect duplicate invoices, fraudulent submissions, and anomalous patterns",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can analyze invoice patterns, vendor behavior, and payment history to detect duplicates and fraud with far greater accuracy than manual review."
+      },
+      "painPoints": [
+        "Duplicate invoices slipping through manual checks",
+        "Vendor fraud going undetected",
+        "Lack of pattern analysis across invoice history",
+        "Reactive rather than proactive fraud detection"
+      ],
+      "beforeAfter": {
+        "before": "Duplicates are caught only if exact amounts match. Sophisticated fraud (altered bank details, phantom vendors) goes undetected until audit.",
+        "after": "AI scans every invoice against historical patterns, flags near-duplicates, detects anomalous vendor behavior, and prevents payment before fraud occurs."
+      },
+      "impactMetrics": {
+        "timeSavings": "90% faster fraud screening",
+        "errorReduction": "95% duplicate detection rate",
+        "costImpact": "0.5-1% of AP spend saved from fraud",
+        "throughput": "Real-time screening of all invoices"
+      }
+    },
+    {
+      "id": "payment-scheduling",
+      "title": "Payment Scheduling & Optimization",
+      "stepNumber": 8,
+      "abbreviation": "Schedule",
+      "description": "Schedule payments to optimize cash flow and capture discounts",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can optimize payment timing to maximize early payment discounts while maintaining optimal cash flow, potentially saving 1-2% of AP spend."
+      },
+      "painPoints": [
+        "Missing early payment discount opportunities",
+        "Manual payment scheduling process",
+        "Poor cash flow visibility",
+        "Difficulty prioritizing payments"
+      ],
+      "beforeAfter": {
+        "before": "Payments are scheduled in weekly batches regardless of discount terms. Cash flow forecasting is done in spreadsheets, missing optimization windows.",
+        "after": "AI optimizes payment timing per vendor, captures early-pay discounts automatically, and balances cash flow across payment cycles."
+      },
+      "impactMetrics": {
+        "timeSavings": "65% less scheduling effort",
+        "errorReduction": "80% fewer missed discounts",
+        "costImpact": "1-2% AP spend saved via discounts",
+        "throughput": "Dynamic daily optimization"
+      }
+    },
+    {
+      "id": "payment-execution",
+      "title": "Payment Execution",
+      "stepNumber": 9,
+      "abbreviation": "Execute",
+      "description": "Execute payments via ACH, wire, check, or card",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can recommend optimal payment methods based on cost, speed, and vendor preferences, and detect potential payment fraud."
+      },
+      "painPoints": [
+        "Multiple payment methods to manage",
+        "Check printing and mailing overhead",
+        "Payment fraud risk",
+        "Vendor payment preference management"
+      ],
+      "beforeAfter": {
+        "before": "Staff manually select payment methods, print checks, and manage bank files. Vendor payment preferences are tracked in spreadsheets.",
+        "after": "AI recommends the cheapest payment rail per vendor, auto-generates payment files, and validates bank details against fraud databases."
+      },
+      "impactMetrics": {
+        "timeSavings": "50% faster payment runs",
+        "errorReduction": "70% fewer payment errors",
+        "costImpact": "$1-3 saved per payment",
+        "throughput": "2x payment volume capacity"
+      }
+    },
+    {
+      "id": "reconciliation-reporting",
+      "title": "Reconciliation & Reporting",
+      "stepNumber": 10,
+      "abbreviation": "Reconcile",
+      "description": "Reconcile payments and generate compliance reports",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can automate reconciliation by matching payments to invoices and GL entries, and generate natural language insights from AP data."
+      },
+      "painPoints": [
+        "Time-consuming month-end close process",
+        "Manual reconciliation of payments to GL",
+        "Difficulty generating compliance reports",
+        "Limited visibility into AP metrics and KPIs"
+      ],
+      "beforeAfter": {
+        "before": "Month-end close takes days of manual reconciliation. Reports are static exports requiring further manipulation before sharing with leadership.",
+        "after": "AI continuously reconciles payments against GL entries, auto-generates compliance reports, and surfaces natural-language insights on AP performance."
+      },
+      "impactMetrics": {
+        "timeSavings": "60% faster month-end close",
+        "errorReduction": "85% fewer reconciliation errors",
+        "costImpact": "$5-10K saved per close cycle",
+        "throughput": "Continuous vs. monthly reconciliation"
+      }
+    }
+  ]
+}
