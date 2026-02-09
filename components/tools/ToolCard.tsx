@@ -9,9 +9,10 @@ import { Building2, Sparkles, ExternalLink } from "lucide-react";
 interface ToolCardProps {
   tool: Tool;
   onLearnMore: (tool: Tool) => void;
+  stepId?: string;
 }
 
-export function ToolCard({ tool, onLearnMore }: ToolCardProps) {
+export function ToolCard({ tool, onLearnMore, stepId }: ToolCardProps) {
   const aiMaturityLabels = {
     'ai-native': 'AI-Native',
     'ai-enabled': 'AI-Enabled',
@@ -41,6 +42,15 @@ export function ToolCard({ tool, onLearnMore }: ToolCardProps) {
           </Badge>
         </div>
         <CardDescription className="mt-2">{tool.tagline}</CardDescription>
+        {stepId && tool.stepVerdicts && (() => {
+          const verdict = tool.stepVerdicts.find(v => v.stepId === stepId);
+          if (!verdict) return null;
+          return (
+            <div className="mt-3 bg-amber-50 border-l-2 border-amber-400 px-3 py-2 rounded-r">
+              <p className="text-sm italic text-amber-900">{verdict.verdict}</p>
+            </div>
+          );
+        })()}
       </CardHeader>
       <CardContent className="flex-1 flex flex-col">
         <div className="flex-1 space-y-4">

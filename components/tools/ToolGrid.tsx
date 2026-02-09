@@ -6,9 +6,10 @@ import { ToolCard } from "./ToolCard";
 interface ToolGridProps {
   tools: Tool[];
   onToolSelect: (tool: Tool) => void;
+  stepId?: string;
 }
 
-export function ToolGrid({ tools, onToolSelect }: ToolGridProps) {
+export function ToolGrid({ tools, onToolSelect, stepId }: ToolGridProps) {
   if (tools.length === 0) {
     return (
       <div className="text-center py-12">
@@ -22,7 +23,7 @@ export function ToolGrid({ tools, onToolSelect }: ToolGridProps) {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       {tools.map((tool) => (
-        <ToolCard key={tool.id} tool={tool} onLearnMore={onToolSelect} />
+        <ToolCard key={tool.id} tool={tool} onLearnMore={onToolSelect} stepId={stepId} />
       ))}
     </div>
   );

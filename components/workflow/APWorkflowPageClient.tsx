@@ -5,8 +5,10 @@ import { useCallback } from "react";
 import { Workflow } from "@/types/workflow";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { SummaryStatsBar } from "./SummaryStatsBar";
+import { SemanticSearchBar } from "./SemanticSearchBar";
 import { PipelineStrip } from "./PipelineStrip";
 import { StepDetailPanel } from "./StepDetailPanel";
+import { ConsultantTakeaway } from "./ConsultantTakeaway";
 import { MaturityAssessment } from "./MaturityAssessment";
 
 interface APWorkflowPageClientProps {
@@ -74,6 +76,8 @@ export function APWorkflowPageClient({ workflow, toolCount }: APWorkflowPageClie
               avgImpact={avgImpact}
             />
 
+            <SemanticSearchBar onStepSelect={handleStepSelect} />
+
             <PipelineStrip
               steps={workflow.steps}
               selectedStepId={selectedStepId}
@@ -81,6 +85,8 @@ export function APWorkflowPageClient({ workflow, toolCount }: APWorkflowPageClie
             />
 
             {selectedStep && <StepDetailPanel step={selectedStep} />}
+
+            <ConsultantTakeaway steps={workflow.steps} />
           </div>
         </TabsContent>
 

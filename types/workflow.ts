@@ -19,6 +19,13 @@ export interface ImpactMetrics {
   throughput: string;
 }
 
+export interface StepInsight {
+  whyItMatters: string;
+  typicalPain: string;
+  aiImpactVerdict: string;
+  aiImpactIntensity: 'fire' | 'strong' | 'moderate';
+}
+
 export interface WorkflowStep {
   id: string;
   title: string;
@@ -29,6 +36,8 @@ export interface WorkflowStep {
   painPoints: string[];
   beforeAfter: BeforeAfterComparison;
   impactMetrics: ImpactMetrics;
+  insight: StepInsight;
+  toolContextSentence: string;
 }
 
 export interface Workflow {

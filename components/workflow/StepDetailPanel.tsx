@@ -6,16 +6,29 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ImpactMetricCard } from "./ImpactMetricCard";
 import { StepToolSection } from "./StepToolSection";
-import { Sparkles } from "lucide-react";
+import { StepInsightPanel } from "./StepInsightPanel";
+import { Flame, Zap, CheckCircle } from "lucide-react";
 
 interface StepDetailPanelProps {
   step: WorkflowStep;
 }
 
-const impactColors: Record<string, string> = {
-  high: "bg-green-100 text-green-800 border-green-300",
-  medium: "bg-yellow-100 text-yellow-800 border-yellow-300",
-  low: "bg-gray-100 text-gray-800 border-gray-300",
+const intensityLabels: Record<string, string> = {
+  fire: "High Leverage",
+  strong: "Strong Leverage",
+  moderate: "Moderate Leverage",
+};
+
+const intensityBadgeColors: Record<string, string> = {
+  fire: "bg-orange-100 text-orange-800 border-orange-300",
+  strong: "bg-emerald-100 text-emerald-800 border-emerald-300",
+  moderate: "bg-blue-100 text-blue-800 border-blue-300",
+};
+
+const intensityIcons = {
+  fire: Flame,
+  strong: Zap,
+  moderate: CheckCircle,
 };
 
 export function StepDetailPanel({ step }: StepDetailPanelProps) {
@@ -25,30 +38,30 @@ export function StepDetailPanel({ step }: StepDetailPanelProps) {
     panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [step.id]);
 
+  const intensity = step.insight?.aiImpactIntensity ?? "moderate";
+  const Icon = intensityIcons[intensity];
+
   return (
     <div ref={panelRef} className="space-y-6 scroll-mt-4">
       {/* Header */}
       <div className="flex items-start justify-between">
         <div>
-          <h2 className="text-2xl font-bold mb-1">
+          <h2 className="text-3xl font-light mb-1">
             {step.stepNumber}. {step.title}
           </h2>
           <p className="text-muted-foreground">{step.description}</p>
         </div>
         <Badge
           variant="outline"
-          className={`${impactColors[step.aiOpportunity.impact]} text-sm ml-4 shrink-0`}
+          className={`${intensityBadgeColors[intensity]} text-sm ml-4 shrink-0`}
         >
-          <Sparkles className="h-4 w-4 mr-1" />
-          {step.aiOpportunity.impact} AI impact
+          <Icon className="h-4 w-4 mr-1" />
+          {intensityLabels[intensity]}
         </Badge>
       </div>
 
-      {/* AI Opportunity */}
-      <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
-        <h3 className="font-semibold text-emerald-900 mb-2">AI Opportunity</h3>
-        <p className="text-emerald-800 text-sm">{step.aiOpportunity.description}</p>
-      </div>
+      {/* Step Insight Panel */}
+      {step.insight && <StepInsightPanel insight={step.insight} />}
 
       {/* Before / After */}
       <div className="grid md:grid-cols-2 gap-4">
@@ -90,7 +103,7 @@ export function StepDetailPanel({ step }: StepDetailPanelProps) {
 
       {/* Tools */}
       <div className="border-t pt-6">
-        <StepToolSection stepId={step.id} />
+        <StepToolSection stepId={step.id} toolContextSentence={step.toolContextSentence} />
       </div>
     </div>
   );

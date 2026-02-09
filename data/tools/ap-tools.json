@@ -28,7 +28,15 @@
     "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "reconciliation-reporting"],
     "tagline": "Collaborative AP Automation Platform",
     "description": "Stampli combines AI-powered invoice processing with collaborative workflows, enabling AP teams to process invoices faster while maintaining control and visibility.",
-    "website": "https://www.stampli.com"
+    "website": "https://www.stampli.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Strong AI capture with good accuracy on complex layouts. The collaborative annotation feature is unique — AP teams can discuss invoices right on the document." },
+      { "stepId": "data-validation", "verdict": "Solid validation against master data but requires good ERP integration setup. Best when NetSuite or Sage Intacct is your backbone." },
+      { "stepId": "po-matching", "verdict": "Competent 3-way matching but not the most sophisticated fuzzy logic. Works well for standard PO-based invoices; struggles with complex partial shipments." },
+      { "stepId": "coding-gl-allocation", "verdict": "AI-assisted GL coding learns from historical patterns. Effective for repeat vendors but needs human oversight on new categories." },
+      { "stepId": "approval-routing", "verdict": "Standout feature: email-based approvals without login. Reduces friction more than most competitors — approvers actually respond instead of ignoring the queue." },
+      { "stepId": "reconciliation-reporting", "verdict": "Good real-time dashboards but reporting depth is moderate. Best for operational visibility, not deep financial analytics." }
+    ]
   },
   {
     "id": "tipalti",
@@ -59,7 +67,15 @@
     "workflowSteps": ["invoice-capture", "data-validation", "approval-routing", "fraud-duplicate-detection", "payment-scheduling", "payment-execution"],
     "tagline": "Global AP & Payment Automation",
     "description": "Tipalti provides end-to-end AP automation with a focus on global payments, tax compliance, and supplier management for high-growth companies.",
-    "website": "https://www.tipalti.com"
+    "website": "https://www.tipalti.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Adequate capture capabilities but not the primary strength. You choose Tipalti for payments, not for invoice capture — the capture is good enough to complete the workflow." },
+      { "stepId": "data-validation", "verdict": "Strong on tax and compliance validation (W-9, W-8BEN, OFAC screening). Weaker on general invoice data enrichment compared to pure AP automation tools." },
+      { "stepId": "approval-routing", "verdict": "Functional approval workflows but less flexible than Stampli or Coupa. Adequate for companies that don't have complex approval hierarchies." },
+      { "stepId": "fraud-duplicate-detection", "verdict": "Good built-in fraud detection with OFAC/sanctions screening. Duplicate detection is reliable for exact matches but less sophisticated on near-duplicates." },
+      { "stepId": "payment-scheduling", "verdict": "Solid payment scheduling with good visibility into upcoming payment obligations. Not as AI-driven as Centime for discount optimization." },
+      { "stepId": "payment-execution", "verdict": "This is Tipalti's crown jewel. 196-country payment coverage with tax compliance is unmatched. If you pay internationally, this is the benchmark." }
+    ]
   },
   {
     "id": "bill",
@@ -90,7 +106,14 @@
     "workflowSteps": ["invoice-capture", "approval-routing", "payment-scheduling", "payment-execution", "reconciliation-reporting"],
     "tagline": "SMB-Focused AP & Payment Platform",
     "description": "Bill.com streamlines AP and payments for SMBs with intuitive workflows, integrated payments, and strong accounting system integration.",
-    "website": "https://www.bill.com"
+    "website": "https://www.bill.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Good enough AI capture for SMB invoice volumes. Not the most accurate on complex layouts but handles standard invoices well." },
+      { "stepId": "approval-routing", "verdict": "Clean mobile approval experience that SMB controllers love. Simple hierarchy support — not built for complex matrix approval structures." },
+      { "stepId": "payment-scheduling", "verdict": "Basic scheduling with cash flow forecasting. Useful for SMBs that lack treasury tools but not sophisticated enough for active discount optimization." },
+      { "stepId": "payment-execution", "verdict": "Strong domestic payment execution (ACH, check, card). The vendor network accelerates payments. International payments are possible but not a strength." },
+      { "stepId": "reconciliation-reporting", "verdict": "Tight accounting system integration makes reconciliation nearly automatic for QuickBooks/Xero users. Reporting is basic but sufficient for SMB needs." }
+    ]
   },
   {
     "id": "coupa",
@@ -121,7 +144,15 @@
     "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "payment-scheduling"],
     "tagline": "Enterprise Procurement & AP Suite",
     "description": "Coupa provides a comprehensive business spend management platform combining procurement, invoicing, and payments with AI-driven insights.",
-    "website": "https://www.coupa.com"
+    "website": "https://www.coupa.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Enterprise-grade capture with supplier network for electronic invoicing. Best when suppliers submit through the Coupa portal — less differentiated for paper/email invoices." },
+      { "stepId": "data-validation", "verdict": "Deep validation against contracts, POs, and master data. The procurement-to-pay integration means validation catches issues that standalone AP tools miss." },
+      { "stepId": "po-matching", "verdict": "Industry-leading 3-way matching for enterprise PO volumes. Handles complex multi-line, multi-delivery POs that trip up smaller tools." },
+      { "stepId": "coding-gl-allocation", "verdict": "Strong GL automation driven by procurement category data. The connection between procurement categories and GL codes is tighter than most AP-only tools." },
+      { "stepId": "approval-routing", "verdict": "Highly configurable approval matrices for complex enterprise hierarchies. Overkill for simple organizations but essential for multi-entity, multi-geography companies." },
+      { "stepId": "payment-scheduling", "verdict": "Comprehensive payment scheduling with spend analytics. Better at strategic payment planning than tactical discount capture." }
+    ]
   },
   {
     "id": "airbase",
@@ -152,7 +183,13 @@
     "workflowSteps": ["invoice-capture", "approval-routing", "payment-execution", "reconciliation-reporting"],
     "tagline": "Modern Spend Management Platform",
     "description": "Airbase combines AP automation with expense management and procurement in a single platform, providing complete spend visibility and control.",
-    "website": "https://www.airbase.com"
+    "website": "https://www.airbase.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Competent capture but not the core differentiator. Airbase shines in unified spend management — the capture is a means to that end." },
+      { "stepId": "approval-routing", "verdict": "Pre-purchase approval workflows are Airbase's unique angle. By the time an invoice arrives, the spend is already approved — this fundamentally changes the AP workflow." },
+      { "stepId": "payment-execution", "verdict": "Good domestic payment execution with virtual card programs that generate rebate revenue. Not strong for international payments." },
+      { "stepId": "reconciliation-reporting", "verdict": "Unified view across AP, expenses, and card spend makes reconciliation simpler. Real-time spend visibility is genuinely ahead of most AP-only tools." }
+    ]
   },
   {
     "id": "centime",
@@ -183,7 +220,13 @@
     "workflowSteps": ["invoice-capture", "payment-scheduling", "payment-execution", "reconciliation-reporting"],
     "tagline": "AI-Powered AP & Cash Management",
     "description": "Centime uses AI to optimize payment timing and cash flow, helping finance teams maximize working capital while automating AP processes.",
-    "website": "https://www.centime.com"
+    "website": "https://www.centime.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Basic capture capabilities — functional but not where Centime's AI investment goes. You'll want Centime for treasury optimization, not capture." },
+      { "stepId": "payment-scheduling", "verdict": "AI-powered payment timing optimization that demonstrably captures more early-pay discounts. This is Centime's core differentiator and it's genuinely best-in-class for SMBs." },
+      { "stepId": "payment-execution", "verdict": "Solid domestic execution with good bank integrations. Pairs payment execution with cash flow forecasting for intelligent timing decisions." },
+      { "stepId": "reconciliation-reporting", "verdict": "Bank-connected reconciliation is smooth. Cash flow reporting and forecasting are where Centime adds unique value beyond standard AP tools." }
+    ]
   },
   {
     "id": "medius",
@@ -214,7 +257,15 @@
     "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "exception-handling", "fraud-duplicate-detection", "payment-execution"],
     "tagline": "Enterprise AP Automation with Fraud Prevention",
     "description": "Medius provides comprehensive AP automation for mid-market and enterprise companies with a focus on fraud prevention and spend analytics.",
-    "website": "https://www.medius.com"
+    "website": "https://www.medius.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Reliable enterprise capture with good multi-format handling. Strong for high-volume manufacturing and healthcare invoice flows." },
+      { "stepId": "data-validation", "verdict": "Thorough validation with multi-entity and multi-currency awareness. Particularly strong for companies operating across multiple ERP instances." },
+      { "stepId": "po-matching", "verdict": "Good matching engine with tolerance management. Handles the complexity of manufacturing POs (partial shipments, price adjustments) well." },
+      { "stepId": "exception-handling", "verdict": "Strong at auto-resolution of routine exceptions. The learning system improves over time but initial setup requires meaningful configuration investment." },
+      { "stepId": "fraud-duplicate-detection", "verdict": "This is Medius's standout capability. AI-powered fraud detection that catches near-duplicates, phantom vendors, and anomalous patterns that other tools miss." },
+      { "stepId": "payment-execution", "verdict": "Functional payment execution but not the primary strength. Most Medius customers pair it with their ERP's payment engine or a specialized payment tool." }
+    ]
   },
   {
     "id": "basware",
@@ -245,7 +296,15 @@
     "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "payment-execution"],
     "tagline": "Global P2P & E-Invoicing Network",
     "description": "Basware offers enterprise-grade AP automation with the world's largest e-invoicing network, ideal for global companies with complex procurement needs.",
-    "website": "https://www.basware.com"
+    "website": "https://www.basware.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "The e-invoicing network is the key differentiator — suppliers on the Basware network submit structured data directly, eliminating capture errors entirely." },
+      { "stepId": "data-validation", "verdict": "Strong compliance-focused validation, especially for European e-invoicing mandates and tax regulations. Less differentiated for US-only operations." },
+      { "stepId": "po-matching", "verdict": "Enterprise-grade matching that handles complex global procurement scenarios. Particularly strong when integrated with SAP or Oracle procurement modules." },
+      { "stepId": "coding-gl-allocation", "verdict": "AI-assisted coding with good learning capabilities for enterprise chart of accounts. Benefits from procurement category mapping in the P2P flow." },
+      { "stepId": "approval-routing", "verdict": "Highly configurable for global enterprises with complex delegation structures. Heavy implementation investment but handles edge cases other tools cannot." },
+      { "stepId": "payment-execution", "verdict": "Adequate payment execution for a P2P platform. Most enterprise customers route through their ERP payment engine rather than Basware's native payments." }
+    ]
   },
   {
     "id": "navan",
@@ -276,7 +335,13 @@
     "workflowSteps": ["invoice-capture", "approval-routing", "payment-execution", "reconciliation-reporting"],
     "tagline": "Travel & Expense Management Platform",
     "description": "Navan combines travel booking with expense and AP management, using AI to automate expense categorization and policy enforcement.",
-    "website": "https://www.navan.com"
+    "website": "https://www.navan.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Focused on receipt and expense capture rather than traditional AP invoices. Best for T&E-heavy organizations, not for high-volume vendor invoice processing." },
+      { "stepId": "approval-routing", "verdict": "Real-time policy enforcement catches out-of-policy expenses before they're incurred — a fundamentally different approach than post-hoc approval workflows." },
+      { "stepId": "payment-execution", "verdict": "Corporate card program with good controls. Payment execution is card-centric — strong for employee spend, not designed for vendor AP payments." },
+      { "stepId": "reconciliation-reporting", "verdict": "Automated expense report creation eliminates a major pain point. Reconciliation is streamlined for card transactions but limited for broader AP reconciliation." }
+    ]
   },
   {
     "id": "happay",
@@ -307,7 +372,13 @@
     "workflowSteps": ["invoice-capture", "approval-routing", "payment-execution", "reconciliation-reporting"],
     "tagline": "Expense & AP Automation for Growth Companies",
     "description": "Happay provides affordable expense and AP automation with a focus on emerging markets, offering strong compliance features for India and Southeast Asia.",
-    "website": "https://www.happay.com"
+    "website": "https://www.happay.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "AI receipt scanning works well for expense receipts. For traditional AP invoice capture, it's functional but not the primary use case." },
+      { "stepId": "approval-routing", "verdict": "Multi-level approval workflows designed for hierarchical organizations common in Indian enterprises. Good for companies with 4-5 approval tiers." },
+      { "stepId": "payment-execution", "verdict": "Strong for India-specific payment methods and UPI integration. Limited for international or US-centric payment workflows." },
+      { "stepId": "reconciliation-reporting", "verdict": "GST compliance reporting is a standout for Indian operations. Limited value for companies outside India/Southeast Asia." }
+    ]
   },
   {
     "id": "procurify",
@@ -338,7 +409,15 @@
     "workflowSteps": ["invoice-capture", "po-matching", "coding-gl-allocation", "approval-routing", "payment-execution", "reconciliation-reporting"],
     "tagline": "Procurement & AP Automation",
     "description": "Procurify focuses on pre-purchase controls and budget management, helping organizations prevent unauthorized spending while streamlining AP.",
-    "website": "https://www.procurify.com"
+    "website": "https://www.procurify.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Basic invoice capture focused on matching to existing POs. The value is in the procurement-first workflow, not standalone capture capabilities." },
+      { "stepId": "po-matching", "verdict": "Strong PO matching because Procurify controls the PO creation process. When you create the PO in Procurify, matching is nearly automatic." },
+      { "stepId": "coding-gl-allocation", "verdict": "Budget-aware GL coding that ties allocations to departmental budgets. Prevents overspend at the coding stage — unique among AP tools." },
+      { "stepId": "approval-routing", "verdict": "Budget-based approval routing is the differentiator. Approvals are tied to remaining budget, not just dollar thresholds — essential for non-profits and government." },
+      { "stepId": "payment-execution", "verdict": "Basic payment capabilities. Most Procurify customers handle payment execution through their accounting system rather than Procurify itself." },
+      { "stepId": "reconciliation-reporting", "verdict": "Budget vs. actual reporting is genuinely useful for budget-constrained organizations. Standard AP reporting is adequate but not exceptional." }
+    ]
   },
   {
     "id": "corpay",
@@ -369,6 +448,14 @@
     "workflowSteps": ["invoice-capture", "data-validation", "coding-gl-allocation", "approval-routing", "payment-execution", "reconciliation-reporting"],
     "tagline": "Industry-Specific AP Automation",
     "description": "Corpay provides AP automation tailored to specific industries like real estate and healthcare, with deep ERP integrations and flexible payment options.",
-    "website": "https://www.corpay.com"
+    "website": "https://www.corpay.com",
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Good capture with industry-specific templates for real estate (CAM charges, lease invoices) and healthcare. Generic invoice handling is adequate." },
+      { "stepId": "data-validation", "verdict": "Industry-aware validation catches issues specific to real estate and healthcare billing. Less differentiated for general commercial AP." },
+      { "stepId": "coding-gl-allocation", "verdict": "Pre-built GL mapping for Yardi and MRI property management. If you're in real estate AP, this saves weeks of implementation time." },
+      { "stepId": "approval-routing", "verdict": "Property/entity-based routing for real estate portfolios. Well-suited for multi-property, multi-entity organizations with complex approval needs." },
+      { "stepId": "payment-execution", "verdict": "Flexible payment execution with good virtual card programs. The supplier network incentivizes electronic payment adoption over checks." },
+      { "stepId": "reconciliation-reporting", "verdict": "Strong audit trail and compliance reporting for regulated industries. 1099 reporting and tax document management are well-handled." }
+    ]
   }
 ]

@@ -8,6 +8,11 @@ export interface PricingInfo {
   notes?: string;
 }
 
+export interface StepVerdict {
+  stepId: string;
+  verdict: string;
+}
+
 export interface Tool {
   id: string;
   name: string;
@@ -24,4 +29,5 @@ export interface Tool {
   tagline: string;
   description: string;
   website?: string;
+  stepVerdicts?: StepVerdict[];
 }
