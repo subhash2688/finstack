@@ -103,7 +103,7 @@ export function EngagementList() {
               <div className="flex items-center gap-2">
                 <FileText className="h-4 w-4 text-muted-foreground" />
                 <span>
-                  {engagement.generatedWorkflow.length} steps
+                  {engagement.processAssessments?.reduce((sum, pa) => sum + (pa.generatedWorkflow?.length || 0), 0) || 0} steps
                 </span>
               </div>
 

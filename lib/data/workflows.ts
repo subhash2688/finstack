@@ -3,8 +3,8 @@ import apWorkflow from '@/data/workflows/ap-workflow.json';
 
 const workflows: Record<WorkflowId, Workflow> = {
   ap: apWorkflow as Workflow,
-  fpa: { id: 'fpa', name: 'FP&A', steps: [] } as Workflow, // Coming soon
-  close: { id: 'close', name: 'Close', steps: [] } as Workflow, // Coming soon
+  fpa: { id: 'fpa', name: 'FP&A', functionId: 'finance', processId: 'fpa', steps: [] } as Workflow, // Coming soon
+  close: { id: 'close', name: 'Close', functionId: 'finance', processId: 'close', steps: [] } as Workflow, // Coming soon
 };
 
 export function getWorkflow(id: WorkflowId): Workflow | null {
