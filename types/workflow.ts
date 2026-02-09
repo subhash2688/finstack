@@ -1,3 +1,5 @@
+import { FunctionId } from "./function";
+
 export type WorkflowId = 'ap' | 'fpa' | 'close';
 export type ImpactLevel = 'high' | 'medium' | 'low';
 export type MaturityLevel = 'manual' | 'semi-automated' | 'automated';
@@ -43,5 +45,7 @@ export interface WorkflowStep {
 export interface Workflow {
   id: WorkflowId;
   name: string;
+  functionId: FunctionId; // NEW: parent function
+  processId: string; // NEW: process ID (e.g., "ap")
   steps: WorkflowStep[];
 }

@@ -1,6 +1,8 @@
 {
   "id": "ap",
   "name": "Accounts Payable",
+  "functionId": "finance",
+  "processId": "ap",
   "steps": [
     {
       "id": "invoice-capture",

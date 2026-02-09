@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { mapQueryToSteps, IntentResult } from "@/lib/search/intent-mapper";
 import { WorkflowStep } from "@/types/workflow";
-import { Search } from "lucide-react";
+import { Search, Loader2 } from "lucide-react";
 
 interface SemanticSearchBarProps {
   steps: WorkflowStep[];
@@ -19,17 +19,67 @@ function confidenceColor(confidence: number): string {
 export function SemanticSearchBar({ steps, onStepSelect }: SemanticSearchBarProps) {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState<IntentResult | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  const runSearch = useCallback((q: string) => {
+  const runSearch = useCallback(async (q: string) => {
     if (q.trim().length < 3) {
       setResult(null);
       return;
     }
-    const mapped = mapQueryToSteps(q, steps);
-    setResult(mapped);
+
+    // Cancel any pending request (COST SAVING: prevent duplicate API calls)
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    setIsLoading(true);
+    abortControllerRef.current = new AbortController();
+
+    try {
+      // Try LLM-powered search first
+      const response = await fetch("/api/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query: q,
+          steps: steps.map((s) => ({
+            id: s.id,
+            title: s.title,
+            description: s.description,
+          })),
+        }),
+        signal: abortControllerRef.current.signal,
+      });
+
+      const data = await response.json();
+
+      // If API returns matches, use them
+      if (data.matches && data.matches.length > 0) {
+        setResult({ query: q, matches: data.matches });
+      } else {
+        // FALLBACK: Use keyword-based search
+        const fallback = mapQueryToSteps(q, steps);
+        setResult(fallback);
+      }
+    } catch (error: any) {
+      // If request was aborted, ignore
+      if (error.name === "AbortError") {
+        return;
+      }
+
+      console.warn("Search API failed, falling back to keyword search:", error);
+
+      // GRACEFUL DEGRADATION: Fall back to keyword-based search
+      const fallback = mapQueryToSteps(q, steps);
+      setResult(fallback);
+    } finally {
+      setIsLoading(false);
+    }
   }, [steps]);
 
   useEffect(() => {
+    // Debounce: 300ms (COST SAVING: avoid API calls while user is typing)
     const timer = setTimeout(() => {
       runSearch(query);
     }, 300);
@@ -39,7 +89,11 @@ export function SemanticSearchBar({ steps, onStepSelect }: SemanticSearchBarProp
   return (
     <div className="w-full">
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        {isLoading ? (
+          <Loader2 className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground animate-spin" />
+        ) : (
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        )}
         <input
           type="text"
           value={query}

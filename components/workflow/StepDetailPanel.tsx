@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { WorkflowStep } from "@/types/workflow";
+import { ToolMapping } from "@/types/engagement";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ImpactMetricCard } from "./ImpactMetricCard";
@@ -11,6 +12,7 @@ import { Flame, Zap, CheckCircle } from "lucide-react";
 
 interface StepDetailPanelProps {
   step: WorkflowStep;
+  toolMappings?: ToolMapping[];
 }
 
 const intensityLabels: Record<string, string> = {
@@ -31,7 +33,7 @@ const intensityIcons = {
   moderate: CheckCircle,
 };
 
-export function StepDetailPanel({ step }: StepDetailPanelProps) {
+export function StepDetailPanel({ step, toolMappings }: StepDetailPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -103,7 +105,11 @@ export function StepDetailPanel({ step }: StepDetailPanelProps) {
 
       {/* Tools */}
       <div className="border-t pt-6">
-        <StepToolSection stepId={step.id} toolContextSentence={step.toolContextSentence} />
+        <StepToolSection
+          stepId={step.id}
+          toolContextSentence={step.toolContextSentence}
+          toolMappings={toolMappings}
+        />
       </div>
     </div>
   );

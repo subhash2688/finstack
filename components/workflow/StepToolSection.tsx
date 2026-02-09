@@ -5,13 +5,16 @@ import { ToolGrid } from "@/components/tools/ToolGrid";
 import { ToolFilters, FilterState } from "@/components/tools/ToolFilters";
 import { ToolDetailModal } from "@/components/tools/ToolDetailModal";
 import { filterTools, getAllIndustries } from "@/lib/data/tools";
+import { getToolsForGeneratedStep } from "@/lib/data/tool-mapping";
 import { Tool } from "@/types/tool";
+import { ToolMapping } from "@/types/engagement";
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, ChevronDown, ChevronRight } from "lucide-react";
 
 interface StepToolSectionProps {
   stepId: string;
   toolContextSentence?: string;
+  toolMappings?: ToolMapping[];
 }
 
 const defaultFilters: FilterState = {
@@ -21,7 +24,11 @@ const defaultFilters: FilterState = {
   search: "",
 };
 
-export function StepToolSection({ stepId, toolContextSentence }: StepToolSectionProps) {
+export function StepToolSection({
+  stepId,
+  toolContextSentence,
+  toolMappings,
+}: StepToolSectionProps) {
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const [selectedTool, setSelectedTool] = useState<Tool | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
@@ -36,12 +43,19 @@ export function StepToolSection({ stepId, toolContextSentence }: StepToolSection
   }, [stepId]);
 
   const filteredTools = useMemo(() => {
-    return filterTools({
-      category: "ap",
-      workflowStep: stepId,
-      ...filters,
-    });
-  }, [stepId, filters]);
+    // DUAL-MODE: Use toolMappings if available (generated workflow), otherwise use filterTools (static workflow)
+    if (toolMappings) {
+      // Generated workflow: get tools from mappings
+      return getToolsForGeneratedStep(stepId, toolMappings);
+    } else {
+      // Static workflow: use existing filter logic
+      return filterTools({
+        category: "ap",
+        workflowStep: stepId,
+        ...filters,
+      });
+    }
+  }, [stepId, filters, toolMappings]);
 
   const availableIndustries = getAllIndustries();
 

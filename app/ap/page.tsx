@@ -6,7 +6,11 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export default function APPage() {
+export default function APPage({
+  searchParams,
+}: {
+  searchParams: { engagement?: string };
+}) {
   const workflow = getWorkflow('ap');
 
   if (!workflow) {
@@ -14,6 +18,7 @@ export default function APPage() {
   }
 
   const toolCount = getToolsByCategory('ap').length;
+  const engagementId = searchParams.engagement || null;
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -26,7 +31,11 @@ export default function APPage() {
         </Link>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <APWorkflowPageClient workflow={workflow} toolCount={toolCount} />
+        <APWorkflowPageClient
+          staticWorkflow={workflow}
+          toolCount={toolCount}
+          engagementId={engagementId}
+        />
       </Suspense>
     </div>
   );

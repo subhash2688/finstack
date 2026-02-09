@@ -26,6 +26,10 @@ export function getToolById(id: string): Tool | null {
   return allTools.find(tool => tool.id === id) || null;
 }
 
+export function getToolsByIds(ids: string[]): Tool[] {
+  return allTools.filter(tool => ids.includes(tool.id));
+}
+
 export function filterTools(filters: ToolFilters): Tool[] {
   let filtered = [...allTools];
 

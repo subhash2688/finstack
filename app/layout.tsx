@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { Sidebar } from "@/components/layout/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "FinStack Navigator - Discover AI Tools for Finance Teams",
-  description: "AI-powered finance tech stack discovery platform for management consultants",
+  title: "Lighthouse - AI-Powered Process Intelligence",
+  description: "Discover and assess AI tools across Finance, Go-To-Market, and R&D processes",
 };
 
 export default function RootLayout({
@@ -19,10 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+        <div className="flex min-h-screen">
+          <Sidebar />
+          <main className="flex-1 overflow-auto">{children}</main>
         </div>
       </body>
     </html>
