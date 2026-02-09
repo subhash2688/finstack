@@ -76,7 +76,7 @@ export function APWorkflowPageClient({ workflow, toolCount }: APWorkflowPageClie
               avgImpact={avgImpact}
             />
 
-            <SemanticSearchBar onStepSelect={handleStepSelect} />
+            <SemanticSearchBar steps={workflow.steps} onStepSelect={handleStepSelect} />
 
             <PipelineStrip
               steps={workflow.steps}

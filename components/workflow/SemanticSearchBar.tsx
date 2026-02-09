@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { mapQueryToSteps, IntentResult } from "@/lib/search/intent-mapper";
+import { WorkflowStep } from "@/types/workflow";
 import { Search } from "lucide-react";
 
 interface SemanticSearchBarProps {
+  steps: WorkflowStep[];
   onStepSelect: (stepId: string) => void;
 }
 
@@ -14,7 +16,7 @@ function confidenceColor(confidence: number): string {
   return "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200";
 }
 
-export function SemanticSearchBar({ onStepSelect }: SemanticSearchBarProps) {
+export function SemanticSearchBar({ steps, onStepSelect }: SemanticSearchBarProps) {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState<IntentResult | null>(null);
 
@@ -23,9 +25,9 @@ export function SemanticSearchBar({ onStepSelect }: SemanticSearchBarProps) {
       setResult(null);
       return;
     }
-    const mapped = mapQueryToSteps(q);
+    const mapped = mapQueryToSteps(q, steps);
     setResult(mapped);
-  }, []);
+  }, [steps]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
