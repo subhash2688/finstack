@@ -59,7 +59,7 @@ export default function HomePage() {
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link href="/ap">
+              <Link href="/dashboard">
                 <Button
                   size="lg"
                   className="bg-[#00B140] hover:bg-[#009934] text-white font-semibold px-8 h-12 rounded-none text-sm tracking-wide uppercase"
@@ -282,6 +282,54 @@ export default function HomePage() {
                   Coming Soon
                 </span>
               </div>
+
+              {/* HR */}
+              <div className="bg-white border border-gray-200 rounded-xl p-10 h-full relative overflow-hidden opacity-75">
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gray-200" />
+                <div className="mb-6">
+                  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" className="text-gray-300">
+                    <circle cx="24" cy="20" r="8" stroke="currentColor" strokeWidth="1.5" />
+                    <circle cx="48" cy="20" r="8" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M10 44 C10 36 17 32 24 32 C28 32 31 33 33 35" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="4 2" />
+                    <path d="M62 44 C62 36 55 32 48 32 C44 32 41 33 39 35" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="4 2" />
+                    <circle cx="36" cy="38" r="3" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M36 41 L36 52" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M30 48 L42 48" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    <line x1="12" y1="58" x2="60" y2="58" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="3 3" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">HR</h3>
+                <p className="text-sm text-gray-500 leading-relaxed mb-8">
+                  Talent acquisition, people operations, and workforce planning.
+                  AI-driven recruiting, onboarding, and performance analytics.
+                </p>
+                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
+                  Coming Soon
+                </span>
+              </div>
+
+              {/* Legal */}
+              <div className="bg-white border border-gray-200 rounded-xl p-10 h-full relative overflow-hidden opacity-75">
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gray-200" />
+                <div className="mb-6">
+                  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" className="text-gray-300">
+                    <line x1="36" y1="8" x2="36" y2="56" stroke="currentColor" strokeWidth="1.5" />
+                    <path d="M18 20 L36 14 L54 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M18 20 C18 20 14 32 18 32 C22 32 18 20 18 20Z" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 2" />
+                    <path d="M54 20 C54 20 50 32 54 32 C58 32 54 20 54 20Z" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 2" />
+                    <rect x="24" y="56" width="24" height="4" rx="1" stroke="currentColor" strokeWidth="1.5" />
+                    <circle cx="36" cy="14" r="3" stroke="currentColor" strokeWidth="1.5" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Legal</h3>
+                <p className="text-sm text-gray-500 leading-relaxed mb-8">
+                  Contract management, compliance, and legal operations.
+                  AI-assisted contract review, risk analysis, and matter tracking.
+                </p>
+                <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">
+                  Coming Soon
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -405,7 +453,7 @@ export default function HomePage() {
               Start with the process. Let AI surface the gaps. The right vendor follows.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/ap">
+              <Link href="/dashboard">
                 <Button
                   size="lg"
                   className="bg-[#00B140] hover:bg-[#009934] text-white font-semibold px-10 h-12 rounded-none text-sm tracking-wide uppercase"

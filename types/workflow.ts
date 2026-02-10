@@ -1,6 +1,6 @@
 import { FunctionId } from "./function";
 
-export type WorkflowId = 'ap' | 'fpa' | 'close';
+export type WorkflowId = 'ap' | 'ar' | 'accounting' | 'fpa' | 'payroll' | 'treasury' | 'tax';
 export type ImpactLevel = 'high' | 'medium' | 'low';
 export type MaturityLevel = 'manual' | 'semi-automated' | 'automated';
 

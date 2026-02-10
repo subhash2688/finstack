@@ -14,6 +14,8 @@ import {
   DollarSign,
   TrendingUp,
   Microscope,
+  Users,
+  Scale,
   PanelLeftClose,
   PanelLeftOpen,
 } from "lucide-react";
@@ -25,6 +27,8 @@ const ICON_MAP: Record<string, any> = {
   DollarSign,
   TrendingUp,
   Microscope,
+  Users,
+  Scale,
 };
 
 export function Sidebar() {
@@ -133,12 +137,12 @@ export function Sidebar() {
 
   // Expanded state
   return (
-    <aside className="w-64 bg-white border-r flex flex-col h-screen shrink-0">
+    <aside className="w-72 bg-white border-r flex flex-col h-screen shrink-0">
       {/* Logo / Header */}
-      <div className="px-5 py-5 border-b flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5">
-          <LighthouseIcon size={36} className="text-gray-900" />
-          <span className="text-2xl font-bold tracking-tight text-gray-900">
+      <div className="px-5 py-6 border-b flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-3">
+          <LighthouseIcon size={44} className="text-gray-900" />
+          <span className="text-3xl font-bold tracking-tight text-gray-900">
             Lighthouse
           </span>
         </Link>
@@ -186,35 +190,43 @@ export function Sidebar() {
                   {/* Processes */}
                   {isExpanded && (
                     <div className="ml-6 mt-0.5 space-y-0.5">
-                      {func.processes.map((process) => {
+                      {func.processes.map((process, idx) => {
                         const processPath = `/${func.id}/${process.id}`;
                         const isActive = pathname.startsWith(processPath) || pathname.startsWith(`/${process.id}`);
 
-                        if (!process.available) {
-                          return (
-                            <div
-                              key={process.id}
-                              className="px-3 py-1.5 text-sm text-gray-400 flex items-center justify-between"
-                            >
-                              <span>{process.name}</span>
-                              <span className="text-[10px] uppercase tracking-wider">Soon</span>
-                            </div>
-                          );
-                        }
+                        // Show group header when group changes
+                        const prevGroup = idx > 0 ? func.processes[idx - 1].group : undefined;
+                        const showGroupHeader = process.group && process.group !== prevGroup;
 
                         return (
-                          <Link
-                            key={process.id}
-                            href={`/${process.id}`}
-                            className={cn(
-                              "block px-3 py-1.5 rounded-md text-sm transition-colors",
-                              isActive
-                                ? "bg-[#00B140] text-white font-medium"
-                                : "text-gray-600 hover:bg-gray-50"
+                          <div key={process.id}>
+                            {showGroupHeader && (
+                              <div className={cn(
+                                "px-3 text-[10px] font-semibold text-gray-300 uppercase tracking-wider",
+                                idx > 0 ? "pt-3 mt-1 border-t border-gray-100" : "pt-1"
+                              )}>
+                                {process.group}
+                              </div>
                             )}
-                          >
-                            {process.name}
-                          </Link>
+                            {!process.available ? (
+                              <div className="px-3 py-1.5 text-gray-400">
+                                <span className="text-sm">{process.name}</span>
+                                <span className="ml-1.5 text-[9px] text-gray-300 italic">coming soon</span>
+                              </div>
+                            ) : (
+                              <Link
+                                href={`/${process.id}`}
+                                className={cn(
+                                  "block px-3 py-1.5 rounded-md text-sm transition-colors",
+                                  isActive
+                                    ? "bg-[#00B140] text-white font-medium"
+                                    : "text-gray-600 hover:bg-gray-50"
+                                )}
+                              >
+                                {process.name}
+                              </Link>
+                            )}
+                          </div>
                         );
                       })}
                     </div>
