@@ -2,7 +2,8 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { useCallback, useState, useEffect, useRef } from "react";
-import { Workflow, MaturityLevel } from "@/types/workflow";
+import { Workflow, WorkflowId, MaturityLevel } from "@/types/workflow";
+import { Category } from "@/types/tool";
 import { Engagement } from "@/types/engagement";
 import { getEngagement, updateMaturityRatings, deleteEngagement } from "@/lib/storage/engagements";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -14,7 +15,7 @@ import { ConsultantTakeaway } from "./ConsultantTakeaway";
 import { MaturityScorecard } from "./MaturityScorecard";
 import { SaveEngagementDialog } from "./SaveEngagementDialog";
 import { VendorLandscapeClient } from "@/components/vendors/VendorLandscapeClient";
-import { getAllTools } from "@/lib/data/tools";
+import { getToolsByCategory } from "@/lib/data/tools";
 import { Button } from "@/components/ui/button";
 import { Edit, Briefcase, Save, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -23,12 +24,18 @@ interface APWorkflowPageClientProps {
   staticWorkflow: Workflow;
   toolCount: number;
   engagementId: string | null;
+  processId?: string;
+  category?: Category;
+  processName?: string;
 }
 
 export function APWorkflowPageClient({
   staticWorkflow,
   toolCount,
   engagementId,
+  processId = "ap",
+  category = "ap",
+  processName = "Accounts Payable",
 }: APWorkflowPageClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -51,7 +58,7 @@ export function APWorkflowPageClient({
       setEngagement(loaded);
       // Restore ratings from engagement (only on first load or engagement change)
       if (loaded && initializedRef.current !== engagementId) {
-        const pa = loaded.processAssessments.find((p) => p.processId === "ap");
+        const pa = loaded.processAssessments.find((p) => p.processId === processId);
         if (pa?.maturityRatings) {
           setRatings(pa.maturityRatings);
         }
@@ -63,21 +70,21 @@ export function APWorkflowPageClient({
         initializedRef.current = null;
       }
     }
-  }, [engagementId]);
+  }, [engagementId, processId]);
 
   // Find the AP process assessment from the engagement
   const processAssessment = engagement?.processAssessments.find(
-    (p) => p.processId === "ap"
+    (p) => p.processId === processId
   );
 
   // Use generated workflow if engagement has one, otherwise use static
   const workflow: Workflow =
     processAssessment && processAssessment.generatedWorkflow.length > 0
       ? {
-          id: "ap",
+          id: processId as WorkflowId,
           name: processAssessment.processName,
           functionId: "finance",
-          processId: "ap",
+          processId,
           steps: processAssessment.generatedWorkflow,
         }
       : staticWorkflow;
@@ -102,7 +109,7 @@ export function APWorkflowPageClient({
         const next = { ...prev, [stepId]: level };
         // Auto-save for loaded engagements
         if (engagementId) {
-          updateMaturityRatings(engagementId, "ap", next);
+          updateMaturityRatings(engagementId, processId, next);
         }
         return next;
       });
@@ -120,9 +127,9 @@ export function APWorkflowPageClient({
       Object.entries(params).forEach(([key, value]) => {
         urlParams.set(key, value);
       });
-      return `/ap?${urlParams.toString()}`;
+      return `/${processId}?${urlParams.toString()}`;
     },
-    [engagementId]
+    [engagementId, processId]
   );
 
   const handleStepSelect = useCallback(
@@ -150,17 +157,17 @@ export function APWorkflowPageClient({
     setEngagement(null);
     setRatings({});
     initializedRef.current = null;
-    router.push("/ap?tab=explore", { scroll: false });
-  }, [engagementId, router]);
+    router.push(`/${processId}?tab=explore`, { scroll: false });
+  }, [engagementId, router, processId]);
 
   const handleEngagementSaved = useCallback(
     (saved: Engagement) => {
       setEngagement(saved);
       initializedRef.current = saved.id;
       // Navigate to include engagement param so auto-save works
-      router.push(`/ap?engagement=${saved.id}&tab=explore`, { scroll: false });
+      router.push(`/${processId}?engagement=${saved.id}&tab=explore`, { scroll: false });
     },
-    [router]
+    [router, processId]
   );
 
   return (
@@ -250,6 +257,7 @@ export function APWorkflowPageClient({
                   steps={workflow.steps}
                   ratings={ratings}
                   compact
+                  category={category}
                 />
                 {/* Save as Engagement button (only when not already saved) */}
                 {!engagementId && (
@@ -273,6 +281,7 @@ export function APWorkflowPageClient({
                 toolMappings={processAssessment?.toolMappings}
                 maturityRating={ratings[selectedStep.id]}
                 onRate={handleRate}
+                category={category}
               />
             )}
 
@@ -281,7 +290,7 @@ export function APWorkflowPageClient({
         </TabsContent>
 
         <TabsContent value="vendors" className="mt-6">
-          <VendorLandscapeClient tools={getAllTools()} embedded />
+          <VendorLandscapeClient tools={getToolsByCategory(category)} embedded workflowSteps={workflow.steps} />
         </TabsContent>
       </Tabs>
 
@@ -290,8 +299,8 @@ export function APWorkflowPageClient({
         open={saveDialogOpen}
         onOpenChange={setSaveDialogOpen}
         ratings={ratings}
-        processId="ap"
-        processName="Accounts Payable"
+        processId={processId}
+        processName={processName}
         functionId="finance"
         onSaved={handleEngagementSaved}
       />

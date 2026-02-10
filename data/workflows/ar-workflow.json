@@ -1,0 +1,348 @@
+{
+  "id": "ar",
+  "name": "Accounts Receivable",
+  "functionId": "finance",
+  "processId": "ar",
+  "steps": [
+    {
+      "id": "credit-assessment",
+      "title": "Credit Assessment & Customer Onboarding",
+      "stepNumber": 1,
+      "abbreviation": "Credit",
+      "description": "Evaluate customer creditworthiness and establish payment terms before extending credit",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can analyze financial statements, payment histories, and market signals to automate credit scoring and dynamically adjust credit limits in real time."
+      },
+      "painPoints": [
+        "Manual credit checks relying on outdated data",
+        "Inconsistent credit policies across regions and sales teams",
+        "Slow onboarding delaying first orders",
+        "No real-time monitoring of customer credit risk changes"
+      ],
+      "beforeAfter": {
+        "before": "Credit analysts manually pull D&B reports, review financial statements, and make subjective decisions. New customer onboarding takes 5-10 days, and existing limits are reviewed annually at best.",
+        "after": "AI continuously scores credit risk using real-time financial data, news signals, and payment behavior — approving low-risk customers instantly and flagging deteriorating accounts before they default."
+      },
+      "impactMetrics": {
+        "timeSavings": "80% faster credit decisions",
+        "errorReduction": "60% fewer bad debt write-offs",
+        "costImpact": "0.5-1% reduction in DSO",
+        "throughput": "5x more credit reviews per analyst"
+      },
+      "insight": {
+        "whyItMatters": "Credit decisions set the risk profile for your entire receivables portfolio — get them wrong and you're funding bad customers with your own working capital.",
+        "typicalPain": "Most companies review credit limits annually or not at all. By the time a customer's financial health deteriorates, you've already extended 6 months of new credit.",
+        "aiImpactVerdict": "AI credit assessment is high-impact but adoption is still early. The leaders combine traditional credit bureau data with alternative signals (news, payment behavior, industry trends) for a holistic view.",
+        "aiImpactIntensity": "strong"
+      },
+      "toolContextSentence": "These tools replace manual credit checks with continuous, data-driven risk assessment — catching deterioration before it becomes bad debt."
+    },
+    {
+      "id": "order-to-invoice",
+      "title": "Order-to-Invoice Generation",
+      "stepNumber": 2,
+      "abbreviation": "Invoice",
+      "description": "Convert sales orders, contracts, and delivery confirmations into accurate invoices",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can auto-generate invoices from contracts and delivery data, catch pricing errors before they ship, and handle complex billing scenarios like milestone and usage-based billing."
+      },
+      "painPoints": [
+        "Manual invoice creation from sales orders",
+        "Pricing discrepancies between quotes and invoices",
+        "Complex billing rules for subscriptions and milestones",
+        "Delays between delivery and invoice generation"
+      ],
+      "beforeAfter": {
+        "before": "Billing clerks manually create invoices from sales orders, checking pricing against contracts and looking up tax rates. Complex billing (milestone, usage, recurring) requires spreadsheet tracking.",
+        "after": "AI auto-generates invoices from contract terms, delivery confirmations, and usage data — applying correct pricing, tax rules, and billing schedules without human intervention."
+      },
+      "impactMetrics": {
+        "timeSavings": "75% reduction in invoice creation time",
+        "errorReduction": "85% fewer billing errors",
+        "costImpact": "$2-4 saved per invoice",
+        "throughput": "10x invoice generation capacity"
+      },
+      "insight": {
+        "whyItMatters": "Every day between delivery and invoice is a day of free financing you're giving your customer — billing speed directly impacts your cash conversion cycle.",
+        "typicalPain": "Companies with complex billing (SaaS, construction, professional services) spend 3-5 days generating invoices after delivery. Pricing errors cause disputes that add another 15-30 days to collection.",
+        "aiImpactVerdict": "Automated invoice generation is well-proven for standard scenarios. The real differentiation is handling complex billing models — usage-based, milestone, multi-element arrangements.",
+        "aiImpactIntensity": "fire"
+      },
+      "toolContextSentence": "These tools close the gap between delivery and billing — turning days of manual invoice creation into automated, error-free generation."
+    },
+    {
+      "id": "invoice-delivery",
+      "title": "Invoice Delivery & Presentment",
+      "stepNumber": 3,
+      "abbreviation": "Deliver",
+      "description": "Deliver invoices to customers through their preferred channels and ensure receipt",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can optimize delivery channels per customer, detect failed deliveries, and provide self-service portals that reduce inbound inquiries by 50%+."
+      },
+      "painPoints": [
+        "Invoices lost in email or sent to wrong contacts",
+        "No confirmation that customer received the invoice",
+        "Multiple delivery formats required (PDF, EDI, portal)",
+        "High volume of customer inquiries about invoice status"
+      ],
+      "beforeAfter": {
+        "before": "Invoices are emailed as PDFs to a single contact. No delivery confirmation exists. When customers claim they never received an invoice, AR teams resend manually and the clock resets.",
+        "after": "AI routes invoices through each customer's preferred channel (email, EDI, portal), confirms receipt, and provides a self-service portal where customers access invoices and payment history."
+      },
+      "impactMetrics": {
+        "timeSavings": "60% fewer delivery-related inquiries",
+        "errorReduction": "90% delivery confirmation rate",
+        "costImpact": "3-5 day DSO reduction",
+        "throughput": "Multi-channel delivery at scale"
+      },
+      "insight": {
+        "whyItMatters": "An invoice that never reaches the right person never gets paid — delivery failures are the hidden cause of 10-15% of late payments.",
+        "typicalPain": "AR teams discover delivery failures only when payments don't arrive. By then, the invoice is already past due and the customer claims the 'clock' starts when they actually received it.",
+        "aiImpactVerdict": "Invoice delivery is a foundational capability — not glamorous but high-impact. Self-service portals are the real game-changer, reducing inbound calls and giving customers control.",
+        "aiImpactIntensity": "moderate"
+      },
+      "toolContextSentence": "These tools ensure invoices reach the right person through the right channel — with confirmation that eliminates 'we never received it' disputes."
+    },
+    {
+      "id": "payment-tracking",
+      "title": "Payment Tracking & Reminders",
+      "stepNumber": 4,
+      "abbreviation": "Track",
+      "description": "Monitor payment status, send automated reminders, and manage aging buckets",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can predict payment timing per customer, optimize reminder frequency and tone, and prioritize collector attention on accounts most likely to become delinquent."
+      },
+      "painPoints": [
+        "Manual tracking of payment due dates",
+        "Generic reminder emails that customers ignore",
+        "No visibility into which invoices are at risk",
+        "Inconsistent follow-up across the AR team"
+      ],
+      "beforeAfter": {
+        "before": "AR clerks run aging reports weekly, send identical reminder emails to everyone, and manually track who they've contacted. High-risk accounts get the same treatment as reliable payers.",
+        "after": "AI predicts payment probability per invoice, sends personalized reminders at optimal times, and surfaces at-risk accounts for proactive outreach before they go past due."
+      },
+      "impactMetrics": {
+        "timeSavings": "70% reduction in manual follow-up time",
+        "errorReduction": "50% fewer invoices going past due",
+        "costImpact": "5-8 day DSO improvement",
+        "throughput": "3x more accounts managed per collector"
+      },
+      "insight": {
+        "whyItMatters": "Proactive payment tracking is the difference between collecting on day 32 and collecting on day 65 — the cost of inaction compounds daily.",
+        "typicalPain": "Most AR teams are reactive — they don't look at an invoice until it's past due. By then, the customer has already allocated their cash elsewhere and you're competing with other creditors.",
+        "aiImpactVerdict": "Predictive payment tracking is one of the highest-ROI capabilities in AR. Knowing which invoices will be late before they're due changes the entire collection strategy.",
+        "aiImpactIntensity": "fire"
+      },
+      "toolContextSentence": "These tools shift AR from reactive aging-report-chasing to predictive, prioritized outreach that catches late payments before they happen."
+    },
+    {
+      "id": "cash-application",
+      "title": "Cash Application & Matching",
+      "stepNumber": 5,
+      "abbreviation": "Cash App",
+      "description": "Match incoming payments to open invoices and apply cash accurately",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can match payments to invoices even with partial payments, remittance data gaps, and customer reference mismatches — automating 85%+ of cash application."
+      },
+      "painPoints": [
+        "Payments received without remittance details",
+        "Partial payments requiring manual allocation",
+        "Multiple invoices paid in single payments",
+        "Bank lockbox data format inconsistencies"
+      ],
+      "beforeAfter": {
+        "before": "Cash application specialists manually match bank deposits to invoices, researching payment references, calling customers for remittance details, and handling exceptions one by one.",
+        "after": "AI automatically matches payments to invoices using pattern recognition, historical payment behavior, and fuzzy matching — even without remittance data, resolving 85%+ without human touch."
+      },
+      "impactMetrics": {
+        "timeSavings": "80% reduction in cash application time",
+        "errorReduction": "90% fewer misapplied payments",
+        "costImpact": "$3-8 saved per payment",
+        "throughput": "Same-day cash application vs. 3-5 day lag"
+      },
+      "insight": {
+        "whyItMatters": "Unapplied cash is invisible cash — it distorts your aging report, triggers false collection calls to customers who already paid, and delays your ability to recognize revenue.",
+        "typicalPain": "The average company has 5-15% of cash sitting unapplied at any time. This creates phantom receivables, wastes collector time on already-paid invoices, and damages customer relationships.",
+        "aiImpactVerdict": "Cash application is the #1 most-automated AR process today. AI matching has crossed the threshold where it's more accurate than humans for most payment scenarios.",
+        "aiImpactIntensity": "fire"
+      },
+      "toolContextSentence": "These tools solve the hardest matching problem in AR — connecting payments to invoices when the data is incomplete, inconsistent, or missing entirely."
+    },
+    {
+      "id": "deduction-management",
+      "title": "Deduction & Dispute Management",
+      "stepNumber": 6,
+      "abbreviation": "Deductions",
+      "description": "Manage customer deductions, short payments, and billing disputes through resolution",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can categorize deductions automatically, match them to trade promotions or contracts, and recommend accept/reject decisions based on historical patterns."
+      },
+      "painPoints": [
+        "High volume of small deductions that cost more to research than to write off",
+        "No visibility into deduction root causes or trends",
+        "Manual research across multiple systems to validate claims",
+        "Inconsistent treatment of similar deduction types"
+      ],
+      "beforeAfter": {
+        "before": "Deduction analysts manually research each claim, pulling data from contracts, promotions, shipping records, and prior disputes. Resolution takes 15-30 days and many are written off by default.",
+        "after": "AI auto-categorizes deductions, validates claims against contracts and trade spend data, and recommends resolution — auto-approving valid deductions and flagging invalid ones for dispute."
+      },
+      "impactMetrics": {
+        "timeSavings": "65% faster deduction resolution",
+        "errorReduction": "50% fewer invalid write-offs",
+        "costImpact": "0.3-0.5% revenue recovery",
+        "throughput": "4x deductions processed per analyst"
+      },
+      "insight": {
+        "whyItMatters": "Deductions are the silent revenue leak in AR — most companies write off 40-60% of deductions without investigation because the research cost exceeds the deduction value.",
+        "typicalPain": "Consumer goods companies lose 1-3% of revenue to deductions. Most lack the tools to distinguish valid trade deductions from invalid claims, so they default to acceptance.",
+        "aiImpactVerdict": "AI deduction management is strong for categorization and pattern detection but still emerging for end-to-end resolution. Best for companies with high deduction volume (CPG, retail).",
+        "aiImpactIntensity": "strong"
+      },
+      "toolContextSentence": "These tools turn deduction management from a write-off queue into a resolution engine — recovering revenue that would otherwise be lost to default acceptance."
+    },
+    {
+      "id": "collections",
+      "title": "Collections Management",
+      "stepNumber": 7,
+      "abbreviation": "Collect",
+      "description": "Manage systematic collection of overdue accounts with prioritized workflows",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can prioritize collection efforts by likelihood of payment, recommend optimal contact strategies per customer, and automate routine collection activities."
+      },
+      "painPoints": [
+        "Collectors work accounts in aging order rather than by priority",
+        "No data-driven prioritization of collection efforts",
+        "Manual logging of collection activities and promises to pay",
+        "Inconsistent collection strategies across the team"
+      ],
+      "beforeAfter": {
+        "before": "Collectors work through aging reports top-to-bottom, calling every past-due account with the same urgency. No intelligence guides who to call first or what approach to use.",
+        "after": "AI prioritizes accounts by payment probability, dollar impact, and customer risk — recommending the optimal contact method and escalation path for each account."
+      },
+      "impactMetrics": {
+        "timeSavings": "60% more productive collector time",
+        "errorReduction": "40% faster recovery on at-risk accounts",
+        "costImpact": "8-12 day DSO improvement",
+        "throughput": "2x accounts managed per collector"
+      },
+      "insight": {
+        "whyItMatters": "Collection effectiveness is the single biggest lever on DSO — a 10% improvement in collector productivity can move DSO by 5-10 days.",
+        "typicalPain": "Most collectors manage 500+ accounts and default to calling the biggest balances first. This means small-but-risky accounts slip into bad debt, and large-but-reliable accounts get unnecessary calls.",
+        "aiImpactVerdict": "AI-driven collection prioritization is proven and high-impact. The best tools combine payment prediction with recommended actions, turning collectors into strategic negotiators.",
+        "aiImpactIntensity": "fire"
+      },
+      "toolContextSentence": "These tools transform collectors from aging-report readers into strategically-guided negotiators — focusing effort where it has the highest dollar impact."
+    },
+    {
+      "id": "dunning",
+      "title": "Dunning & Escalation",
+      "stepNumber": 8,
+      "abbreviation": "Dunning",
+      "description": "Automate escalation sequences for delinquent accounts with progressively urgent communications",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can personalize dunning sequences based on customer behavior, payment history, and relationship value — balancing firmness with retention."
+      },
+      "painPoints": [
+        "One-size-fits-all dunning letters that damage relationships",
+        "No escalation logic beyond basic aging buckets",
+        "Manual decisions on when to involve sales or legal",
+        "Inability to balance collection urgency with customer retention"
+      ],
+      "beforeAfter": {
+        "before": "Generic dunning letters are sent at fixed intervals regardless of customer importance or payment history. Escalation to sales or legal happens only after manual review.",
+        "after": "AI personalizes dunning tone, timing, and channel based on customer segment and behavior — automatically escalating to sales when strategic accounts are at risk."
+      },
+      "impactMetrics": {
+        "timeSavings": "70% reduction in manual escalation decisions",
+        "errorReduction": "30% higher response rate to dunning",
+        "costImpact": "3-5 day reduction in average days delinquent",
+        "throughput": "Automated escalation for 100% of past-due accounts"
+      },
+      "insight": {
+        "whyItMatters": "Dunning is where AR meets customer relationships — too aggressive and you lose customers, too soft and you fund their working capital.",
+        "typicalPain": "Most companies have 3 dunning letter templates that go out regardless of context. A Fortune 500 strategic account gets the same 'your account is past due' letter as a one-time buyer.",
+        "aiImpactVerdict": "AI dunning personalization is a clear win — the data to segment and personalize exists, and the cost of getting it wrong (lost customers or lost cash) is high.",
+        "aiImpactIntensity": "strong"
+      },
+      "toolContextSentence": "These tools replace generic dunning with intelligent escalation — balancing collection urgency against customer lifetime value."
+    },
+    {
+      "id": "bad-debt-reserve",
+      "title": "Bad Debt & Write-Off Management",
+      "stepNumber": 9,
+      "abbreviation": "Bad Debt",
+      "description": "Manage bad debt provisioning, write-off decisions, and recovery efforts",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can predict default probability per account, calculate optimal reserve levels, and identify accounts worth pursuing for recovery vs. writing off."
+      },
+      "painPoints": [
+        "Inaccurate bad debt reserve estimates",
+        "Subjective write-off decisions without data support",
+        "No systematic approach to recovery of written-off accounts",
+        "Audit challenges around reserve adequacy"
+      ],
+      "beforeAfter": {
+        "before": "Bad debt reserves are estimated using aging-bucket percentages that haven't changed in years. Write-off decisions are made subjectively, and recovery efforts are ad hoc.",
+        "after": "AI predicts default probability at the account level, calculates dynamic reserve requirements, and recommends write-off vs. recovery decisions based on expected recovery rates."
+      },
+      "impactMetrics": {
+        "timeSavings": "50% faster reserve calculations",
+        "errorReduction": "40% more accurate reserve estimates",
+        "costImpact": "10-20% improvement in recovery rates",
+        "throughput": "Continuous reserve monitoring vs. quarterly"
+      },
+      "insight": {
+        "whyItMatters": "Bad debt reserves directly hit your P&L — over-reserving ties up capital, under-reserving creates earnings surprises. Getting it right is a CFO-level concern.",
+        "typicalPain": "Most companies use static aging percentages (e.g., 5% of 60-day, 20% of 90-day) that don't reflect actual portfolio risk. Auditors routinely challenge reserve adequacy.",
+        "aiImpactVerdict": "AI-driven reserve estimation is relatively straightforward — the models are well-understood from credit risk. The bigger opportunity is using prediction to prevent bad debt rather than just reserving for it.",
+        "aiImpactIntensity": "moderate"
+      },
+      "toolContextSentence": "These tools replace static aging-based reserves with dynamic, account-level default prediction — improving reserve accuracy and recovery outcomes."
+    },
+    {
+      "id": "ar-reporting",
+      "title": "AR Reporting & Analytics",
+      "stepNumber": 10,
+      "abbreviation": "Reporting",
+      "description": "Generate AR performance reports, cash flow forecasts, and portfolio analytics",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can generate natural-language AR insights, predict cash inflows, and surface trends that traditional dashboards miss — enabling proactive management."
+      },
+      "painPoints": [
+        "Static aging reports that don't predict future performance",
+        "Manual cash flow forecasting in spreadsheets",
+        "No root cause analysis for DSO trends",
+        "Limited visibility across business units and geographies"
+      ],
+      "beforeAfter": {
+        "before": "AR managers rely on weekly aging reports and manual spreadsheet forecasts. Trend analysis is backward-looking, and cash flow predictions are based on gut feel plus historical averages.",
+        "after": "AI generates predictive cash inflow forecasts, surfaces root causes behind DSO changes, and provides natural-language insights on portfolio health — enabling proactive treasury management."
+      },
+      "impactMetrics": {
+        "timeSavings": "70% less time on report generation",
+        "errorReduction": "85% more accurate cash forecasts",
+        "costImpact": "Improved working capital through better forecasting",
+        "throughput": "Real-time analytics vs. weekly batch reports"
+      },
+      "insight": {
+        "whyItMatters": "AR analytics quality determines whether treasury can forecast cash accurately — and whether the CFO trusts the numbers enough to make strategic working capital decisions.",
+        "typicalPain": "AR managers spend Monday mornings building aging reports that are already stale. Cash flow forecasts are typically off by 15-25% because they use simple averages rather than predictive models.",
+        "aiImpactVerdict": "AI-powered AR analytics is a clear upgrade over static reporting. Predictive cash forecasting is the killer feature — it turns AR from a back-office function into a strategic treasury input.",
+        "aiImpactIntensity": "strong"
+      },
+      "toolContextSentence": "These tools transform AR reporting from backward-looking aging snapshots into forward-looking, predictive analytics that treasury teams can act on."
+    }
+  ]
+}

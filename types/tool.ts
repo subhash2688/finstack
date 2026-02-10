@@ -1,6 +1,6 @@
 export type AIMaturity = 'ai-native' | 'ai-enabled' | 'traditional';
 export type CompanySize = 'startup' | 'smb' | 'mid-market' | 'enterprise';
-export type Category = 'ap' | 'fpa' | 'close';
+export type Category = 'ap' | 'ar' | 'fpa' | 'close';
 export type FitGrade = 'best-fit' | 'good-fit' | 'limited';
 export type EffortLevel = 'low' | 'medium' | 'high';
 

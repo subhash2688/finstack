@@ -1,0 +1,1314 @@
+[
+  {
+    "id": "highradius",
+    "name": "HighRadius",
+    "vendor": "HighRadius",
+    "category": "ar",
+    "aiMaturity": "ai-native",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Consumer Goods", "Technology", "Healthcare", "Energy"],
+    "painPoints": [
+      "Manual cash application consuming analyst time",
+      "Reactive collections with no prioritization",
+      "Inaccurate cash flow forecasting"
+    ],
+    "integrations": ["SAP", "Oracle", "NetSuite", "Microsoft Dynamics", "Workday"],
+    "pricing": {
+      "model": "Per user + modules",
+      "startingPrice": "$100K+ annually",
+      "notes": "Enterprise pricing, modular add-ons"
+    },
+    "keyFeatures": [
+      "AI-powered cash application with 95%+ auto-match rate",
+      "Predictive collections prioritization",
+      "Integrated credit risk management",
+      "Automated deduction resolution",
+      "Real-time AR analytics and cash forecasting"
+    ],
+    "workflowSteps": ["credit-assessment", "order-to-invoice", "payment-tracking", "cash-application", "deduction-management", "collections", "ar-reporting"],
+    "tagline": "AI-Powered Order-to-Cash Platform",
+    "description": "HighRadius provides an end-to-end Autonomous Receivables platform that uses AI to automate cash application, collections, credit, and deductions — enabling companies to lower DSO and accelerate cash flow.",
+    "website": "https://www.highradius.com",
+    "founded": "2006",
+    "headquarters": "Houston, TX",
+    "employeeCount": "~4,500",
+    "overallFitScore": 88,
+    "fitScores": [
+      { "stepId": "credit-assessment", "score": 82, "grade": "best-fit" },
+      { "stepId": "order-to-invoice", "score": 70, "grade": "good-fit" },
+      { "stepId": "payment-tracking", "score": 85, "grade": "best-fit" },
+      { "stepId": "cash-application", "score": 95, "grade": "best-fit" },
+      { "stepId": "deduction-management", "score": 88, "grade": "best-fit" },
+      { "stepId": "collections", "score": 90, "grade": "best-fit" },
+      { "stepId": "ar-reporting", "score": 80, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "800+",
+      "revenue": "$400M ARR",
+      "yoyGrowth": "35%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["P&G", "Unilever", "Johnson & Johnson", "PepsiCo"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "12-16 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — requires historical payment and invoice data for AI training",
+      "changeManagement": "Moderate — collectors need training on prioritization workflows",
+      "requirements": ["ERP integration (SAP/Oracle preferred)", "Minimum 10K invoices/month for AI ROI", "Dedicated project team"]
+    },
+    "stepVerdicts": [
+      { "stepId": "credit-assessment", "verdict": "Strong credit risk module with real-time monitoring and scoring. Best for enterprises that want integrated credit-to-cash on a single platform." },
+      { "stepId": "order-to-invoice", "verdict": "Solid e-invoicing capabilities but not the primary focus. Adequate for standard billing but consider specialists for complex billing models." },
+      { "stepId": "payment-tracking", "verdict": "Excellent predictive payment tracking with AI that learns customer payment patterns. One of the best in class for proactive follow-up." },
+      { "stepId": "cash-application", "verdict": "Industry-leading AI cash application — the product that built the company. 95%+ auto-match rates even without remittance data. The gold standard." },
+      { "stepId": "deduction-management", "verdict": "Purpose-built deduction management with AI categorization and workflow. Particularly strong for CPG companies with high trade deduction volumes." },
+      { "stepId": "collections", "verdict": "AI-prioritized worklists with recommended actions transform collector productivity. The best at turning data into actionable collection strategies." },
+      { "stepId": "ar-reporting", "verdict": "Comprehensive AR analytics with predictive cash forecasting. Dashboards are strong but customization requires professional services." }
+    ]
+  },
+  {
+    "id": "billtrust",
+    "name": "Billtrust",
+    "vendor": "Billtrust (Flywire)",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Distribution", "Building Materials", "Food & Beverage"],
+    "painPoints": [
+      "Paper-based invoice delivery",
+      "Slow cash application from lockbox",
+      "Disconnected AR processes"
+    ],
+    "integrations": ["SAP", "Oracle", "NetSuite", "Microsoft Dynamics", "Infor"],
+    "pricing": {
+      "model": "Per transaction + platform fee",
+      "startingPrice": "$50K+ annually",
+      "notes": "Modular pricing by capability"
+    },
+    "keyFeatures": [
+      "Multi-channel invoice delivery (email, EDI, portal, print)",
+      "AI-powered cash application",
+      "Integrated payments with multiple payment methods",
+      "Customer self-service portal",
+      "AR analytics and reporting"
+    ],
+    "workflowSteps": ["order-to-invoice", "invoice-delivery", "payment-tracking", "cash-application", "collections", "ar-reporting"],
+    "tagline": "Order-to-Cash Automation for B2B",
+    "description": "Billtrust provides a comprehensive order-to-cash platform that automates invoice delivery, payment acceptance, and cash application — helping B2B companies get paid faster.",
+    "website": "https://www.billtrust.com",
+    "founded": "2001",
+    "headquarters": "Lawrenceville, NJ",
+    "employeeCount": "~700",
+    "overallFitScore": 78,
+    "fitScores": [
+      { "stepId": "order-to-invoice", "score": 80, "grade": "best-fit" },
+      { "stepId": "invoice-delivery", "score": 92, "grade": "best-fit" },
+      { "stepId": "payment-tracking", "score": 72, "grade": "good-fit" },
+      { "stepId": "cash-application", "score": 85, "grade": "best-fit" },
+      { "stepId": "collections", "score": 65, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 70, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "2,400+",
+      "revenue": "$180M ARR",
+      "yoyGrowth": "25%",
+      "g2Rating": 4.2,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["Cardinal Health", "HD Supply", "Wesco", "Grainger"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-12 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — customer and invoice data for portal setup",
+      "changeManagement": "Low — customer-facing portal requires buyer adoption",
+      "requirements": ["ERP integration", "Customer communication about portal", "AR team of 3+"]
+    },
+    "stepVerdicts": [
+      { "stepId": "order-to-invoice", "verdict": "Good invoice generation with strong template management. Particularly well-suited for B2B companies with high-volume, standardized invoicing." },
+      { "stepId": "invoice-delivery", "verdict": "Best-in-class multi-channel delivery — the core competency. Handles print, email, EDI, and portal delivery with comprehensive tracking and confirmation." },
+      { "stepId": "payment-tracking", "verdict": "Solid payment tracking through the customer portal. The self-service aspect reduces inbound inquiries but collection intelligence is less sophisticated than specialists." },
+      { "stepId": "cash-application", "verdict": "Strong AI cash application that benefits from payment data captured through their own portal. Match rates improve significantly for portal-paying customers." },
+      { "stepId": "collections", "verdict": "Basic collections management included but not a differentiator. Better suited as a complement to a dedicated collections tool." },
+      { "stepId": "ar-reporting", "verdict": "Good operational reporting with insights into delivery and payment trends. Analytics are practical but not as deep as pure-play analytics tools." }
+    ]
+  },
+  {
+    "id": "esker-ar",
+    "name": "Esker AR",
+    "vendor": "Esker",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Consumer Goods", "Life Sciences", "Technology"],
+    "painPoints": [
+      "Manual invoice creation and delivery",
+      "Disconnected order-to-cash processes",
+      "Poor visibility into collections status"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "JD Edwards"],
+    "pricing": {
+      "model": "Per transaction",
+      "startingPrice": "$40K+ annually",
+      "notes": "Volume-based pricing"
+    },
+    "keyFeatures": [
+      "AI-driven invoice generation and delivery",
+      "Automated collections management",
+      "Cash application with machine learning",
+      "Customer self-service portal",
+      "Seamless AP/AR integration on single platform"
+    ],
+    "workflowSteps": ["order-to-invoice", "invoice-delivery", "payment-tracking", "cash-application", "collections", "dunning"],
+    "tagline": "AI-Driven Accounts Receivable Automation",
+    "description": "Esker provides cloud-based AR automation that covers invoicing, collections, cash application, and payment management — with strong SAP integration and a unified AP/AR platform.",
+    "website": "https://www.esker.com",
+    "founded": "1985",
+    "headquarters": "Lyon, France",
+    "employeeCount": "~1,800",
+    "overallFitScore": 74,
+    "fitScores": [
+      { "stepId": "order-to-invoice", "score": 82, "grade": "best-fit" },
+      { "stepId": "invoice-delivery", "score": 80, "grade": "best-fit" },
+      { "stepId": "payment-tracking", "score": 70, "grade": "good-fit" },
+      { "stepId": "cash-application", "score": 75, "grade": "good-fit" },
+      { "stepId": "collections", "score": 72, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 68, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "6,000+",
+      "revenue": "$200M ARR",
+      "yoyGrowth": "20%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["Heineken", "Whirlpool", "Bridgestone", "Sony"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-12 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — invoice templates and customer data migration",
+      "changeManagement": "Low-moderate — users familiar with Esker AP adapt quickly",
+      "requirements": ["ERP integration (SAP preferred)", "Invoice template setup", "AR team training"]
+    },
+    "stepVerdicts": [
+      { "stepId": "order-to-invoice", "verdict": "Strong invoice generation with flexible template engine. The SAP integration is particularly deep, pulling order data directly for automated invoice creation." },
+      { "stepId": "invoice-delivery", "verdict": "Comprehensive multi-channel delivery with good tracking. Benefits from Esker's decades of document management expertise." },
+      { "stepId": "payment-tracking", "verdict": "Adequate tracking and reminder capabilities. The strength is in the unified view when you also use Esker AP — giving a full P2P and O2C picture." },
+      { "stepId": "cash-application", "verdict": "Competent ML-based cash application that improves over time. Not the most advanced AI but reliable and well-integrated with the broader platform." },
+      { "stepId": "collections", "verdict": "Good collections workflows with automated task assignment. Best when used alongside the full Esker O2C suite for end-to-end visibility." },
+      { "stepId": "dunning", "verdict": "Solid automated dunning with configurable escalation rules. The multi-language support is a differentiator for global companies." }
+    ]
+  },
+  {
+    "id": "versapay",
+    "name": "Versapay",
+    "vendor": "Versapay",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market", "enterprise"],
+    "industries": ["SaaS", "Professional Services", "Manufacturing", "Distribution"],
+    "painPoints": [
+      "Customers can't self-serve on invoices and payments",
+      "High volume of payment inquiries",
+      "Slow cash application processes"
+    ],
+    "integrations": ["NetSuite", "Sage Intacct", "Microsoft Dynamics", "SAP", "QuickBooks"],
+    "pricing": {
+      "model": "Per user + transaction fees",
+      "startingPrice": "$30K+ annually",
+      "notes": "Mid-market friendly pricing"
+    },
+    "keyFeatures": [
+      "Collaborative AR portal for buyers and sellers",
+      "Automated cash application",
+      "Smart collections with payment prediction",
+      "Customer self-service portal",
+      "Integrated online payment acceptance"
+    ],
+    "workflowSteps": ["invoice-delivery", "payment-tracking", "cash-application", "collections", "dunning", "ar-reporting"],
+    "tagline": "Collaborative Accounts Receivable Network",
+    "description": "Versapay's Collaborative AR platform connects AR teams with their customers in a shared portal, making it easier to resolve invoice questions, accept payments, and automate cash application.",
+    "website": "https://www.versapay.com",
+    "founded": "2006",
+    "headquarters": "Toronto, Canada",
+    "employeeCount": "~400",
+    "overallFitScore": 72,
+    "fitScores": [
+      { "stepId": "invoice-delivery", "score": 78, "grade": "good-fit" },
+      { "stepId": "payment-tracking", "score": 74, "grade": "good-fit" },
+      { "stepId": "cash-application", "score": 80, "grade": "best-fit" },
+      { "stepId": "collections", "score": 76, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 68, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 65, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "10,000+",
+      "revenue": "$60M ARR",
+      "yoyGrowth": "30%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["Toyota", "Iron Mountain", "Verizon", "AutoNation"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "4-8 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — connects to existing ERP for invoice data",
+      "changeManagement": "Low — portal requires buyer invitation and adoption",
+      "requirements": ["ERP integration", "Customer communication plan for portal rollout"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-delivery", "verdict": "Good portal-based delivery where customers can view, comment, and pay. The collaborative aspect reduces 'where's my invoice' calls significantly." },
+      { "stepId": "payment-tracking", "verdict": "The collaborative portal makes payment tracking transparent for both sides. Customers can see what's due; AR can see what's viewed and pending." },
+      { "stepId": "cash-application", "verdict": "Strong auto-matching for portal payments since the data is inherently structured. Match rates drop for non-portal payments." },
+      { "stepId": "collections", "verdict": "Collections benefit from the collaborative model — discussions happen in-context rather than over email. Good for relationship-driven businesses." },
+      { "stepId": "dunning", "verdict": "Basic dunning automation through the portal. Effective for simple escalation sequences but less configurable than dedicated dunning tools." },
+      { "stepId": "ar-reporting", "verdict": "Practical reporting focused on portal adoption and payment metrics. Useful but not as comprehensive as dedicated analytics platforms." }
+    ]
+  },
+  {
+    "id": "blackline-ar",
+    "name": "BlackLine AR",
+    "vendor": "BlackLine",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Financial Services", "Technology", "Healthcare", "Manufacturing"],
+    "painPoints": [
+      "Manual AR reconciliation at month-end",
+      "Disconnected collections from close process",
+      "Poor cash application accuracy"
+    ],
+    "integrations": ["SAP", "Oracle", "NetSuite", "Workday", "Microsoft Dynamics"],
+    "pricing": {
+      "model": "Per user + modules",
+      "startingPrice": "$75K+ annually",
+      "notes": "Part of broader BlackLine close platform"
+    },
+    "keyFeatures": [
+      "AI-powered cash application",
+      "Collections management with smart prioritization",
+      "AR intelligence and analytics",
+      "Integrated with BlackLine close and reconciliation",
+      "Team performance tracking"
+    ],
+    "workflowSteps": ["cash-application", "collections", "dunning", "bad-debt-reserve", "ar-reporting"],
+    "tagline": "Intelligent AR Automation",
+    "description": "BlackLine AR Automation uses AI to streamline cash application and collections while integrating with BlackLine's market-leading close and reconciliation platform for a unified financial operations experience.",
+    "website": "https://www.blackline.com",
+    "founded": "2001",
+    "headquarters": "Woodland Hills, CA",
+    "employeeCount": "~1,800",
+    "overallFitScore": 73,
+    "fitScores": [
+      { "stepId": "cash-application", "score": 82, "grade": "best-fit" },
+      { "stepId": "collections", "score": 75, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 65, "grade": "good-fit" },
+      { "stepId": "bad-debt-reserve", "score": 78, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 80, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "4,300+",
+      "revenue": "$550M ARR",
+      "yoyGrowth": "18%",
+      "g2Rating": 4.3,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["Coca-Cola", "Under Armour", "SiriusXM", "Hershey's"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-12 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — bank data and AR aging import",
+      "changeManagement": "Low if already on BlackLine; moderate for new customers",
+      "requirements": ["ERP integration", "Bank file connectivity", "Existing BlackLine platform recommended"]
+    },
+    "stepVerdicts": [
+      { "stepId": "cash-application", "verdict": "Strong AI cash application via the Rimilia acquisition. The integration with BlackLine's reconciliation platform is a unique advantage for close-focused teams." },
+      { "stepId": "collections", "verdict": "Good prioritized worklists and activity tracking. Works best when combined with BlackLine's broader financial operations platform." },
+      { "stepId": "dunning", "verdict": "Basic but functional dunning automation. Not as sophisticated as dedicated AR platforms but adequate for most use cases." },
+      { "stepId": "bad-debt-reserve", "verdict": "Solid reserve management that benefits from BlackLine's close expertise. The integration with reconciliation data provides a more complete picture." },
+      { "stepId": "ar-reporting", "verdict": "Excellent AR analytics, especially when paired with BlackLine's financial reporting. The unified view of AR within the broader close process is a genuine differentiator." }
+    ]
+  },
+  {
+    "id": "yaypay",
+    "name": "YayPay (Quadient)",
+    "vendor": "Quadient",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["SaaS", "Technology", "Professional Services", "Media"],
+    "painPoints": [
+      "Reactive collections approach",
+      "Manual payment prediction",
+      "Limited visibility into payment behavior"
+    ],
+    "integrations": ["NetSuite", "Sage Intacct", "QuickBooks", "Microsoft Dynamics", "Salesforce"],
+    "pricing": {
+      "model": "Per user per month",
+      "startingPrice": "$20K+ annually",
+      "notes": "SMB-friendly pricing"
+    },
+    "keyFeatures": [
+      "AI-powered payment prediction",
+      "Automated collections workflows",
+      "Smart dunning sequences",
+      "Cash forecasting dashboard",
+      "Customer payment portal"
+    ],
+    "workflowSteps": ["payment-tracking", "cash-application", "collections", "dunning", "ar-reporting"],
+    "tagline": "Predictive AR Automation",
+    "description": "YayPay (now Quadient AR) uses predictive analytics to forecast payment timing, automate collections, and provide real-time visibility into AR performance for mid-market companies.",
+    "website": "https://www.quadient.com/ar-automation",
+    "founded": "2015",
+    "headquarters": "New York, NY",
+    "employeeCount": "~100 (AR division)",
+    "overallFitScore": 70,
+    "fitScores": [
+      { "stepId": "payment-tracking", "score": 82, "grade": "best-fit" },
+      { "stepId": "cash-application", "score": 68, "grade": "good-fit" },
+      { "stepId": "collections", "score": 78, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 75, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 72, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "1,000+",
+      "revenue": "$25M ARR",
+      "yoyGrowth": "28%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Vice Media", "Conduit", "Pangea", "TripActions"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "4-6 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — pulls data from ERP via API",
+      "changeManagement": "Low — intuitive interface for AR teams",
+      "requirements": ["ERP integration (NetSuite or Sage Intacct ideal)", "AR team of 2+"]
+    },
+    "stepVerdicts": [
+      { "stepId": "payment-tracking", "verdict": "Strong payment prediction is the core differentiator. AI predicts when each invoice will be paid, allowing proactive prioritization of follow-ups." },
+      { "stepId": "cash-application", "verdict": "Adequate cash application for mid-market volumes. Not as sophisticated as HighRadius but sufficient for companies processing under 5K payments/month." },
+      { "stepId": "collections", "verdict": "Well-designed collections workflows with AI-driven prioritization. The interface is clean and intuitive — great for teams that don't want enterprise complexity." },
+      { "stepId": "dunning", "verdict": "Configurable dunning sequences with smart timing. Good for standard escalation scenarios; limited customization for complex multi-entity dunning." },
+      { "stepId": "ar-reporting", "verdict": "Clean, actionable dashboards focused on collections performance and cash forecasting. Less depth than enterprise tools but great for mid-market needs." }
+    ]
+  },
+  {
+    "id": "cforia",
+    "name": "Cforia",
+    "vendor": "Cforia",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["enterprise"],
+    "industries": ["Manufacturing", "Energy", "Chemicals", "Technology"],
+    "painPoints": [
+      "Complex multi-entity AR management",
+      "Inconsistent credit policies across divisions",
+      "Limited AR visibility in SAP environments"
+    ],
+    "integrations": ["SAP", "Oracle", "JD Edwards", "Microsoft Dynamics"],
+    "pricing": {
+      "model": "Per user + modules",
+      "startingPrice": "$80K+ annually",
+      "notes": "Enterprise pricing"
+    },
+    "keyFeatures": [
+      "Multi-ERP credit-to-cash platform",
+      "Centralized credit management",
+      "Automated collections with worklist management",
+      "Cash application with intelligent matching",
+      "Enterprise AR analytics"
+    ],
+    "workflowSteps": ["credit-assessment", "payment-tracking", "cash-application", "collections", "bad-debt-reserve", "ar-reporting"],
+    "tagline": "Enterprise Credit-to-Cash Intelligence",
+    "description": "Cforia provides enterprise-grade credit-to-cash automation for complex, multi-ERP environments — offering centralized credit management, collections, and cash application across global operations.",
+    "website": "https://www.cforia.com",
+    "founded": "1999",
+    "headquarters": "Princeton, NJ",
+    "employeeCount": "~150",
+    "overallFitScore": 72,
+    "fitScores": [
+      { "stepId": "credit-assessment", "score": 85, "grade": "best-fit" },
+      { "stepId": "payment-tracking", "score": 70, "grade": "good-fit" },
+      { "stepId": "cash-application", "score": 72, "grade": "good-fit" },
+      { "stepId": "collections", "score": 78, "grade": "good-fit" },
+      { "stepId": "bad-debt-reserve", "score": 68, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 75, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "200+",
+      "revenue": "$30M ARR",
+      "yoyGrowth": "15%",
+      "g2Rating": 4.1,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["BASF", "DuPont", "Honeywell", "3M"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "12-20 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — multi-ERP data aggregation and normalization",
+      "changeManagement": "Moderate — centralizing credit decisions changes regional authority",
+      "requirements": ["Multi-ERP environment", "Centralized AR leadership", "Dedicated project team"]
+    },
+    "stepVerdicts": [
+      { "stepId": "credit-assessment", "verdict": "Strongest differentiator — centralized credit management across multiple ERPs. Excellent for enterprises needing consistent credit policies across divisions and geographies." },
+      { "stepId": "payment-tracking", "verdict": "Solid payment tracking with cross-ERP visibility. The multi-entity view is valuable but the interface can feel dated compared to newer competitors." },
+      { "stepId": "cash-application", "verdict": "Good intelligent matching for multi-ERP environments. Match rates are competitive but the AI is less advanced than HighRadius or BlackLine." },
+      { "stepId": "collections", "verdict": "Effective worklist-based collections with good prioritization. The cross-ERP view lets collectors see the full customer relationship across entities." },
+      { "stepId": "bad-debt-reserve", "verdict": "Adequate reserve management within the broader credit framework. Not a standout feature but well-integrated with credit scoring." },
+      { "stepId": "ar-reporting", "verdict": "Strong cross-ERP analytics that provide a consolidated view you can't get from individual ERPs. The reporting is the primary reason many enterprises choose Cforia." }
+    ]
+  },
+  {
+    "id": "tesorio",
+    "name": "Tesorio",
+    "vendor": "Tesorio",
+    "category": "ar",
+    "aiMaturity": "ai-native",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["SaaS", "Technology", "Professional Services", "Media"],
+    "painPoints": [
+      "Inaccurate cash flow forecasting",
+      "Manual collections workflows",
+      "Disconnect between AR and treasury"
+    ],
+    "integrations": ["NetSuite", "Sage Intacct", "QuickBooks", "Salesforce", "Slack"],
+    "pricing": {
+      "model": "Per user per month",
+      "startingPrice": "$15K+ annually",
+      "notes": "Growth-stage friendly pricing"
+    },
+    "keyFeatures": [
+      "AI-powered cash flow forecasting",
+      "Automated AR collections workflows",
+      "Payment prediction per invoice",
+      "Customer health scoring",
+      "Treasury collaboration tools"
+    ],
+    "workflowSteps": ["payment-tracking", "collections", "dunning", "ar-reporting"],
+    "tagline": "AI Cash Flow Forecasting & AR Automation",
+    "description": "Tesorio combines AI-powered cash flow forecasting with automated collections to help finance teams predict cash inflows accurately and accelerate collections through intelligent automation.",
+    "website": "https://www.tesorio.com",
+    "founded": "2015",
+    "headquarters": "San Francisco, CA",
+    "employeeCount": "~80",
+    "overallFitScore": 68,
+    "fitScores": [
+      { "stepId": "payment-tracking", "score": 78, "grade": "good-fit" },
+      { "stepId": "collections", "score": 72, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 70, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 85, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "500+",
+      "revenue": "$15M ARR",
+      "yoyGrowth": "40%",
+      "g2Rating": 4.6,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Slack", "Box", "Veeva", "Conga"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "2-4 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — connects via API to existing ERP",
+      "changeManagement": "Very low — intuitive interface, works within existing workflows",
+      "requirements": ["ERP with API access (NetSuite or Sage Intacct ideal)", "AR/Finance team of 2+"]
+    },
+    "stepVerdicts": [
+      { "stepId": "payment-tracking", "verdict": "Good payment prediction that integrates well with collection workflows. The Slack integration is a nice touch for cross-functional payment follow-ups." },
+      { "stepId": "collections", "verdict": "Solid automated collections with smart prioritization. Best for SaaS/tech companies with subscription billing and recurring customer relationships." },
+      { "stepId": "dunning", "verdict": "Clean, effective dunning automation with good template management. Works well for standard escalation sequences." },
+      { "stepId": "ar-reporting", "verdict": "Standout cash flow forecasting — the primary differentiator. AI predicts cash inflows with high accuracy, making this a favorite with treasury teams." }
+    ]
+  },
+  {
+    "id": "kolleno",
+    "name": "Kolleno",
+    "vendor": "Kolleno",
+    "category": "ar",
+    "aiMaturity": "ai-native",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["SaaS", "Technology", "Professional Services", "Fintech"],
+    "painPoints": [
+      "Manual collections eating up team bandwidth",
+      "No AI-driven payment prediction",
+      "Disconnected communication with customers"
+    ],
+    "integrations": ["Xero", "QuickBooks", "NetSuite", "Sage", "Stripe"],
+    "pricing": {
+      "model": "Per user per month",
+      "startingPrice": "$10K+ annually",
+      "notes": "SMB-friendly pricing with free tier"
+    },
+    "keyFeatures": [
+      "AI-powered collections automation",
+      "Smart payment reminders and follow-ups",
+      "Customer communication hub",
+      "Payment prediction scoring",
+      "Multi-channel payment acceptance"
+    ],
+    "workflowSteps": ["payment-tracking", "collections", "dunning", "ar-reporting"],
+    "tagline": "AI-Powered Collections for Growing Businesses",
+    "description": "Kolleno uses AI to automate the entire collections process — from payment prediction to smart reminders and follow-ups — helping growing businesses reduce DSO without adding headcount.",
+    "website": "https://www.kolleno.com",
+    "founded": "2019",
+    "headquarters": "London, UK",
+    "employeeCount": "~60",
+    "overallFitScore": 65,
+    "fitScores": [
+      { "stepId": "payment-tracking", "score": 75, "grade": "good-fit" },
+      { "stepId": "collections", "score": 80, "grade": "best-fit" },
+      { "stepId": "dunning", "score": 72, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 60, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "300+",
+      "revenue": "$5M ARR",
+      "yoyGrowth": "60%",
+      "g2Rating": 4.7,
+      "gartnerPosition": "Emerging",
+      "notableCustomers": ["Paddle", "Dext", "Pleo"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-2 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "None — connects directly to accounting system",
+      "changeManagement": "Minimal — designed for teams with no prior AR automation",
+      "requirements": ["Cloud accounting system (Xero, QBO, or NetSuite)", "AR volume of 100+ invoices/month"]
+    },
+    "stepVerdicts": [
+      { "stepId": "payment-tracking", "verdict": "Good payment tracking with AI-driven risk scoring. Simple and effective for SMBs that want to move beyond spreadsheet-based tracking." },
+      { "stepId": "collections", "verdict": "Strong automated collections for the SMB segment. The AI learns customer payment patterns and adjusts follow-up strategies accordingly." },
+      { "stepId": "dunning", "verdict": "Effective multi-channel dunning (email, SMS, portal). The tone and timing are AI-optimized based on customer response patterns." },
+      { "stepId": "ar-reporting", "verdict": "Basic but clean reporting focused on collections performance. Sufficient for SMBs but lacks the depth needed for larger organizations." }
+    ]
+  },
+  {
+    "id": "gaviti",
+    "name": "Gaviti",
+    "vendor": "Gaviti",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Manufacturing", "Distribution", "Professional Services", "Technology"],
+    "painPoints": [
+      "Collectors spending time on low-priority accounts",
+      "Inconsistent collection follow-up",
+      "No systematic approach to dispute resolution"
+    ],
+    "integrations": ["NetSuite", "SAP Business One", "Priority ERP", "Microsoft Dynamics"],
+    "pricing": {
+      "model": "Per user per month",
+      "startingPrice": "$15K+ annually",
+      "notes": "Mid-market pricing"
+    },
+    "keyFeatures": [
+      "AI-driven collection prioritization",
+      "Automated dunning and follow-up workflows",
+      "Dispute management and tracking",
+      "Customer payment portal",
+      "AR analytics and reporting"
+    ],
+    "workflowSteps": ["payment-tracking", "collections", "dunning", "deduction-management", "ar-reporting"],
+    "tagline": "Smart Collections Automation",
+    "description": "Gaviti provides AI-driven collections management that helps mid-market companies prioritize collector efforts, automate follow-ups, and manage disputes — reducing DSO and improving collector productivity.",
+    "website": "https://www.gaviti.com",
+    "founded": "2015",
+    "headquarters": "Tel Aviv, Israel",
+    "employeeCount": "~80",
+    "overallFitScore": 68,
+    "fitScores": [
+      { "stepId": "payment-tracking", "score": 72, "grade": "good-fit" },
+      { "stepId": "collections", "score": 82, "grade": "best-fit" },
+      { "stepId": "dunning", "score": 78, "grade": "good-fit" },
+      { "stepId": "deduction-management", "score": 65, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 68, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "400+",
+      "revenue": "$10M ARR",
+      "yoyGrowth": "35%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Strauss Group", "Sapiens", "Orion", "Elco"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "3-6 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — connects to ERP for invoice and payment data",
+      "changeManagement": "Low — collectors adapt quickly to prioritized worklists",
+      "requirements": ["ERP integration", "AR team of 2+", "Collections focus"]
+    },
+    "stepVerdicts": [
+      { "stepId": "payment-tracking", "verdict": "Good tracking integrated into the collections workflow. The aging-based views are practical and easy for collectors to act on." },
+      { "stepId": "collections", "verdict": "Core strength — AI-prioritized worklists that guide collectors to the highest-impact accounts. Good balance of automation and human judgment." },
+      { "stepId": "dunning", "verdict": "Well-designed multi-step dunning with flexible escalation rules. The ability to customize per customer segment is a practical differentiator." },
+      { "stepId": "deduction-management", "verdict": "Basic dispute tracking that's adequate for companies without complex deduction workflows. Not a substitute for dedicated deduction management." },
+      { "stepId": "ar-reporting", "verdict": "Practical collections-focused reporting with DSO trending and collector performance metrics. Good for operations but limited strategic analytics." }
+    ]
+  },
+  {
+    "id": "celonis-ar",
+    "name": "Celonis AR",
+    "vendor": "Celonis",
+    "category": "ar",
+    "aiMaturity": "ai-native",
+    "companySizes": ["enterprise"],
+    "industries": ["Manufacturing", "Automotive", "Consumer Goods", "Chemicals", "Technology"],
+    "painPoints": [
+      "No visibility into AR process bottlenecks",
+      "Can't identify root causes of high DSO",
+      "Manual process analysis and optimization"
+    ],
+    "integrations": ["SAP", "Oracle", "Salesforce", "ServiceNow", "Microsoft Dynamics"],
+    "pricing": {
+      "model": "Platform license + AR module",
+      "startingPrice": "$150K+ annually",
+      "notes": "Enterprise pricing, part of broader Celonis platform"
+    },
+    "keyFeatures": [
+      "Process mining for AR workflow optimization",
+      "AI-driven root cause analysis for late payments",
+      "Automated action recommendations",
+      "Real-time AR process monitoring",
+      "Benchmark against industry peers"
+    ],
+    "workflowSteps": ["payment-tracking", "collections", "cash-application", "ar-reporting"],
+    "tagline": "Process Intelligence for Accounts Receivable",
+    "description": "Celonis applies process mining and AI to uncover AR inefficiencies, identify root causes of high DSO, and trigger automated actions — providing a data-driven approach to AR optimization.",
+    "website": "https://www.celonis.com",
+    "founded": "2011",
+    "headquarters": "Munich, Germany",
+    "employeeCount": "~3,000",
+    "overallFitScore": 70,
+    "fitScores": [
+      { "stepId": "payment-tracking", "score": 72, "grade": "good-fit" },
+      { "stepId": "collections", "score": 68, "grade": "good-fit" },
+      { "stepId": "cash-application", "score": 65, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 90, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "2,500+ (platform)",
+      "revenue": "$500M+ ARR (platform)",
+      "yoyGrowth": "30%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Leader (Process Mining)",
+      "notableCustomers": ["Siemens", "BMW", "ABB", "L'Oréal"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-16 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — requires ERP event log data for process mining",
+      "changeManagement": "High — requires AR leadership buy-in for process-driven changes",
+      "requirements": ["SAP or Oracle ERP with event logs", "Process mining champion", "Existing Celonis platform preferred"]
+    },
+    "stepVerdicts": [
+      { "stepId": "payment-tracking", "verdict": "Unique process mining perspective on payment patterns. Identifies systemic issues (like specific order types that always pay late) that no other tool surfaces." },
+      { "stepId": "collections", "verdict": "Process mining reveals which collection activities actually drive payments vs. which are wasted effort. Valuable insights but not a replacement for collection execution tools." },
+      { "stepId": "cash-application", "verdict": "Process mining can identify cash application bottlenecks but doesn't automate matching directly. Best used alongside a dedicated cash application tool." },
+      { "stepId": "ar-reporting", "verdict": "Unmatched process analytics — the ability to see how invoices actually flow through your AR process (vs. how you think they flow) is genuinely transformative for AR leaders." }
+    ]
+  },
+  {
+    "id": "serrala",
+    "name": "Serrala",
+    "vendor": "Serrala",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Automotive", "Chemicals", "Retail"],
+    "painPoints": [
+      "Disconnected treasury and AR processes",
+      "Manual cash application in SAP",
+      "Poor collection workflow automation"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics"],
+    "pricing": {
+      "model": "Per user + modules",
+      "startingPrice": "$60K+ annually",
+      "notes": "SAP-centric pricing"
+    },
+    "keyFeatures": [
+      "SAP-native AR automation",
+      "Intelligent cash application",
+      "Collections management with workflow",
+      "Credit management",
+      "Integration with treasury management"
+    ],
+    "workflowSteps": ["credit-assessment", "cash-application", "collections", "dunning", "ar-reporting"],
+    "tagline": "SAP-Native Financial Process Automation",
+    "description": "Serrala provides financial process automation deeply integrated with SAP, covering AR, AP, and treasury — ideal for SAP-centric enterprises seeking to automate cash application and collections.",
+    "website": "https://www.serrala.com",
+    "founded": "1984",
+    "headquarters": "Hamburg, Germany",
+    "employeeCount": "~700",
+    "overallFitScore": 68,
+    "fitScores": [
+      { "stepId": "credit-assessment", "score": 70, "grade": "good-fit" },
+      { "stepId": "cash-application", "score": 78, "grade": "good-fit" },
+      { "stepId": "collections", "score": 72, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 68, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 65, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "2,500+",
+      "revenue": "$120M ARR",
+      "yoyGrowth": "12%",
+      "g2Rating": 4.0,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Continental", "Evonik", "Fresenius", "ThyssenKrupp"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "12-16 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Low — runs within SAP, minimal data migration",
+      "changeManagement": "Moderate — SAP users need training on new workflows",
+      "requirements": ["SAP ERP (strongly preferred)", "SAP Basis team for deployment", "AR team of 5+"]
+    },
+    "stepVerdicts": [
+      { "stepId": "credit-assessment", "verdict": "Solid SAP-native credit management that extends standard SAP functionality. Best for companies committed to keeping AR processes within SAP." },
+      { "stepId": "cash-application", "verdict": "Good SAP-native cash application with intelligent matching. The seamless SAP integration eliminates middleware complexity." },
+      { "stepId": "collections", "verdict": "Workable collections management within the SAP ecosystem. Not as feature-rich as pure-play tools but eliminates integration headaches for SAP shops." },
+      { "stepId": "dunning", "verdict": "Extends SAP's native dunning with better workflow and automation. Practical for SAP customers who want to enhance rather than replace their dunning process." },
+      { "stepId": "ar-reporting", "verdict": "SAP-centric reporting that provides AR visibility without leaving the SAP environment. Limited compared to standalone analytics tools." }
+    ]
+  },
+  {
+    "id": "oracle-ar",
+    "name": "Oracle AR",
+    "vendor": "Oracle",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["enterprise"],
+    "industries": ["Financial Services", "Manufacturing", "Healthcare", "Public Sector", "Technology"],
+    "painPoints": [
+      "Legacy AR processes in Oracle EBS",
+      "Manual collections and dunning",
+      "Disconnected AR modules"
+    ],
+    "integrations": ["Oracle Cloud ERP", "Oracle EBS", "Oracle CX", "Oracle EPM"],
+    "pricing": {
+      "model": "Included in Oracle Cloud ERP",
+      "startingPrice": "Part of Cloud ERP subscription",
+      "notes": "Bundled with Oracle Financials Cloud"
+    },
+    "keyFeatures": [
+      "Native AR within Oracle Cloud Financials",
+      "Automated invoicing and revenue recognition",
+      "Built-in collections management",
+      "Customer self-service portal",
+      "Unified with Oracle GL, AP, and fixed assets"
+    ],
+    "workflowSteps": ["order-to-invoice", "invoice-delivery", "payment-tracking", "collections", "dunning", "bad-debt-reserve", "ar-reporting"],
+    "tagline": "Enterprise AR in Oracle Cloud",
+    "description": "Oracle AR is the accounts receivable module within Oracle Cloud Financials, providing integrated billing, collections, and cash management for enterprises running on Oracle's cloud ERP platform.",
+    "website": "https://www.oracle.com/erp/financials/",
+    "founded": "1977",
+    "headquarters": "Austin, TX",
+    "employeeCount": "~165,000",
+    "overallFitScore": 65,
+    "fitScores": [
+      { "stepId": "order-to-invoice", "score": 72, "grade": "good-fit" },
+      { "stepId": "invoice-delivery", "score": 60, "grade": "good-fit" },
+      { "stepId": "payment-tracking", "score": 58, "grade": "good-fit" },
+      { "stepId": "collections", "score": 62, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 60, "grade": "good-fit" },
+      { "stepId": "bad-debt-reserve", "score": 70, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 68, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "10,000+ (Cloud ERP)",
+      "revenue": "Part of $5B+ Cloud ERP",
+      "yoyGrowth": "25% (Cloud ERP)",
+      "g2Rating": 3.9,
+      "gartnerPosition": "Leader (Cloud ERP)",
+      "notableCustomers": ["FedEx", "Western Digital", "Dropbox", "Marriott"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "16-24 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — full ERP migration if not already on Oracle Cloud",
+      "changeManagement": "High — enterprise ERP change management required",
+      "requirements": ["Oracle Cloud ERP commitment", "Implementation partner", "Large project team"]
+    },
+    "stepVerdicts": [
+      { "stepId": "order-to-invoice", "verdict": "Solid ERP-native invoicing tightly integrated with Oracle Order Management. Best when you're already on Oracle Cloud for the full order-to-cash flow." },
+      { "stepId": "invoice-delivery", "verdict": "Basic delivery capabilities — email and portal. Lacks the multi-channel sophistication of dedicated AR platforms like Billtrust." },
+      { "stepId": "payment-tracking", "verdict": "Functional but not intelligent. Standard aging-based tracking without predictive capabilities. Most Oracle customers augment with a third-party tool." },
+      { "stepId": "collections", "verdict": "Built-in collections with configurable strategies. Adequate for basic workflows but lacks the AI-driven prioritization of specialized AR tools." },
+      { "stepId": "dunning", "verdict": "Configurable dunning letters with rule-based escalation. Functional but rigid compared to AI-personalized dunning from specialized vendors." },
+      { "stepId": "bad-debt-reserve", "verdict": "Strong integration with Oracle GL for reserve accounting. The native ERP connection ensures accounting entries flow cleanly." },
+      { "stepId": "ar-reporting", "verdict": "Good financial reporting through Oracle Analytics Cloud. The unified data model across all Oracle modules is a genuine advantage for holistic finance reporting." }
+    ]
+  },
+  {
+    "id": "sap-ar",
+    "name": "SAP AR",
+    "vendor": "SAP",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["enterprise"],
+    "industries": ["Manufacturing", "Consumer Goods", "Chemicals", "Automotive", "Utilities"],
+    "painPoints": [
+      "Complex SAP AR configuration",
+      "Manual dunning processes",
+      "Limited collections automation in standard SAP"
+    ],
+    "integrations": ["SAP S/4HANA", "SAP ECC", "SAP Analytics Cloud", "SAP CX"],
+    "pricing": {
+      "model": "Included in SAP S/4HANA",
+      "startingPrice": "Part of S/4HANA license",
+      "notes": "Additional modules may require separate licenses"
+    },
+    "keyFeatures": [
+      "Native AR within SAP S/4HANA",
+      "Automated billing and invoicing",
+      "Built-in dunning management",
+      "Credit management integration",
+      "SAP Analytics Cloud AR dashboards"
+    ],
+    "workflowSteps": ["credit-assessment", "order-to-invoice", "invoice-delivery", "dunning", "bad-debt-reserve", "ar-reporting"],
+    "tagline": "Enterprise AR in SAP S/4HANA",
+    "description": "SAP AR is the accounts receivable component of SAP S/4HANA, providing billing, dunning, credit management, and AR accounting for enterprises running SAP as their core ERP.",
+    "website": "https://www.sap.com/products/erp.html",
+    "founded": "1972",
+    "headquarters": "Walldorf, Germany",
+    "employeeCount": "~107,000",
+    "overallFitScore": 62,
+    "fitScores": [
+      { "stepId": "credit-assessment", "score": 68, "grade": "good-fit" },
+      { "stepId": "order-to-invoice", "score": 75, "grade": "good-fit" },
+      { "stepId": "invoice-delivery", "score": 55, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 65, "grade": "good-fit" },
+      { "stepId": "bad-debt-reserve", "score": 72, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 65, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "15,000+ (S/4HANA)",
+      "revenue": "Part of $8B+ Cloud ERP",
+      "yoyGrowth": "30% (S/4HANA Cloud)",
+      "g2Rating": 4.0,
+      "gartnerPosition": "Leader (Cloud ERP)",
+      "notableCustomers": ["Shell", "BMW", "Nestlé", "Siemens"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "20-30 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — S/4HANA migration is a major undertaking",
+      "changeManagement": "High — SAP S/4HANA transformation impacts entire organization",
+      "requirements": ["SAP S/4HANA commitment", "SAP implementation partner", "Large project team", "SAP Basis resources"]
+    },
+    "stepVerdicts": [
+      { "stepId": "credit-assessment", "verdict": "SAP FSCM Credit Management is functional but rigid. Works within the SAP ecosystem but lacks the real-time alternative data scoring of specialized tools." },
+      { "stepId": "order-to-invoice", "verdict": "Strong billing integration with SAP Sales & Distribution. The end-to-end order-to-invoice flow is seamless when you're fully on SAP." },
+      { "stepId": "invoice-delivery", "verdict": "Basic output management for invoice delivery. Most SAP customers add Esker, Billtrust, or a document management solution for multi-channel delivery." },
+      { "stepId": "dunning", "verdict": "SAP dunning is highly configurable but complex. Dunning areas, levels, and procedures require significant setup but offer deep customization." },
+      { "stepId": "bad-debt-reserve", "verdict": "Good accounting integration for reserve calculations. The connection to SAP GL ensures clean posting of reserve adjustments." },
+      { "stepId": "ar-reporting", "verdict": "SAP Analytics Cloud AR content is improving rapidly. Good for SAP-centric organizations but requires SAC investment for full analytics capabilities." }
+    ]
+  },
+  {
+    "id": "sage-ar",
+    "name": "Sage Intacct AR",
+    "vendor": "Sage",
+    "category": "ar",
+    "aiMaturity": "traditional",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Professional Services", "Nonprofit", "Healthcare", "Financial Services", "SaaS"],
+    "painPoints": [
+      "Manual billing and invoicing",
+      "Limited collections automation",
+      "Need for multi-entity AR consolidation"
+    ],
+    "integrations": ["Sage Intacct", "Salesforce", "ADP", "Expensify", "Bill.com"],
+    "pricing": {
+      "model": "Part of Sage Intacct subscription",
+      "startingPrice": "Included in Sage Intacct",
+      "notes": "Base ERP module, no additional cost"
+    },
+    "keyFeatures": [
+      "Automated billing and invoicing",
+      "Multi-entity AR management",
+      "Configurable revenue recognition",
+      "Contract-based billing",
+      "Dimensional AR reporting"
+    ],
+    "workflowSteps": ["order-to-invoice", "invoice-delivery", "payment-tracking", "ar-reporting"],
+    "tagline": "Cloud AR for Mid-Market Finance Teams",
+    "description": "Sage Intacct AR provides cloud-native accounts receivable management with strong multi-entity support, flexible billing, and dimensional reporting for mid-market finance teams.",
+    "website": "https://www.sage.com/intacct",
+    "founded": "1999",
+    "headquarters": "San Jose, CA",
+    "employeeCount": "~13,000 (Sage Group)",
+    "overallFitScore": 55,
+    "fitScores": [
+      { "stepId": "order-to-invoice", "score": 72, "grade": "good-fit" },
+      { "stepId": "invoice-delivery", "score": 55, "grade": "good-fit" },
+      { "stepId": "payment-tracking", "score": 50, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 68, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "20,000+ (Sage Intacct)",
+      "revenue": "Part of Sage Group £2B+",
+      "yoyGrowth": "20%",
+      "g2Rating": 4.3,
+      "gartnerPosition": "Leader (Mid-Market ERP)",
+      "notableCustomers": ["Smile Brands", "Salvation Army", "AICPA"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "6-10 weeks",
+      "effortLevel": "medium",
+      "requiresIt": false,
+      "dataMigration": "Moderate — standard ERP data migration",
+      "changeManagement": "Low-moderate — intuitive interface",
+      "requirements": ["Sage Intacct subscription", "Finance team of 3+"]
+    },
+    "stepVerdicts": [
+      { "stepId": "order-to-invoice", "verdict": "Good contract and subscription billing. The multi-entity invoicing is a standout for growing companies with subsidiaries." },
+      { "stepId": "invoice-delivery", "verdict": "Basic email-based invoice delivery. Most Sage Intacct customers add a dedicated AR tool (Versapay, Tesorio) for better delivery and collections." },
+      { "stepId": "payment-tracking", "verdict": "Standard aging-based tracking without predictive capabilities. Functional for basic needs but limited for proactive AR management." },
+      { "stepId": "ar-reporting", "verdict": "Excellent dimensional reporting is Sage Intacct's strength. The ability to slice AR data by custom dimensions (department, project, location) is powerful." }
+    ]
+  },
+  {
+    "id": "sidetrade",
+    "name": "Sidetrade",
+    "vendor": "Sidetrade",
+    "category": "ar",
+    "aiMaturity": "ai-native",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Technology", "Energy", "Transportation", "Professional Services"],
+    "painPoints": [
+      "Reactive collections with no payment prediction",
+      "Manual cash allocation processes",
+      "Limited cross-border AR management"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "Sage", "Infor"],
+    "pricing": {
+      "model": "Per user + volume",
+      "startingPrice": "$50K+ annually",
+      "notes": "European-origin pricing model"
+    },
+    "keyFeatures": [
+      "Aimie AI for payment behavior prediction",
+      "Automated cash collection strategies",
+      "Cash application with AI matching",
+      "Order-to-cash analytics",
+      "Multi-currency and multi-language support"
+    ],
+    "workflowSteps": ["credit-assessment", "payment-tracking", "cash-application", "collections", "dunning", "ar-reporting"],
+    "tagline": "AI-Powered Order-to-Cash Performance",
+    "description": "Sidetrade uses its proprietary Aimie AI to predict payment behavior and automate collections across the order-to-cash cycle — with particularly strong capabilities for European and global operations.",
+    "website": "https://www.sidetrade.com",
+    "founded": "2000",
+    "headquarters": "Paris, France",
+    "employeeCount": "~400",
+    "overallFitScore": 74,
+    "fitScores": [
+      { "stepId": "credit-assessment", "score": 72, "grade": "good-fit" },
+      { "stepId": "payment-tracking", "score": 80, "grade": "best-fit" },
+      { "stepId": "cash-application", "score": 76, "grade": "good-fit" },
+      { "stepId": "collections", "score": 82, "grade": "best-fit" },
+      { "stepId": "dunning", "score": 74, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 78, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "400+",
+      "revenue": "$50M ARR",
+      "yoyGrowth": "22%",
+      "g2Rating": 4.3,
+      "gartnerPosition": "Strong Performer",
+      "notableCustomers": ["Engie", "Manpower", "Atos", "Sodexo"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-12 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — historical invoice and payment data for AI training",
+      "changeManagement": "Moderate — requires adoption of AI-recommended strategies",
+      "requirements": ["ERP integration", "Minimum 6 months payment history", "AR team of 3+"]
+    },
+    "stepVerdicts": [
+      { "stepId": "credit-assessment", "verdict": "Good credit scoring with payment behavior data from across the Sidetrade network. The network effect provides insights you can't get from a single-company dataset." },
+      { "stepId": "payment-tracking", "verdict": "Strong predictive tracking powered by Aimie AI. The payment prediction model is trained on billions of B2B transactions across the Sidetrade network." },
+      { "stepId": "cash-application", "verdict": "Competitive AI-powered cash matching. Performs well for European payment formats and multi-currency scenarios." },
+      { "stepId": "collections", "verdict": "Excellent AI-driven collection strategies. Aimie recommends the next-best action per customer, and the results are measurably better than rules-based approaches." },
+      { "stepId": "dunning", "verdict": "Multi-language, multi-format dunning optimized for European regulatory requirements. Strong for companies operating across multiple EU countries." },
+      { "stepId": "ar-reporting", "verdict": "Good analytics with strong benchmarking capabilities. The network data allows comparisons against industry peers — a unique advantage." }
+    ]
+  },
+  {
+    "id": "emagia",
+    "name": "Emagia",
+    "vendor": "Emagia",
+    "category": "ar",
+    "aiMaturity": "ai-native",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Technology", "Manufacturing", "Healthcare", "Financial Services"],
+    "painPoints": [
+      "Manual credit and collections processes",
+      "Lack of AI in AR workflows",
+      "Disconnected AR systems"
+    ],
+    "integrations": ["SAP", "Oracle", "NetSuite", "Microsoft Dynamics", "Workday"],
+    "pricing": {
+      "model": "Per user + modules",
+      "startingPrice": "$60K+ annually",
+      "notes": "Module-based pricing"
+    },
+    "keyFeatures": [
+      "AI-powered Digital Finance Assistant (Gia)",
+      "Autonomous credit management",
+      "Intelligent collections automation",
+      "AI cash application",
+      "Predictive analytics and forecasting"
+    ],
+    "workflowSteps": ["credit-assessment", "payment-tracking", "cash-application", "collections", "deduction-management", "ar-reporting"],
+    "tagline": "Autonomous Finance with AI",
+    "description": "Emagia provides an AI-driven Autonomous Finance platform with a digital assistant (Gia) that automates credit, collections, cash application, and deductions — aiming for touchless AR operations.",
+    "website": "https://www.emagia.com",
+    "founded": "2005",
+    "headquarters": "Santa Clara, CA",
+    "employeeCount": "~300",
+    "overallFitScore": 72,
+    "fitScores": [
+      { "stepId": "credit-assessment", "score": 78, "grade": "good-fit" },
+      { "stepId": "payment-tracking", "score": 74, "grade": "good-fit" },
+      { "stepId": "cash-application", "score": 80, "grade": "best-fit" },
+      { "stepId": "collections", "score": 76, "grade": "good-fit" },
+      { "stepId": "deduction-management", "score": 70, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 72, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "300+",
+      "revenue": "$25M ARR",
+      "yoyGrowth": "30%",
+      "g2Rating": 4.2,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Wipro", "Tech Mahindra", "HCL", "Infosys"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-14 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — historical data needed for AI model training",
+      "changeManagement": "Moderate — AI-driven recommendations require trust-building",
+      "requirements": ["ERP integration", "AR team open to AI-assisted workflows", "Executive sponsorship"]
+    },
+    "stepVerdicts": [
+      { "stepId": "credit-assessment", "verdict": "Good AI-driven credit scoring with automated risk assessment. The digital assistant Gia can handle routine credit requests autonomously." },
+      { "stepId": "payment-tracking", "verdict": "Solid predictive tracking with payment forecasting. The AI learns customer patterns over time and improves prediction accuracy." },
+      { "stepId": "cash-application", "verdict": "Strong AI cash application with good match rates. The platform handles complex scenarios including multi-currency and partial payments well." },
+      { "stepId": "collections", "verdict": "AI-prioritized collections with Gia providing next-best-action recommendations. Good automation but the UI can feel less polished than competitors." },
+      { "stepId": "deduction-management", "verdict": "Adequate deduction management with AI categorization. Handles standard deduction types well but may need augmentation for complex CPG trade deductions." },
+      { "stepId": "ar-reporting", "verdict": "Comprehensive AR analytics with predictive elements. The Gia assistant can answer natural-language questions about AR performance." }
+    ]
+  },
+  {
+    "id": "corcentric-ar",
+    "name": "Corcentric AR",
+    "vendor": "Corcentric",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Distribution", "Healthcare", "Transportation"],
+    "painPoints": [
+      "High cost of invoice delivery and collections",
+      "Customer payment friction",
+      "Manual billing processes"
+    ],
+    "integrations": ["SAP", "Oracle", "NetSuite", "Microsoft Dynamics", "Infor"],
+    "pricing": {
+      "model": "Per transaction + managed services",
+      "startingPrice": "$40K+ annually",
+      "notes": "Managed services option available"
+    },
+    "keyFeatures": [
+      "EIPP (Electronic Invoice Presentment & Payment)",
+      "Managed AR services",
+      "Customer payment portal",
+      "Cash application automation",
+      "Supply chain finance integration"
+    ],
+    "workflowSteps": ["order-to-invoice", "invoice-delivery", "cash-application", "collections", "ar-reporting"],
+    "tagline": "Managed AR & Procurement Solutions",
+    "description": "Corcentric provides managed AR automation including electronic invoicing, payment portals, and collections services — offering both technology and outsourced AR management for mid-market companies.",
+    "website": "https://www.corcentric.com",
+    "founded": "1996",
+    "headquarters": "Cherry Hill, NJ",
+    "employeeCount": "~600",
+    "overallFitScore": 66,
+    "fitScores": [
+      { "stepId": "order-to-invoice", "score": 70, "grade": "good-fit" },
+      { "stepId": "invoice-delivery", "score": 82, "grade": "best-fit" },
+      { "stepId": "cash-application", "score": 68, "grade": "good-fit" },
+      { "stepId": "collections", "score": 62, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 58, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "1,500+",
+      "revenue": "$100M ARR",
+      "yoyGrowth": "20%",
+      "g2Rating": 4.0,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["USPS", "Grainger", "Henry Schein"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "6-10 weeks",
+      "effortLevel": "medium",
+      "requiresIt": false,
+      "dataMigration": "Moderate — invoice data and customer records",
+      "changeManagement": "Low — managed services model handles much of the change",
+      "requirements": ["ERP integration", "Customer communication plan", "Decision on managed vs. self-service"]
+    },
+    "stepVerdicts": [
+      { "stepId": "order-to-invoice", "verdict": "Good electronic invoicing with compliance support. The EIPP platform handles various format requirements across industries." },
+      { "stepId": "invoice-delivery", "verdict": "Strong electronic delivery with compliance features. The EIPP platform is particularly good for industries with specific invoice format requirements." },
+      { "stepId": "cash-application", "verdict": "Adequate cash application as part of the managed service. Performance depends on whether you use managed or self-service." },
+      { "stepId": "collections", "verdict": "The managed collections service is the differentiator — Corcentric's team handles collections on your behalf. Good for companies that want to outsource." },
+      { "stepId": "ar-reporting", "verdict": "Basic reporting adequate for operational needs. The managed service includes performance reporting but analytics depth is limited." }
+    ]
+  },
+  {
+    "id": "upflow",
+    "name": "Upflow",
+    "vendor": "Upflow",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["startup", "smb", "mid-market"],
+    "industries": ["SaaS", "Technology", "Professional Services", "E-commerce"],
+    "painPoints": [
+      "No AR automation for growing companies",
+      "Manual payment reminders via email",
+      "No visibility into cash collection performance"
+    ],
+    "integrations": ["QuickBooks", "Xero", "NetSuite", "Chargebee", "Stripe", "HubSpot"],
+    "pricing": {
+      "model": "Per user per month",
+      "startingPrice": "$5K+ annually",
+      "notes": "Startup-friendly pricing with growth tiers"
+    },
+    "keyFeatures": [
+      "Automated payment reminders and dunning",
+      "Customer payment portal",
+      "Real-time AR dashboard",
+      "Multi-channel payment acceptance",
+      "CRM integration for sales-finance alignment"
+    ],
+    "workflowSteps": ["invoice-delivery", "payment-tracking", "collections", "dunning", "ar-reporting"],
+    "tagline": "Modern AR for B2B SaaS",
+    "description": "Upflow provides modern, lightweight AR automation for B2B SaaS and tech companies — automating payment collection, providing customer payment portals, and giving real-time visibility into cash flow.",
+    "website": "https://www.upflow.io",
+    "founded": "2018",
+    "headquarters": "Paris, France",
+    "employeeCount": "~60",
+    "overallFitScore": 62,
+    "fitScores": [
+      { "stepId": "invoice-delivery", "score": 70, "grade": "good-fit" },
+      { "stepId": "payment-tracking", "score": 72, "grade": "good-fit" },
+      { "stepId": "collections", "score": 68, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 76, "grade": "good-fit" },
+      { "stepId": "ar-reporting", "score": 65, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "500+",
+      "revenue": "$8M ARR",
+      "yoyGrowth": "50%",
+      "g2Rating": 4.7,
+      "gartnerPosition": "Emerging",
+      "notableCustomers": ["Front", "Lattice", "Spendesk", "Swile"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-2 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "None — connects via API to accounting system",
+      "changeManagement": "Minimal — designed for teams without dedicated AR staff",
+      "requirements": ["Cloud accounting system", "B2B invoice volume of 50+/month"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-delivery", "verdict": "Clean, modern payment portal that customers actually want to use. The UX is a genuine differentiator for SaaS companies that care about customer experience." },
+      { "stepId": "payment-tracking", "verdict": "Simple, real-time visibility into payment status. Great for founders and finance managers who want a quick pulse on collections without running reports." },
+      { "stepId": "collections", "verdict": "Good automated collections for small teams. Not as sophisticated as enterprise tools but perfect for companies where the CFO is also the collections team." },
+      { "stepId": "dunning", "verdict": "Well-designed automated dunning with smart escalation. The templates are modern and professional — important for SaaS companies maintaining brand consistency." },
+      { "stepId": "ar-reporting", "verdict": "Clean, real-time dashboards focused on the metrics that matter: DSO, aging, collection rates. Simple but actionable for growing companies." }
+    ]
+  },
+  {
+    "id": "gocardless",
+    "name": "GoCardless",
+    "vendor": "GoCardless",
+    "category": "ar",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["startup", "smb", "mid-market", "enterprise"],
+    "industries": ["SaaS", "Utilities", "Financial Services", "Media", "Education"],
+    "painPoints": [
+      "Failed payments and involuntary churn",
+      "High card payment processing fees",
+      "Manual payment retry processes"
+    ],
+    "integrations": ["Xero", "QuickBooks", "Salesforce", "Zuora", "Chargebee", "Stripe"],
+    "pricing": {
+      "model": "Per transaction",
+      "startingPrice": "1-2% per transaction",
+      "notes": "Volume discounts for enterprise"
+    },
+    "keyFeatures": [
+      "Direct debit payment collection (ACH, SEPA, BACS)",
+      "Intelligent payment retry (Success+)",
+      "Multi-currency bank-to-bank payments",
+      "Subscription payment management",
+      "Payment failure prediction and recovery"
+    ],
+    "workflowSteps": ["invoice-delivery", "payment-tracking", "cash-application", "dunning"],
+    "tagline": "Bank-to-Bank Payment Collection",
+    "description": "GoCardless specializes in bank-to-bank payment collection via direct debit networks (ACH, SEPA, BACS), with AI-powered payment retry that recovers failed payments and reduces involuntary churn.",
+    "website": "https://www.gocardless.com",
+    "founded": "2011",
+    "headquarters": "London, UK",
+    "employeeCount": "~900",
+    "overallFitScore": 60,
+    "fitScores": [
+      { "stepId": "invoice-delivery", "score": 58, "grade": "good-fit" },
+      { "stepId": "payment-tracking", "score": 68, "grade": "good-fit" },
+      { "stepId": "cash-application", "score": 72, "grade": "good-fit" },
+      { "stepId": "dunning", "score": 80, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "85,000+",
+      "revenue": "$130M ARR",
+      "yoyGrowth": "40%",
+      "g2Rating": 4.3,
+      "gartnerPosition": "Strong Performer (Payments)",
+      "notableCustomers": ["DocuSign", "The Guardian", "TripAdvisor", "Nutmeg"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-4 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — mandate migration from existing direct debit provider",
+      "changeManagement": "Low — customer-facing mandate setup required",
+      "requirements": ["Direct debit acceptance in target markets", "Recurring billing model"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-delivery", "verdict": "Basic invoice delivery focused on payment collection. Not a full AR platform — use alongside a dedicated invoicing tool." },
+      { "stepId": "payment-tracking", "verdict": "Good tracking of direct debit payment status. The real-time visibility into payment lifecycle (submitted, confirmed, failed) is clean and reliable." },
+      { "stepId": "cash-application", "verdict": "Automatic cash application for direct debit payments since the payment-invoice link is inherent. Eliminates matching entirely for enrolled customers." },
+      { "stepId": "dunning", "verdict": "Success+ AI retry is the standout — it predicts the optimal time to retry failed payments, recovering 70%+ of initially failed direct debits. Unique capability." }
+    ]
+  }
+]

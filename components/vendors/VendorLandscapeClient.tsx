@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { Tool, AIMaturity } from "@/types/tool";
+import { WorkflowStep } from "@/types/workflow";
 import { VendorHeatmap } from "./VendorHeatmap";
 import { ComparisonBar } from "./ComparisonBar";
 import { Badge } from "@/components/ui/badge";
@@ -12,9 +13,10 @@ import { Search, Filter, X } from "lucide-react";
 interface VendorLandscapeClientProps {
   tools: Tool[];
   embedded?: boolean;
+  workflowSteps?: WorkflowStep[];
 }
 
-export function VendorLandscapeClient({ tools, embedded = false }: VendorLandscapeClientProps) {
+export function VendorLandscapeClient({ tools, embedded = false, workflowSteps }: VendorLandscapeClientProps) {
   const [search, setSearch] = useState("");
   const [maturityFilter, setMaturityFilter] = useState<AIMaturity | null>(null);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -61,13 +63,13 @@ export function VendorLandscapeClient({ tools, embedded = false }: VendorLandsca
         <div className="mb-8">
           <h1 className="text-3xl font-bold tracking-tight mb-2">Vendor Landscape</h1>
           <p className="text-muted-foreground">
-            {tools.length} AP automation vendors evaluated across 10 workflow steps. Color intensity reflects fit score.
+            {tools.length} vendors evaluated across {workflowSteps?.length ?? 10} workflow steps. Color intensity reflects fit score.
           </p>
         </div>
       )}
       {embedded && (
         <p className="text-sm text-muted-foreground mb-4">
-          {tools.length} vendors evaluated across 10 workflow steps. Color intensity reflects fit score — click any vendor to see their full profile.
+          {tools.length} vendors evaluated across {workflowSteps?.length ?? 10} workflow steps. Color intensity reflects fit score — click any vendor to see their full profile.
         </p>
       )}
 
@@ -147,6 +149,7 @@ export function VendorLandscapeClient({ tools, embedded = false }: VendorLandsca
         tools={filtered}
         selectedIds={selectedIds}
         onToggleSelect={handleToggleSelect}
+        workflowSteps={workflowSteps}
       />
 
       {/* Comparison bar */}

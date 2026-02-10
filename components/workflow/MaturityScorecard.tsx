@@ -1,6 +1,7 @@
 "use client";
 
 import { WorkflowStep, MaturityLevel } from "@/types/workflow";
+import { Category } from "@/types/tool";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { StepToolSection } from "./StepToolSection";
@@ -9,6 +10,7 @@ interface MaturityScorecardProps {
   steps: WorkflowStep[];
   ratings: Record<string, MaturityLevel>;
   compact?: boolean;
+  category?: Category;
 }
 
 const maturityScores: Record<MaturityLevel, number> = {
@@ -23,7 +25,7 @@ const maturityLabels: Record<MaturityLevel, string> = {
   automated: "Automated",
 };
 
-export function MaturityScorecard({ steps, ratings, compact }: MaturityScorecardProps) {
+export function MaturityScorecard({ steps, ratings, compact, category = "ap" }: MaturityScorecardProps) {
   const ratedSteps = steps.filter((s) => ratings[s.id]);
   const ratedCount = ratedSteps.length;
 
@@ -215,7 +217,7 @@ export function MaturityScorecard({ steps, ratings, compact }: MaturityScorecard
 
               {/* Tools for this step */}
               <div className="border-t pt-6">
-                <StepToolSection stepId={topGap.id} />
+                <StepToolSection stepId={topGap.id} category={category} />
               </div>
             </div>
           )}

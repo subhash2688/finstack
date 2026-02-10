@@ -39,7 +39,7 @@ export const FUNCTIONS: Function[] = [
         id: "ar",
         name: "Accounts Receivable",
         description: "Billing, collections, cash application, and credit management",
-        available: false,
+        available: true,
       },
       {
         id: "accounting",

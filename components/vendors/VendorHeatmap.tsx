@@ -1,22 +1,11 @@
 "use client";
 
+import { useMemo } from "react";
 import { Tool, StepFitScore } from "@/types/tool";
+import { WorkflowStep } from "@/types/workflow";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
-
-const STEPS = [
-  { id: "invoice-capture", abbr: "Capture" },
-  { id: "data-validation", abbr: "Validate" },
-  { id: "po-matching", abbr: "PO Match" },
-  { id: "coding-gl-allocation", abbr: "GL Code" },
-  { id: "approval-routing", abbr: "Approve" },
-  { id: "exception-handling", abbr: "Except." },
-  { id: "fraud-duplicate-detection", abbr: "Fraud" },
-  { id: "payment-scheduling", abbr: "Schedule" },
-  { id: "payment-execution", abbr: "Execute" },
-  { id: "reconciliation-reporting", abbr: "Reconcile" },
-];
 
 function getCellColor(score: number): string {
   if (score >= 80) return "bg-emerald-500";
@@ -40,10 +29,30 @@ interface VendorHeatmapProps {
   tools: Tool[];
   selectedIds?: string[];
   onToggleSelect?: (id: string) => void;
+  workflowSteps?: WorkflowStep[];
 }
 
-export function VendorHeatmap({ tools, selectedIds = [], onToggleSelect }: VendorHeatmapProps) {
+export function VendorHeatmap({ tools, selectedIds = [], onToggleSelect, workflowSteps }: VendorHeatmapProps) {
   const router = useRouter();
+
+  // Derive step columns from workflow steps if provided, otherwise from tool fitScores
+  const steps = useMemo(() => {
+    if (workflowSteps && workflowSteps.length > 0) {
+      return workflowSteps.map((s) => ({ id: s.id, abbr: s.abbreviation }));
+    }
+    // Fallback: derive unique steps from tools' fitScores, ordered by first appearance
+    const seen = new Set<string>();
+    const derived: { id: string; abbr: string }[] = [];
+    for (const tool of tools) {
+      for (const fs of tool.fitScores ?? []) {
+        if (!seen.has(fs.stepId)) {
+          seen.add(fs.stepId);
+          derived.push({ id: fs.stepId, abbr: fs.stepId.split("-").map(w => w[0].toUpperCase() + w.slice(1)).join(" ") });
+        }
+      }
+    }
+    return derived;
+  }, [workflowSteps, tools]);
 
   // Sort tools by overallFitScore descending
   const sorted = [...tools].sort(
@@ -64,7 +73,7 @@ export function VendorHeatmap({ tools, selectedIds = [], onToggleSelect }: Vendo
           <div className="heatmap-header-row">
             <div className="heatmap-vendor-header">Vendor</div>
             <div className="heatmap-score-header">Score</div>
-            {STEPS.map((step) => (
+            {steps.map((step) => (
               <div key={step.id} className="heatmap-step-header">
                 <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wide leading-tight">
                   {step.abbr}
@@ -103,7 +112,7 @@ export function VendorHeatmap({ tools, selectedIds = [], onToggleSelect }: Vendo
                 </div>
 
                 {/* Step cells */}
-                {STEPS.map((step) => {
+                {steps.map((step) => {
                   const fs = scores.get(step.id);
                   if (!fs) {
                     return (

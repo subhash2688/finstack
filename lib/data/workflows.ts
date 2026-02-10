@@ -1,9 +1,10 @@
 import { Workflow, WorkflowId } from '@/types/workflow';
 import apWorkflow from '@/data/workflows/ap-workflow.json';
+import arWorkflow from '@/data/workflows/ar-workflow.json';
 
 const workflows: Record<WorkflowId, Workflow> = {
   ap: apWorkflow as Workflow,
-  ar: { id: 'ar', name: 'Accounts Receivable', functionId: 'finance', processId: 'ar', steps: [] } as Workflow,
+  ar: arWorkflow as Workflow,
   accounting: { id: 'accounting', name: 'Accounting', functionId: 'finance', processId: 'accounting', steps: [] } as Workflow,
   fpa: { id: 'fpa', name: 'FP&A', functionId: 'finance', processId: 'fpa', steps: [] } as Workflow,
   payroll: { id: 'payroll', name: 'Payroll', functionId: 'finance', processId: 'payroll', steps: [] } as Workflow,

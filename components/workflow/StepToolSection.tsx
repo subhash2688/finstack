@@ -6,7 +6,7 @@ import { ToolFilters, FilterState } from "@/components/tools/ToolFilters";
 import { ToolDetailModal } from "@/components/tools/ToolDetailModal";
 import { getToolsForStepSorted, getAllIndustries } from "@/lib/data/tools";
 import { getToolsForGeneratedStep } from "@/lib/data/tool-mapping";
-import { Tool } from "@/types/tool";
+import { Tool, Category } from "@/types/tool";
 import { ToolMapping } from "@/types/engagement";
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, ChevronDown, ChevronRight } from "lucide-react";
@@ -15,6 +15,7 @@ interface StepToolSectionProps {
   stepId: string;
   toolContextSentence?: string;
   toolMappings?: ToolMapping[];
+  category?: Category;
 }
 
 const defaultFilters: FilterState = {
@@ -28,6 +29,7 @@ export function StepToolSection({
   stepId,
   toolContextSentence,
   toolMappings,
+  category = "ap",
 }: StepToolSectionProps) {
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const [selectedTool, setSelectedTool] = useState<Tool | null>(null);
@@ -48,11 +50,11 @@ export function StepToolSection({
       return getToolsForGeneratedStep(stepId, toolMappings);
     } else {
       // Use fit-score sorted tools
-      return getToolsForStepSorted(stepId, {
+      return getToolsForStepSorted(stepId, category, {
         ...filters,
       });
     }
-  }, [stepId, filters, toolMappings]);
+  }, [stepId, filters, toolMappings, category]);
 
   const availableIndustries = getAllIndustries();
 

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { WorkflowStep, MaturityLevel } from "@/types/workflow";
 import { ToolMapping } from "@/types/engagement";
+import { Category } from "@/types/tool";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ImpactMetricCard } from "./ImpactMetricCard";
@@ -15,6 +16,7 @@ interface StepDetailPanelProps {
   toolMappings?: ToolMapping[];
   maturityRating?: MaturityLevel;
   onRate?: (stepId: string, level: MaturityLevel) => void;
+  category?: Category;
 }
 
 const intensityLabels: Record<string, string> = {
@@ -61,7 +63,7 @@ const maturityOptions: {
   },
 ];
 
-export function StepDetailPanel({ step, toolMappings, maturityRating, onRate }: StepDetailPanelProps) {
+export function StepDetailPanel({ step, toolMappings, maturityRating, onRate, category = "ap" }: StepDetailPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -160,6 +162,7 @@ export function StepDetailPanel({ step, toolMappings, maturityRating, onRate }: 
           stepId={step.id}
           toolContextSentence={step.toolContextSentence}
           toolMappings={toolMappings}
+          category={category}
         />
       </div>
     </div>

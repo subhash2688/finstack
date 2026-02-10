@@ -1,8 +1,10 @@
 import { Tool, Category, AIMaturity, CompanySize, FitGrade } from '@/types/tool';
 import apTools from '@/data/tools/ap-tools.json';
+import arTools from '@/data/tools/ar-tools.json';
 
 const allTools: Tool[] = [
   ...(apTools as Tool[]),
+  ...(arTools as Tool[]),
 ];
 
 export interface ToolFilters {
@@ -88,9 +90,9 @@ export function getToolFitGrade(score: number): FitGrade {
   return 'limited';
 }
 
-export function getToolsForStepSorted(stepId: string, filters?: ToolFilters): Tool[] {
+export function getToolsForStepSorted(stepId: string, category: Category, filters?: ToolFilters): Tool[] {
   let tools = filterTools({
-    category: 'ap',
+    category,
     workflowStep: stepId,
     ...filters,
   });
