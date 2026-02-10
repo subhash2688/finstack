@@ -29,6 +29,34 @@
     "tagline": "Collaborative AP Automation Platform",
     "description": "Stampli combines AI-powered invoice processing with collaborative workflows, enabling AP teams to process invoices faster while maintaining control and visibility.",
     "website": "https://www.stampli.com",
+    "founded": "2015",
+    "headquarters": "Mountain View, CA",
+    "employeeCount": "~300",
+    "overallFitScore": 76,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 82, "grade": "best-fit" },
+      { "stepId": "data-validation", "score": 74, "grade": "good-fit" },
+      { "stepId": "po-matching", "score": 68, "grade": "good-fit" },
+      { "stepId": "coding-gl-allocation", "score": 72, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 88, "grade": "best-fit" },
+      { "stepId": "reconciliation-reporting", "score": 65, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "5,000+",
+      "revenue": "$80M ARR",
+      "yoyGrowth": "40%",
+      "g2Rating": 4.6,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["Affirm", "Kabbage", "DoorDash", "Veritone"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "4-6 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — connects to existing ERP, no data migration required",
+      "changeManagement": "Low friction — email-based approvals require no training for approvers",
+      "requirements": ["ERP system (NetSuite, QBO, Sage Intacct, etc.)", "AP team of 2+ for ROI"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Strong AI capture with good accuracy on complex layouts. The collaborative annotation feature is unique — AP teams can discuss invoices right on the document." },
       { "stepId": "data-validation", "verdict": "Solid validation against master data but requires good ERP integration setup. Best when NetSuite or Sage Intacct is your backbone." },
@@ -68,6 +96,34 @@
     "tagline": "Global AP & Payment Automation",
     "description": "Tipalti provides end-to-end AP automation with a focus on global payments, tax compliance, and supplier management for high-growth companies.",
     "website": "https://www.tipalti.com",
+    "founded": "2010",
+    "headquarters": "San Mateo, CA",
+    "employeeCount": "~1,200",
+    "overallFitScore": 74,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 60, "grade": "good-fit" },
+      { "stepId": "data-validation", "score": 72, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 65, "grade": "good-fit" },
+      { "stepId": "fraud-duplicate-detection", "score": 76, "grade": "good-fit" },
+      { "stepId": "payment-scheduling", "score": 78, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 95, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "4,000+",
+      "revenue": "$200M ARR",
+      "yoyGrowth": "35%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["Twitch", "Roblox", "GoDaddy", "ZipRecruiter"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-12 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — vendor master data and payment details need migration",
+      "changeManagement": "Medium — AP and vendor management teams need training on new workflows",
+      "requirements": ["ERP integration", "Banking setup for multi-country payments", "Vendor onboarding campaign"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Adequate capture capabilities but not the primary strength. You choose Tipalti for payments, not for invoice capture — the capture is good enough to complete the workflow." },
       { "stepId": "data-validation", "verdict": "Strong on tax and compliance validation (W-9, W-8BEN, OFAC screening). Weaker on general invoice data enrichment compared to pure AP automation tools." },
@@ -107,6 +163,33 @@
     "tagline": "SMB-Focused AP & Payment Platform",
     "description": "Bill.com streamlines AP and payments for SMBs with intuitive workflows, integrated payments, and strong accounting system integration.",
     "website": "https://www.bill.com",
+    "founded": "2006",
+    "headquarters": "San Jose, CA",
+    "employeeCount": "~2,200",
+    "overallFitScore": 68,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 65, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 72, "grade": "good-fit" },
+      { "stepId": "payment-scheduling", "score": 62, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 78, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 70, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "400,000+",
+      "revenue": "$1.1B ARR",
+      "yoyGrowth": "20%",
+      "g2Rating": 4.3,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["WeWork", "Soulcycle", "Via", "Clover Health"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-2 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — accounting system sync handles most data",
+      "changeManagement": "Very low — intuitive UI, most users productive in hours",
+      "requirements": ["Accounting system (QuickBooks, Xero, etc.)", "Bank account for payments"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Good enough AI capture for SMB invoice volumes. Not the most accurate on complex layouts but handles standard invoices well." },
       { "stepId": "approval-routing", "verdict": "Clean mobile approval experience that SMB controllers love. Simple hierarchy support — not built for complex matrix approval structures." },
@@ -145,6 +228,34 @@
     "tagline": "Enterprise Procurement & AP Suite",
     "description": "Coupa provides a comprehensive business spend management platform combining procurement, invoicing, and payments with AI-driven insights.",
     "website": "https://www.coupa.com",
+    "founded": "2006",
+    "headquarters": "San Mateo, CA",
+    "employeeCount": "~4,500",
+    "overallFitScore": 78,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 75, "grade": "good-fit" },
+      { "stepId": "data-validation", "score": 85, "grade": "best-fit" },
+      { "stepId": "po-matching", "score": 92, "grade": "best-fit" },
+      { "stepId": "coding-gl-allocation", "score": 80, "grade": "best-fit" },
+      { "stepId": "approval-routing", "score": 85, "grade": "best-fit" },
+      { "stepId": "payment-scheduling", "score": 70, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "3,000+",
+      "revenue": "$900M ARR",
+      "yoyGrowth": "15%",
+      "g2Rating": 4.2,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["Salesforce", "Unilever", "Sanofi", "BMS"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "12-24 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — procurement data, vendor master, contracts all need migration",
+      "changeManagement": "High — affects procurement, AP, and finance teams across the organization",
+      "requirements": ["ERP integration (SAP/Oracle)", "Dedicated project team", "Executive sponsorship", "Supplier onboarding program"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Enterprise-grade capture with supplier network for electronic invoicing. Best when suppliers submit through the Coupa portal — less differentiated for paper/email invoices." },
       { "stepId": "data-validation", "verdict": "Deep validation against contracts, POs, and master data. The procurement-to-pay integration means validation catches issues that standalone AP tools miss." },
@@ -184,6 +295,32 @@
     "tagline": "Modern Spend Management Platform",
     "description": "Airbase combines AP automation with expense management and procurement in a single platform, providing complete spend visibility and control.",
     "website": "https://www.airbase.com",
+    "founded": "2017",
+    "headquarters": "San Francisco, CA",
+    "employeeCount": "~300",
+    "overallFitScore": 66,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 58, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 84, "grade": "best-fit" },
+      { "stepId": "payment-execution", "score": 72, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 70, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "2,000+",
+      "revenue": "$60M ARR",
+      "yoyGrowth": "50%",
+      "g2Rating": 4.7,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["Segment", "Notion", "Gusto", "Plaid"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "3-5 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — syncs with accounting system for chart of accounts",
+      "changeManagement": "Low — intuitive UX, card programs drive organic adoption",
+      "requirements": ["Accounting system integration", "Banking setup for card program"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Competent capture but not the core differentiator. Airbase shines in unified spend management — the capture is a means to that end." },
       { "stepId": "approval-routing", "verdict": "Pre-purchase approval workflows are Airbase's unique angle. By the time an invoice arrives, the spend is already approved — this fundamentally changes the AP workflow." },
@@ -221,6 +358,32 @@
     "tagline": "AI-Powered AP & Cash Management",
     "description": "Centime uses AI to optimize payment timing and cash flow, helping finance teams maximize working capital while automating AP processes.",
     "website": "https://www.centime.com",
+    "founded": "2015",
+    "headquarters": "New York, NY",
+    "employeeCount": "~80",
+    "overallFitScore": 72,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 48, "grade": "limited" },
+      { "stepId": "payment-scheduling", "score": 94, "grade": "best-fit" },
+      { "stepId": "payment-execution", "score": 75, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 78, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "500+",
+      "revenue": "$15M ARR",
+      "yoyGrowth": "60%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Jobvite", "Planful", "Vena Solutions", "ClickUp"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "2-4 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — bank and accounting system integrations handle data sync",
+      "changeManagement": "Low — treasury and AP teams are primary users",
+      "requirements": ["Accounting system integration", "Bank account API access"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Basic capture capabilities — functional but not where Centime's AI investment goes. You'll want Centime for treasury optimization, not capture." },
       { "stepId": "payment-scheduling", "verdict": "AI-powered payment timing optimization that demonstrably captures more early-pay discounts. This is Centime's core differentiator and it's genuinely best-in-class for SMBs." },
@@ -258,6 +421,34 @@
     "tagline": "Enterprise AP Automation with Fraud Prevention",
     "description": "Medius provides comprehensive AP automation for mid-market and enterprise companies with a focus on fraud prevention and spend analytics.",
     "website": "https://www.medius.com",
+    "founded": "2001",
+    "headquarters": "Linköping, Sweden",
+    "employeeCount": "~600",
+    "overallFitScore": 74,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 76, "grade": "good-fit" },
+      { "stepId": "data-validation", "score": 78, "grade": "good-fit" },
+      { "stepId": "po-matching", "score": 74, "grade": "good-fit" },
+      { "stepId": "exception-handling", "score": 80, "grade": "best-fit" },
+      { "stepId": "fraud-duplicate-detection", "score": 92, "grade": "best-fit" },
+      { "stepId": "payment-execution", "score": 58, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "4,000+",
+      "revenue": "$120M ARR",
+      "yoyGrowth": "25%",
+      "g2Rating": 4.3,
+      "gartnerPosition": "Challenger",
+      "notableCustomers": ["Volvo", "Electrolux", "Husqvarna", "Assa Abloy"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-14 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — vendor master, GL structure, and historical data recommended",
+      "changeManagement": "Medium — AP team training plus fraud review process changes",
+      "requirements": ["ERP integration", "IT resources for configuration", "Fraud review workflow definition"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Reliable enterprise capture with good multi-format handling. Strong for high-volume manufacturing and healthcare invoice flows." },
       { "stepId": "data-validation", "verdict": "Thorough validation with multi-entity and multi-currency awareness. Particularly strong for companies operating across multiple ERP instances." },
@@ -297,6 +488,34 @@
     "tagline": "Global P2P & E-Invoicing Network",
     "description": "Basware offers enterprise-grade AP automation with the world's largest e-invoicing network, ideal for global companies with complex procurement needs.",
     "website": "https://www.basware.com",
+    "founded": "1985",
+    "headquarters": "Espoo, Finland",
+    "employeeCount": "~1,400",
+    "overallFitScore": 72,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 85, "grade": "best-fit" },
+      { "stepId": "data-validation", "score": 78, "grade": "good-fit" },
+      { "stepId": "po-matching", "score": 80, "grade": "best-fit" },
+      { "stepId": "coding-gl-allocation", "score": 72, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 70, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 55, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "10,000+",
+      "revenue": "$180M ARR",
+      "yoyGrowth": "10%",
+      "g2Rating": 4.1,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["IKEA", "Heineken", "Marks & Spencer", "Deutsche Post"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "16-24 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — supplier network onboarding, procurement data, GL mapping",
+      "changeManagement": "High — affects procurement, AP, and supplier-facing processes globally",
+      "requirements": ["ERP integration (SAP/Oracle)", "Supplier onboarding program", "E-invoicing compliance review", "Dedicated project manager"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "The e-invoicing network is the key differentiator — suppliers on the Basware network submit structured data directly, eliminating capture errors entirely." },
       { "stepId": "data-validation", "verdict": "Strong compliance-focused validation, especially for European e-invoicing mandates and tax regulations. Less differentiated for US-only operations." },
@@ -336,6 +555,32 @@
     "tagline": "Travel & Expense Management Platform",
     "description": "Navan combines travel booking with expense and AP management, using AI to automate expense categorization and policy enforcement.",
     "website": "https://www.navan.com",
+    "founded": "2015",
+    "headquarters": "Palo Alto, CA",
+    "employeeCount": "~3,000",
+    "overallFitScore": 58,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 42, "grade": "limited" },
+      { "stepId": "approval-routing", "score": 74, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 65, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 60, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "10,000+",
+      "revenue": "$500M ARR",
+      "yoyGrowth": "45%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["GitHub", "Lyft", "Box", "Zillow"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "2-4 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — employee roster and accounting system sync",
+      "changeManagement": "Low — consumer-grade UX drives organic adoption",
+      "requirements": ["Accounting system integration", "Employee directory sync"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Focused on receipt and expense capture rather than traditional AP invoices. Best for T&E-heavy organizations, not for high-volume vendor invoice processing." },
       { "stepId": "approval-routing", "verdict": "Real-time policy enforcement catches out-of-policy expenses before they're incurred — a fundamentally different approach than post-hoc approval workflows." },
@@ -373,6 +618,32 @@
     "tagline": "Expense & AP Automation for Growth Companies",
     "description": "Happay provides affordable expense and AP automation with a focus on emerging markets, offering strong compliance features for India and Southeast Asia.",
     "website": "https://www.happay.com",
+    "founded": "2012",
+    "headquarters": "Bangalore, India",
+    "employeeCount": "~200",
+    "overallFitScore": 52,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 50, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 62, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 48, "grade": "limited" },
+      { "stepId": "reconciliation-reporting", "score": 55, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "8,000+",
+      "revenue": "$20M ARR",
+      "yoyGrowth": "30%",
+      "g2Rating": 4.2,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Tata Group", "Infosys", "Wipro", "Mahindra"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-3 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — employee data and accounting system sync",
+      "changeManagement": "Low — mobile-first UX designed for ease of use",
+      "requirements": ["Accounting system integration", "Corporate banking relationship"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "AI receipt scanning works well for expense receipts. For traditional AP invoice capture, it's functional but not the primary use case." },
       { "stepId": "approval-routing", "verdict": "Multi-level approval workflows designed for hierarchical organizations common in Indian enterprises. Good for companies with 4-5 approval tiers." },
@@ -410,6 +681,34 @@
     "tagline": "Procurement & AP Automation",
     "description": "Procurify focuses on pre-purchase controls and budget management, helping organizations prevent unauthorized spending while streamlining AP.",
     "website": "https://www.procurify.com",
+    "founded": "2013",
+    "headquarters": "Vancouver, Canada",
+    "employeeCount": "~200",
+    "overallFitScore": 64,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 45, "grade": "limited" },
+      { "stepId": "po-matching", "score": 82, "grade": "best-fit" },
+      { "stepId": "coding-gl-allocation", "score": 76, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 80, "grade": "best-fit" },
+      { "stepId": "payment-execution", "score": 42, "grade": "limited" },
+      { "stepId": "reconciliation-reporting", "score": 62, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "700+",
+      "revenue": "$25M ARR",
+      "yoyGrowth": "35%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["World Vision", "PetSmart", "United Way", "Simon Fraser University"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "4-8 weeks",
+      "effortLevel": "medium",
+      "requiresIt": false,
+      "dataMigration": "Moderate — vendor master, budget structures, and GL mapping",
+      "changeManagement": "Medium — procurement and budget owners need training on new workflows",
+      "requirements": ["Accounting system integration", "Budget hierarchy definition", "Department onboarding plan"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Basic invoice capture focused on matching to existing POs. The value is in the procurement-first workflow, not standalone capture capabilities." },
       { "stepId": "po-matching", "verdict": "Strong PO matching because Procurify controls the PO creation process. When you create the PO in Procurify, matching is nearly automatic." },
@@ -449,6 +748,34 @@
     "tagline": "Industry-Specific AP Automation",
     "description": "Corpay provides AP automation tailored to specific industries like real estate and healthcare, with deep ERP integrations and flexible payment options.",
     "website": "https://www.corpay.com",
+    "founded": "2000",
+    "headquarters": "Atlanta, GA",
+    "employeeCount": "~9,000",
+    "overallFitScore": 68,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 70, "grade": "good-fit" },
+      { "stepId": "data-validation", "score": 68, "grade": "good-fit" },
+      { "stepId": "coding-gl-allocation", "score": 75, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 72, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 78, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 74, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "8,000+",
+      "revenue": "$400M ARR",
+      "yoyGrowth": "18%",
+      "g2Rating": 4.0,
+      "gartnerPosition": "Challenger",
+      "notableCustomers": ["CBRE", "JLL", "HCA Healthcare", "Marriott"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-12 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — vendor master, property/entity structures for real estate",
+      "changeManagement": "Medium — property managers and AP teams need workflow training",
+      "requirements": ["ERP/property management system integration", "Entity structure mapping", "Supplier payment enrollment"]
+    },
     "stepVerdicts": [
       { "stepId": "invoice-capture", "verdict": "Good capture with industry-specific templates for real estate (CAM charges, lease invoices) and healthcare. Generic invoice handling is adequate." },
       { "stepId": "data-validation", "verdict": "Industry-aware validation catches issues specific to real estate and healthcare billing. Less differentiated for general commercial AP." },
@@ -456,6 +783,1068 @@
       { "stepId": "approval-routing", "verdict": "Property/entity-based routing for real estate portfolios. Well-suited for multi-property, multi-entity organizations with complex approval needs." },
       { "stepId": "payment-execution", "verdict": "Flexible payment execution with good virtual card programs. The supplier network incentivizes electronic payment adoption over checks." },
       { "stepId": "reconciliation-reporting", "verdict": "Strong audit trail and compliance reporting for regulated industries. 1099 reporting and tax document management are well-handled." }
+    ]
+  },
+  {
+    "id": "vic-ai",
+    "name": "Vic.ai",
+    "vendor": "Vic.ai",
+    "category": "ap",
+    "aiMaturity": "ai-native",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Technology", "Professional Services", "Financial Services", "Real Estate"],
+    "painPoints": [
+      "Manual invoice coding and data entry",
+      "Inconsistent GL allocation",
+      "Slow invoice processing cycles"
+    ],
+    "integrations": ["NetSuite", "Sage Intacct", "QuickBooks", "Microsoft Dynamics", "Xero"],
+    "pricing": {
+      "model": "Per invoice processed",
+      "startingPrice": "$1-3 per invoice",
+      "notes": "Volume-based pricing with AI accuracy guarantees"
+    },
+    "keyFeatures": [
+      "Autonomous AI invoice processing",
+      "Self-learning GL coding with 99%+ accuracy",
+      "Predictive invoice data extraction",
+      "Continuous learning from corrections",
+      "ERP-native integration"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "reconciliation-reporting"],
+    "tagline": "Autonomous AI for Invoice Processing",
+    "description": "Vic.ai uses deep learning to autonomously process invoices, achieving near-human accuracy in data extraction and GL coding without manual rules or templates.",
+    "website": "https://www.vic.ai",
+    "founded": "2017",
+    "headquarters": "Oslo, Norway / New York, NY",
+    "employeeCount": "~200",
+    "overallFitScore": 82,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 92, "grade": "best-fit" },
+      { "stepId": "data-validation", "score": 88, "grade": "best-fit" },
+      { "stepId": "po-matching", "score": 78, "grade": "good-fit" },
+      { "stepId": "coding-gl-allocation", "score": 95, "grade": "best-fit" },
+      { "stepId": "approval-routing", "score": 68, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 62, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "1,500+",
+      "revenue": "$40M ARR",
+      "yoyGrowth": "70%",
+      "g2Rating": 4.7,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["KPMG", "BDO", "CohnReznick", "Moss Adams"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "3-6 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — AI learns from historical invoice data in your ERP",
+      "changeManagement": "Low — AP team reviews AI suggestions initially, then trust builds quickly",
+      "requirements": ["ERP system with historical invoice data", "AP team willing to trust AI suggestions"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Best-in-class AI capture that learns from every invoice. No templates needed — the deep learning model adapts to any format, including handwritten invoices." },
+      { "stepId": "data-validation", "verdict": "Validates against historical patterns and vendor data simultaneously. Catches anomalies that rule-based systems miss because it understands context, not just fields." },
+      { "stepId": "po-matching", "verdict": "Competent matching capabilities but not the primary differentiator. PO matching is handled well for standard scenarios; complex multi-line matching is adequate." },
+      { "stepId": "coding-gl-allocation", "verdict": "This is Vic.ai's crown jewel. The AI achieves 99%+ GL coding accuracy by learning from your historical patterns — genuinely autonomous for repeat vendors." },
+      { "stepId": "approval-routing", "verdict": "Functional approval workflows but not the focus area. You choose Vic.ai for AI processing power, not for approval workflow sophistication." },
+      { "stepId": "reconciliation-reporting", "verdict": "Basic reporting and analytics. Provides good visibility into AI processing metrics but limited depth in financial reconciliation analytics." }
+    ]
+  },
+  {
+    "id": "rossum",
+    "name": "Rossum",
+    "vendor": "Rossum",
+    "category": "ap",
+    "aiMaturity": "ai-native",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Logistics", "Manufacturing", "Financial Services", "Retail"],
+    "painPoints": [
+      "Complex multi-format document processing",
+      "Low OCR accuracy on non-standard documents",
+      "High manual review rates"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "NetSuite", "Coupa"],
+    "pricing": {
+      "model": "Per document processed",
+      "startingPrice": "$0.50-$2.00 per document",
+      "notes": "Volume discounts, enterprise agreements available"
+    },
+    "keyFeatures": [
+      "AI-first document intelligence engine",
+      "No-template data extraction",
+      "Human-in-the-loop validation interface",
+      "Multi-document type support (invoices, POs, receipts)",
+      "API-first architecture for embedding"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching"],
+    "tagline": "AI Document Intelligence for Finance",
+    "description": "Rossum provides AI-native document processing that extracts data from any document format without templates, designed to handle the long tail of invoice variations.",
+    "website": "https://www.rossum.ai",
+    "founded": "2017",
+    "headquarters": "Prague, Czech Republic",
+    "employeeCount": "~150",
+    "overallFitScore": 78,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 95, "grade": "best-fit" },
+      { "stepId": "data-validation", "score": 85, "grade": "best-fit" },
+      { "stepId": "po-matching", "score": 65, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "800+",
+      "revenue": "$25M ARR",
+      "yoyGrowth": "55%",
+      "g2Rating": 4.6,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["Siemens", "Pricefx", "Rohlik", "Cushman & Wakefield"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "2-4 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "None — cloud API processes documents on demand",
+      "changeManagement": "Very low — validation interface is intuitive, minimal training needed",
+      "requirements": ["Document source (email, scanner, ERP)", "API integration capability or partner middleware"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Top-tier AI extraction that handles the long tail of invoice formats better than any competitor. The no-template approach means zero setup for new vendors." },
+      { "stepId": "data-validation", "verdict": "Strong validation with an elegant human-in-the-loop interface. When the AI is uncertain, the review experience is fast and teaches the model for next time." },
+      { "stepId": "po-matching", "verdict": "Basic matching capability — Rossum is primarily a capture/extraction tool. Most customers use their ERP or a separate AP tool for matching." }
+    ]
+  },
+  {
+    "id": "hypatos",
+    "name": "Hypatos",
+    "vendor": "Hypatos",
+    "category": "ap",
+    "aiMaturity": "ai-native",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Logistics", "Financial Services", "Retail"],
+    "painPoints": [
+      "High volume document processing",
+      "Complex document formats requiring manual extraction",
+      "Inconsistent data quality from OCR"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "Workday"],
+    "pricing": {
+      "model": "Per document processed",
+      "startingPrice": "$0.30-$1.50 per document",
+      "notes": "Enterprise volume pricing available"
+    },
+    "keyFeatures": [
+      "Deep learning document extraction",
+      "Pre-trained models for financial documents",
+      "Line-item level extraction",
+      "Multi-language document support",
+      "Continuous model improvement"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "coding-gl-allocation"],
+    "tagline": "Deep Learning for Document Automation",
+    "description": "Hypatos uses deep learning to extract and understand financial documents at line-item level, enabling straight-through processing for high-volume AP operations.",
+    "website": "https://www.hypatos.ai",
+    "founded": "2018",
+    "headquarters": "Berlin, Germany",
+    "employeeCount": "~100",
+    "overallFitScore": 76,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 90, "grade": "best-fit" },
+      { "stepId": "data-validation", "score": 88, "grade": "best-fit" },
+      { "stepId": "coding-gl-allocation", "score": 82, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "300+",
+      "revenue": "$12M ARR",
+      "yoyGrowth": "80%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Metro AG", "Schwarz Group", "Deutsche Bahn", "Bosch"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "4-8 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Minimal — API-based, processes documents on demand",
+      "changeManagement": "Low — operates behind the scenes, AP team sees cleaner data",
+      "requirements": ["Document pipeline (email/scanner)", "ERP API access for GL coding training", "IT resources for API integration"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Excellent line-item level extraction that handles complex European invoice formats. Pre-trained models for financial documents reduce time-to-value significantly." },
+      { "stepId": "data-validation", "verdict": "Strong validation driven by deep understanding of document structure. Catches header-to-line-item inconsistencies that field-level extraction misses." },
+      { "stepId": "coding-gl-allocation", "verdict": "AI-driven GL coding that learns from your ERP's historical data. Particularly strong for manufacturing and logistics with complex cost structures." }
+    ]
+  },
+  {
+    "id": "sap-concur",
+    "name": "SAP Concur Invoice",
+    "vendor": "SAP",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Financial Services", "Healthcare", "Energy", "Retail"],
+    "painPoints": [
+      "Fragmented travel, expense, and invoice processes",
+      "Complex compliance requirements",
+      "Global multi-entity operations"
+    ],
+    "integrations": ["SAP S/4HANA", "SAP ECC", "Oracle", "Microsoft Dynamics", "Workday"],
+    "pricing": {
+      "model": "Subscription based on modules + volume",
+      "startingPrice": "$8-15/report or $75K+ annually",
+      "notes": "Bundle pricing with Concur Travel and Expense"
+    },
+    "keyFeatures": [
+      "End-to-end invoice management",
+      "Global compliance and tax engine",
+      "AI-powered invoice capture",
+      "Integrated travel and expense (Concur suite)",
+      "Supplier management and e-invoicing"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "exception-handling", "fraud-duplicate-detection", "payment-scheduling", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Enterprise Invoice & Spend Management",
+    "description": "SAP Concur Invoice provides enterprise-grade AP automation as part of the broader Concur spend management suite, with deep SAP ERP integration and global compliance.",
+    "website": "https://www.concur.com",
+    "founded": "1993",
+    "headquarters": "Bellevue, WA",
+    "employeeCount": "~10,000+",
+    "overallFitScore": 72,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 70, "grade": "good-fit" },
+      { "stepId": "data-validation", "score": 72, "grade": "good-fit" },
+      { "stepId": "po-matching", "score": 75, "grade": "good-fit" },
+      { "stepId": "coding-gl-allocation", "score": 68, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 74, "grade": "good-fit" },
+      { "stepId": "exception-handling", "score": 70, "grade": "good-fit" },
+      { "stepId": "fraud-duplicate-detection", "score": 72, "grade": "good-fit" },
+      { "stepId": "payment-scheduling", "score": 68, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 72, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 74, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "50,000+",
+      "revenue": "$2B+ (Concur suite)",
+      "yoyGrowth": "8%",
+      "g2Rating": 3.9,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["Deloitte", "Accenture", "Johnson & Johnson", "Siemens"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "12-20 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — vendor master, GL structure, approval hierarchies, compliance rules",
+      "changeManagement": "High — broad organizational impact, training across AP, procurement, and finance",
+      "requirements": ["SAP or major ERP", "Dedicated project team", "Executive sponsorship", "IT resources for integration", "Compliance review"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Competent capture that improves in the SAP ecosystem. Not the most innovative AI but covers the basics reliably at enterprise scale." },
+      { "stepId": "data-validation", "verdict": "Thorough validation with strong compliance rules engine. Best for organizations with complex tax and regulatory requirements across multiple countries." },
+      { "stepId": "po-matching", "verdict": "Solid enterprise matching integrated with SAP procurement. Good for SAP shops; less differentiated when matched against best-of-breed AP tools." },
+      { "stepId": "coding-gl-allocation", "verdict": "Reliable GL coding with SAP chart of accounts integration. Configuration-heavy but handles complex enterprise GL structures." },
+      { "stepId": "approval-routing", "verdict": "Enterprise-grade routing that mirrors SAP organizational hierarchies. Complex to configure but handles global matrix organizations." },
+      { "stepId": "exception-handling", "verdict": "Structured exception workflows with audit trails. Less AI-driven than modern tools but reliable for compliance-heavy organizations." },
+      { "stepId": "fraud-duplicate-detection", "verdict": "Basic duplicate detection and compliance screening. SAP's fraud capabilities are growing but lag behind specialized tools like Medius." },
+      { "stepId": "payment-scheduling", "verdict": "Functional scheduling integrated with SAP treasury. Better for enterprise payment planning than discount optimization." },
+      { "stepId": "payment-execution", "verdict": "Enterprise payment execution through SAP payment rails. Reliable but not innovative — most value comes from existing SAP banking integrations." },
+      { "stepId": "reconciliation-reporting", "verdict": "Deep SAP integration means reconciliation is semi-automatic for SAP customers. Reporting is comprehensive but requires SAP Analytics Cloud for best insights." }
+    ]
+  },
+  {
+    "id": "oracle-ap",
+    "name": "Oracle AP Cloud",
+    "vendor": "Oracle",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["enterprise"],
+    "industries": ["Financial Services", "Manufacturing", "Public Sector", "Telecommunications"],
+    "painPoints": [
+      "Legacy AP system modernization",
+      "Global multi-subsidiary operations",
+      "Complex intercompany transactions"
+    ],
+    "integrations": ["Oracle Fusion Cloud", "Oracle E-Business Suite", "SAP", "Workday"],
+    "pricing": {
+      "model": "Subscription per user per month",
+      "startingPrice": "$100K+ annually",
+      "notes": "Part of Oracle Fusion Cloud ERP suite"
+    },
+    "keyFeatures": [
+      "Native Oracle Cloud ERP integration",
+      "AI-assisted invoice processing",
+      "Multi-entity and intercompany support",
+      "Global tax and compliance engine",
+      "Advanced analytics with Oracle BI"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "exception-handling", "fraud-duplicate-detection", "payment-scheduling", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Cloud-Native Enterprise AP",
+    "description": "Oracle AP Cloud provides comprehensive accounts payable automation as part of Oracle Fusion Cloud ERP, designed for large enterprises with complex global operations.",
+    "website": "https://www.oracle.com/erp/payables/",
+    "founded": "1977",
+    "headquarters": "Austin, TX",
+    "employeeCount": "~160,000+",
+    "overallFitScore": 70,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 65, "grade": "good-fit" },
+      { "stepId": "data-validation", "score": 70, "grade": "good-fit" },
+      { "stepId": "po-matching", "score": 78, "grade": "good-fit" },
+      { "stepId": "coding-gl-allocation", "score": 72, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 70, "grade": "good-fit" },
+      { "stepId": "exception-handling", "score": 68, "grade": "good-fit" },
+      { "stepId": "fraud-duplicate-detection", "score": 65, "grade": "good-fit" },
+      { "stepId": "payment-scheduling", "score": 72, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 75, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 78, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "30,000+",
+      "revenue": "$5B+ (Cloud ERP suite)",
+      "yoyGrowth": "25%",
+      "g2Rating": 3.8,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["FedEx", "Bank of America", "AT&T", "Dow Chemical"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "20-40 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Major — full ERP migration typically required, including vendor master, GL, open AP balances",
+      "changeManagement": "Very high — organization-wide ERP transformation, extensive training programs",
+      "requirements": ["Oracle Cloud subscription", "Implementation partner (Deloitte, Accenture, etc.)", "Executive steering committee", "Data migration team", "Change management program"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Growing AI capabilities but still behind best-of-breed capture tools. Most Oracle customers pair with a specialized capture solution." },
+      { "stepId": "data-validation", "verdict": "Strong validation leveraging Oracle's master data management. Best for organizations already on Oracle Cloud with clean master data." },
+      { "stepId": "po-matching", "verdict": "Robust matching engine integrated with Oracle Procurement. Handles complex multi-org, multi-currency PO matching well." },
+      { "stepId": "coding-gl-allocation", "verdict": "Deep integration with Oracle GL and subledger accounting. Configuration-intensive but handles the most complex enterprise GL structures." },
+      { "stepId": "approval-routing", "verdict": "AME (Approval Management Engine) is powerful but complex. Requires significant configuration investment to get right." },
+      { "stepId": "exception-handling", "verdict": "Structured exception handling with good holds management. More rules-based than AI-driven but reliable for enterprise operations." },
+      { "stepId": "fraud-duplicate-detection", "verdict": "Basic duplicate detection built in. Growing AI capabilities through Oracle Analytics but not yet competitive with specialized fraud tools." },
+      { "stepId": "payment-scheduling", "verdict": "Comprehensive payment scheduling with strong multi-currency support. Integrates well with Oracle Cash Management for treasury operations." },
+      { "stepId": "payment-execution", "verdict": "Enterprise payment execution with broad banking integration. Oracle Payment Manager handles complex international payment scenarios." },
+      { "stepId": "reconciliation-reporting", "verdict": "Native GL integration means reconciliation is tight. Oracle Analytics Cloud provides deep reporting but requires additional licensing." }
+    ]
+  },
+  {
+    "id": "sage-ap",
+    "name": "Sage AP Automation",
+    "vendor": "Sage",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Manufacturing", "Construction", "Professional Services", "Non-Profit"],
+    "painPoints": [
+      "Manual invoice entry into Sage systems",
+      "Disconnected approval processes",
+      "Limited payment automation"
+    ],
+    "integrations": ["Sage Intacct", "Sage 300", "Sage X3", "Sage 100"],
+    "pricing": {
+      "model": "Subscription per user",
+      "startingPrice": "$40-80/user/month",
+      "notes": "Best value when bundled with Sage Intacct"
+    },
+    "keyFeatures": [
+      "Native Sage ERP integration",
+      "AI-powered invoice capture",
+      "Automated approval workflows",
+      "Multi-entity support",
+      "Dimensional reporting"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "coding-gl-allocation", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "AP Automation for the Sage Ecosystem",
+    "description": "Sage AP Automation provides native AP automation for Sage ERP customers, with strong dimensional accounting and multi-entity support for growing businesses.",
+    "website": "https://www.sage.com",
+    "founded": "1981",
+    "headquarters": "Newcastle, UK",
+    "employeeCount": "~12,000",
+    "overallFitScore": 65,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 68, "grade": "good-fit" },
+      { "stepId": "data-validation", "score": 65, "grade": "good-fit" },
+      { "stepId": "coding-gl-allocation", "score": 72, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 65, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 58, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 68, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "20,000+",
+      "revenue": "$2.5B (Sage overall)",
+      "yoyGrowth": "10%",
+      "g2Rating": 4.1,
+      "gartnerPosition": "Challenger",
+      "notableCustomers": ["AICPA", "Habitat for Humanity", "LSG Group", "Urban Outfitters"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "4-8 weeks",
+      "effortLevel": "medium",
+      "requiresIt": false,
+      "dataMigration": "Low — leverages existing Sage data structures",
+      "changeManagement": "Low to medium — familiar interface for existing Sage users",
+      "requirements": ["Sage ERP system", "Sage Intacct recommended for best experience"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Adequate AI capture that's well-integrated with Sage dimensions. Not the most sophisticated but data flows cleanly into the Sage GL." },
+      { "stepId": "data-validation", "verdict": "Validation leverages Sage master data effectively. Best for existing Sage customers who want validation without adding another vendor." },
+      { "stepId": "coding-gl-allocation", "verdict": "Strong dimensional coding for Sage Intacct users. The multi-dimensional allocation support (departments, locations, classes) is a natural fit." },
+      { "stepId": "approval-routing", "verdict": "Basic but functional approval workflows. Adequate for mid-market organizations with straightforward approval needs." },
+      { "stepId": "payment-execution", "verdict": "Limited native payment capabilities. Most Sage customers use bank portals or third-party payment tools for execution." },
+      { "stepId": "reconciliation-reporting", "verdict": "Tight Sage GL integration makes reconciliation smooth. Dimensional reporting is a strength for Sage Intacct users." }
+    ]
+  },
+  {
+    "id": "ramp",
+    "name": "Ramp",
+    "vendor": "Ramp",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["startup", "smb", "mid-market"],
+    "industries": ["Technology", "Professional Services", "E-commerce", "Media"],
+    "painPoints": [
+      "Overspending on software and subscriptions",
+      "Manual expense reconciliation",
+      "Lack of real-time spend controls"
+    ],
+    "integrations": ["NetSuite", "QuickBooks", "Xero", "Sage Intacct", "Workday"],
+    "pricing": {
+      "model": "Free platform + interchange revenue",
+      "startingPrice": "Free (revenue from card interchange)",
+      "notes": "Premium tiers available for enterprise features"
+    },
+    "keyFeatures": [
+      "AI-powered expense categorization",
+      "Real-time spend controls and limits",
+      "Automated receipt matching",
+      "Subscription management and savings",
+      "Bill pay and vendor payments",
+      "Price intelligence (duplicate subscription detection)"
+    ],
+    "workflowSteps": ["invoice-capture", "coding-gl-allocation", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "The Finance Automation Platform That Saves You Money",
+    "description": "Ramp combines corporate cards, expense management, bill pay, and procurement into a single platform focused on helping companies spend less and close books faster.",
+    "website": "https://www.ramp.com",
+    "founded": "2019",
+    "headquarters": "New York, NY",
+    "employeeCount": "~800",
+    "overallFitScore": 78,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 72, "grade": "good-fit" },
+      { "stepId": "coding-gl-allocation", "score": 80, "grade": "best-fit" },
+      { "stepId": "approval-routing", "score": 88, "grade": "best-fit" },
+      { "stepId": "payment-execution", "score": 85, "grade": "best-fit" },
+      { "stepId": "reconciliation-reporting", "score": 82, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "25,000+",
+      "revenue": "$300M ARR",
+      "yoyGrowth": "80%",
+      "g2Rating": 4.8,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["Shopify", "Notion", "Anduril", "Ro"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-2 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — accounting system sync handles chart of accounts",
+      "changeManagement": "Very low — consumer-grade UX, employees adopt organically through card program",
+      "requirements": ["Accounting system", "US-based entity for card program"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Good bill pay capture with OCR. Not the most sophisticated invoice AI but handles standard vendor invoices well for SMB/mid-market volumes." },
+      { "stepId": "coding-gl-allocation", "verdict": "AI-powered categorization learns from your patterns. Memo-based coding is surprisingly accurate and saves significant time at month-end." },
+      { "stepId": "approval-routing", "verdict": "Real-time spend controls and pre-purchase approval policies are best-in-class. The ability to set limits before spend occurs fundamentally reduces AP overhead." },
+      { "stepId": "payment-execution", "verdict": "Seamless payment execution through cards and bill pay. The card-first approach generates rebate revenue that can offset the AP team's costs." },
+      { "stepId": "reconciliation-reporting", "verdict": "Automated receipt matching and real-time sync to accounting systems dramatically accelerate month-end close. Price intelligence surfaces duplicate subscriptions." }
+    ]
+  },
+  {
+    "id": "brex",
+    "name": "Brex",
+    "vendor": "Brex",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["startup", "smb", "mid-market", "enterprise"],
+    "industries": ["Technology", "Life Sciences", "E-commerce", "Financial Services"],
+    "painPoints": [
+      "Complex expense policy enforcement",
+      "Manual reimbursement processes",
+      "Fragmented spend across cards, invoices, and travel"
+    ],
+    "integrations": ["NetSuite", "QuickBooks", "Sage Intacct", "Workday", "Rippling"],
+    "pricing": {
+      "model": "Free essentials + premium tiers",
+      "startingPrice": "Free essentials, $12/user/month premium",
+      "notes": "Enterprise pricing available"
+    },
+    "keyFeatures": [
+      "Corporate cards with global coverage",
+      "AI-powered expense management",
+      "Bill pay and vendor payments",
+      "Travel booking integration",
+      "Budgeting and spend controls",
+      "Multi-entity and multi-currency support"
+    ],
+    "workflowSteps": ["invoice-capture", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "AI-Powered Spend Management for Growing Companies",
+    "description": "Brex provides unified spend management combining corporate cards, expense management, bill pay, and travel in a single platform with AI-powered automation.",
+    "website": "https://www.brex.com",
+    "founded": "2017",
+    "headquarters": "San Francisco, CA",
+    "employeeCount": "~1,000",
+    "overallFitScore": 72,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 65, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 80, "grade": "best-fit" },
+      { "stepId": "payment-execution", "score": 86, "grade": "best-fit" },
+      { "stepId": "reconciliation-reporting", "score": 72, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "20,000+",
+      "revenue": "$350M ARR",
+      "yoyGrowth": "45%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["DoorDash", "Scale AI", "Coinbase", "SeatGeek"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-3 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — accounting system sync and employee data import",
+      "changeManagement": "Low — intuitive UX, card programs drive organic adoption",
+      "requirements": ["Accounting system", "US or global entity", "Banking relationship for bill pay"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Bill pay invoice capture is functional for standard invoices. Not built for high-volume complex invoice processing but adequate for vendor payments." },
+      { "stepId": "approval-routing", "verdict": "Sophisticated approval policies with budget-based controls and multi-level workflows. Strong for companies needing pre-purchase spend governance." },
+      { "stepId": "payment-execution", "verdict": "Excellent payment execution with global card coverage and bill pay. The multi-currency support and global card program are standouts for international companies." },
+      { "stepId": "reconciliation-reporting", "verdict": "Good automated reconciliation for card transactions. Bill pay reconciliation is clean. Reporting provides solid spend visibility but not deep AP analytics." }
+    ]
+  },
+  {
+    "id": "pleo",
+    "name": "Pleo",
+    "vendor": "Pleo",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["startup", "smb", "mid-market"],
+    "industries": ["Technology", "Professional Services", "Retail", "Hospitality"],
+    "painPoints": [
+      "Employee expense reimbursement delays",
+      "Lack of real-time spend visibility",
+      "Manual receipt collection"
+    ],
+    "integrations": ["Xero", "QuickBooks", "Sage", "NetSuite", "Datev"],
+    "pricing": {
+      "model": "Per user per month",
+      "startingPrice": "Free starter, €7.90/user/month pro",
+      "notes": "Enterprise pricing available"
+    },
+    "keyFeatures": [
+      "Smart company cards (virtual and physical)",
+      "Automated receipt capture and matching",
+      "Real-time spend tracking",
+      "Reimbursement management",
+      "Multi-entity support for Europe"
+    ],
+    "workflowSteps": ["invoice-capture", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Smart Spending for Modern European Businesses",
+    "description": "Pleo provides smart company cards and spend management designed for European businesses, with automated expense tracking and real-time visibility.",
+    "website": "https://www.pleo.io",
+    "founded": "2015",
+    "headquarters": "Copenhagen, Denmark",
+    "employeeCount": "~900",
+    "overallFitScore": 68,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 58, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 82, "grade": "best-fit" },
+      { "stepId": "payment-execution", "score": 78, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 72, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "30,000+",
+      "revenue": "$120M ARR",
+      "yoyGrowth": "35%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Trustpilot", "Made.com", "Deliveroo", "SumUp"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-2 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — accounting system sync for chart of accounts",
+      "changeManagement": "Very low — mobile-first design drives immediate adoption",
+      "requirements": ["European entity", "Accounting system integration"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Basic invoice capture for expense receipts and small vendor invoices. Not designed for high-volume AP invoice processing." },
+      { "stepId": "approval-routing", "verdict": "Clean, mobile-first approval experience with smart spending limits. Per-card limits and category controls prevent overspending before it happens." },
+      { "stepId": "payment-execution", "verdict": "Strong European payment coverage with smart company cards. Virtual cards for subscriptions and online purchases are well-designed." },
+      { "stepId": "reconciliation-reporting", "verdict": "Automated receipt matching and real-time accounting sync. Best for European companies on Xero or QuickBooks with moderate transaction volumes." }
+    ]
+  },
+  {
+    "id": "spendesk",
+    "name": "Spendesk",
+    "vendor": "Spendesk",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Technology", "Professional Services", "Retail", "Media"],
+    "painPoints": [
+      "Uncontrolled employee spending",
+      "Slow purchase request processes",
+      "Missing receipts at month-end"
+    ],
+    "integrations": ["Xero", "QuickBooks", "Sage", "NetSuite", "Datev", "Exact"],
+    "pricing": {
+      "model": "Per user per month",
+      "startingPrice": "€8/user/month",
+      "notes": "Custom pricing for 200+ employees"
+    },
+    "keyFeatures": [
+      "Spend requests and approval workflows",
+      "Virtual and physical company cards",
+      "Invoice management and bill pay",
+      "Automated receipt capture",
+      "Budget tracking and controls"
+    ],
+    "workflowSteps": ["invoice-capture", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "All-in-One Spend Management for European Teams",
+    "description": "Spendesk provides spend management with built-in approval workflows, company cards, and invoice management for European mid-market companies.",
+    "website": "https://www.spendesk.com",
+    "founded": "2016",
+    "headquarters": "Paris, France",
+    "employeeCount": "~400",
+    "overallFitScore": 66,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 55, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 80, "grade": "best-fit" },
+      { "stepId": "payment-execution", "score": 76, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 68, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "5,000+",
+      "revenue": "$50M ARR",
+      "yoyGrowth": "40%",
+      "g2Rating": 4.6,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Algolia", "Doctolib", "Sezane", "Wefox"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-3 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — accounting system sync handles setup",
+      "changeManagement": "Low — intuitive UX designed for non-finance users",
+      "requirements": ["European entity", "Accounting system integration"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Basic invoice capture for vendor bills and subscriptions. Functional for SMB volumes but not built for enterprise-scale invoice processing." },
+      { "stepId": "approval-routing", "verdict": "Strong pre-purchase approval workflows. The spend request flow gives finance teams control before money leaves the company — well-designed for growing teams." },
+      { "stepId": "payment-execution", "verdict": "Good European payment execution with virtual and physical cards. Bill pay handles vendor payments cleanly for moderate volumes." },
+      { "stepId": "reconciliation-reporting", "verdict": "Clean month-end close experience with automated receipt matching. Budget tracking provides good visibility for department managers." }
+    ]
+  },
+  {
+    "id": "kofax",
+    "name": "Kofax ReadSoft",
+    "vendor": "Kofax (Tungsten Automation)",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Financial Services", "Healthcare", "Government"],
+    "painPoints": [
+      "High-volume document processing bottlenecks",
+      "Poor OCR accuracy on legacy documents",
+      "Complex multi-ERP document routing"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "Infor", "JD Edwards"],
+    "pricing": {
+      "model": "Per document + license",
+      "startingPrice": "$75K+ annually",
+      "notes": "Volume-based enterprise pricing"
+    },
+    "keyFeatures": [
+      "High-volume intelligent document capture",
+      "Multi-channel invoice ingestion",
+      "SAP-certified AP automation",
+      "Machine learning data extraction",
+      "Document workflow orchestration"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing"],
+    "tagline": "Intelligent Document Processing at Scale",
+    "description": "Kofax ReadSoft provides enterprise-grade intelligent document capture and AP automation, with deep SAP integration and proven high-volume processing capabilities.",
+    "website": "https://www.kofax.com",
+    "founded": "1985",
+    "headquarters": "Irvine, CA",
+    "employeeCount": "~2,000",
+    "overallFitScore": 70,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 88, "grade": "best-fit" },
+      { "stepId": "data-validation", "score": 82, "grade": "best-fit" },
+      { "stepId": "po-matching", "score": 72, "grade": "good-fit" },
+      { "stepId": "coding-gl-allocation", "score": 65, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 60, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "6,000+",
+      "revenue": "$200M ARR",
+      "yoyGrowth": "5%",
+      "g2Rating": 4.0,
+      "gartnerPosition": "Challenger",
+      "notableCustomers": ["BMW", "Nestlé", "Procter & Gamble", "US Department of Defense"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-16 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Moderate — document templates, extraction rules, routing configurations",
+      "changeManagement": "Medium — AP operators need training on validation interface",
+      "requirements": ["On-premise or cloud infrastructure", "ERP integration (SAP preferred)", "IT resources for configuration", "Document format analysis"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Proven high-volume capture engine with decades of refinement. The SAP-certified integration is rock-solid. Modern AI is improving but the template-based approach still works for consistent formats." },
+      { "stepId": "data-validation", "verdict": "Thorough field-level validation with configurable rules. Strong for enterprises with strict data quality requirements and complex validation logic." },
+      { "stepId": "po-matching", "verdict": "Competent matching that benefits from clean capture data. Not the most sophisticated matching engine but reliable in SAP environments." },
+      { "stepId": "coding-gl-allocation", "verdict": "Basic GL coding based on vendor and document type rules. Less AI-driven than modern tools but predictable for regulated environments." },
+      { "stepId": "approval-routing", "verdict": "Functional routing integrated with document workflow. Better as a document processing engine than an approval workflow platform." }
+    ]
+  },
+  {
+    "id": "yooz",
+    "name": "Yooz",
+    "vendor": "Yooz",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Real Estate", "Hospitality", "Franchise", "Professional Services"],
+    "painPoints": [
+      "Paper-heavy AP processes",
+      "Multi-location invoice management",
+      "Lack of purchase order integration"
+    ],
+    "integrations": ["Sage Intacct", "QuickBooks", "Microsoft Dynamics", "NetSuite", "Yardi"],
+    "pricing": {
+      "model": "Per document per month",
+      "startingPrice": "$200-800/month",
+      "notes": "Unlimited users included"
+    },
+    "keyFeatures": [
+      "Smart invoice capture with learning AI",
+      "Automated approval workflows",
+      "PO matching capabilities",
+      "Multi-entity support",
+      "Mobile approval app"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Cloud AP Automation Made Simple",
+    "description": "Yooz provides cloud-based AP automation with smart invoice capture and approval workflows, designed for multi-location businesses in real estate and hospitality.",
+    "website": "https://www.getyooz.com",
+    "founded": "2010",
+    "headquarters": "Dallas, TX",
+    "employeeCount": "~300",
+    "overallFitScore": 68,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 84, "grade": "best-fit" },
+      { "stepId": "data-validation", "score": 70, "grade": "good-fit" },
+      { "stepId": "po-matching", "score": 65, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 78, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 55, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 62, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "5,000+",
+      "revenue": "$40M ARR",
+      "yoyGrowth": "30%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Choice Hotels", "RE/MAX", "Subway franchisees", "Holiday Inn"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "2-4 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — accounting system sync for vendor and GL data",
+      "changeManagement": "Low — intuitive interface with unlimited user model encourages broad adoption",
+      "requirements": ["Accounting system", "Document source (email, scanner)"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Strong AI capture that learns from corrections over time. The unlimited user model means everyone can submit invoices, reducing bottlenecks." },
+      { "stepId": "data-validation", "verdict": "Good validation against vendor master and GL data. The learning AI improves accuracy over time but starts slower than pre-trained models." },
+      { "stepId": "po-matching", "verdict": "Basic PO matching adequate for mid-market volumes. Not as sophisticated as enterprise tools but covers standard matching scenarios." },
+      { "stepId": "approval-routing", "verdict": "Clean approval workflows with good mobile experience. The multi-entity routing works well for property management and franchise operations." },
+      { "stepId": "payment-execution", "verdict": "Basic payment capabilities. Most Yooz customers use their accounting system or bank portal for payment execution." },
+      { "stepId": "reconciliation-reporting", "verdict": "Adequate reporting for mid-market needs. Multi-entity reporting is useful for property management companies." }
+    ]
+  },
+  {
+    "id": "mineraltree",
+    "name": "MineralTree",
+    "vendor": "MineralTree",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Professional Services", "Technology", "Healthcare", "Manufacturing"],
+    "painPoints": [
+      "End-to-end AP process inefficiency",
+      "Check-heavy payment processes",
+      "Lack of payment optimization"
+    ],
+    "integrations": ["NetSuite", "QuickBooks", "Sage Intacct", "Microsoft Dynamics", "Acumatica"],
+    "pricing": {
+      "model": "Subscription + per payment",
+      "startingPrice": "$500-2,000/month",
+      "notes": "Implementation fees may apply"
+    },
+    "keyFeatures": [
+      "End-to-end AP automation",
+      "AI-powered invoice capture",
+      "Automated approval workflows",
+      "Payment optimization (ACH, virtual card, check)",
+      "Vendor portal for payment status"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "payment-scheduling", "payment-execution", "reconciliation-reporting"],
+    "tagline": "End-to-End AP Automation for Mid-Market",
+    "description": "MineralTree provides comprehensive AP automation from invoice capture to payment execution, designed for mid-market companies looking to eliminate paper and manual processes.",
+    "website": "https://www.mineraltree.com",
+    "founded": "2010",
+    "headquarters": "Cambridge, MA",
+    "employeeCount": "~200",
+    "overallFitScore": 70,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 76, "grade": "good-fit" },
+      { "stepId": "data-validation", "score": 70, "grade": "good-fit" },
+      { "stepId": "po-matching", "score": 68, "grade": "good-fit" },
+      { "stepId": "coding-gl-allocation", "score": 72, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 74, "grade": "good-fit" },
+      { "stepId": "payment-scheduling", "score": 70, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 78, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 65, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "2,000+",
+      "revenue": "$35M ARR",
+      "yoyGrowth": "25%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Zoll Medical", "Evolent Health", "Ingo Money", "Kforce"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "4-8 weeks",
+      "effortLevel": "medium",
+      "requiresIt": false,
+      "dataMigration": "Moderate — vendor master, GL mapping, approval hierarchies",
+      "changeManagement": "Medium — AP team transition from manual to automated workflows",
+      "requirements": ["ERP/accounting system", "Banking setup for payment optimization", "Vendor communication for payment method changes"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Solid AI capture for mid-market volumes. Good accuracy on standard invoices with reasonable learning curve for new formats." },
+      { "stepId": "data-validation", "verdict": "Competent validation against ERP master data. Catches common errors but not as sophisticated as enterprise-grade validation tools." },
+      { "stepId": "po-matching", "verdict": "Adequate PO matching for standard scenarios. Handles 2-way and 3-way matching but may struggle with complex multi-line POs." },
+      { "stepId": "coding-gl-allocation", "verdict": "AI-assisted coding that learns from historical patterns. Good enough for most mid-market GL structures." },
+      { "stepId": "approval-routing", "verdict": "Clean approval workflows with mobile support. Well-suited for mid-market organizations with moderate approval complexity." },
+      { "stepId": "payment-scheduling", "verdict": "Good payment scheduling with vendor payment optimization suggestions. Helps transition from check to electronic payments." },
+      { "stepId": "payment-execution", "verdict": "Strong payment execution with virtual card programs that generate revenue. The check-to-electronic conversion drives measurable savings." },
+      { "stepId": "reconciliation-reporting", "verdict": "Adequate reconciliation and reporting. Provides the basics for mid-market AP teams but not deep analytics." }
+    ]
+  },
+  {
+    "id": "esker",
+    "name": "Esker",
+    "vendor": "Esker",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Retail", "Consumer Goods", "Chemical"],
+    "painPoints": [
+      "Multi-channel document processing",
+      "Global AP process standardization",
+      "Order-to-cash and procure-to-pay disconnection"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "JD Edwards", "Infor"],
+    "pricing": {
+      "model": "Subscription per document",
+      "startingPrice": "$50K+ annually",
+      "notes": "Volume-based pricing, P2P and O2C bundles available"
+    },
+    "keyFeatures": [
+      "AI-powered document processing (P2P and O2C)",
+      "Global invoice capture and routing",
+      "Supplier management portal",
+      "Procurement automation",
+      "Analytics and dashboards"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "po-matching", "coding-gl-allocation", "approval-routing", "exception-handling", "payment-scheduling", "reconciliation-reporting"],
+    "tagline": "AI-Driven Document Process Automation",
+    "description": "Esker provides AI-driven automation for both procure-to-pay and order-to-cash processes, helping enterprises standardize document workflows globally.",
+    "website": "https://www.esker.com",
+    "founded": "1985",
+    "headquarters": "Lyon, France",
+    "employeeCount": "~1,500",
+    "overallFitScore": 74,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 86, "grade": "best-fit" },
+      { "stepId": "data-validation", "score": 78, "grade": "good-fit" },
+      { "stepId": "po-matching", "score": 82, "grade": "best-fit" },
+      { "stepId": "coding-gl-allocation", "score": 74, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 80, "grade": "best-fit" },
+      { "stepId": "exception-handling", "score": 72, "grade": "good-fit" },
+      { "stepId": "payment-scheduling", "score": 62, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 68, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "6,000+",
+      "revenue": "$180M ARR",
+      "yoyGrowth": "15%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Challenger",
+      "notableCustomers": ["Heineken", "Beiersdorf", "McCain Foods", "Bridgestone"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "10-16 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — vendor master, GL mapping, workflow rules, document templates",
+      "changeManagement": "Medium — AP team and supplier training, global rollout planning",
+      "requirements": ["ERP integration", "Supplier portal onboarding", "Document format analysis", "Multi-country compliance review"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Strong multi-channel capture with AI that handles diverse invoice formats well. The dual P2P/O2C capability is unique for companies that need both." },
+      { "stepId": "data-validation", "verdict": "Solid validation with good SAP and Oracle integration. Handles multi-country tax and compliance validation for European operations well." },
+      { "stepId": "po-matching", "verdict": "Good enterprise matching with tolerance management. The integration with procurement workflow data improves matching accuracy." },
+      { "stepId": "coding-gl-allocation", "verdict": "AI-assisted coding that benefits from procurement category data. Reliable for established vendor relationships, less so for new categories." },
+      { "stepId": "approval-routing", "verdict": "Well-designed approval workflows with good delegation and escalation capabilities. Mobile approval experience is clean and responsive." },
+      { "stepId": "exception-handling", "verdict": "Structured exception handling with learning capabilities. The supplier portal helps resolve vendor-side exceptions faster." },
+      { "stepId": "payment-scheduling", "verdict": "Basic payment scheduling. Most Esker customers handle payment optimization through their ERP treasury module." },
+      { "stepId": "reconciliation-reporting", "verdict": "Good operational dashboards and process analytics. Financial reconciliation relies on ERP integration rather than native capabilities." }
+    ]
+  },
+  {
+    "id": "quadient-ap",
+    "name": "Quadient AP Automation",
+    "vendor": "Quadient",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Professional Services", "Real Estate", "Healthcare", "Non-Profit"],
+    "painPoints": [
+      "Paper-based AP processes",
+      "Slow invoice approval cycles",
+      "Difficulty managing remote AP teams"
+    ],
+    "integrations": ["QuickBooks", "Sage Intacct", "NetSuite", "Microsoft Dynamics", "Sage 100"],
+    "pricing": {
+      "model": "Subscription per user",
+      "startingPrice": "$30-75/user/month",
+      "notes": "Volume discounts for larger teams"
+    },
+    "keyFeatures": [
+      "Cloud-based invoice capture",
+      "Configurable approval workflows",
+      "Mobile AP management",
+      "Document storage and audit trail",
+      "Multi-entity support"
+    ],
+    "workflowSteps": ["invoice-capture", "data-validation", "approval-routing", "payment-execution", "reconciliation-reporting"],
+    "tagline": "Cloud AP Automation for Growing Businesses",
+    "description": "Quadient AP provides cloud-based AP automation with configurable workflows, designed to help growing businesses eliminate paper and accelerate invoice processing.",
+    "website": "https://www.quadient.com",
+    "founded": "1924",
+    "headquarters": "Paris, France",
+    "employeeCount": "~5,600",
+    "overallFitScore": 66,
+    "fitScores": [
+      { "stepId": "invoice-capture", "score": 80, "grade": "best-fit" },
+      { "stepId": "data-validation", "score": 68, "grade": "good-fit" },
+      { "stepId": "approval-routing", "score": 76, "grade": "good-fit" },
+      { "stepId": "payment-execution", "score": 52, "grade": "good-fit" },
+      { "stepId": "reconciliation-reporting", "score": 60, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "3,500+",
+      "revenue": "$60M ARR (AP division)",
+      "yoyGrowth": "12%",
+      "g2Rating": 4.2,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Legal Aid Society", "RE/MAX", "Salvation Army", "Boys & Girls Clubs"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "2-4 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Minimal — accounting system sync for basic setup",
+      "changeManagement": "Low — simple interface, quick adoption for AP teams",
+      "requirements": ["Accounting system", "Document source (email, scanner)"]
+    },
+    "stepVerdicts": [
+      { "stepId": "invoice-capture", "verdict": "Good cloud capture with reliable OCR. Handles standard invoice formats well and the learning capability improves over time." },
+      { "stepId": "data-validation", "verdict": "Basic validation against accounting system data. Adequate for mid-market accuracy requirements but not as thorough as enterprise tools." },
+      { "stepId": "approval-routing", "verdict": "Configurable workflows that work well for distributed and remote AP teams. Good mobile experience for on-the-go approvals." },
+      { "stepId": "payment-execution", "verdict": "Limited native payment capabilities. Most customers use their accounting system or bank for payment execution." },
+      { "stepId": "reconciliation-reporting", "verdict": "Basic reporting and document storage. Good audit trail but limited analytical depth." }
+    ]
+  },
+  {
+    "id": "paymentworks",
+    "name": "PaymentWorks",
+    "vendor": "PaymentWorks",
+    "category": "ap",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Financial Services", "Healthcare", "Higher Education", "Government"],
+    "painPoints": [
+      "Vendor payment fraud and BEC attacks",
+      "Unreliable vendor banking data",
+      "Manual vendor onboarding and verification"
+    ],
+    "integrations": ["SAP", "Oracle", "Workday", "PeopleSoft", "Banner"],
+    "pricing": {
+      "model": "Subscription + per vendor verification",
+      "startingPrice": "$50K+ annually",
+      "notes": "Enterprise pricing based on vendor volume"
+    },
+    "keyFeatures": [
+      "Vendor identity verification",
+      "Bank account validation",
+      "Business email compromise (BEC) prevention",
+      "Automated vendor onboarding",
+      "Payment method optimization"
+    ],
+    "workflowSteps": ["data-validation", "fraud-duplicate-detection", "payment-execution"],
+    "tagline": "Vendor Payment Security & Compliance",
+    "description": "PaymentWorks specializes in vendor payment security, preventing business email compromise and payment fraud through verified vendor identity and bank account validation.",
+    "website": "https://www.paymentworks.com",
+    "founded": "2014",
+    "headquarters": "Boston, MA",
+    "employeeCount": "~100",
+    "overallFitScore": 72,
+    "fitScores": [
+      { "stepId": "data-validation", "score": 78, "grade": "good-fit" },
+      { "stepId": "fraud-duplicate-detection", "score": 92, "grade": "best-fit" },
+      { "stepId": "payment-execution", "score": 80, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "800+",
+      "revenue": "$30M ARR",
+      "yoyGrowth": "35%",
+      "g2Rating": 4.6,
+      "gartnerPosition": "Niche Player",
+      "notableCustomers": ["Stanford University", "Mass General Brigham", "University of Virginia", "Fifth Third Bank"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "6-10 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — vendor master data migration and verification campaign",
+      "changeManagement": "Medium — AP and vendor management teams need process changes for vendor onboarding",
+      "requirements": ["ERP integration for vendor master sync", "Vendor communication plan for re-verification", "IT resources for API integration"]
+    },
+    "stepVerdicts": [
+      { "stepId": "data-validation", "verdict": "Specialized in vendor data validation — verifies business identity, tax compliance, and bank account ownership. Not general invoice validation, but critical for payment security." },
+      { "stepId": "fraud-duplicate-detection", "verdict": "Best-in-class BEC prevention and vendor fraud detection. Validates bank accounts against business identity in real-time — catches the attacks that AP automation tools miss entirely." },
+      { "stepId": "payment-execution", "verdict": "Secure payment execution with verified vendor bank details. The confidence in payment accuracy is the primary value — reduces payment fraud risk dramatically." }
     ]
   }
 ]

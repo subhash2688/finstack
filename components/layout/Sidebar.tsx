@@ -31,7 +31,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [expandedFunctions, setExpandedFunctions] = useState<Set<string>>(
-    new Set(["finance"]) // Finance expanded by default
+    new Set() // All collapsed by default
   );
   const [engagements, setEngagements] = useState<Engagement[]>([]);
 

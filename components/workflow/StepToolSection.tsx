@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from "react";
 import { ToolGrid } from "@/components/tools/ToolGrid";
 import { ToolFilters, FilterState } from "@/components/tools/ToolFilters";
 import { ToolDetailModal } from "@/components/tools/ToolDetailModal";
-import { filterTools, getAllIndustries } from "@/lib/data/tools";
+import { getToolsForStepSorted, getAllIndustries } from "@/lib/data/tools";
 import { getToolsForGeneratedStep } from "@/lib/data/tool-mapping";
 import { Tool } from "@/types/tool";
 import { ToolMapping } from "@/types/engagement";
@@ -43,15 +43,12 @@ export function StepToolSection({
   }, [stepId]);
 
   const filteredTools = useMemo(() => {
-    // DUAL-MODE: Use toolMappings if available (generated workflow), otherwise use filterTools (static workflow)
+    // DUAL-MODE: Use toolMappings if available (generated workflow), otherwise use sorted tools
     if (toolMappings) {
-      // Generated workflow: get tools from mappings
       return getToolsForGeneratedStep(stepId, toolMappings);
     } else {
-      // Static workflow: use existing filter logic
-      return filterTools({
-        category: "ap",
-        workflowStep: stepId,
+      // Use fit-score sorted tools
+      return getToolsForStepSorted(stepId, {
         ...filters,
       });
     }
@@ -92,7 +89,7 @@ export function StepToolSection({
                 Tools for This Step
               </h3>
               <p className="text-sm text-muted-foreground">
-                {filteredTools.length} {filteredTools.length === 1 ? "tool" : "tools"} found
+                {filteredTools.length} {filteredTools.length === 1 ? "tool" : "tools"} found — sorted by fit score
               </p>
             </div>
             <Button

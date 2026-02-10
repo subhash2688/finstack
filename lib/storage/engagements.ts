@@ -1,4 +1,5 @@
-import { Engagement, LegacyEngagement, ProcessAssessment } from "@/types/engagement";
+import { Engagement, LegacyEngagement, ProcessAssessment, ClientContext } from "@/types/engagement";
+import { MaturityLevel } from "@/types/workflow";
 
 const STORAGE_KEY = "finstack-engagements";
 
@@ -130,4 +131,73 @@ export function deleteEngagement(id: string): void {
  */
 export function generateEngagementId(): string {
   return `eng_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+}
+
+/**
+ * Save a lightweight engagement from inline maturity assessment.
+ * Only requires a name; industry/size/ERP are optional.
+ */
+export function saveLightweightEngagement(params: {
+  name: string;
+  industry?: string;
+  companySize?: "startup" | "smb" | "mid-market" | "enterprise";
+  erp?: string;
+  processId: string;
+  processName: string;
+  functionId: string;
+  maturityRatings: Record<string, MaturityLevel>;
+}): Engagement {
+  const now = new Date().toISOString();
+  const engagement: Engagement = {
+    id: generateEngagementId(),
+    name: params.name,
+    type: "lightweight",
+    clientContext: {
+      companyName: params.name,
+      industry: params.industry || "",
+      companySize: params.companySize || "mid-market",
+      erp: params.erp || "",
+      monthlyInvoiceVolume: "",
+      characteristics: "",
+    },
+    processAssessments: [
+      {
+        functionId: params.functionId as any,
+        processId: params.processId,
+        processName: params.processName,
+        generatedWorkflow: [],
+        toolMappings: [],
+        maturityRatings: params.maturityRatings,
+      },
+    ],
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  saveEngagement(engagement);
+  return engagement;
+}
+
+/**
+ * Update maturity ratings for a specific process within an engagement.
+ * Auto-saves to localStorage.
+ */
+export function updateMaturityRatings(
+  engagementId: string,
+  processId: string,
+  ratings: Record<string, MaturityLevel>
+): Engagement | null {
+  const engagement = getEngagement(engagementId);
+  if (!engagement) return null;
+
+  const updated = {
+    ...engagement,
+    processAssessments: engagement.processAssessments.map((pa) =>
+      pa.processId === processId ? { ...pa, maturityRatings: ratings } : pa
+    ),
+    updatedAt: new Date().toISOString(),
+  };
+
+  saveEngagement(updated);
+  return updated;
 }

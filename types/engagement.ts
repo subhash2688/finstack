@@ -1,4 +1,4 @@
-import { WorkflowStep } from "./workflow";
+import { WorkflowStep, MaturityLevel } from "./workflow";
 import { FunctionId } from "./function";
 
 /**
@@ -31,6 +31,7 @@ export interface ProcessAssessment {
   processName: string; // e.g., "Accounts Payable"
   generatedWorkflow: WorkflowStep[]; // Tailored workflow for this process
   toolMappings: ToolMapping[]; // Tool mappings for this process
+  maturityRatings?: Record<string, MaturityLevel>; // stepId → maturity level
   score?: number; // Optional maturity score (0-5)
   notes?: string; // Optional consultant notes
 }
@@ -42,6 +43,7 @@ export interface ProcessAssessment {
 export interface Engagement {
   id: string; // UUID
   name: string; // e.g., "Acme Corp - Operations Assessment"
+  type?: "full" | "lightweight"; // "lightweight" = quick save from inline assessment
   clientContext: ClientContext;
   processAssessments: ProcessAssessment[]; // NEW: Array of assessed processes
   createdAt: string; // ISO 8601

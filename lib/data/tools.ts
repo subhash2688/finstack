@@ -1,4 +1,4 @@
-import { Tool, Category, AIMaturity, CompanySize } from '@/types/tool';
+import { Tool, Category, AIMaturity, CompanySize, FitGrade } from '@/types/tool';
 import apTools from '@/data/tools/ap-tools.json';
 
 const allTools: Tool[] = [
@@ -80,4 +80,27 @@ export function getAllIndustries(): string[] {
     tool.industries.forEach(industry => industries.add(industry));
   });
   return Array.from(industries).sort();
+}
+
+export function getToolFitGrade(score: number): FitGrade {
+  if (score >= 80) return 'best-fit';
+  if (score >= 50) return 'good-fit';
+  return 'limited';
+}
+
+export function getToolsForStepSorted(stepId: string, filters?: ToolFilters): Tool[] {
+  let tools = filterTools({
+    category: 'ap',
+    workflowStep: stepId,
+    ...filters,
+  });
+
+  // Sort by fit score for this step (highest first), tools without scores go last
+  tools.sort((a, b) => {
+    const aScore = a.fitScores?.find(f => f.stepId === stepId)?.score ?? -1;
+    const bScore = b.fitScores?.find(f => f.stepId === stepId)?.score ?? -1;
+    return bScore - aScore;
+  });
+
+  return tools;
 }

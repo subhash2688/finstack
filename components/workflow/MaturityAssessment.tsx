@@ -1,3 +1,8 @@
+/**
+ * @deprecated Maturity assessment is now inline in the Process Explorer tab.
+ * Ratings are handled via StepDetailPanel + PipelineStrip in APWorkflowPageClient.
+ * This component is kept for reference but no longer imported.
+ */
 "use client";
 
 import { useState, useCallback } from "react";

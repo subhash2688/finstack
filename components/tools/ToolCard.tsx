@@ -4,15 +4,20 @@ import { Tool } from "@/types/tool";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Building2, Sparkles, ExternalLink } from "lucide-react";
+import { Building2, Sparkles, ExternalLink, ArrowRight } from "lucide-react";
+import { FitScoreBadge } from "./FitScoreBadge";
+import Link from "next/link";
 
 interface ToolCardProps {
   tool: Tool;
   onLearnMore: (tool: Tool) => void;
   stepId?: string;
+  showCompare?: boolean;
+  isSelected?: boolean;
+  onCompareToggle?: (toolId: string) => void;
 }
 
-export function ToolCard({ tool, onLearnMore, stepId }: ToolCardProps) {
+export function ToolCard({ tool, onLearnMore, stepId, showCompare, isSelected, onCompareToggle }: ToolCardProps) {
   const aiMaturityLabels = {
     'ai-native': 'AI-Native',
     'ai-enabled': 'AI-Enabled',
@@ -24,6 +29,10 @@ export function ToolCard({ tool, onLearnMore, stepId }: ToolCardProps) {
     'ai-enabled': 'bg-teal-100 text-teal-800 border-teal-300',
     'traditional': 'bg-gray-100 text-gray-800 border-gray-300'
   };
+
+  const fitScore = stepId
+    ? tool.fitScores?.find(f => f.stepId === stepId)
+    : null;
 
   return (
     <Card className="hover:shadow-lg transition-shadow h-full flex flex-col">
@@ -41,7 +50,15 @@ export function ToolCard({ tool, onLearnMore, stepId }: ToolCardProps) {
             {aiMaturityLabels[tool.aiMaturity]}
           </Badge>
         </div>
+
+        {fitScore && (
+          <div className="mt-2">
+            <FitScoreBadge score={fitScore.score} grade={fitScore.grade} />
+          </div>
+        )}
+
         <CardDescription className="mt-2">{tool.tagline}</CardDescription>
+
         {stepId && tool.stepVerdicts && (() => {
           const verdict = tool.stepVerdicts.find(v => v.stepId === stepId);
           if (!verdict) return null;
@@ -85,22 +102,45 @@ export function ToolCard({ tool, onLearnMore, stepId }: ToolCardProps) {
             </div>
           </div>
         </div>
-        <div className="mt-4 flex gap-2">
-          <Button onClick={() => onLearnMore(tool)} className="flex-1">
-            Learn More
-          </Button>
-          {tool.website && (
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={(e) => {
-                e.stopPropagation();
-                window.open(tool.website, '_blank');
-              }}
-            >
-              <ExternalLink className="h-4 w-4" />
+        <div className="mt-4 space-y-2">
+          <div className="flex gap-2">
+            <Button onClick={() => onLearnMore(tool)} className="flex-1">
+              Learn More
             </Button>
-          )}
+            {tool.website && (
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(tool.website, '_blank');
+                }}
+              >
+                <ExternalLink className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
+          <div className="flex gap-2">
+            <Link href={`/vendors/${tool.id}`} className="flex-1">
+              <Button variant="outline" className="w-full gap-1 text-xs">
+                View Full Profile
+                <ArrowRight className="h-3 w-3" />
+              </Button>
+            </Link>
+            {showCompare && onCompareToggle && (
+              <Button
+                variant={isSelected ? "default" : "outline"}
+                size="sm"
+                className="text-xs"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onCompareToggle(tool.id);
+                }}
+              >
+                {isSelected ? "Selected" : "Compare"}
+              </Button>
+            )}
+          </div>
         </div>
       </CardContent>
     </Card>

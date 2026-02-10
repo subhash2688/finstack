@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Building2, Sparkles, ExternalLink, DollarSign, Plug, Target } from "lucide-react";
+import { Building2, Sparkles, ExternalLink, DollarSign, Plug, Target, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 interface ToolDetailModalProps {
   tool: Tool | null;
@@ -149,17 +150,23 @@ export function ToolDetailModal({ tool, open, onOpenChange }: ToolDetailModalPro
             </div>
           </div>
 
-          {tool.website && (
-            <div className="pt-4 border-t">
+          <div className="pt-4 border-t flex gap-3">
+            <Link href={`/vendors/${tool.id}`} className="flex-1" onClick={() => onOpenChange(false)}>
+              <Button variant="outline" className="w-full gap-2">
+                View Full Profile
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+            {tool.website && (
               <Button
                 onClick={() => window.open(tool.website, '_blank')}
-                className="w-full gap-2"
+                className="flex-1 gap-2"
               >
-                Visit {tool.vendor} Website
+                Visit Website
                 <ExternalLink className="h-4 w-4" />
               </Button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </DialogContent>
     </Dialog>

@@ -60,9 +60,12 @@ export function EngagementList() {
               <div>
                 <h3 className="text-lg font-medium mb-1">{engagement.name}</h3>
                 <p className="text-sm text-muted-foreground">
-                  {engagement.clientContext.companyName} •{" "}
-                  {engagement.clientContext.industry} •{" "}
-                  {engagement.clientContext.companySize}
+                  {engagement.clientContext.companyName}
+                  {engagement.clientContext.industry && ` • ${engagement.clientContext.industry}`}
+                  {engagement.clientContext.companySize && ` • ${engagement.clientContext.companySize}`}
+                  {engagement.type === "lightweight" && (
+                    <span className="ml-2 inline-block px-1.5 py-0.5 rounded text-xs bg-blue-100 text-blue-700">Quick Assessment</span>
+                  )}
                 </p>
               </div>
 
@@ -109,7 +112,7 @@ export function EngagementList() {
 
               <div className="flex items-center gap-2">
                 <Briefcase className="h-4 w-4 text-muted-foreground" />
-                <span>{engagement.clientContext.erp}</span>
+                <span>{engagement.clientContext.erp || "—"}</span>
               </div>
 
               <div className="flex items-center gap-2">

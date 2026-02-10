@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { WorkflowStep } from "@/types/workflow";
+import { WorkflowStep, MaturityLevel } from "@/types/workflow";
 import { ToolMapping } from "@/types/engagement";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,8 @@ import { Flame, Zap, CheckCircle } from "lucide-react";
 interface StepDetailPanelProps {
   step: WorkflowStep;
   toolMappings?: ToolMapping[];
+  maturityRating?: MaturityLevel;
+  onRate?: (stepId: string, level: MaturityLevel) => void;
 }
 
 const intensityLabels: Record<string, string> = {
@@ -33,7 +35,33 @@ const intensityIcons = {
   moderate: CheckCircle,
 };
 
-export function StepDetailPanel({ step, toolMappings }: StepDetailPanelProps) {
+const maturityOptions: {
+  value: MaturityLevel;
+  label: string;
+  idle: string;
+  selected: string;
+}[] = [
+  {
+    value: "manual",
+    label: "Manual",
+    idle: "border-gray-200 text-gray-500 hover:border-red-300 hover:bg-red-50 hover:text-red-700",
+    selected: "border-red-500 bg-red-500 text-white shadow-sm",
+  },
+  {
+    value: "semi-automated",
+    label: "Semi-Auto",
+    idle: "border-gray-200 text-gray-500 hover:border-yellow-300 hover:bg-yellow-50 hover:text-yellow-700",
+    selected: "border-yellow-500 bg-yellow-500 text-white shadow-sm",
+  },
+  {
+    value: "automated",
+    label: "Automated",
+    idle: "border-gray-200 text-gray-500 hover:border-emerald-300 hover:bg-emerald-50 hover:text-emerald-700",
+    selected: "border-emerald-500 bg-emerald-500 text-white shadow-sm",
+  },
+];
+
+export function StepDetailPanel({ step, toolMappings, maturityRating, onRate }: StepDetailPanelProps) {
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,13 +81,36 @@ export function StepDetailPanel({ step, toolMappings }: StepDetailPanelProps) {
           </h2>
           <p className="text-muted-foreground">{step.description}</p>
         </div>
-        <Badge
-          variant="outline"
-          className={`${intensityBadgeColors[intensity]} text-sm ml-4 shrink-0`}
-        >
-          <Icon className="h-4 w-4 mr-1" />
-          {intensityLabels[intensity]}
-        </Badge>
+        <div className="flex items-center gap-3 ml-4 shrink-0">
+          {onRate && (
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-muted-foreground mr-1">Current State:</span>
+              {maturityOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => onRate(step.id, option.value)}
+                  className={`
+                    px-3 py-1.5 rounded-md text-xs font-medium border-2 transition-all duration-150 cursor-pointer
+                    ${
+                      maturityRating === option.value
+                        ? option.selected
+                        : option.idle
+                    }
+                  `}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          )}
+          <Badge
+            variant="outline"
+            className={`${intensityBadgeColors[intensity]} text-sm`}
+          >
+            <Icon className="h-4 w-4 mr-1" />
+            {intensityLabels[intensity]}
+          </Badge>
+        </div>
       </div>
 
       {/* Step Insight Panel */}

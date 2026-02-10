@@ -56,9 +56,9 @@ export function EngagementWorkspace({ engagementId }: EngagementWorkspaceProps) 
               {engagement.name}
             </h1>
             <p className="text-muted-foreground">
-              {engagement.clientContext.companyName} •{" "}
-              {engagement.clientContext.industry} •{" "}
-              {engagement.clientContext.companySize}
+              {engagement.clientContext.companyName}
+              {engagement.clientContext.industry && ` • ${engagement.clientContext.industry}`}
+              {engagement.clientContext.companySize && ` • ${engagement.clientContext.companySize}`}
             </p>
           </div>
 
@@ -70,12 +70,12 @@ export function EngagementWorkspace({ engagementId }: EngagementWorkspaceProps) 
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <span className="text-muted-foreground">ERP:</span>{" "}
-            <span className="font-medium">{engagement.clientContext.erp}</span>
+            <span className="font-medium">{engagement.clientContext.erp || "—"}</span>
           </div>
           <div>
             <span className="text-muted-foreground">Invoice Volume:</span>{" "}
             <span className="font-medium">
-              {engagement.clientContext.monthlyInvoiceVolume}
+              {engagement.clientContext.monthlyInvoiceVolume || "—"}
             </span>
           </div>
         </div>
@@ -153,9 +153,18 @@ export function EngagementWorkspace({ engagementId }: EngagementWorkspaceProps) 
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-muted-foreground">Steps:</span>
                         <span className="font-medium">
-                          {assessment.generatedWorkflow.length}
+                          {assessment.generatedWorkflow?.length || 0}
                         </span>
                       </div>
+
+                      {assessment.maturityRatings && Object.keys(assessment.maturityRatings).length > 0 && (
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-muted-foreground">Maturity Rated:</span>
+                          <span className="font-medium">
+                            {Object.keys(assessment.maturityRatings).length} steps
+                          </span>
+                        </div>
+                      )}
 
                       {assessment.score !== undefined && (
                         <div className="flex items-center justify-between text-sm">
