@@ -66,7 +66,7 @@ export function VendorProfileClient({ tool }: { tool: Tool }) {
     <div className="max-w-5xl mx-auto px-6 py-8">
       {/* Back nav */}
       <Link
-        href="/ap?tab=vendors"
+        href={`/${tool.category}?tab=vendors`}
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
       >
         <ArrowLeft className="h-4 w-4" />

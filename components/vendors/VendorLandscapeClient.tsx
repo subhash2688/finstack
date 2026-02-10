@@ -14,9 +14,10 @@ interface VendorLandscapeClientProps {
   tools: Tool[];
   embedded?: boolean;
   workflowSteps?: WorkflowStep[];
+  category?: string;
 }
 
-export function VendorLandscapeClient({ tools, embedded = false, workflowSteps }: VendorLandscapeClientProps) {
+export function VendorLandscapeClient({ tools, embedded = false, workflowSteps, category }: VendorLandscapeClientProps) {
   const [search, setSearch] = useState("");
   const [maturityFilter, setMaturityFilter] = useState<AIMaturity | null>(null);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -159,6 +160,7 @@ export function VendorLandscapeClient({ tools, embedded = false, workflowSteps }
           tools={tools}
           onRemove={(id) => setSelectedIds((prev) => prev.filter((x) => x !== id))}
           onClear={() => setSelectedIds([])}
+          category={category}
         />
       )}
     </div>

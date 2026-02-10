@@ -23,7 +23,7 @@ export function Header() {
             Engagements
           </Link>
           <Link
-            href="/#coming-soon"
+            href="/fpa"
             className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
           >
             FP&A

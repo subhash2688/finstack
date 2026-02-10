@@ -73,7 +73,7 @@ export function EngagementList() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => router.push(`/ap?engagement=${engagement.id}`)}
+                  onClick={() => router.push(`/${engagement.processAssessments[0]?.processId || 'ap'}?engagement=${engagement.id}`)}
                   title="Present to client"
                 >
                   <Eye className="h-4 w-4 mr-1" />

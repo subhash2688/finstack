@@ -1,0 +1,348 @@
+{
+  "id": "fpa",
+  "name": "FP&A",
+  "functionId": "finance",
+  "processId": "fpa",
+  "steps": [
+    {
+      "id": "annual-planning",
+      "title": "Annual Operating Plan & Target Setting",
+      "stepNumber": 1,
+      "abbreviation": "AOP",
+      "description": "Set annual financial targets aligned with corporate strategy and cascade goals across business units",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can analyze historical performance, market trends, and competitive benchmarks to generate data-driven target recommendations, reducing planning cycle time from months to weeks."
+      },
+      "painPoints": [
+        "Planning cycles stretch 3-4 months with endless back-and-forth between corporate and business units",
+        "Targets are often politically negotiated rather than analytically derived",
+        "Misalignment between strategic objectives and financial targets cascaded to operating teams",
+        "Prior-year actuals dominate target-setting instead of forward-looking market intelligence"
+      ],
+      "beforeAfter": {
+        "before": "FP&A teams spend 12-16 weeks building the annual plan in spreadsheets, manually consolidating inputs from 10+ business units. Targets are based on last year plus a growth factor, with limited connection to strategic priorities.",
+        "after": "AI ingests historical performance, market data, and strategic priorities to propose data-driven targets in days. Scenario engines let leadership pressure-test targets before cascading, cutting AOP cycle time by 60%."
+      },
+      "impactMetrics": {
+        "timeSavings": "60% shorter planning cycle",
+        "errorReduction": "75% fewer consolidation errors",
+        "costImpact": "Better target accuracy drives 5-10% improvement in plan attainment",
+        "throughput": "3x more scenario iterations during planning"
+      },
+      "insight": {
+        "whyItMatters": "The annual plan sets the financial framework for the entire organization — when targets are poorly set, every downstream forecast and variance report inherits that dysfunction.",
+        "typicalPain": "Most FP&A teams spend more time on the mechanics of consolidating spreadsheets than on the strategic analysis that makes the plan valuable. By the time the AOP is approved, it's already stale.",
+        "aiImpactVerdict": "AI won't replace the strategic judgment needed in target-setting, but it dramatically compresses the analytical grunt work and enables real scenario-based planning instead of political negotiation.",
+        "aiImpactIntensity": "strong"
+      },
+      "toolContextSentence": "These tools accelerate the annual planning process by automating consolidation, enabling scenario modeling, and connecting strategic objectives to financial targets."
+    },
+    {
+      "id": "budgeting",
+      "title": "Budget Creation & Allocation",
+      "stepNumber": 2,
+      "abbreviation": "Budget",
+      "description": "Build detailed budgets through bottom-up and top-down processes across all departments and cost centers",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can auto-generate budget baselines from historical spend patterns, flag unrealistic submissions, and reconcile top-down targets with bottom-up requests in real time."
+      },
+      "painPoints": [
+        "Hundreds of spreadsheets circulated via email with no version control or audit trail",
+        "Budget holders pad requests knowing they'll be cut, creating a game of inflated asks and arbitrary haircuts",
+        "Reconciling bottom-up department requests with top-down corporate targets requires weeks of iteration",
+        "Chart of accounts and cost center changes break prior-year comparisons mid-cycle"
+      ],
+      "beforeAfter": {
+        "before": "Budget owners fill in Excel templates emailed by FP&A. Analysts spend weeks consolidating, fixing broken formulas, and chasing late submissions. Final budgets are a compromise between padded requests and arbitrary cuts.",
+        "after": "AI pre-populates budgets from historical patterns and known commitments, flags outlier requests, and auto-reconciles bottom-up totals against top-down targets — turning weeks of spreadsheet wrangling into days of strategic review."
+      },
+      "impactMetrics": {
+        "timeSavings": "55% reduction in budgeting cycle time",
+        "errorReduction": "80% fewer formula and consolidation errors",
+        "costImpact": "3-5% more accurate budget allocations reduce waste",
+        "throughput": "4x more budget iterations before lock"
+      },
+      "insight": {
+        "whyItMatters": "The budget is the financial contract between the business and its stakeholders — when the process is broken, the result is a number everyone agreed to but no one believes in.",
+        "typicalPain": "FP&A teams report spending 70% of budgeting effort on data collection and consolidation, leaving only 30% for the analysis and strategic discussion that actually improves the budget.",
+        "aiImpactVerdict": "AI is transforming budgeting from a data-collection exercise into a strategic allocation process. The biggest wins come from auto-populating baselines and enabling real-time reconciliation between top-down and bottom-up views.",
+        "aiImpactIntensity": "strong"
+      },
+      "toolContextSentence": "These tools eliminate spreadsheet chaos from budgeting by centralizing inputs, auto-generating baselines, and providing real-time reconciliation of top-down targets with bottom-up requests."
+    },
+    {
+      "id": "forecasting",
+      "title": "Rolling Forecasting",
+      "stepNumber": 3,
+      "abbreviation": "Forecast",
+      "description": "Produce continuous rolling forecasts that replace static annual budgets with dynamic forward-looking projections",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI-driven forecasting can incorporate real-time signals — pipeline data, macroeconomic indicators, operational metrics — to produce continuously updated forecasts that outperform manual models by 25-40% on accuracy."
+      },
+      "painPoints": [
+        "Monthly re-forecasting consumes 5-7 days of FP&A capacity every cycle with diminishing analytical return",
+        "Forecasts are biased toward recent actuals rather than incorporating leading indicators and external signals",
+        "Business partners treat the forecast as a commitment rather than a best estimate, incentivizing sandbagging",
+        "Static annual budgets become irrelevant by Q2, but the organization still manages to them instead of rolling forecasts"
+      ],
+      "beforeAfter": {
+        "before": "FP&A analysts manually collect inputs from business partners, update spreadsheet models line by line, and produce a forecast that's already stale by the time it's presented. The process repeats monthly with most effort spent on data gathering, not insight generation.",
+        "after": "AI continuously ingests actuals, pipeline data, and external signals to auto-generate rolling forecasts. Analysts focus on reviewing AI-flagged variances and providing judgment on inflection points — not updating cells."
+      },
+      "impactMetrics": {
+        "timeSavings": "70% reduction in forecast preparation time",
+        "errorReduction": "25-40% improvement in forecast accuracy",
+        "costImpact": "Better forecasts enable 10-15% working capital optimization",
+        "throughput": "Continuous forecasting vs. monthly snapshots"
+      },
+      "insight": {
+        "whyItMatters": "Forecasting is the heartbeat of FP&A — it's how the organization sees around corners. When forecasts are slow or inaccurate, leadership is flying blind and capital allocation suffers.",
+        "typicalPain": "Most FP&A teams can tell you what happened last month in great detail, but struggle to predict next quarter with confidence. The median forecast error at most companies is 10-15% at the quarterly level — essentially random noise.",
+        "aiImpactVerdict": "This is the single highest-impact AI use case in FP&A. Machine learning forecasting is not speculative — it's proven in production at thousands of companies and consistently outperforms human-built models on accuracy and speed.",
+        "aiImpactIntensity": "fire"
+      },
+      "toolContextSentence": "These tools replace manual forecast cycles with AI-driven continuous projections that incorporate real-time data signals and learn from historical accuracy patterns."
+    },
+    {
+      "id": "variance-analysis",
+      "title": "Variance Analysis & Commentary",
+      "stepNumber": 4,
+      "abbreviation": "Variance",
+      "description": "Analyze actual results against budget and forecast, identify root causes, and generate executive-ready narrative commentary",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can automatically decompose variances into root-cause drivers, generate natural-language commentary, and surface the 3-5 variances that actually matter from hundreds of line items."
+      },
+      "painPoints": [
+        "Analysts spend days producing variance commentary that leadership skims in minutes",
+        "Root-cause analysis is surface-level — 'revenue was down because sales missed' without actionable decomposition",
+        "Materiality thresholds are applied inconsistently, leading to either information overload or missed signals",
+        "Commentary is backward-looking and descriptive rather than forward-looking and prescriptive"
+      ],
+      "beforeAfter": {
+        "before": "FP&A analysts manually compare actuals to budget across hundreds of line items, write narrative explanations in Word documents, and chase business partners for color commentary — often missing the real story in the noise.",
+        "after": "AI auto-decomposes variances into volume, price, mix, and timing drivers, generates draft commentary in natural language, and highlights the 5 variances that explain 80% of the total deviation — letting analysts focus on insight, not arithmetic."
+      },
+      "impactMetrics": {
+        "timeSavings": "65% faster variance reporting cycle",
+        "errorReduction": "85% of variances auto-decomposed to root cause",
+        "costImpact": "Faster variance identification enables $2-5M annualized corrective action acceleration",
+        "throughput": "10x more granular analysis without additional headcount"
+      },
+      "insight": {
+        "whyItMatters": "Variance analysis is where FP&A earns its seat at the table — or loses it. When the CFO asks 'why did we miss?' and the answer takes a week to produce, the function is a reporting shop, not a strategic partner.",
+        "typicalPain": "80% of variance analysis effort goes into computing and formatting the numbers. By the time the commentary is written, the business has moved on. Worse, most commentary explains what happened without recommending what to do next.",
+        "aiImpactVerdict": "AI variance analysis is a game-changer for FP&A productivity. Auto-decomposition and natural-language generation free analysts from arithmetic drudgery and let them focus on the 'so what' and 'now what' that leadership actually needs.",
+        "aiImpactIntensity": "fire"
+      },
+      "toolContextSentence": "These tools automate variance decomposition and commentary generation, letting FP&A teams shift from computing differences to explaining drivers and recommending actions."
+    },
+    {
+      "id": "scenario-planning",
+      "title": "Scenario & What-If Analysis",
+      "stepNumber": 5,
+      "abbreviation": "Scenarios",
+      "description": "Model multiple business scenarios, stress-test assumptions, and quantify the financial impact of strategic decisions",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can generate and evaluate thousands of scenarios in minutes, identify the variables with highest sensitivity, and recommend optimal decision paths under uncertainty."
+      },
+      "painPoints": [
+        "Scenario modeling is limited to 2-3 cases (best/base/worst) because spreadsheets can't handle more complexity",
+        "Assumptions are buried in cell formulas, making it impossible to audit or stress-test them systematically",
+        "Interdependencies between variables (e.g., price increases reducing volume) are rarely modeled correctly",
+        "Leadership requests ad-hoc scenarios faster than FP&A can build them, creating a permanent backlog"
+      ],
+      "beforeAfter": {
+        "before": "FP&A builds 3 scenarios in Excel by manually toggling assumptions and copying sheets. Each new scenario request from leadership takes 2-3 days to build. Sensitivity analysis is limited to one variable at a time.",
+        "after": "AI runs Monte Carlo simulations across thousands of scenarios, identifies the 5 assumptions that drive 80% of outcome variance, and produces interactive sensitivity dashboards that leadership can explore in real time."
+      },
+      "impactMetrics": {
+        "timeSavings": "80% faster scenario generation",
+        "errorReduction": "1000x more scenarios evaluated per decision",
+        "costImpact": "Better scenario analysis improves capital allocation ROI by 10-20%",
+        "throughput": "Real-time scenario exploration vs. multi-day request cycles"
+      },
+      "insight": {
+        "whyItMatters": "In a volatile macro environment, the ability to quickly model 'what if interest rates rise 200bps?' or 'what if we lose our top customer?' is the difference between proactive leadership and reactive firefighting.",
+        "typicalPain": "FP&A teams know they should do more scenario planning but lack the bandwidth. The typical company models 3 scenarios per year during AOP and then never revisits them, leaving leadership exposed to unquantified risks.",
+        "aiImpactVerdict": "AI scenario planning is the most strategically valuable FP&A capability you can build. It transforms the function from backward-looking reporting to forward-looking decision support — which is what every CFO says they want.",
+        "aiImpactIntensity": "fire"
+      },
+      "toolContextSentence": "These tools enable rapid multi-scenario modeling and sensitivity analysis, transforming FP&A from a reporting function into a real-time decision support engine."
+    },
+    {
+      "id": "financial-modeling",
+      "title": "Financial Modeling",
+      "stepNumber": 6,
+      "abbreviation": "Modeling",
+      "description": "Build and maintain financial models for M&A analysis, business cases, pricing decisions, and long-range strategic planning",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can accelerate model construction, audit formula integrity, auto-populate assumptions from market data, and flag structural errors before they compound through the model."
+      },
+      "painPoints": [
+        "Critical business decisions depend on models built by one person with no documentation or peer review",
+        "Models grow in complexity over years until they become unmaintainable 'Frankenstein' spreadsheets",
+        "Assumption sourcing is manual — analysts spend hours searching for market data, comps, and benchmarks",
+        "Model audit and error-checking is done visually, missing circular references and broken links"
+      ],
+      "beforeAfter": {
+        "before": "Senior analysts spend 2-3 weeks building financial models from scratch for each business case. Models are reviewed by walking through tabs with a colleague. Assumptions are sourced manually from equity research, industry reports, and internal data.",
+        "after": "AI generates model scaffolding from templates, auto-populates market assumptions from live data feeds, audits formula integrity in real time, and documents model logic as it's built — cutting build time by 50% with higher quality."
+      },
+      "impactMetrics": {
+        "timeSavings": "50% faster model construction",
+        "errorReduction": "70% fewer formula and structural errors",
+        "costImpact": "Better models improve deal evaluation accuracy by 15-20%",
+        "throughput": "2x more models delivered per analyst per quarter"
+      },
+      "insight": {
+        "whyItMatters": "Financial models are the analytical backbone of every major business decision — M&A, capex, pricing, restructuring. When a model is wrong, the decision is wrong, and the cost can be measured in millions.",
+        "typicalPain": "Every FP&A team has horror stories about the model that had a circular reference nobody caught, or the $50M business case built on an assumption pulled from a 3-year-old industry report. The risk is real and underappreciated.",
+        "aiImpactVerdict": "AI is a strong co-pilot for financial modeling — excellent at audit, assumption population, and template generation. But the strategic judgment of what to model and how to structure it remains a human skill for now.",
+        "aiImpactIntensity": "strong"
+      },
+      "toolContextSentence": "These tools augment financial modeling with AI-powered scaffolding, real-time formula audit, and automated assumption sourcing from market data."
+    },
+    {
+      "id": "management-reporting",
+      "title": "Management Reporting & Dashboards",
+      "stepNumber": 7,
+      "abbreviation": "Mgmt Rpt",
+      "description": "Produce executive dashboards, KPI packs, flash reports, and board-ready financial summaries on a recurring cadence",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can auto-generate management reports with natural-language insights, dynamically highlight the metrics that matter most this period, and personalize reporting views for each executive stakeholder."
+      },
+      "painPoints": [
+        "FP&A spends 3-5 days per month producing recurring reports that could be auto-generated",
+        "Executives receive static PDF decks when they need interactive, drill-down capability",
+        "Every stakeholder wants a slightly different cut of the same data, creating a report proliferation problem",
+        "KPI definitions are inconsistent across reports — different teams calculate the same metric differently"
+      ],
+      "beforeAfter": {
+        "before": "Analysts manually pull data from multiple systems, build PowerPoint decks, and format charts for each executive audience. Reports are distributed as static PDFs that are outdated by the time they're read.",
+        "after": "AI auto-generates personalized dashboards from live data, highlights anomalies and trends worth noting, and produces natural-language summaries — turning FP&A from report producers into insight curators."
+      },
+      "impactMetrics": {
+        "timeSavings": "70% reduction in report production time",
+        "errorReduction": "90% fewer copy-paste and formatting errors",
+        "costImpact": "Faster executive insights enable 2-3 day faster decision cycles",
+        "throughput": "5x more reporting views without additional effort"
+      },
+      "insight": {
+        "whyItMatters": "Management reporting is how the CFO and executive team see the business. When reports are slow, stale, or hard to interpret, decisions are delayed and trust in finance erodes.",
+        "typicalPain": "FP&A teams estimate 40-50% of their time goes to recurring reporting — time they'd rather spend on analysis and business partnering. Yet cutting corners on reporting quality is not an option when the audience is the C-suite.",
+        "aiImpactVerdict": "AI-powered reporting is a massive productivity unlock for FP&A. Auto-generated insights and anomaly detection are table-stakes at leading organizations. The differentiator is personalization — serving each executive the view they need without manual effort.",
+        "aiImpactIntensity": "strong"
+      },
+      "toolContextSentence": "These tools automate recurring report production and enrich dashboards with AI-generated insights, freeing FP&A to focus on analysis instead of formatting."
+    },
+    {
+      "id": "revenue-planning",
+      "title": "Revenue Planning & Analysis",
+      "stepNumber": 8,
+      "abbreviation": "Revenue",
+      "description": "Forecast revenue by product, segment, and geography using pipeline data, pricing analysis, and market intelligence",
+      "aiOpportunity": {
+        "impact": "high",
+        "description": "AI can combine CRM pipeline data, historical win rates, pricing elasticity models, and macroeconomic signals to produce revenue forecasts that are 20-30% more accurate than judgment-based methods."
+      },
+      "painPoints": [
+        "Revenue forecasts rely heavily on sales team judgment, which is systematically biased toward optimism",
+        "Pipeline-to-revenue conversion rates are applied as static averages rather than deal-specific probabilities",
+        "Pricing impact analysis is done ad-hoc — no systematic way to model how price changes affect volume and mix",
+        "Subscription revenue, usage-based revenue, and one-time revenue require different models but are often forced into one framework"
+      ],
+      "beforeAfter": {
+        "before": "FP&A takes the sales forecast at face value or applies a blanket haircut. Pipeline conversion is modeled with static stage-based probabilities. Pricing analysis is a spreadsheet exercise disconnected from demand elasticity.",
+        "after": "AI scores every deal in the pipeline with ML-derived close probabilities, models revenue by cohort and product line, and simulates pricing scenarios with elasticity curves — giving FP&A a revenue forecast they can defend."
+      },
+      "impactMetrics": {
+        "timeSavings": "60% faster revenue forecast cycle",
+        "errorReduction": "20-30% improvement in revenue forecast accuracy",
+        "costImpact": "Accurate revenue forecasts improve resource allocation by 10-15%",
+        "throughput": "Weekly revenue signal updates vs. monthly forecasts"
+      },
+      "insight": {
+        "whyItMatters": "Revenue is the most watched line on the P&L — and the hardest to forecast accurately. When revenue misses, everything downstream breaks: earnings, guidance, resource plans, and investor confidence.",
+        "typicalPain": "FP&A teams are caught between sales leadership (who are always bullish) and the CFO (who wants conservative guidance). Without independent analytical tools, FP&A becomes a messenger rather than a check on revenue assumptions.",
+        "aiImpactVerdict": "AI revenue forecasting is one of the most proven and highest-ROI applications in FP&A. Companies using ML-based pipeline scoring consistently outperform judgment-based forecasts, especially at the quarterly call level.",
+        "aiImpactIntensity": "strong"
+      },
+      "toolContextSentence": "These tools combine pipeline intelligence, pricing analytics, and ML-driven forecasting to produce revenue projections FP&A can stand behind."
+    },
+    {
+      "id": "workforce-planning-fpa",
+      "title": "Workforce & Headcount Planning",
+      "stepNumber": 9,
+      "abbreviation": "Workforce",
+      "description": "Plan headcount, model fully-loaded compensation costs, and track workforce productivity metrics across the organization",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can model compensation scenarios, predict attrition-driven hiring needs, and link headcount plans to revenue and capacity models for integrated workforce planning."
+      },
+      "painPoints": [
+        "Headcount is the largest expense line but planned in disconnected spreadsheets separate from the financial plan",
+        "Fully-loaded cost calculations (benefits, taxes, equipment, facilities) are manually maintained and frequently wrong",
+        "Attrition assumptions are flat percentages that don't reflect team-level or role-level variation",
+        "Hiring timelines are modeled as instant starts rather than reflecting realistic ramp curves and backfill delays"
+      ],
+      "beforeAfter": {
+        "before": "FP&A maintains a headcount tracker in Excel that HR updates quarterly. Fully-loaded costs are estimated with rough multipliers. When a hiring freeze is announced, there's no model to show the P&L impact by team or timeline.",
+        "after": "AI integrates HRIS data with financial plans, models fully-loaded costs by role and location, predicts attrition by team, and simulates the P&L impact of hiring scenarios — including ramp time and backfill delays."
+      },
+      "impactMetrics": {
+        "timeSavings": "50% faster headcount planning cycles",
+        "errorReduction": "60% more accurate fully-loaded cost estimates",
+        "costImpact": "Better workforce modeling saves 3-5% on people-related spend",
+        "throughput": "Real-time headcount scenario modeling vs. quarterly updates"
+      },
+      "insight": {
+        "whyItMatters": "People costs are typically 60-70% of operating expense. Getting headcount planning wrong doesn't just blow the budget — it means either overstaffing (wasted spend) or understaffing (missed revenue).",
+        "typicalPain": "FP&A and HR operate in parallel universes. FP&A has a headcount budget; HR has a hiring plan. They rarely reconcile until month-end close reveals the gap. Meanwhile, managers hire against stale approvals.",
+        "aiImpactVerdict": "AI adds meaningful value to workforce planning through attrition prediction and integrated cost modeling. The challenge is data quality — most companies don't have clean, connected HR and finance data to feed the models.",
+        "aiImpactIntensity": "moderate"
+      },
+      "toolContextSentence": "These tools bridge the gap between HR and finance by integrating headcount data into financial models with AI-driven attrition prediction and fully-loaded cost calculations."
+    },
+    {
+      "id": "board-reporting",
+      "title": "Board & Investor Reporting",
+      "stepNumber": 10,
+      "abbreviation": "Board",
+      "description": "Prepare board packages, investor updates, earnings materials, and regulatory financial filings with executive-grade precision",
+      "aiOpportunity": {
+        "impact": "medium",
+        "description": "AI can auto-draft board narratives from financial data, ensure consistency across documents, and benchmark performance metrics against peers and prior periods."
+      },
+      "painPoints": [
+        "Board deck preparation consumes senior FP&A time for 1-2 weeks every quarter",
+        "Data discrepancies between the board deck, earnings script, and investor presentation erode credibility",
+        "Narrative sections are written from scratch each quarter despite following the same structure",
+        "Benchmarking against peers and prior periods is manual and inconsistently applied"
+      ],
+      "beforeAfter": {
+        "before": "The CFO's team manually assembles board packages from multiple data sources, writes narrative commentary from scratch, and spends days on formatting and cross-checking numbers across documents. Last-minute changes cascade through 50+ slides.",
+        "after": "AI auto-generates board narratives from live financial data, ensures number consistency across all documents, benchmarks KPIs against peers, and updates all downstream materials when a number changes — reducing prep from weeks to days."
+      },
+      "impactMetrics": {
+        "timeSavings": "60% reduction in board prep time",
+        "errorReduction": "95% fewer cross-document inconsistencies",
+        "costImpact": "Senior FP&A time redeployed to strategic analysis worth $50-100K annually",
+        "throughput": "3x faster turnaround on board material revisions"
+      },
+      "insight": {
+        "whyItMatters": "Board and investor materials represent the company's financial story to its most important stakeholders. A single inconsistency can trigger uncomfortable questions and erode trust that takes quarters to rebuild.",
+        "typicalPain": "Board prep is the most dreaded recurring task in FP&A. It demands perfection on formatting, narrative quality, and data accuracy — all under time pressure with last-minute changes from multiple executives.",
+        "aiImpactVerdict": "AI is well-suited to the repetitive structure of board reporting — auto-generating narratives, ensuring consistency, and benchmarking. The human value-add is in the strategic framing and anticipating board questions, not in building slides.",
+        "aiImpactIntensity": "moderate"
+      },
+      "toolContextSentence": "These tools automate the mechanical aspects of board and investor reporting — data assembly, narrative drafting, and cross-document consistency — freeing senior FP&A for strategic storytelling."
+    }
+  ]
+}

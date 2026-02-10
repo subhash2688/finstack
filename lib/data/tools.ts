@@ -1,10 +1,12 @@
 import { Tool, Category, AIMaturity, CompanySize, FitGrade } from '@/types/tool';
 import apTools from '@/data/tools/ap-tools.json';
 import arTools from '@/data/tools/ar-tools.json';
+import fpaTools from '@/data/tools/fpa-tools.json';
 
 const allTools: Tool[] = [
   ...(apTools as Tool[]),
   ...(arTools as Tool[]),
+  ...(fpaTools as Tool[]),
 ];
 
 export interface ToolFilters {

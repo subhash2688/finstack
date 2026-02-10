@@ -1,6 +1,8 @@
 "use client";
 
-import { Tool } from "@/types/tool";
+import { useMemo } from "react";
+import { Tool, Category } from "@/types/tool";
+import { WorkflowStep } from "@/types/workflow";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,19 +24,6 @@ import {
   Users,
 } from "lucide-react";
 
-const STEPS = [
-  { id: "invoice-capture", label: "Invoice Capture" },
-  { id: "data-validation", label: "Data Validation" },
-  { id: "po-matching", label: "PO Matching" },
-  { id: "coding-gl-allocation", label: "GL Coding" },
-  { id: "approval-routing", label: "Approval Routing" },
-  { id: "exception-handling", label: "Exception Mgmt" },
-  { id: "fraud-duplicate-detection", label: "Fraud Detection" },
-  { id: "payment-scheduling", label: "Payment Scheduling" },
-  { id: "payment-execution", label: "Payment Execution" },
-  { id: "reconciliation-reporting", label: "Reconciliation" },
-];
-
 const aiMaturityLabels: Record<string, string> = {
   "ai-native": "AI-Native",
   "ai-enabled": "AI-Enabled",
@@ -53,13 +42,29 @@ const effortColors: Record<string, string> = {
   high: "text-red-600",
 };
 
-export function VendorComparisonClient({ tools }: { tools: Tool[] }) {
+interface VendorComparisonClientProps {
+  tools: Tool[];
+  workflowSteps?: WorkflowStep[];
+  category?: Category;
+}
+
+export function VendorComparisonClient({ tools, workflowSteps, category }: VendorComparisonClientProps) {
   const colCount = tools.length;
+
+  const steps = useMemo(() => {
+    if (workflowSteps && workflowSteps.length > 0) {
+      return workflowSteps.map((s) => ({ id: s.id, label: s.abbreviation || s.title }));
+    }
+    // Fallback: derive from tools' fitScores
+    const stepIds = new Set<string>();
+    tools.forEach((t) => t.fitScores?.forEach((f) => stepIds.add(f.stepId)));
+    return Array.from(stepIds).map((id) => ({ id, label: id }));
+  }, [workflowSteps, tools]);
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-8">
       <Link
-        href="/ap?tab=vendors"
+        href={`/${category || 'ap'}?tab=vendors`}
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -147,7 +152,7 @@ export function VendorComparisonClient({ tools }: { tools: Tool[] }) {
 
       {/* ─── Fit Scores by Step ─── */}
       <ComparisonSection title="Workflow Fit Scores">
-        {STEPS.map((step) => (
+        {steps.map((step) => (
           <ComparisonRow key={step.id} label={step.label}>
             {tools.map((t) => {
               const fs = t.fitScores?.find((f) => f.stepId === step.id);
@@ -168,7 +173,7 @@ export function VendorComparisonClient({ tools }: { tools: Tool[] }) {
 
       {/* ─── Step Coverage ─── */}
       <ComparisonSection title="Step Coverage">
-        {STEPS.map((step) => (
+        {steps.map((step) => (
           <ComparisonRow key={step.id} label={step.label}>
             {tools.map((t) => {
               const covered = t.workflowSteps.includes(step.id);
@@ -187,7 +192,7 @@ export function VendorComparisonClient({ tools }: { tools: Tool[] }) {
         <ComparisonRow label="Total Steps">
           {tools.map((t) => (
             <span key={t.id} className="text-sm font-semibold">
-              {t.workflowSteps.length} / 10
+              {t.workflowSteps.length} / {steps.length}
             </span>
           ))}
         </ComparisonRow>

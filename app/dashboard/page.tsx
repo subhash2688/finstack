@@ -89,11 +89,11 @@ export default function DashboardPage() {
           const activeCount = func.processes.filter((p) => p.available).length;
 
           // Group processes for display
-          const groups = new Map<string, string[]>();
+          const groups = new Map<string, typeof func.processes>();
           func.processes.forEach((p) => {
             const group = p.group || "Processes";
             if (!groups.has(group)) groups.set(group, []);
-            groups.get(group)!.push(p.name);
+            groups.get(group)!.push(p);
           });
 
           const card = (
@@ -101,7 +101,7 @@ export default function DashboardPage() {
               className={`
                 bg-white border rounded-xl p-8 h-full relative overflow-hidden transition-all
                 ${hasActive
-                  ? "border-gray-200 hover:shadow-lg hover:border-[#00B140]/30 cursor-pointer"
+                  ? "border-gray-200"
                   : "border-gray-100 opacity-70"
                 }
               `}
@@ -122,7 +122,7 @@ export default function DashboardPage() {
 
               {/* Process groups */}
               <div className="space-y-3 mb-6">
-                {Array.from(groups.entries()).map(([group, names]) => (
+                {Array.from(groups.entries()).map(([group, processes]) => (
                   <div key={group}>
                     {groups.size > 1 && (
                       <p className="text-[10px] font-semibold text-gray-300 uppercase tracking-wider mb-1">
@@ -130,14 +130,24 @@ export default function DashboardPage() {
                       </p>
                     )}
                     <div className="flex flex-wrap gap-1.5">
-                      {names.map((name) => (
-                        <span
-                          key={name}
-                          className="text-xs px-2 py-0.5 rounded bg-gray-50 text-gray-400 border border-gray-100"
-                        >
-                          {name}
-                        </span>
-                      ))}
+                      {processes.map((proc) =>
+                        proc.available ? (
+                          <Link
+                            key={proc.id}
+                            href={`/${proc.id}`}
+                            className="text-xs px-2 py-0.5 rounded bg-[#00B140]/10 text-[#00B140] border border-[#00B140]/20 font-medium hover:bg-[#00B140]/20 transition-colors"
+                          >
+                            {proc.name}
+                          </Link>
+                        ) : (
+                          <span
+                            key={proc.id}
+                            className="text-xs px-2 py-0.5 rounded bg-gray-50 text-gray-400 border border-gray-100"
+                          >
+                            {proc.name}
+                          </span>
+                        )
+                      )}
                     </div>
                   </div>
                 ))}
@@ -150,8 +160,8 @@ export default function DashboardPage() {
                     <span className="text-xs text-gray-400">
                       {activeCount} of {processCount} live
                     </span>
-                    <span className="flex items-center text-[#00B140] font-semibold text-sm gap-1">
-                      Explore {activeProcess!.name} <ChevronRight className="h-4 w-4" />
+                    <span className="flex items-center text-[#00B140] font-medium text-xs gap-1">
+                      Click a process above to explore
                     </span>
                   </div>
                 ) : (
@@ -167,14 +177,6 @@ export default function DashboardPage() {
               </div>
             </div>
           );
-
-          if (hasActive) {
-            return (
-              <Link key={func.id} href={`/${activeProcess!.id}`} className="group">
-                {card}
-              </Link>
-            );
-          }
 
           return <div key={func.id}>{card}</div>;
         })}

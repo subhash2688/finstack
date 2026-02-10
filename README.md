@@ -1,74 +1,113 @@
-# FinStack Navigator
+# Lighthouse
 
-AI-powered finance tech stack discovery platform for management consultants.
+AI-powered process intelligence platform for consultants and finance teams. Explore workflows, assess maturity, compare vendors, and get AI-powered recommendations across AP, AR, and FP&A.
 
-## Quick Start
+## Getting Started
+
+### Prerequisites
+- Node.js 18+
+- npm 9+
+
+### Installation
 
 ```bash
-# Install dependencies
 npm install
+```
 
-# Run development server
+### Environment Variables
+
+Create a `.env.local` file:
+
+```env
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+The API key is required for:
+- AI Copilot chat (streaming responses)
+- Semantic search across workflow steps
+- AI-powered workflow generation for engagements
+
+### Development
+
+```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the app.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Features
+### Build
 
-- **Discovery-First Experience**: Browse AI tools for finance functions immediately
-- **Accounts Payable Workflow**: 8 workflow steps with 12 quality tools
-- **Smart Filtering**: Filter by company size, industry, AI maturity, and search
-- **Professional UI**: Client-ready interface with detailed tool information
-- **Mobile Responsive**: Works seamlessly on all devices
+```bash
+npm run build
+npm start
+```
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router, TypeScript)
-- **Styling**: Tailwind CSS + shadcn/ui
-- **Data**: JSON-based (static generation)
-- **Deployment**: Vercel-ready
+| Layer | Technology |
+|-------|-----------|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| UI Components | shadcn/ui + Radix UI |
+| Icons | Lucide React |
+| AI (Chat) | Vercel AI SDK + `@ai-sdk/anthropic` |
+| AI (Generation) | `@anthropic-ai/sdk` |
+| Storage | localStorage (client-side) |
 
 ## Project Structure
 
 ```
-finstack-navigator/
-├── app/                    # Next.js app router pages
-├── components/             # React components
-│   ├── ui/                # shadcn/ui components
-│   ├── layout/            # Header, Footer
-│   ├── workflow/          # Workflow visualization
-│   └── tools/             # Tool discovery components
-├── lib/                   # Data access and utilities
-├── types/                 # TypeScript type definitions
-└── data/                  # JSON seed data
+app/
+  layout.tsx              # Root layout with sidebar + copilot
+  page.tsx                # Homepage
+  dashboard/              # Dashboard with function cards
+  [processId]/            # Dynamic process pages (AP, AR, FP&A)
+  engagements/            # Engagement CRUD
+  vendors/                # Vendor profiles + comparison
+  api/
+    chat/route.ts         # AI copilot streaming endpoint
+    search/route.ts       # Semantic search endpoint
+    workflows/generate/   # AI workflow generation
+
+components/
+  chat/                   # AI copilot (CopilotButton, CopilotPanel)
+  workflow/               # Process explorer components
+  engagement/             # Engagement management
+  tools/                  # Vendor cards, filters, modals
+  vendors/                # Vendor landscape, comparison, profiles
+  layout/                 # Sidebar, Footer
+  ui/                     # shadcn/ui primitives
+
+lib/
+  ai/                     # AI utilities (Anthropic client, copilot context)
+  data/                   # Data loaders (workflows, tools)
+  storage/                # localStorage persistence
+
+data/
+  workflows/              # AP, AR, FP&A workflow JSON
+  tools/                  # Vendor data JSON (AP, AR, FP&A)
+
+types/                    # TypeScript type definitions
 ```
 
-## Roadmap
+## Features
 
-### Phase 2 (Post-MVP)
-- Add FP&A function
-- Add Close Management function
-- Expand tool count to 20+ per category
-
-### Phase 3
-- AI Advisor with Claude integration
-- Context-aware recommendations
-- Chat interface
-
-### Phase 4
-- PDF export functionality
-- Tool comparison view
-- Advanced analytics
+- **Process Explorer** — Visual pipeline with AI impact analysis per step
+- **Maturity Assessment** — Rate steps, get a scorecard, auto-save to engagements
+- **Vendor Landscape** — Heatmap, profiles, side-by-side comparison
+- **AI Copilot** — Ask questions about vendors, workflows, and processes
+- **Engagement Management** — Create client assessments with AI-generated workflows
 
 ## Deploy to Vercel
 
 ```bash
-# Install Vercel CLI
 npm i -g vercel
-
-# Deploy
 vercel
 ```
 
 Or connect your GitHub repository to Vercel for automatic deployments.
+
+## License
+
+Private — all rights reserved.

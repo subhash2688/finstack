@@ -1,0 +1,874 @@
+[
+  {
+    "id": "anaplan",
+    "name": "Anaplan",
+    "vendor": "Anaplan",
+    "category": "fpa",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["enterprise"],
+    "industries": ["Technology", "Manufacturing", "Financial Services", "Retail", "Healthcare"],
+    "painPoints": [
+      "Disconnected planning silos across departments",
+      "Inability to model complex business scenarios at scale",
+      "Slow budgeting cycles with too many spreadsheets"
+    ],
+    "integrations": ["SAP", "Oracle", "Salesforce", "Workday", "NetSuite"],
+    "pricing": {
+      "model": "Per user + platform fee",
+      "startingPrice": "$150K+ annually",
+      "notes": "Enterprise-only pricing, workspace-based licensing"
+    },
+    "keyFeatures": [
+      "Hyperblock multi-dimensional modeling engine",
+      "Connected planning across finance, sales, and supply chain",
+      "PlanIQ predictive forecasting with machine learning",
+      "Scenario planning with unlimited what-if versions",
+      "Enterprise-grade security and audit trail"
+    ],
+    "workflowSteps": ["annual-planning", "budgeting", "forecasting", "scenario-planning", "financial-modeling", "revenue-planning", "workforce-planning-fpa", "board-reporting"],
+    "tagline": "Connected Planning for the Enterprise",
+    "description": "Anaplan is the enterprise-grade connected planning platform that unifies planning across finance, sales, and operations. Its proprietary Hyperblock engine enables complex multi-dimensional models at massive scale, making it the go-to choice for Fortune 500 companies tackling cross-functional planning.",
+    "website": "https://www.anaplan.com",
+    "founded": "2006",
+    "headquarters": "San Francisco, CA",
+    "employeeCount": "~2,500",
+    "overallFitScore": 90,
+    "fitScores": [
+      { "stepId": "annual-planning", "score": 92, "grade": "best-fit" },
+      { "stepId": "budgeting", "score": 88, "grade": "best-fit" },
+      { "stepId": "forecasting", "score": 85, "grade": "best-fit" },
+      { "stepId": "scenario-planning", "score": 95, "grade": "best-fit" },
+      { "stepId": "financial-modeling", "score": 90, "grade": "best-fit" },
+      { "stepId": "revenue-planning", "score": 86, "grade": "best-fit" },
+      { "stepId": "workforce-planning-fpa", "score": 82, "grade": "best-fit" },
+      { "stepId": "board-reporting", "score": 72, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "2,000+",
+      "revenue": "$700M ARR",
+      "yoyGrowth": "20%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["Coca-Cola", "Visa", "Dell", "Salesforce"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "16-24 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — requires mapping all planning models, hierarchies, and historical data",
+      "changeManagement": "High — model builders need extensive training; end-user adoption requires structured rollout"
+    }
+  },
+  {
+    "id": "workday-adaptive-planning",
+    "name": "Workday Adaptive Planning",
+    "vendor": "Workday",
+    "category": "fpa",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Technology", "Financial Services", "Healthcare", "Professional Services", "Education"],
+    "painPoints": [
+      "Cumbersome budget consolidation across business units",
+      "Forecasts that are outdated by the time they're published",
+      "Inability to do rolling forecasts efficiently"
+    ],
+    "integrations": ["Workday HCM", "Workday Financials", "Salesforce", "NetSuite", "SAP"],
+    "pricing": {
+      "model": "Per user tiered licensing",
+      "startingPrice": "$80K+ annually",
+      "notes": "Bundled pricing available for Workday HCM/Financials customers"
+    },
+    "keyFeatures": [
+      "Elastic Hypercube Technology for real-time modeling",
+      "Native integration with Workday HCM and Financials",
+      "Collaborative workflow with approval chains",
+      "AI-assisted anomaly detection in forecasts",
+      "Interactive dashboards with drill-down capabilities"
+    ],
+    "workflowSteps": ["annual-planning", "budgeting", "forecasting", "variance-analysis", "scenario-planning", "workforce-planning-fpa", "management-reporting", "board-reporting"],
+    "tagline": "Cloud-Native Planning for a Changing World",
+    "description": "Workday Adaptive Planning delivers cloud-native FP&A with powerful modeling, rolling forecasts, and deep integration into the Workday ecosystem. Its intuitive interface and Elastic Hypercube Technology make it a top choice for mid-market and enterprise organizations seeking agility in planning.",
+    "website": "https://www.workday.com/en-us/products/adaptive-planning",
+    "founded": "2003",
+    "headquarters": "Pleasanton, CA",
+    "employeeCount": "~18,000",
+    "overallFitScore": 87,
+    "fitScores": [
+      { "stepId": "annual-planning", "score": 88, "grade": "best-fit" },
+      { "stepId": "budgeting", "score": 90, "grade": "best-fit" },
+      { "stepId": "forecasting", "score": 87, "grade": "best-fit" },
+      { "stepId": "variance-analysis", "score": 80, "grade": "best-fit" },
+      { "stepId": "scenario-planning", "score": 82, "grade": "best-fit" },
+      { "stepId": "workforce-planning-fpa", "score": 92, "grade": "best-fit" },
+      { "stepId": "management-reporting", "score": 78, "grade": "good-fit" },
+      { "stepId": "board-reporting", "score": 75, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "6,000+",
+      "revenue": "$500M ARR",
+      "yoyGrowth": "22%",
+      "g2Rating": 4.3,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["Netflix", "Boston Scientific", "DocuSign", "Levi's"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "10-16 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — simplified if already on Workday HCM/Financials; otherwise requires GL and workforce data mapping",
+      "changeManagement": "Moderate — intuitive interface reduces training needs but process redesign is still required"
+    }
+  },
+  {
+    "id": "planful",
+    "name": "Planful",
+    "vendor": "Planful",
+    "category": "fpa",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market"],
+    "industries": ["Technology", "Healthcare", "Financial Services", "Manufacturing", "Non-Profit"],
+    "painPoints": [
+      "Slow month-end close and reporting cycles",
+      "Budget vs. actual variance analysis done manually",
+      "Disconnected planning and consolidation workflows"
+    ],
+    "integrations": ["NetSuite", "Sage Intacct", "SAP", "Oracle", "Salesforce"],
+    "pricing": {
+      "model": "Per user + modules",
+      "startingPrice": "$60K+ annually",
+      "notes": "Modular pricing for planning, consolidation, and reporting"
+    },
+    "keyFeatures": [
+      "End-to-end financial planning and consolidation",
+      "Predict Signals AI for anomaly detection",
+      "Structured planning with dynamic templates",
+      "Close management and reporting automation",
+      "Workforce planning with headcount modeling"
+    ],
+    "workflowSteps": ["annual-planning", "budgeting", "forecasting", "variance-analysis", "management-reporting", "workforce-planning-fpa", "board-reporting"],
+    "tagline": "End-to-End FP&A for the Modern Finance Team",
+    "description": "Planful provides a comprehensive cloud FP&A platform that spans budgeting, forecasting, consolidation, and reporting. With its Predict Signals AI and structured planning approach, it delivers strong value for mid-market finance teams looking to replace spreadsheets.",
+    "website": "https://www.planful.com",
+    "founded": "2000",
+    "headquarters": "San Francisco, CA",
+    "employeeCount": "~700",
+    "overallFitScore": 82,
+    "fitScores": [
+      { "stepId": "annual-planning", "score": 82, "grade": "best-fit" },
+      { "stepId": "budgeting", "score": 85, "grade": "best-fit" },
+      { "stepId": "forecasting", "score": 80, "grade": "best-fit" },
+      { "stepId": "variance-analysis", "score": 83, "grade": "best-fit" },
+      { "stepId": "management-reporting", "score": 84, "grade": "best-fit" },
+      { "stepId": "workforce-planning-fpa", "score": 75, "grade": "good-fit" },
+      { "stepId": "board-reporting", "score": 72, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "1,500+",
+      "revenue": "$150M ARR",
+      "yoyGrowth": "25%",
+      "g2Rating": 4.3,
+      "gartnerPosition": "Challenger",
+      "notableCustomers": ["TripAdvisor", "Bose", "Eventbrite", "1-800-Flowers"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-14 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — GL mapping and historical actuals required; consolidation rules can add complexity",
+      "changeManagement": "Moderate — structured interface requires process alignment and user training"
+    }
+  },
+  {
+    "id": "vena-solutions",
+    "name": "Vena Solutions",
+    "vendor": "Vena Solutions",
+    "category": "fpa",
+    "aiMaturity": "traditional",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Technology", "Professional Services", "Healthcare", "Financial Services"],
+    "painPoints": [
+      "Finance teams unwilling to abandon Excel",
+      "Version control nightmares with spreadsheet-based budgets",
+      "Manual data consolidation from multiple sources"
+    ],
+    "integrations": ["Microsoft Excel", "Microsoft 365", "NetSuite", "Sage Intacct", "QuickBooks"],
+    "pricing": {
+      "model": "Per user tiered",
+      "startingPrice": "$40K+ annually",
+      "notes": "Growth and Professional tiers available"
+    },
+    "keyFeatures": [
+      "Native Excel interface with centralized database backend",
+      "Pre-built planning templates and best practices",
+      "Automated data collection and consolidation",
+      "Workflow automation with approval routing",
+      "Version control and audit trail for Excel models"
+    ],
+    "workflowSteps": ["annual-planning", "budgeting", "forecasting", "variance-analysis", "management-reporting", "board-reporting"],
+    "tagline": "Complete Planning in the Excel You Already Know",
+    "description": "Vena Solutions bridges the gap between spreadsheet familiarity and enterprise planning rigor. Built on a native Excel interface with a centralized database, Vena lets finance teams keep their Excel workflows while gaining governance, automation, and collaboration.",
+    "website": "https://www.venasolutions.com",
+    "founded": "2011",
+    "headquarters": "Toronto, Canada",
+    "employeeCount": "~600",
+    "overallFitScore": 78,
+    "fitScores": [
+      { "stepId": "annual-planning", "score": 76, "grade": "good-fit" },
+      { "stepId": "budgeting", "score": 82, "grade": "best-fit" },
+      { "stepId": "forecasting", "score": 74, "grade": "good-fit" },
+      { "stepId": "variance-analysis", "score": 78, "grade": "good-fit" },
+      { "stepId": "management-reporting", "score": 80, "grade": "best-fit" },
+      { "stepId": "board-reporting", "score": 70, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "1,300+",
+      "revenue": "$100M ARR",
+      "yoyGrowth": "30%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["World Vision", "Kansas City Chiefs", "FreshBooks", "Coca-Cola Bottlers"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "6-10 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Low — Excel models can be directly imported; GL integration is straightforward",
+      "changeManagement": "Low — Excel-native interface means minimal retraining for finance teams"
+    }
+  },
+  {
+    "id": "pigment",
+    "name": "Pigment",
+    "vendor": "Pigment",
+    "category": "fpa",
+    "aiMaturity": "ai-native",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Technology", "SaaS", "Financial Services", "Retail", "Manufacturing"],
+    "painPoints": [
+      "Planning tools that can't handle real-time data at scale",
+      "Inability to collaborate across finance and ops teams in real time",
+      "Static models that break when business changes"
+    ],
+    "integrations": ["Salesforce", "NetSuite", "SAP", "Workday", "Snowflake"],
+    "pricing": {
+      "model": "Platform fee + per user",
+      "startingPrice": "$80K+ annually",
+      "notes": "Custom pricing based on data volume and users"
+    },
+    "keyFeatures": [
+      "Real-time collaborative planning with live data connections",
+      "AI-powered forecasting and anomaly detection",
+      "Dynamic modeling with no row or column limits",
+      "Granular permissions with cell-level security",
+      "Native scenario comparison and versioning"
+    ],
+    "workflowSteps": ["annual-planning", "budgeting", "forecasting", "scenario-planning", "financial-modeling", "revenue-planning", "workforce-planning-fpa"],
+    "tagline": "Next-Gen Business Planning for Strategic Decisions",
+    "description": "Pigment is a next-generation business planning platform built for speed and scale. With AI-native forecasting, real-time collaboration, and a modern data architecture, Pigment enables finance and operations teams to plan together in a single source of truth.",
+    "website": "https://www.gopigment.com",
+    "founded": "2019",
+    "headquarters": "Paris, France",
+    "employeeCount": "~400",
+    "overallFitScore": 85,
+    "fitScores": [
+      { "stepId": "annual-planning", "score": 84, "grade": "best-fit" },
+      { "stepId": "budgeting", "score": 80, "grade": "best-fit" },
+      { "stepId": "forecasting", "score": 90, "grade": "best-fit" },
+      { "stepId": "scenario-planning", "score": 88, "grade": "best-fit" },
+      { "stepId": "financial-modeling", "score": 86, "grade": "best-fit" },
+      { "stepId": "revenue-planning", "score": 82, "grade": "best-fit" },
+      { "stepId": "workforce-planning-fpa", "score": 78, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "500+",
+      "revenue": "$80M ARR",
+      "yoyGrowth": "85%",
+      "g2Rating": 4.6,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["Figma", "Deliveroo", "Brevo", "ManoMano"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "8-12 weeks",
+      "effortLevel": "medium",
+      "requiresIt": false,
+      "dataMigration": "Moderate — native connectors simplify ERP and CRM integration; data mapping still required",
+      "changeManagement": "Moderate — modern UI is intuitive but teams need to adapt from spreadsheet-based workflows"
+    }
+  },
+  {
+    "id": "datarails",
+    "name": "Datarails",
+    "vendor": "Datarails",
+    "category": "fpa",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Technology", "Professional Services", "Healthcare", "Financial Services"],
+    "painPoints": [
+      "Hours spent consolidating data from multiple spreadsheets",
+      "No single source of truth for financial data",
+      "CFO reporting takes days instead of hours"
+    ],
+    "integrations": ["QuickBooks", "Xero", "NetSuite", "Sage Intacct", "Microsoft Excel"],
+    "pricing": {
+      "model": "Per user tiered",
+      "startingPrice": "$30K+ annually",
+      "notes": "Essentials and Professional tiers; discounts for annual contracts"
+    },
+    "keyFeatures": [
+      "Automated Excel data consolidation and versioning",
+      "AI-powered financial analyst (FP&A Genius chatbot)",
+      "Real-time dashboards pulling from live Excel models",
+      "Automated variance analysis and commentary",
+      "Data warehouse for financial data unification"
+    ],
+    "workflowSteps": ["budgeting", "forecasting", "variance-analysis", "management-reporting", "board-reporting"],
+    "tagline": "FP&A Automation for Excel Power Users",
+    "description": "Datarails automates FP&A for teams that love Excel. It consolidates financial data from ERPs and spreadsheets into a centralized platform, enabling real-time reporting, AI-assisted analysis, and automated dashboards — all without leaving the Excel environment.",
+    "website": "https://www.datarails.com",
+    "founded": "2015",
+    "headquarters": "New York, NY",
+    "employeeCount": "~350",
+    "overallFitScore": 76,
+    "fitScores": [
+      { "stepId": "budgeting", "score": 78, "grade": "good-fit" },
+      { "stepId": "forecasting", "score": 72, "grade": "good-fit" },
+      { "stepId": "variance-analysis", "score": 82, "grade": "best-fit" },
+      { "stepId": "management-reporting", "score": 80, "grade": "best-fit" },
+      { "stepId": "board-reporting", "score": 74, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "1,000+",
+      "revenue": "$50M ARR",
+      "yoyGrowth": "60%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Niche",
+      "notableCustomers": ["Guesty", "BigPanda", "Cato Networks", "Papaya Global"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "4-8 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Low — connects directly to ERPs and ingests existing Excel files",
+      "changeManagement": "Low — Excel-based interface means finance teams work in their familiar environment"
+    }
+  },
+  {
+    "id": "cube",
+    "name": "Cube",
+    "vendor": "Cube",
+    "category": "fpa",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["smb", "mid-market"],
+    "industries": ["Technology", "SaaS", "Professional Services", "Healthcare"],
+    "painPoints": [
+      "Manual data pulls from ERP to spreadsheets every month",
+      "Budgeting process takes weeks of back-and-forth",
+      "No way to do real-time reporting without IT help"
+    ],
+    "integrations": ["NetSuite", "QuickBooks", "Sage Intacct", "Microsoft Excel", "Google Sheets"],
+    "pricing": {
+      "model": "Per user tiered",
+      "startingPrice": "$25K+ annually",
+      "notes": "Core and Launch tiers available; free trial offered"
+    },
+    "keyFeatures": [
+      "Bi-directional spreadsheet sync (Excel and Google Sheets)",
+      "Automated data consolidation from multiple sources",
+      "Scenario builder with side-by-side comparisons",
+      "Self-service reporting with drag-and-drop dashboards",
+      "AI-assisted formula generation and analysis"
+    ],
+    "workflowSteps": ["budgeting", "forecasting", "variance-analysis", "scenario-planning", "management-reporting"],
+    "tagline": "The Spreadsheet-Native FP&A Platform",
+    "description": "Cube is an FP&A platform designed for teams that want to keep working in spreadsheets while gaining the power of a centralized planning tool. It automates data consolidation, syncs bidirectionally with Excel and Google Sheets, and enables faster reporting and budgeting.",
+    "website": "https://www.cubesoftware.com",
+    "founded": "2018",
+    "headquarters": "New York, NY",
+    "employeeCount": "~150",
+    "overallFitScore": 74,
+    "fitScores": [
+      { "stepId": "budgeting", "score": 76, "grade": "good-fit" },
+      { "stepId": "forecasting", "score": 70, "grade": "good-fit" },
+      { "stepId": "variance-analysis", "score": 74, "grade": "good-fit" },
+      { "stepId": "scenario-planning", "score": 72, "grade": "good-fit" },
+      { "stepId": "management-reporting", "score": 78, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "800+",
+      "revenue": "$25M ARR",
+      "yoyGrowth": "55%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Niche",
+      "notableCustomers": ["Forcepoint", "Wistia", "Coupa", "BlueVine"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "3-6 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Low — native ERP connectors and spreadsheet import make setup fast",
+      "changeManagement": "Low — spreadsheet-native approach minimizes learning curve"
+    }
+  },
+  {
+    "id": "mosaic",
+    "name": "Mosaic",
+    "vendor": "Mosaic",
+    "category": "fpa",
+    "aiMaturity": "ai-native",
+    "companySizes": ["startup", "smb"],
+    "industries": ["Technology", "SaaS", "Fintech", "E-Commerce"],
+    "painPoints": [
+      "CFO spending 80% of time on data gathering instead of analysis",
+      "No real-time visibility into SaaS metrics and runway",
+      "Board decks take a full week to prepare"
+    ],
+    "integrations": ["QuickBooks", "NetSuite", "Gusto", "Rippling", "Stripe"],
+    "pricing": {
+      "model": "Platform fee tiered by revenue",
+      "startingPrice": "$20K+ annually",
+      "notes": "Startup-friendly pricing with growth tiers"
+    },
+    "keyFeatures": [
+      "Real-time SaaS metrics dashboard (ARR, burn, runway)",
+      "AI-generated financial narratives and insights",
+      "Automated board reporting with templates",
+      "Scenario planning with real-time data integration",
+      "Headcount planning with cost modeling"
+    ],
+    "workflowSteps": ["budgeting", "forecasting", "scenario-planning", "management-reporting", "revenue-planning", "board-reporting"],
+    "tagline": "Strategic Finance for High-Growth Companies",
+    "description": "Mosaic is a Strategic Finance platform purpose-built for high-growth SaaS and tech companies. It integrates directly with billing, HRIS, and ERP systems to deliver real-time metrics, AI-powered insights, and automated reporting — giving CFOs their time back.",
+    "website": "https://www.mosaic.tech",
+    "founded": "2019",
+    "headquarters": "San Francisco, CA",
+    "employeeCount": "~150",
+    "overallFitScore": 72,
+    "fitScores": [
+      { "stepId": "budgeting", "score": 70, "grade": "good-fit" },
+      { "stepId": "forecasting", "score": 74, "grade": "good-fit" },
+      { "stepId": "scenario-planning", "score": 72, "grade": "good-fit" },
+      { "stepId": "management-reporting", "score": 76, "grade": "good-fit" },
+      { "stepId": "revenue-planning", "score": 78, "grade": "good-fit" },
+      { "stepId": "board-reporting", "score": 80, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "400+",
+      "revenue": "$20M ARR",
+      "yoyGrowth": "70%",
+      "g2Rating": 4.6,
+      "gartnerPosition": "Niche",
+      "notableCustomers": ["Drata", "Lattice", "Fivetran", "ClickUp"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "2-4 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Low — native integrations auto-sync data from billing, HRIS, and ERP",
+      "changeManagement": "Low — intuitive dashboard-first approach requires minimal training"
+    }
+  },
+  {
+    "id": "jirav",
+    "name": "Jirav",
+    "vendor": "Jirav",
+    "category": "fpa",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["startup", "smb"],
+    "industries": ["Technology", "SaaS", "Professional Services"],
+    "painPoints": [
+      "No dedicated FP&A tool — relying entirely on spreadsheets",
+      "Cannot create driver-based financial models easily",
+      "Investor reporting is manual and error-prone"
+    ],
+    "integrations": ["QuickBooks", "Xero", "NetSuite", "Gusto", "ADP"],
+    "pricing": {
+      "model": "Monthly subscription tiered",
+      "startingPrice": "$15K+ annually",
+      "notes": "Starter and Growth plans available; often sold through accounting firms"
+    },
+    "keyFeatures": [
+      "Driver-based financial planning and modeling",
+      "Automated three-statement financial model",
+      "Departmental budgeting with headcount planning",
+      "Visual dashboards with KPI tracking",
+      "Investor-ready reporting templates"
+    ],
+    "workflowSteps": ["budgeting", "forecasting", "financial-modeling", "management-reporting", "workforce-planning-fpa"],
+    "tagline": "Driver-Based Planning for Growing Businesses",
+    "description": "Jirav brings driver-based financial planning to startups and small businesses that have outgrown spreadsheets. With automated three-statement models, headcount planning, and visual dashboards, it helps growing companies build their first real FP&A function.",
+    "website": "https://www.jirav.com",
+    "founded": "2015",
+    "headquarters": "San Francisco, CA",
+    "employeeCount": "~80",
+    "overallFitScore": 68,
+    "fitScores": [
+      { "stepId": "budgeting", "score": 70, "grade": "good-fit" },
+      { "stepId": "forecasting", "score": 68, "grade": "good-fit" },
+      { "stepId": "financial-modeling", "score": 72, "grade": "good-fit" },
+      { "stepId": "management-reporting", "score": 66, "grade": "good-fit" },
+      { "stepId": "workforce-planning-fpa", "score": 70, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "500+",
+      "revenue": "$10M ARR",
+      "yoyGrowth": "35%",
+      "g2Rating": 4.4,
+      "gartnerPosition": "Niche",
+      "notableCustomers": ["CPA.com partners", "BDO network firms", "Various Series A-C startups"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "2-4 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Low — direct integrations with small-business ERPs and payroll providers",
+      "changeManagement": "Low — purpose-built for teams new to FP&A tooling"
+    }
+  },
+  {
+    "id": "prophix",
+    "name": "Prophix",
+    "vendor": "Prophix",
+    "category": "fpa",
+    "aiMaturity": "traditional",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Healthcare", "Financial Services", "Education", "Government"],
+    "painPoints": [
+      "Complex consolidation across multiple entities",
+      "Month-end reporting delays impacting decision-making",
+      "Budgeting process too rigid for dynamic business needs"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "Sage", "NetSuite"],
+    "pricing": {
+      "model": "Per user + modules",
+      "startingPrice": "$50K+ annually",
+      "notes": "Modular pricing for planning, consolidation, and reporting"
+    },
+    "keyFeatures": [
+      "Comprehensive budgeting and planning workflows",
+      "Financial consolidation with intercompany eliminations",
+      "Automated reporting with pixel-perfect output",
+      "Workflow automation with approval chains",
+      "Ad hoc analysis with self-service reporting"
+    ],
+    "workflowSteps": ["annual-planning", "budgeting", "forecasting", "variance-analysis", "management-reporting", "board-reporting"],
+    "tagline": "Corporate Performance Management Made Simple",
+    "description": "Prophix is a corporate performance management platform offering robust budgeting, planning, consolidation, and reporting. With deep workflow automation and a structured approach, it excels for mid-market organizations that need governance and control in their finance processes.",
+    "website": "https://www.prophix.com",
+    "founded": "1987",
+    "headquarters": "Mississauga, Canada",
+    "employeeCount": "~500",
+    "overallFitScore": 75,
+    "fitScores": [
+      { "stepId": "annual-planning", "score": 74, "grade": "good-fit" },
+      { "stepId": "budgeting", "score": 80, "grade": "best-fit" },
+      { "stepId": "forecasting", "score": 72, "grade": "good-fit" },
+      { "stepId": "variance-analysis", "score": 76, "grade": "good-fit" },
+      { "stepId": "management-reporting", "score": 78, "grade": "good-fit" },
+      { "stepId": "board-reporting", "score": 70, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "2,500+",
+      "revenue": "$80M ARR",
+      "yoyGrowth": "15%",
+      "g2Rating": 4.2,
+      "gartnerPosition": "Challenger",
+      "notableCustomers": ["Crocs", "Sephora", "Bauer Hockey", "Tata Group"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "10-16 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — requires GL mapping, hierarchy setup, and historical data import",
+      "changeManagement": "Moderate — structured workflows require process alignment and training"
+    }
+  },
+  {
+    "id": "onestream",
+    "name": "OneStream",
+    "vendor": "OneStream",
+    "category": "fpa",
+    "aiMaturity": "traditional",
+    "companySizes": ["enterprise"],
+    "industries": ["Manufacturing", "Financial Services", "Energy", "Healthcare", "Retail"],
+    "painPoints": [
+      "Multiple legacy CPM tools that need to be unified",
+      "Complex multi-entity consolidation with different chart of accounts",
+      "Disconnected financial close, planning, and reporting processes"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "Workday", "JD Edwards"],
+    "pricing": {
+      "model": "Platform license + per user",
+      "startingPrice": "$200K+ annually",
+      "notes": "Enterprise pricing with XF Marketplace solutions included"
+    },
+    "keyFeatures": [
+      "Unified platform for consolidation, planning, and reporting",
+      "Extensible Dimensionality for complex data models",
+      "XF Marketplace with pre-built solutions and extensions",
+      "Financial close management and task automation",
+      "Multi-GAAP and multi-currency support"
+    ],
+    "workflowSteps": ["annual-planning", "budgeting", "forecasting", "variance-analysis", "financial-modeling", "management-reporting", "board-reporting"],
+    "tagline": "The Unified CPM Platform for Complex Enterprises",
+    "description": "OneStream delivers a unified corporate performance management platform that replaces fragmented legacy solutions. Its Extensible Dimensionality architecture handles complex consolidation, planning, and reporting needs — making it the top choice for large enterprises replacing Hyperion or other legacy tools.",
+    "website": "https://www.onestream.com",
+    "founded": "2010",
+    "headquarters": "Birmingham, MI",
+    "employeeCount": "~1,400",
+    "overallFitScore": 83,
+    "fitScores": [
+      { "stepId": "annual-planning", "score": 82, "grade": "best-fit" },
+      { "stepId": "budgeting", "score": 84, "grade": "best-fit" },
+      { "stepId": "forecasting", "score": 78, "grade": "good-fit" },
+      { "stepId": "variance-analysis", "score": 86, "grade": "best-fit" },
+      { "stepId": "financial-modeling", "score": 80, "grade": "best-fit" },
+      { "stepId": "management-reporting", "score": 88, "grade": "best-fit" },
+      { "stepId": "board-reporting", "score": 82, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "1,400+",
+      "revenue": "$450M ARR",
+      "yoyGrowth": "35%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Leader",
+      "notableCustomers": ["Hershey's", "AAA", "Colgate-Palmolive", "News Corp"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "16-24 weeks",
+      "effortLevel": "high",
+      "requiresIt": true,
+      "dataMigration": "Significant — complex consolidation rules, multi-entity hierarchies, and historical data migration",
+      "changeManagement": "High — replacing legacy CPM requires comprehensive training and phased rollout"
+    }
+  },
+  {
+    "id": "board-international",
+    "name": "Board International",
+    "vendor": "Board International",
+    "category": "fpa",
+    "aiMaturity": "ai-enabled",
+    "companySizes": ["mid-market", "enterprise"],
+    "industries": ["Manufacturing", "Retail", "Consumer Goods", "Financial Services", "Pharmaceuticals"],
+    "painPoints": [
+      "Disconnect between financial and operational planning",
+      "BI and planning living in separate tools",
+      "Inability to drill from financial summaries into operational details"
+    ],
+    "integrations": ["SAP", "Oracle", "Microsoft Dynamics", "Salesforce", "IBM"],
+    "pricing": {
+      "model": "Platform license + per user",
+      "startingPrice": "$70K+ annually",
+      "notes": "Modular pricing for planning, BI, and simulation capabilities"
+    },
+    "keyFeatures": [
+      "Unified planning, BI, and simulation in one platform",
+      "BEAM (Board Enterprise Analytical Modeling) engine",
+      "AI-assisted demand and financial forecasting",
+      "Interactive dashboards with write-back planning",
+      "Supply chain and financial planning integration"
+    ],
+    "workflowSteps": ["annual-planning", "budgeting", "forecasting", "scenario-planning", "financial-modeling", "management-reporting"],
+    "tagline": "Intelligent Planning for Smarter Decisions",
+    "description": "Board International unifies business intelligence, planning, and simulation into a single decision-making platform. Its BEAM engine bridges financial and operational planning, making it particularly strong for organizations that need integrated demand planning and financial forecasting.",
+    "website": "https://www.board.com",
+    "founded": "1994",
+    "headquarters": "Chiasso, Switzerland",
+    "employeeCount": "~800",
+    "overallFitScore": 79,
+    "fitScores": [
+      { "stepId": "annual-planning", "score": 78, "grade": "good-fit" },
+      { "stepId": "budgeting", "score": 76, "grade": "good-fit" },
+      { "stepId": "forecasting", "score": 82, "grade": "best-fit" },
+      { "stepId": "scenario-planning", "score": 80, "grade": "best-fit" },
+      { "stepId": "financial-modeling", "score": 78, "grade": "good-fit" },
+      { "stepId": "management-reporting", "score": 80, "grade": "best-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "3,000+",
+      "revenue": "$120M ARR",
+      "yoyGrowth": "18%",
+      "g2Rating": 4.3,
+      "gartnerPosition": "Visionary",
+      "notableCustomers": ["Puma", "H&M", "Coca-Cola HBC", "NatWest"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "10-16 weeks",
+      "effortLevel": "medium",
+      "requiresIt": true,
+      "dataMigration": "Moderate — data cube design and source system integration require planning",
+      "changeManagement": "Moderate — combined BI and planning paradigm requires new ways of working"
+    }
+  },
+  {
+    "id": "causal",
+    "name": "Causal",
+    "vendor": "Causal",
+    "category": "fpa",
+    "aiMaturity": "ai-native",
+    "companySizes": ["startup", "smb"],
+    "industries": ["Technology", "SaaS", "Fintech"],
+    "painPoints": [
+      "Financial models in spreadsheets are opaque and error-prone",
+      "No easy way to visualize assumptions and their downstream impact",
+      "Fundraising models take weeks to build and maintain"
+    ],
+    "integrations": ["QuickBooks", "Xero", "Google Sheets", "Stripe", "NetSuite"],
+    "pricing": {
+      "model": "Monthly subscription",
+      "startingPrice": "$10K+ annually",
+      "notes": "Free tier available for individuals; Team and Business plans for companies"
+    },
+    "keyFeatures": [
+      "Visual formula builder with DAG-based dependency mapping",
+      "Built-in uncertainty ranges and probability distributions",
+      "Interactive financial model sharing and presentations",
+      "AI-assisted model building and formula suggestions",
+      "Native integration with accounting data sources"
+    ],
+    "workflowSteps": ["forecasting", "scenario-planning", "financial-modeling", "revenue-planning", "board-reporting"],
+    "tagline": "Beautiful Financial Models, Built for Clarity",
+    "description": "Causal replaces spreadsheet-based financial modeling with a visual, intuitive platform where every number tells a story. Its DAG-based architecture makes model logic transparent, while built-in uncertainty ranges and AI assistance help founders and finance teams build better models faster.",
+    "website": "https://www.causal.app",
+    "founded": "2019",
+    "headquarters": "London, UK",
+    "employeeCount": "~60",
+    "overallFitScore": 70,
+    "fitScores": [
+      { "stepId": "forecasting", "score": 72, "grade": "good-fit" },
+      { "stepId": "scenario-planning", "score": 78, "grade": "good-fit" },
+      { "stepId": "financial-modeling", "score": 82, "grade": "best-fit" },
+      { "stepId": "revenue-planning", "score": 68, "grade": "good-fit" },
+      { "stepId": "board-reporting", "score": 65, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "300+",
+      "revenue": "$8M ARR",
+      "yoyGrowth": "80%",
+      "g2Rating": 4.7,
+      "gartnerPosition": "Niche",
+      "notableCustomers": ["Personio", "Remote", "Pitch", "various VC-backed startups"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-3 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Low — connects to accounting systems; models are built natively in Causal",
+      "changeManagement": "Low — visual interface is intuitive; biggest shift is moving away from spreadsheet habits"
+    }
+  },
+  {
+    "id": "abacum",
+    "name": "Abacum",
+    "vendor": "Abacum",
+    "category": "fpa",
+    "aiMaturity": "ai-native",
+    "companySizes": ["startup", "smb", "mid-market"],
+    "industries": ["Technology", "SaaS", "E-Commerce", "Fintech"],
+    "painPoints": [
+      "Finance teams stuck in reactive mode with no time for analysis",
+      "Real-time actuals vs. plan tracking is impossible in spreadsheets",
+      "Cross-departmental budget collaboration is chaotic"
+    ],
+    "integrations": ["NetSuite", "QuickBooks", "Sage Intacct", "Salesforce", "BambooHR"],
+    "pricing": {
+      "model": "Platform fee + per user",
+      "startingPrice": "$25K+ annually",
+      "notes": "Growth and Scale tiers available; startup-friendly pricing"
+    },
+    "keyFeatures": [
+      "Real-time actuals integration with live variance tracking",
+      "AI-powered forecasting with confidence intervals",
+      "Collaborative budgeting with department owner workflows",
+      "Automated monthly reporting packages",
+      "Multi-entity consolidation for growing companies"
+    ],
+    "workflowSteps": ["budgeting", "forecasting", "variance-analysis", "management-reporting", "revenue-planning", "board-reporting"],
+    "tagline": "Real-Time FP&A for Fast-Moving Finance Teams",
+    "description": "Abacum brings real-time financial planning to fast-growing companies. By integrating live data from ERPs, CRMs, and HRIS systems, it eliminates the lag between actuals and plans — enabling finance teams to shift from data gathering to strategic analysis.",
+    "website": "https://www.abacum.io",
+    "founded": "2020",
+    "headquarters": "New York, NY",
+    "employeeCount": "~100",
+    "overallFitScore": 73,
+    "fitScores": [
+      { "stepId": "budgeting", "score": 74, "grade": "good-fit" },
+      { "stepId": "forecasting", "score": 76, "grade": "good-fit" },
+      { "stepId": "variance-analysis", "score": 80, "grade": "best-fit" },
+      { "stepId": "management-reporting", "score": 72, "grade": "good-fit" },
+      { "stepId": "revenue-planning", "score": 70, "grade": "good-fit" },
+      { "stepId": "board-reporting", "score": 68, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "250+",
+      "revenue": "$12M ARR",
+      "yoyGrowth": "90%",
+      "g2Rating": 4.5,
+      "gartnerPosition": "Niche",
+      "notableCustomers": ["Typeform", "Factorial", "Jobandtalent", "TravelPerk"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "3-6 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Low — native connectors auto-sync from ERP, CRM, and HRIS sources",
+      "changeManagement": "Low — modern interface designed for finance teams; onboarding is guided"
+    }
+  },
+  {
+    "id": "runway",
+    "name": "Runway",
+    "vendor": "Runway",
+    "category": "fpa",
+    "aiMaturity": "ai-native",
+    "companySizes": ["startup", "smb"],
+    "industries": ["Technology", "SaaS", "Fintech"],
+    "painPoints": [
+      "Startup financial models break every time the business changes",
+      "No way to connect operational metrics to financial outcomes",
+      "Cash runway tracking is done in fragile spreadsheets"
+    ],
+    "integrations": ["QuickBooks", "Xero", "Stripe", "Gusto", "Google Sheets"],
+    "pricing": {
+      "model": "Monthly subscription tiered",
+      "startingPrice": "$12K+ annually",
+      "notes": "Startup plan available; scales with company size"
+    },
+    "keyFeatures": [
+      "Automated three-statement financial model generation",
+      "Real-time cash runway and burn rate monitoring",
+      "AI-assisted scenario analysis and what-if modeling",
+      "Operational driver integration (sales, marketing, product)",
+      "Investor-ready reporting and board deck automation"
+    ],
+    "workflowSteps": ["budgeting", "forecasting", "scenario-planning", "financial-modeling", "revenue-planning"],
+    "tagline": "Modern Financial Planning for Startups",
+    "description": "Runway is a modern business planning platform built for startups and growth-stage companies. It connects operational data to financial models in real time, making it easy to track runway, model scenarios, and keep investors informed — all without the spreadsheet overhead.",
+    "website": "https://www.runway.com",
+    "founded": "2019",
+    "headquarters": "San Francisco, CA",
+    "employeeCount": "~50",
+    "overallFitScore": 69,
+    "fitScores": [
+      { "stepId": "budgeting", "score": 66, "grade": "good-fit" },
+      { "stepId": "forecasting", "score": 72, "grade": "good-fit" },
+      { "stepId": "scenario-planning", "score": 74, "grade": "good-fit" },
+      { "stepId": "financial-modeling", "score": 76, "grade": "good-fit" },
+      { "stepId": "revenue-planning", "score": 70, "grade": "good-fit" }
+    ],
+    "adoptionMetrics": {
+      "customerCount": "200+",
+      "revenue": "$6M ARR",
+      "yoyGrowth": "75%",
+      "g2Rating": 4.6,
+      "gartnerPosition": "Niche",
+      "notableCustomers": ["Loom", "AngelList", "SuperHuman", "various Y Combinator companies"]
+    },
+    "deploymentComplexity": {
+      "typicalTimeline": "1-2 weeks",
+      "effortLevel": "low",
+      "requiresIt": false,
+      "dataMigration": "Low — connects to accounting and billing systems automatically; models built in-app",
+      "changeManagement": "Low — designed for founders and first-hire finance leaders with no training required"
+    }
+  }
+]

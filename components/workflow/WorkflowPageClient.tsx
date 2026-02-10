@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Edit, Briefcase, Save, Trash2 } from "lucide-react";
 import Link from "next/link";
 
-interface APWorkflowPageClientProps {
+interface WorkflowPageClientProps {
   staticWorkflow: Workflow;
   toolCount: number;
   engagementId: string | null;
@@ -29,14 +29,14 @@ interface APWorkflowPageClientProps {
   processName?: string;
 }
 
-export function APWorkflowPageClient({
+export function WorkflowPageClient({
   staticWorkflow,
   toolCount,
   engagementId,
   processId = "ap",
   category = "ap",
   processName = "Accounts Payable",
-}: APWorkflowPageClientProps) {
+}: WorkflowPageClientProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const selectedStepId = searchParams.get("step");
@@ -72,7 +72,7 @@ export function APWorkflowPageClient({
     }
   }, [engagementId, processId]);
 
-  // Find the AP process assessment from the engagement
+  // Find the process assessment from the engagement
   const processAssessment = engagement?.processAssessments.find(
     (p) => p.processId === processId
   );
@@ -83,7 +83,7 @@ export function APWorkflowPageClient({
       ? {
           id: processId as WorkflowId,
           name: processAssessment.processName,
-          functionId: "finance",
+          functionId: staticWorkflow.functionId,
           processId,
           steps: processAssessment.generatedWorkflow,
         }
@@ -290,7 +290,7 @@ export function APWorkflowPageClient({
         </TabsContent>
 
         <TabsContent value="vendors" className="mt-6">
-          <VendorLandscapeClient tools={getToolsByCategory(category)} embedded workflowSteps={workflow.steps} />
+          <VendorLandscapeClient tools={getToolsByCategory(category)} embedded workflowSteps={workflow.steps} category={category} />
         </TabsContent>
       </Tabs>
 
@@ -301,7 +301,7 @@ export function APWorkflowPageClient({
         ratings={ratings}
         processId={processId}
         processName={processName}
-        functionId="finance"
+        functionId={workflow.functionId}
         onSaved={handleEngagementSaved}
       />
     </div>

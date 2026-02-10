@@ -10,9 +10,10 @@ interface ComparisonBarProps {
   tools: Tool[];
   onRemove: (id: string) => void;
   onClear: () => void;
+  category?: string;
 }
 
-export function ComparisonBar({ selectedIds, tools, onRemove, onClear }: ComparisonBarProps) {
+export function ComparisonBar({ selectedIds, tools, onRemove, onClear, category }: ComparisonBarProps) {
   const router = useRouter();
   const selected = tools.filter((t) => selectedIds.includes(t.id));
 
@@ -52,7 +53,7 @@ export function ComparisonBar({ selectedIds, tools, onRemove, onClear }: Compari
             disabled={selected.length < 2}
             onClick={() => {
               const ids = selectedIds.join(",");
-              router.push(`/vendors/compare?ids=${ids}`);
+              router.push(`/vendors/compare?ids=${ids}${category ? `&category=${category}` : ''}`);
             }}
           >
             Compare

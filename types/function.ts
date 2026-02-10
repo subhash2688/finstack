@@ -51,7 +51,7 @@ export const FUNCTIONS: Function[] = [
         id: "fpa",
         name: "FP&A",
         description: "Planning, budgeting, forecasting, and financial reporting",
-        available: false,
+        available: true,
       },
       {
         id: "payroll",
@@ -298,4 +298,15 @@ export function getProcessMeta(
 ): ProcessMeta | undefined {
   const func = getFunctionById(functionId);
   return func?.processes.find((p) => p.id === processId);
+}
+
+/**
+ * Helper to find a process across all functions by processId
+ */
+export function findProcessById(processId: string): { process: ProcessMeta; func: Function } | undefined {
+  for (const func of FUNCTIONS) {
+    const process = func.processes.find((p) => p.id === processId);
+    if (process) return { process, func };
+  }
+  return undefined;
 }
