@@ -9,7 +9,7 @@ export default function EngagementsPage() {
             ENGAGEMENTS
           </h1>
           <p className="text-muted-foreground">
-            Manage your client engagements and tailored AP workflows
+            Manage your client engagements and process assessments
           </p>
         </div>
 

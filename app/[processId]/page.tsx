@@ -39,10 +39,10 @@ export default function ProcessPage({
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="mb-8">
-        <Link href="/dashboard">
+        <Link href={engagementId ? `/engagements/${engagementId}?tab=processes` : "/dashboard"}>
           <Button variant="ghost" className="gap-2">
             <ArrowLeft className="h-4 w-4" />
-            Back to Dashboard
+            {engagementId ? "Back to Engagement" : "Back to Dashboard"}
           </Button>
         </Link>
       </div>

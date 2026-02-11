@@ -8,7 +8,7 @@ export default function NewEngagementPage() {
           NEW ENGAGEMENT
         </h1>
         <p className="text-muted-foreground">
-          Provide client context to generate a tailored AP workflow
+          Company profile, function selection, and process-specific intake
         </p>
       </div>
 

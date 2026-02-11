@@ -6,8 +6,11 @@ import { Engagement, ProcessAssessment } from "@/types/engagement";
 import { WorkflowStep } from "@/types/workflow";
 import { getEngagement, saveEngagement } from "@/lib/storage/engagements";
 import { StepEditor } from "./StepEditor";
+import { EditCompanyDialog } from "./EditCompanyDialog";
+import { EditProcessContextDialog } from "./EditProcessContextDialog";
+import { ClientContext } from "@/types/engagement";
 import { Button } from "@/components/ui/button";
-import { Save, Eye } from "lucide-react";
+import { Save, Eye, Pencil } from "lucide-react";
 
 interface EngagementEditorProps {
   engagementId: string;
@@ -21,6 +24,8 @@ export function EngagementEditor({ engagementId }: EngagementEditorProps) {
   const [engagement, setEngagement] = useState<Engagement | null>(null);
   const [processAssessment, setProcessAssessment] = useState<ProcessAssessment | null>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [showEditCompany, setShowEditCompany] = useState(false);
+  const [showEditProcessContext, setShowEditProcessContext] = useState(false);
 
   useEffect(() => {
     const loaded = getEngagement(engagementId);
@@ -132,15 +137,49 @@ export function EngagementEditor({ engagementId }: EngagementEditorProps) {
 
   const handleSaveAndPresent = () => {
     handleSave();
-    router.push(`/${processAssessment.processId}?engagement=${engagement.id}`);
+    router.push(`/engagements/${engagement.id}`);
+  };
+
+  const handleUpdateClientContext = (updated: ClientContext) => {
+    const updatedEngagement = {
+      ...engagement,
+      clientContext: updated,
+      updatedAt: new Date().toISOString(),
+    };
+    saveEngagement(updatedEngagement);
+    setEngagement(updatedEngagement);
+  };
+
+  const handleUpdateProcessContext = (_processId: string, context: Record<string, string>) => {
+    const updatedAssessment = { ...processAssessment, context };
+    setProcessAssessment(updatedAssessment);
+    const updatedEngagement = {
+      ...engagement,
+      processAssessments: engagement.processAssessments.map((p) =>
+        p.processId === _processId ? { ...p, context } : p
+      ),
+      updatedAt: new Date().toISOString(),
+    };
+    saveEngagement(updatedEngagement);
+    setEngagement(updatedEngagement);
   };
 
   return (
     <div className="space-y-6">
       <div className="bg-card border rounded-lg p-6">
-        <h3 className="text-sm font-medium text-muted-foreground mb-2">
-          CLIENT CONTEXT
-        </h3>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm font-medium text-muted-foreground">
+            CLIENT CONTEXT
+          </h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowEditCompany(true)}
+            className="h-7 w-7 p-0"
+          >
+            <Pencil className="h-3.5 w-3.5" />
+          </Button>
+        </div>
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <span className="text-muted-foreground">Company:</span>{" "}
@@ -162,9 +201,20 @@ export function EngagementEditor({ engagementId }: EngagementEditorProps) {
       </div>
 
       <div className="flex justify-between items-center">
-        <h3 className="text-sm font-medium text-muted-foreground">
-          {processAssessment.processName} - WORKFLOW STEPS ({processAssessment.generatedWorkflow.length})
-        </h3>
+        <div className="flex items-center gap-2">
+          <h3 className="text-sm font-medium text-muted-foreground">
+            {processAssessment.processName} - WORKFLOW STEPS ({processAssessment.generatedWorkflow.length})
+          </h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setShowEditProcessContext(true)}
+            className="h-7 w-7 p-0"
+            title="Edit process context"
+          >
+            <Pencil className="h-3.5 w-3.5" />
+          </Button>
+        </div>
 
         <div className="flex gap-2">
           <Button variant="outline" onClick={handleSave} disabled={isSaving}>
@@ -193,6 +243,22 @@ export function EngagementEditor({ engagementId }: EngagementEditorProps) {
           />
         ))}
       </div>
+
+      <EditCompanyDialog
+        open={showEditCompany}
+        onOpenChange={setShowEditCompany}
+        clientContext={engagement.clientContext}
+        onSave={handleUpdateClientContext}
+      />
+
+      <EditProcessContextDialog
+        open={showEditProcessContext}
+        onOpenChange={setShowEditProcessContext}
+        processId={processAssessment.processId}
+        processName={processAssessment.processName}
+        context={processAssessment.context || {}}
+        onSave={handleUpdateProcessContext}
+      />
     </div>
   );
 }

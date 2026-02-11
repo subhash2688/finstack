@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Engagement } from "@/types/engagement";
 import { getAllEngagements, deleteEngagement } from "@/lib/storage/engagements";
 import { Button } from "@/components/ui/button";
-import { Briefcase, Calendar, FileText, Trash2, Edit, Eye } from "lucide-react";
+import { Briefcase, Calendar, FileText, Trash2, Eye } from "lucide-react";
 
 export function EngagementList() {
   const router = useRouter();
@@ -30,7 +30,7 @@ export function EngagementList() {
           NO ENGAGEMENTS YET
         </h2>
         <p className="text-muted-foreground mb-6">
-          Create your first engagement to generate a tailored AP workflow
+          Start a new assessment to evaluate your client&apos;s processes
         </p>
         <Button onClick={() => router.push("/engagements/new")}>
           New Engagement
@@ -61,7 +61,8 @@ export function EngagementList() {
                 <h3 className="text-lg font-medium mb-1">{engagement.name}</h3>
                 <p className="text-sm text-muted-foreground">
                   {engagement.clientContext.companyName}
-                  {engagement.clientContext.industry && ` • ${engagement.clientContext.industry}`}
+                  {engagement.clientContext.subSector && ` • ${engagement.clientContext.subSector}`}
+                  {!engagement.clientContext.subSector && engagement.clientContext.industry && ` • ${engagement.clientContext.industry}`}
                   {engagement.clientContext.companySize && ` • ${engagement.clientContext.companySize}`}
                   {engagement.type === "lightweight" && (
                     <span className="ml-2 inline-block px-1.5 py-0.5 rounded text-xs bg-blue-100 text-blue-700">Quick Assessment</span>
@@ -73,21 +74,11 @@ export function EngagementList() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => router.push(`/${engagement.processAssessments[0]?.processId || 'ap'}?engagement=${engagement.id}`)}
-                  title="Present to client"
+                  onClick={() => router.push(`/engagements/${engagement.id}`)}
+                  title="Open engagement workspace"
                 >
                   <Eye className="h-4 w-4 mr-1" />
-                  Present
-                </Button>
-
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => router.push(`/engagements/${engagement.id}/edit`)}
-                  title="Edit engagement"
-                >
-                  <Edit className="h-4 w-4 mr-1" />
-                  Edit
+                  Open
                 </Button>
 
                 <Button
@@ -106,7 +97,7 @@ export function EngagementList() {
               <div className="flex items-center gap-2">
                 <FileText className="h-4 w-4 text-muted-foreground" />
                 <span>
-                  {engagement.processAssessments?.reduce((sum, pa) => sum + (pa.generatedWorkflow?.length || 0), 0) || 0} steps
+                  {engagement.processAssessments?.length || 0} process{(engagement.processAssessments?.length || 0) !== 1 ? "es" : ""}
                 </span>
               </div>
 
