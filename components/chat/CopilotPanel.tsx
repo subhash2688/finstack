@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState, useCallback, FormEvent } from 'react';
+import { useRef, useEffect, useState, FormEvent } from 'react';
 import { X, Send, Sparkles } from 'lucide-react';
 
 const STARTER_PROMPTS = [
@@ -22,16 +22,26 @@ interface CopilotPanelProps {
 }
 
 let messageCounter = 0;
+function nextId() {
+  return `msg-${++messageCounter}`;
+}
 
 export function CopilotPanel({ onClose, currentProcessId }: CopilotPanelProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+  // Use a ref for messages so the async sendMessage always sees the latest
+  const messagesRef = useRef<Message[]>([]);
 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -45,22 +55,24 @@ export function CopilotPanel({ onClose, currentProcessId }: CopilotPanelProps) {
     inputRef.current?.focus();
   }, []);
 
-  const sendMessage = useCallback(async (userMessage: string) => {
+  async function sendMessage(userMessage: string) {
     if (!userMessage.trim() || isLoading) return;
 
     setError(null);
+
     const userMsg: Message = {
-      id: `msg-${++messageCounter}`,
+      id: nextId(),
       role: 'user',
       content: userMessage.trim(),
     };
 
-    const updatedMessages = [...messages, userMsg];
+    const updatedMessages = [...messagesRef.current, userMsg];
+    messagesRef.current = updatedMessages;
     setMessages(updatedMessages);
     setInput('');
     setIsLoading(true);
 
-    const assistantId = `msg-${++messageCounter}`;
+    const assistantId = nextId();
 
     try {
       abortRef.current = new AbortController();
@@ -85,54 +97,47 @@ export function CopilotPanel({ onClose, currentProcessId }: CopilotPanelProps) {
       }
 
       // Add empty assistant message to stream into
-      setMessages((prev) => [...prev, { id: assistantId, role: 'assistant', content: '' }]);
+      const withAssistant = [...updatedMessages, { id: assistantId, role: 'assistant' as const, content: '' }];
+      messagesRef.current = withAssistant;
+      setMessages(withAssistant);
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
+      let assistantContent = '';
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
 
         const chunk = decoder.decode(value, { stream: true });
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantId ? { ...m, content: m.content + chunk } : m
-          )
+        assistantContent += chunk;
+
+        // Update the assistant message with accumulated content
+        const updated = messagesRef.current.map((m) =>
+          m.id === assistantId ? { ...m, content: assistantContent } : m
         );
+        messagesRef.current = updated;
+        setMessages(updated);
       }
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') return;
-      setError(err instanceof Error ? err.message : 'Something went wrong');
+      const errorMsg = err instanceof Error ? err.message : 'Something went wrong';
+      console.error('Copilot error:', errorMsg);
+      setError(errorMsg);
       // Remove the empty assistant message on error
-      setMessages((prev) => prev.filter((m) => m.id !== assistantId));
+      const cleaned = messagesRef.current.filter((m) => m.id !== assistantId);
+      messagesRef.current = cleaned;
+      setMessages(cleaned);
     } finally {
       setIsLoading(false);
       abortRef.current = null;
     }
-  }, [messages, isLoading, currentProcessId]);
+  }
 
-  const handleSubmit = (e: FormEvent) => {
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
     sendMessage(input);
-  };
-
-  const handleStarterClick = (prompt: string) => {
-    sendMessage(prompt);
-  };
-
-  const handleRetry = () => {
-    const lastUser = [...messages].reverse().find((m) => m.role === 'user');
-    if (lastUser) {
-      // Remove last assistant message (if any) and retry
-      setMessages((prev) => {
-        const idx = prev.findLastIndex((m) => m.role === 'user');
-        return prev.slice(0, idx);
-      });
-      setError(null);
-      sendMessage(lastUser.content);
-    }
-  };
+  }
 
   return (
     <div className="fixed bottom-20 right-6 z-50 w-[400px] max-h-[520px] bg-white rounded-xl border border-border shadow-2xl flex flex-col overflow-hidden animate-fade-up">
@@ -167,7 +172,7 @@ export function CopilotPanel({ onClose, currentProcessId }: CopilotPanelProps) {
               {STARTER_PROMPTS.map((prompt) => (
                 <button
                   key={prompt}
-                  onClick={() => handleStarterClick(prompt)}
+                  onClick={() => sendMessage(prompt)}
                   className="w-full text-left text-sm px-3 py-2 rounded-lg border border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-colors text-gray-700"
                 >
                   {prompt}
@@ -214,7 +219,16 @@ export function CopilotPanel({ onClose, currentProcessId }: CopilotPanelProps) {
           <div className="flex justify-center">
             <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 px-3 py-2 rounded-lg">
               <span>{error}</span>
-              <button onClick={handleRetry} className="underline hover:no-underline">
+              <button
+                onClick={() => {
+                  const lastUser = [...messages].reverse().find((m) => m.role === 'user');
+                  if (lastUser) {
+                    setError(null);
+                    sendMessage(lastUser.content);
+                  }
+                }}
+                className="underline hover:no-underline"
+              >
                 Retry
               </button>
             </div>
