@@ -1,6 +1,7 @@
 import { WorkflowStep, MaturityLevel } from "./workflow";
 import { FunctionId } from "./function";
-import { CompanyDiagnostic } from "./diagnostic";
+import { CompanyDiagnostic, CompanyIntel } from "./diagnostic";
+import { SavingsAssumptions } from "./findings";
 
 /**
  * Client context captured during engagement creation
@@ -57,7 +58,10 @@ export interface Engagement {
   type?: "full" | "lightweight"; // "lightweight" = quick save from inline assessment
   clientContext: ClientContext;
   diagnostic?: CompanyDiagnostic; // Company-level AI diagnostic (optional for backwards compat)
+  diagnosticHistory?: CompanyDiagnostic[]; // Previous diagnostic versions for delta tracking
+  companyIntel?: CompanyIntel; // Company Intelligence dashboard data (EDGAR + templates)
   processAssessments: ProcessAssessment[]; // NEW: Array of assessed processes
+  customAssumptions?: SavingsAssumptions; // User-editable savings assumptions
   createdAt: string; // ISO 8601
   updatedAt: string; // ISO 8601
 }

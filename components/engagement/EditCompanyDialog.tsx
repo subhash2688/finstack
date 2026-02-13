@@ -11,6 +11,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { PublicCompanyPicker } from "@/components/engagement/PublicCompanyPicker";
 import { Building2 } from "lucide-react";
 
 interface EditCompanyDialogProps {
@@ -90,20 +91,14 @@ export function EditCompanyDialog({
             </div>
           </div>
 
-          {/* Ticker Symbol — public only */}
+          {/* Public company picker */}
           {form.isPublic && (
-            <div>
-              <label className="block text-sm font-medium mb-2">Ticker Symbol</label>
-              <input
-                type="text"
-                value={form.tickerSymbol || ""}
-                onChange={(e) =>
-                  setForm({ ...form, tickerSymbol: e.target.value.toUpperCase() })
-                }
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 uppercase"
-                placeholder="e.g., AAPL"
-              />
-            </div>
+            <PublicCompanyPicker
+              value={form.tickerSymbol || ""}
+              onSelect={(ticker, companyName) =>
+                setForm({ ...form, tickerSymbol: ticker, companyName })
+              }
+            />
           )}
 
           {/* Private company financials */}

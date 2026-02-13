@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAnthropicClient, callAnthropicWithRetry } from "@/lib/ai/anthropic-client";
 import { ClientContext } from "@/types/engagement";
-import { CompanyDiagnostic } from "@/types/diagnostic";
+import { CompanyDiagnostic, CompanyIntelligence } from "@/types/diagnostic";
+import { buildERPContext } from "@/lib/data/erp-intelligence";
 
 // Rate limiting: 10 requests per hour per IP
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -31,15 +32,25 @@ interface ProcessContext {
   context?: Record<string, string>;
 }
 
+interface MaturityDataEntry {
+  processId: string;
+  processName: string;
+  ratings: Record<string, string>;
+  totalSteps: number;
+  ratedSteps: number;
+}
+
 interface GenerateRequest {
   clientContext: ClientContext;
   processAssessments: ProcessContext[];
+  maturityData?: MaturityDataEntry[];
+  isRefinement?: boolean;
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body: GenerateRequest = await request.json();
-    const { clientContext, processAssessments } = body;
+    const { clientContext, processAssessments, maturityData, isRefinement } = body;
 
     if (!clientContext || !clientContext.companyName) {
       return NextResponse.json(
@@ -59,6 +70,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Resolve ERP from client context or process-level context
+    const erpName = clientContext.erp
+      || (processAssessments || []).map((p) => p.context?.erp).find(Boolean)
+      || "";
+
     // Build process context section for the prompt
     const processSection = (processAssessments || [])
       .map((p) => {
@@ -77,6 +93,35 @@ export async function POST(request: NextRequest) {
       processName: p.processName,
       functionId: clientContext.functionId || "finance",
     }));
+
+    // Build company intelligence prompt section
+    const isPublicCompany = clientContext.isPublic && clientContext.tickerSymbol;
+    const companyIntelligencePrompt = isPublicCompany
+      ? `\nCOMPANY INTELLIGENCE REQUEST:
+This is a PUBLIC company with ticker ${clientContext.tickerSymbol}. Use your training knowledge to provide:
+- Known products/services, business model, and revenue scale
+- Industry positioning and key competitors
+- Technology stack and operational characteristics relevant to finance transformation
+- Any known challenges, recent strategic shifts, or market dynamics
+Generate a "companyIntelligence" section with confidenceLevel "high" if you recognize the company, "medium" if partially recognized.`
+      : `\nCOMPANY INTELLIGENCE REQUEST:
+This is a PRIVATE company. Generate a "companyIntelligence" section with:
+- confidenceLevel: "low" (unless you happen to recognize the company, then use "medium")
+- Industry-level benchmarks for ${clientContext.industry} companies of ${clientContext.companySize} size
+- Typical competitive landscape patterns for this segment`;
+
+    // Build maturity data section for refinements
+    const maturitySection = maturityData && maturityData.length > 0
+      ? `\nACTUAL ASSESSMENT DATA (from completed maturity assessments):
+${maturityData.map((m) => {
+  const ratingEntries = Object.entries(m.ratings)
+    .map(([stepId, level]) => `    ${stepId}: ${level}`)
+    .join("\n");
+  return `- ${m.processName} (${m.ratedSteps}/${m.totalSteps} steps rated):\n${ratingEntries}`;
+}).join("\n")}
+
+${isRefinement ? "IMPORTANT: This is a REFINEMENT of a previous hypothesis. Recalibrate ALL ranges and assessments based on the actual maturity data above rather than assumptions. The assessment data should visibly shift your estimates — if a process was assessed as more mature than expected, narrow the opportunity ranges; if less mature, widen them." : ""}`
+      : "";
 
     const result = await callAnthropicWithRetry(async () => {
       const client = getAnthropicClient();
@@ -101,6 +146,9 @@ SELECTED FUNCTION: ${clientContext.functionId || "finance"}
 
 SELECTED PROCESSES WITH CONTEXT:
 ${processSection || "No process-specific context provided"}
+${companyIntelligencePrompt}
+${maturitySection}
+${erpName ? "\n" + buildERPContext(erpName) : ""}
 
 TASK: Generate a tailored company diagnostic that reflects this SPECIFIC company's profile, scale, and pain points. Do NOT produce generic output — every field should be calibrated to the company's size, sub-sector, and stated challenges.
 
@@ -146,6 +194,13 @@ Return VALID JSON matching this EXACT structure:
 {
   "companyArchetype": "string",
   "archetypeDescription": "string",
+  "companyIntelligence": {
+    "confidenceLevel": "high"|"medium"|"low",
+    "confidenceReason": "string explaining why this confidence level",
+    "knownContext": "string — what you know about this specific company (omit if low confidence)",
+    "industryBenchmarks": "string — relevant industry benchmarks for companies of this size/sector",
+    "competitiveLandscape": "string — key competitors and market positioning"
+  },
   "challenges": [
     { "title": "string", "description": "string", "category": "operational"|"cost"|"data-quality"|"scale" }
   ],

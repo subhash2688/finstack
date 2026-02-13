@@ -2,12 +2,23 @@ import { getAllWorkflows } from '@/lib/data/workflows';
 import { getAllTools } from '@/lib/data/tools';
 import { FUNCTIONS } from '@/types/function';
 
+export interface CopilotEngagementContext {
+  companyName: string;
+  companySize: string;
+  industry: string;
+  erp?: string;
+  processes: { name: string; maturitySummary?: string; savingsRange?: string }[];
+  totalSavingsRange?: string;
+  totalToolCostRange?: string;
+  assumptions?: { costPerPerson: number; rangeFactor: number };
+}
+
 /**
  * Builds a grounded system prompt for the AI copilot.
  * Summarizes platform data (workflows, tools, functions) so the model
  * can answer questions without hallucinating.
  */
-export function buildCopilotSystemPrompt(currentProcessId?: string): string {
+export function buildCopilotSystemPrompt(currentProcessId?: string, engagementCtx?: CopilotEngagementContext): string {
   const workflows = getAllWorkflows();
   const tools = getAllTools();
 
@@ -45,6 +56,33 @@ export function buildCopilotSystemPrompt(currentProcessId?: string): string {
     ? `\nThe user is currently viewing the **${currentProcessId}** process page. Prioritize information about this process in your answers, but still answer cross-process questions.`
     : '';
 
+  // Build engagement context section
+  let engagementSection = '';
+  if (engagementCtx) {
+    const processLines = engagementCtx.processes.map(p => {
+      let line = `  - ${p.name}`;
+      if (p.maturitySummary) line += ` (${p.maturitySummary})`;
+      if (p.savingsRange) line += ` — est. savings: ${p.savingsRange}/yr`;
+      return line;
+    }).join('\n');
+
+    engagementSection = `
+## Active Engagement Context
+You are assisting with an active engagement for **${engagementCtx.companyName}**.
+- Industry: ${engagementCtx.industry}
+- Company size: ${engagementCtx.companySize}
+${engagementCtx.erp ? `- ERP system: ${engagementCtx.erp}` : ''}
+${engagementCtx.assumptions ? `- Cost assumptions: $${engagementCtx.assumptions.costPerPerson.toLocaleString()}/person, ±${Math.round(engagementCtx.assumptions.rangeFactor * 100)}% range` : ''}
+
+### Assessed Processes
+${processLines}
+
+${engagementCtx.totalSavingsRange ? `**Total addressable savings: ${engagementCtx.totalSavingsRange}/yr**` : ''}
+${engagementCtx.totalToolCostRange ? `**Est. tool investment: ${engagementCtx.totalToolCostRange}/yr**` : ''}
+
+Use this engagement context to give more specific, calibrated answers. Reference the company's ERP, size, and assessed processes when relevant.`;
+  }
+
   return `You are Lighthouse AI, a copilot for the Lighthouse process intelligence platform. You help consultants and finance teams explore workflow processes, assess AI-readiness, and discover the right vendors.
 
 ## Your Knowledge
@@ -68,6 +106,8 @@ ${toolSummaries}
   - Process steps: [Step Name](/{processId}?step={stepId})
 - **Stay grounded.** If asked about something not in your data, say "I don't have data on that in the platform" rather than guessing.
 - **Compare when asked.** For vendor comparisons, structure as a brief side-by-side with scores, strengths, and pricing.
-- **Process awareness.** When asked about "this process" or "current workflow," refer to the user's active process page.${currentContext}
+- **Process awareness.** When asked about "this process" or "current workflow," refer to the user's active process page.
+- **Engagement awareness.** If an active engagement is loaded, tailor recommendations to the company's ERP, size, and maturity. Reference specific findings data when answering ROI or savings questions.${currentContext}
+${engagementSection}
 `;
 }

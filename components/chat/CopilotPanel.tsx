@@ -16,9 +16,12 @@ interface Message {
   content: string;
 }
 
+import { CopilotEngagementContext } from '@/lib/ai/copilot-context';
+
 interface CopilotPanelProps {
   onClose: () => void;
   currentProcessId?: string;
+  engagementContext?: CopilotEngagementContext;
 }
 
 let messageCounter = 0;
@@ -26,7 +29,7 @@ function nextId() {
   return `msg-${++messageCounter}`;
 }
 
-export function CopilotPanel({ onClose, currentProcessId }: CopilotPanelProps) {
+export function CopilotPanel({ onClose, currentProcessId, engagementContext }: CopilotPanelProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
@@ -83,6 +86,7 @@ export function CopilotPanel({ onClose, currentProcessId }: CopilotPanelProps) {
         body: JSON.stringify({
           messages: updatedMessages.map((m) => ({ role: m.role, content: m.content })),
           currentProcessId,
+          engagementContext,
         }),
         signal: abortRef.current.signal,
       });

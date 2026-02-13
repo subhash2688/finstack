@@ -18,6 +18,19 @@
       "startingPrice": "$150K+ annually",
       "notes": "Enterprise-only pricing, workspace-based licensing"
     },
+    "annualCostEstimate": {
+      "flatFee": 200000,
+      "implementationCost": { "low": 75000, "high": 300000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "SAP", "integrationLevel": "connector", "notes": "Pre-built connector via Anaplan CloudWorks" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "connector", "notes": "CloudWorks connector for GL and transactional data" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "connector", "notes": "CloudWorks connector for Dynamics 365" },
+      { "erpName": "Workday", "integrationLevel": "connector", "notes": "CloudWorks connector for Workday Financials and HCM" },
+      { "erpName": "QuickBooks", "integrationLevel": "api", "notes": "REST API integration; not a typical Anaplan use case" },
+      { "erpName": "Sage", "integrationLevel": "api", "notes": "Custom API integration required" },
+      { "erpName": "Xero", "integrationLevel": "api", "notes": "Custom API integration required" }
+    ],
     "keyFeatures": [
       "Hyperblock multi-dimensional modeling engine",
       "Connected planning across finance, sales, and supply chain",
@@ -78,6 +91,19 @@
       "startingPrice": "$80K+ annually",
       "notes": "Bundled pricing available for Workday HCM/Financials customers"
     },
+    "annualCostEstimate": {
+      "flatFee": 150000,
+      "implementationCost": { "low": 60000, "high": 250000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "Workday", "integrationLevel": "native", "notes": "Seamless native integration with Workday HCM and Financials" },
+      { "erpName": "SAP", "integrationLevel": "connector", "notes": "Pre-built integration via Workday Integration Cloud" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "connector", "notes": "Pre-built connector for GL and financial data" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "connector", "notes": "Integration Cloud connector for Dynamics 365" },
+      { "erpName": "QuickBooks", "integrationLevel": "api", "notes": "API-based integration for smaller entities" },
+      { "erpName": "Sage", "integrationLevel": "api", "notes": "Custom API integration required" },
+      { "erpName": "Xero", "integrationLevel": "api", "notes": "Custom API integration required" }
+    ],
     "keyFeatures": [
       "Elastic Hypercube Technology for real-time modeling",
       "Native integration with Workday HCM and Financials",
@@ -138,6 +164,19 @@
       "startingPrice": "$60K+ annually",
       "notes": "Modular pricing for planning, consolidation, and reporting"
     },
+    "annualCostEstimate": {
+      "flatFee": 65000,
+      "implementationCost": { "low": 30000, "high": 85000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "Oracle NetSuite", "integrationLevel": "native", "notes": "Deep native integration with NetSuite GL and subledgers" },
+      { "erpName": "Sage", "integrationLevel": "native", "notes": "Native connector for Sage Intacct financials" },
+      { "erpName": "SAP", "integrationLevel": "connector", "notes": "Pre-built connector for SAP ECC and S/4HANA" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "connector", "notes": "Connector for Dynamics 365 Business Central and F&O" },
+      { "erpName": "Workday", "integrationLevel": "connector", "notes": "Connector for Workday Financials and HCM data" },
+      { "erpName": "QuickBooks", "integrationLevel": "api", "notes": "API integration for QuickBooks Online" },
+      { "erpName": "Xero", "integrationLevel": "api", "notes": "API-based integration available" }
+    ],
     "keyFeatures": [
       "End-to-end financial planning and consolidation",
       "Predict Signals AI for anomaly detection",
@@ -197,6 +236,19 @@
       "startingPrice": "$40K+ annually",
       "notes": "Growth and Professional tiers available"
     },
+    "annualCostEstimate": {
+      "flatFee": 45000,
+      "implementationCost": { "low": 20000, "high": 60000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "native", "notes": "Deep native integration via Microsoft ecosystem and Power Platform" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "native", "notes": "Native connector for NetSuite GL and reporting" },
+      { "erpName": "SAP", "integrationLevel": "connector", "notes": "Pre-built connector for SAP ECC and S/4HANA" },
+      { "erpName": "Workday", "integrationLevel": "connector", "notes": "Connector for Workday Financials data sync" },
+      { "erpName": "QuickBooks", "integrationLevel": "api", "notes": "API integration for QuickBooks Online data" },
+      { "erpName": "Sage", "integrationLevel": "connector", "notes": "Connector for Sage Intacct" },
+      { "erpName": "Xero", "integrationLevel": "api", "notes": "API-based integration available" }
+    ],
     "keyFeatures": [
       "Native Excel interface with centralized database backend",
       "Pre-built planning templates and best practices",
@@ -255,6 +307,19 @@
       "startingPrice": "$80K+ annually",
       "notes": "Custom pricing based on data volume and users"
     },
+    "annualCostEstimate": {
+      "flatFee": 110000,
+      "implementationCost": { "low": 40000, "high": 120000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "SAP", "integrationLevel": "connector", "notes": "Pre-built connector for SAP S/4HANA and ECC" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "connector", "notes": "Native connector for NetSuite financial data" },
+      { "erpName": "Workday", "integrationLevel": "connector", "notes": "Connector for Workday Financials and HCM" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "connector", "notes": "Connector for Dynamics 365 data sync" },
+      { "erpName": "QuickBooks", "integrationLevel": "api", "notes": "API integration for smaller entities" },
+      { "erpName": "Sage", "integrationLevel": "api", "notes": "API-based integration via Pigment data platform" },
+      { "erpName": "Xero", "integrationLevel": "api", "notes": "API-based integration available" }
+    ],
     "keyFeatures": [
       "Real-time collaborative planning with live data connections",
       "AI-powered forecasting and anomaly detection",
@@ -314,6 +379,19 @@
       "startingPrice": "$30K+ annually",
       "notes": "Essentials and Professional tiers; discounts for annual contracts"
     },
+    "annualCostEstimate": {
+      "flatFee": 35000,
+      "implementationCost": { "low": 10000, "high": 35000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "QuickBooks", "integrationLevel": "native", "notes": "Deep native integration for QuickBooks Online and Desktop" },
+      { "erpName": "Xero", "integrationLevel": "native", "notes": "Native connector with automatic data sync" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "native", "notes": "Native integration for NetSuite financials" },
+      { "erpName": "Sage", "integrationLevel": "native", "notes": "Native connector for Sage Intacct GL data" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "connector", "notes": "Pre-built connector for Dynamics 365" },
+      { "erpName": "SAP", "integrationLevel": "api", "notes": "API-based integration for SAP data extraction" },
+      { "erpName": "Workday", "integrationLevel": "api", "notes": "Custom API integration available" }
+    ],
     "keyFeatures": [
       "Automated Excel data consolidation and versioning",
       "AI-powered financial analyst (FP&A Genius chatbot)",
@@ -371,6 +449,19 @@
       "startingPrice": "$25K+ annually",
       "notes": "Core and Launch tiers available; free trial offered"
     },
+    "annualCostEstimate": {
+      "flatFee": 30000,
+      "implementationCost": { "low": 8000, "high": 25000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "Oracle NetSuite", "integrationLevel": "native", "notes": "Deep native integration with NetSuite GL and dimensions" },
+      { "erpName": "QuickBooks", "integrationLevel": "native", "notes": "Native connector for QuickBooks Online" },
+      { "erpName": "Xero", "integrationLevel": "native", "notes": "Native connector with automatic data sync" },
+      { "erpName": "SAP", "integrationLevel": "connector", "notes": "Pre-built connector for SAP data extraction" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "connector", "notes": "Connector for Dynamics 365 Business Central" },
+      { "erpName": "Workday", "integrationLevel": "api", "notes": "API-based integration for Workday financial data" },
+      { "erpName": "Sage", "integrationLevel": "native", "notes": "Native connector for Sage Intacct" }
+    ],
     "keyFeatures": [
       "Bi-directional spreadsheet sync (Excel and Google Sheets)",
       "Automated data consolidation from multiple sources",
@@ -428,6 +519,19 @@
       "startingPrice": "$20K+ annually",
       "notes": "Startup-friendly pricing with growth tiers"
     },
+    "annualCostEstimate": {
+      "flatFee": 18000,
+      "implementationCost": { "low": 5000, "high": 18000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "QuickBooks", "integrationLevel": "native", "notes": "Deep native integration with automatic sync" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "native", "notes": "Native connector for NetSuite financials" },
+      { "erpName": "Xero", "integrationLevel": "connector", "notes": "Pre-built connector for Xero accounting data" },
+      { "erpName": "Sage", "integrationLevel": "api", "notes": "API integration for Sage Intacct" },
+      { "erpName": "SAP", "integrationLevel": "api", "notes": "Not a typical use case; API available for custom integration" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "api", "notes": "API-based integration for Dynamics data" },
+      { "erpName": "Workday", "integrationLevel": "api", "notes": "API integration available but rare for Mosaic's market segment" }
+    ],
     "keyFeatures": [
       "Real-time SaaS metrics dashboard (ARR, burn, runway)",
       "AI-generated financial narratives and insights",
@@ -486,6 +590,19 @@
       "startingPrice": "$15K+ annually",
       "notes": "Starter and Growth plans available; often sold through accounting firms"
     },
+    "annualCostEstimate": {
+      "flatFee": 12000,
+      "implementationCost": { "low": 3000, "high": 12000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "QuickBooks", "integrationLevel": "native", "notes": "Deep native integration with QuickBooks Online" },
+      { "erpName": "Xero", "integrationLevel": "native", "notes": "Native connector with automatic GL sync" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "native", "notes": "Native connector for NetSuite financials" },
+      { "erpName": "Sage", "integrationLevel": "connector", "notes": "Pre-built connector for Sage Intacct" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "api", "notes": "API integration available" },
+      { "erpName": "SAP", "integrationLevel": "api", "notes": "Not a typical use case; custom API integration" },
+      { "erpName": "Workday", "integrationLevel": "api", "notes": "API integration available but uncommon for Jirav's market" }
+    ],
     "keyFeatures": [
       "Driver-based financial planning and modeling",
       "Automated three-statement financial model",
@@ -543,6 +660,19 @@
       "startingPrice": "$50K+ annually",
       "notes": "Modular pricing for planning, consolidation, and reporting"
     },
+    "annualCostEstimate": {
+      "flatFee": 55000,
+      "implementationCost": { "low": 25000, "high": 75000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "SAP", "integrationLevel": "connector", "notes": "Pre-built connector for SAP ECC and Business One" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "native", "notes": "Deep native integration with Dynamics GP, NAV, and 365" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "connector", "notes": "Pre-built connector for NetSuite GL data" },
+      { "erpName": "Sage", "integrationLevel": "connector", "notes": "Connector for Sage 300 and Intacct" },
+      { "erpName": "Workday", "integrationLevel": "api", "notes": "API integration for Workday financial data" },
+      { "erpName": "QuickBooks", "integrationLevel": "connector", "notes": "Pre-built connector for QuickBooks" },
+      { "erpName": "Xero", "integrationLevel": "api", "notes": "API-based integration available" }
+    ],
     "keyFeatures": [
       "Comprehensive budgeting and planning workflows",
       "Financial consolidation with intercompany eliminations",
@@ -601,6 +731,19 @@
       "startingPrice": "$200K+ annually",
       "notes": "Enterprise pricing with XF Marketplace solutions included"
     },
+    "annualCostEstimate": {
+      "flatFee": 250000,
+      "implementationCost": { "low": 100000, "high": 400000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "SAP", "integrationLevel": "native", "notes": "Deep native integration with SAP ECC, S/4HANA, and BPC migration path" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "connector", "notes": "Pre-built connector for Oracle and NetSuite GL data" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "connector", "notes": "Connector for Dynamics 365 and legacy Dynamics products" },
+      { "erpName": "Workday", "integrationLevel": "connector", "notes": "Connector for Workday Financials data extraction" },
+      { "erpName": "Sage", "integrationLevel": "connector", "notes": "Connector for Sage enterprise products" },
+      { "erpName": "QuickBooks", "integrationLevel": "api", "notes": "API available but not a typical use case for OneStream" },
+      { "erpName": "Xero", "integrationLevel": "api", "notes": "API available but not a typical use case for OneStream" }
+    ],
     "keyFeatures": [
       "Unified platform for consolidation, planning, and reporting",
       "Extensible Dimensionality for complex data models",
@@ -660,6 +803,19 @@
       "startingPrice": "$70K+ annually",
       "notes": "Modular pricing for planning, BI, and simulation capabilities"
     },
+    "annualCostEstimate": {
+      "flatFee": 85000,
+      "implementationCost": { "low": 35000, "high": 100000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "SAP", "integrationLevel": "native", "notes": "Deep native integration with SAP ECC and S/4HANA including certified connector" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "connector", "notes": "Pre-built connector for Oracle and NetSuite data" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "connector", "notes": "Connector for Dynamics 365 and legacy Dynamics products" },
+      { "erpName": "Workday", "integrationLevel": "connector", "notes": "Connector for Workday Financials and HCM" },
+      { "erpName": "Sage", "integrationLevel": "connector", "notes": "Connector for Sage enterprise products" },
+      { "erpName": "QuickBooks", "integrationLevel": "api", "notes": "API integration available for smaller entities" },
+      { "erpName": "Xero", "integrationLevel": "api", "notes": "API-based integration available" }
+    ],
     "keyFeatures": [
       "Unified planning, BI, and simulation in one platform",
       "BEAM (Board Enterprise Analytical Modeling) engine",
@@ -718,6 +874,19 @@
       "startingPrice": "$10K+ annually",
       "notes": "Free tier available for individuals; Team and Business plans for companies"
     },
+    "annualCostEstimate": {
+      "flatFee": 8000,
+      "implementationCost": { "low": 3000, "high": 10000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "QuickBooks", "integrationLevel": "native", "notes": "Native connector for QuickBooks Online" },
+      { "erpName": "Xero", "integrationLevel": "native", "notes": "Native connector with automatic data sync" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "connector", "notes": "Pre-built connector for NetSuite data" },
+      { "erpName": "Sage", "integrationLevel": "api", "notes": "API integration available" },
+      { "erpName": "SAP", "integrationLevel": "api", "notes": "Not a typical use case; custom API integration" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "api", "notes": "API-based integration available" },
+      { "erpName": "Workday", "integrationLevel": "api", "notes": "API integration available but uncommon for Causal's market" }
+    ],
     "keyFeatures": [
       "Visual formula builder with DAG-based dependency mapping",
       "Built-in uncertainty ranges and probability distributions",
@@ -775,6 +944,19 @@
       "startingPrice": "$25K+ annually",
       "notes": "Growth and Scale tiers available; startup-friendly pricing"
     },
+    "annualCostEstimate": {
+      "flatFee": 28000,
+      "implementationCost": { "low": 8000, "high": 25000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "Oracle NetSuite", "integrationLevel": "native", "notes": "Deep native integration for NetSuite GL and dimensions" },
+      { "erpName": "QuickBooks", "integrationLevel": "native", "notes": "Native connector for QuickBooks Online" },
+      { "erpName": "Sage", "integrationLevel": "native", "notes": "Native connector for Sage Intacct" },
+      { "erpName": "Xero", "integrationLevel": "connector", "notes": "Pre-built connector for Xero accounting data" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "connector", "notes": "Connector for Dynamics 365 data sync" },
+      { "erpName": "SAP", "integrationLevel": "api", "notes": "API integration for SAP financial data" },
+      { "erpName": "Workday", "integrationLevel": "api", "notes": "API integration for Workday financial data" }
+    ],
     "keyFeatures": [
       "Real-time actuals integration with live variance tracking",
       "AI-powered forecasting with confidence intervals",
@@ -833,6 +1015,19 @@
       "startingPrice": "$12K+ annually",
       "notes": "Startup plan available; scales with company size"
     },
+    "annualCostEstimate": {
+      "flatFee": 10000,
+      "implementationCost": { "low": 3000, "high": 10000 }
+    },
+    "erpIntegrations": [
+      { "erpName": "QuickBooks", "integrationLevel": "native", "notes": "Deep native integration with QuickBooks Online" },
+      { "erpName": "Xero", "integrationLevel": "native", "notes": "Native connector with automatic sync" },
+      { "erpName": "Oracle NetSuite", "integrationLevel": "connector", "notes": "Pre-built connector for NetSuite data" },
+      { "erpName": "Sage", "integrationLevel": "api", "notes": "API integration available" },
+      { "erpName": "SAP", "integrationLevel": "api", "notes": "Not a typical use case; custom API integration" },
+      { "erpName": "Microsoft Dynamics", "integrationLevel": "api", "notes": "API-based integration available" },
+      { "erpName": "Workday", "integrationLevel": "api", "notes": "API integration available but uncommon for Runway's market" }
+    ],
     "keyFeatures": [
       "Automated three-statement financial model generation",
       "Real-time cash runway and burn rate monitoring",

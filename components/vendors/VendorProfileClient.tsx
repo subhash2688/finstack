@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FitScoreBadge, FitScoreBar } from "@/components/tools/FitScoreBadge";
 import { getToolFitGrade } from "@/lib/data/tools";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   Building2,
@@ -58,6 +59,7 @@ const effortColors: Record<string, string> = {
 };
 
 export function VendorProfileClient({ tool }: { tool: Tool }) {
+  const router = useRouter();
   const overallGrade = tool.overallFitScore
     ? getToolFitGrade(tool.overallFitScore)
     : null;
@@ -65,13 +67,13 @@ export function VendorProfileClient({ tool }: { tool: Tool }) {
   return (
     <div className="max-w-5xl mx-auto px-6 py-8">
       {/* Back nav */}
-      <Link
-        href={`/${tool.category}?tab=vendors`}
+      <button
+        onClick={() => router.back()}
         className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
       >
         <ArrowLeft className="h-4 w-4" />
-        Vendor Landscape
-      </Link>
+        Back
+      </button>
 
       {/* ─── Header ─── */}
       <section className="mb-10">

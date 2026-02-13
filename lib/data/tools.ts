@@ -1,4 +1,5 @@
-import { Tool, Category, AIMaturity, CompanySize, FitGrade } from '@/types/tool';
+import { Tool, Category, AIMaturity, CompanySize, FitGrade, ERPIntegration } from '@/types/tool';
+import { getERPSignal } from '@/lib/data/erp-intelligence';
 import apTools from '@/data/tools/ap-tools.json';
 import arTools from '@/data/tools/ar-tools.json';
 import fpaTools from '@/data/tools/fpa-tools.json';
@@ -92,19 +93,146 @@ export function getToolFitGrade(score: number): FitGrade {
   return 'limited';
 }
 
-export function getToolsForStepSorted(stepId: string, category: Category, filters?: ToolFilters): Tool[] {
+/**
+ * Filter tools by company size and sub-sector context.
+ * Tools matching the context are returned first, with higher relevance.
+ */
+export function filterToolsByContext(
+  category: Category,
+  companySize?: CompanySize,
+  subSector?: string
+): Tool[] {
+  let tools = getToolsByCategory(category);
+
+  if (!companySize && !subSector) return tools;
+
+  // Score each tool by context match
+  const scored = tools.map((tool) => {
+    let score = 0;
+
+    // Company size match
+    if (companySize && tool.companySizes.includes(companySize)) {
+      score += 2;
+    }
+
+    // Sub-sector match
+    if (subSector && tool.subSectors?.includes(subSector)) {
+      score += 3;
+    }
+
+    return { tool, score };
+  });
+
+  // Sort by score descending, then by overall fit score
+  scored.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return (b.tool.overallFitScore || 0) - (a.tool.overallFitScore || 0);
+  });
+
+  return scored.map((s) => s.tool);
+}
+
+/**
+ * Get ERP compatibility level for a tool given an ERP name.
+ * Checks erpIntegrations first (structured data), falls back to integrations list.
+ */
+export function getToolERPCompatibility(
+  tool: Tool,
+  erpName: string
+): { level: ERPIntegration["integrationLevel"]; notes?: string } | null {
+  if (!erpName) return null;
+
+  const signal = getERPSignal(erpName);
+  if (!signal) return null;
+
+  // Check structured erpIntegrations first
+  if (tool.erpIntegrations && tool.erpIntegrations.length > 0) {
+    const match = tool.erpIntegrations.find(
+      (e) => e.erpName.toLowerCase() === signal.erpName.toLowerCase()
+    );
+    if (match) return { level: match.integrationLevel, notes: match.notes };
+  }
+
+  // Fallback: check integrations string array
+  const erpLower = signal.erpName.toLowerCase();
+  const aliases = signal.aliases;
+  const hasMatch = tool.integrations.some((integ) => {
+    const l = integ.toLowerCase();
+    return l === erpLower || aliases.some((a) => l.includes(a));
+  });
+
+  if (hasMatch) return { level: "connector" };
+  return null;
+}
+
+/**
+ * ERP compatibility score boost:
+ * - native: +8 points
+ * - connector: +5 points
+ * - middleware: +3 points
+ * - api: +1 point
+ */
+function erpScoreBoost(level: ERPIntegration["integrationLevel"]): number {
+  switch (level) {
+    case "native": return 8;
+    case "connector": return 5;
+    case "middleware": return 3;
+    case "api": return 1;
+  }
+}
+
+export function getToolsForStepSorted(stepId: string, category: Category, filters?: ToolFilters, erpName?: string): Tool[] {
   let tools = filterTools({
     category,
     workflowStep: stepId,
     ...filters,
   });
 
-  // Sort by fit score for this step (highest first), tools without scores go last
+  // Sort by fit score for this step (highest first), with ERP boost, tools without scores go last
   tools.sort((a, b) => {
-    const aScore = a.fitScores?.find(f => f.stepId === stepId)?.score ?? -1;
-    const bScore = b.fitScores?.find(f => f.stepId === stepId)?.score ?? -1;
+    let aScore = a.fitScores?.find(f => f.stepId === stepId)?.score ?? -1;
+    let bScore = b.fitScores?.find(f => f.stepId === stepId)?.score ?? -1;
+
+    // Apply ERP compatibility boost
+    if (erpName) {
+      const aErp = getToolERPCompatibility(a, erpName);
+      const bErp = getToolERPCompatibility(b, erpName);
+      if (aErp && aScore >= 0) aScore += erpScoreBoost(aErp.level);
+      if (bErp && bScore >= 0) bScore += erpScoreBoost(bErp.level);
+    }
+
     return bScore - aScore;
   });
 
   return tools;
+}
+
+/**
+ * Estimate annual tool cost for a given team size.
+ */
+export function estimateToolCost(tool: Tool, teamSize: number): { low: number; high: number } | null {
+  const cost = tool.annualCostEstimate;
+  if (!cost) return null;
+
+  let annual = 0;
+  if (cost.perUser) {
+    annual = cost.perUser * teamSize;
+  } else if (cost.flatFee) {
+    annual = cost.flatFee;
+  } else if (cost.perTransaction) {
+    // Rough estimate: 500 transactions per person per year
+    annual = cost.perTransaction * teamSize * 500;
+  }
+
+  if (annual === 0) return null;
+
+  // Add implementation cost amortized over 3 years
+  const implLow = cost.implementationCost?.low ?? 0;
+  const implHigh = cost.implementationCost?.high ?? 0;
+  const implAmort = (implLow + implHigh) / 2 / 3;
+
+  return {
+    low: Math.round(annual * 0.8 + implLow / 3),
+    high: Math.round(annual * 1.2 + implHigh / 3),
+  };
 }

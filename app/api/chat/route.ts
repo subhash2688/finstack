@@ -1,7 +1,7 @@
 import { NextRequest } from 'next/server';
 import { streamText } from 'ai';
 import { createAnthropic } from '@ai-sdk/anthropic';
-import { buildCopilotSystemPrompt } from '@/lib/ai/copilot-context';
+import { buildCopilotSystemPrompt, CopilotEngagementContext } from '@/lib/ai/copilot-context';
 
 // Rate limiting: 20 messages per minute per IP
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { messages, currentProcessId } = await request.json();
+    const { messages, currentProcessId, engagementContext } = await request.json();
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return new Response(
@@ -54,7 +54,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const systemPrompt = buildCopilotSystemPrompt(currentProcessId);
+    const systemPrompt = buildCopilotSystemPrompt(
+      currentProcessId,
+      engagementContext as CopilotEngagementContext | undefined
+    );
 
     // Convert to simple role/content format for the model
     const modelMessages = (messages as ChatMessage[]).map((m) => ({

@@ -14,6 +14,8 @@ import {
   PROCESS_QUESTIONS,
   DEFAULT_PROCESS_QUESTIONS,
 } from "@/lib/data/process-questions";
+import { EngagementStepper, StepDef } from "@/components/engagement/EngagementStepper";
+import { PublicCompanyPicker } from "@/components/engagement/PublicCompanyPicker";
 import {
   DollarSign,
   TrendingUp,
@@ -22,7 +24,6 @@ import {
   Scale,
   Loader2,
   Building2,
-  Check,
 } from "lucide-react";
 
 const FUNCTION_ICONS: Record<string, React.ElementType> = {
@@ -198,57 +199,26 @@ export function NewEngagementForm() {
         .filter(Boolean) as ProcessMeta[]
     : [];
 
-  // ── Step Nav Bar ──
-  const stepNav = (
-    <nav className="mb-8">
-      <div className="flex items-center gap-0">
-        {STEPS.map((s, i) => {
-          const isActive = s.id === step;
-          const isCompleted = i < currentStepIndex;
-          const isClickable = canNavigateTo(i);
+  // ── Step Nav Bar (shared component) ──
+  const stepDefs: StepDef[] = STEPS.map((s, i) => ({
+    id: s.id,
+    label: s.label,
+    shortLabel: s.shortLabel,
+    status:
+      s.id === step
+        ? "active"
+        : i < currentStepIndex
+        ? "completed"
+        : canNavigateTo(i)
+        ? "available"
+        : "disabled",
+  }));
 
-          return (
-            <div key={s.id} className="flex items-center">
-              {i > 0 && (
-                <div
-                  className={`w-8 sm:w-12 h-px mx-1 ${
-                    i <= currentStepIndex ? "bg-primary" : "bg-border"
-                  }`}
-                />
-              )}
-              <button
-                type="button"
-                onClick={() => isClickable && navigateTo(s.id)}
-                disabled={!isClickable}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium transition-colors whitespace-nowrap ${
-                  isActive
-                    ? "bg-primary text-primary-foreground"
-                    : isCompleted
-                    ? "bg-primary/10 text-primary hover:bg-primary/20 cursor-pointer"
-                    : isClickable
-                    ? "bg-muted text-foreground hover:bg-accent cursor-pointer"
-                    : "bg-muted/50 text-muted-foreground cursor-not-allowed"
-                }`}
-              >
-                <span
-                  className={`flex items-center justify-center h-5 w-5 rounded-full text-xs ${
-                    isActive
-                      ? "bg-primary-foreground/20 text-primary-foreground"
-                      : isCompleted
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted-foreground/20 text-muted-foreground"
-                  }`}
-                >
-                  {isCompleted ? <Check className="h-3 w-3" /> : i + 1}
-                </span>
-                <span className="hidden sm:inline">{s.label}</span>
-                <span className="sm:hidden">{s.shortLabel}</span>
-              </button>
-            </div>
-          );
-        })}
-      </div>
-    </nav>
+  const stepNav = (
+    <EngagementStepper
+      steps={stepDefs}
+      onStepClick={(id) => navigateTo(id as Step)}
+    />
   );
 
   // ════════════════════════════════════════
@@ -259,18 +229,6 @@ export function NewEngagementForm() {
       <div className="max-w-2xl mx-auto">
         {stepNav}
         <div className="space-y-6">
-          {/* Company Name */}
-          <div>
-            <label className="block text-sm font-medium mb-2">Company Name *</label>
-            <input
-              type="text"
-              value={formData.companyName}
-              onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
-              placeholder="Acme Corp"
-            />
-          </div>
-
           {/* Public / Private */}
           <div>
             <label className="block text-sm font-medium mb-2">Company Type *</label>
@@ -302,24 +260,27 @@ export function NewEngagementForm() {
             </div>
           </div>
 
-          {/* Ticker Symbol — public only */}
+          {/* Public company picker — auto-fills company name */}
           {formData.isPublic && (
-            <div>
-              <label className="block text-sm font-medium mb-2">Ticker Symbol</label>
-              <input
-                type="text"
-                value={formData.tickerSymbol || ""}
-                onChange={(e) =>
-                  setFormData({ ...formData, tickerSymbol: e.target.value.toUpperCase() })
-                }
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 uppercase"
-                placeholder="e.g., AAPL"
-              />
-              <p className="mt-1 text-xs text-muted-foreground">
-                We&apos;ll use this to pull publicly available financial data
-              </p>
-            </div>
+            <PublicCompanyPicker
+              value={formData.tickerSymbol || ""}
+              onSelect={(ticker, companyName) =>
+                setFormData({ ...formData, tickerSymbol: ticker, companyName })
+              }
+            />
           )}
+
+          {/* Company Name */}
+          <div>
+            <label className="block text-sm font-medium mb-2">Company Name *</label>
+            <input
+              type="text"
+              value={formData.companyName}
+              onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
+              placeholder={formData.isPublic ? "Auto-filled from selection above" : "Acme Corp"}
+            />
+          </div>
 
           {/* Private company financials */}
           {!formData.isPublic && (

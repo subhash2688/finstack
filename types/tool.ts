@@ -39,6 +39,19 @@ export interface DeploymentComplexity {
   requirements?: string[];
 }
 
+export interface AnnualCostEstimate {
+  perUser?: number;
+  perTransaction?: number;
+  flatFee?: number;
+  implementationCost?: { low: number; high: number };
+}
+
+export interface ERPIntegration {
+  erpName: string;
+  integrationLevel: "native" | "connector" | "middleware" | "api";
+  notes?: string;
+}
+
 export interface Tool {
   id: string;
   name: string;
@@ -63,4 +76,7 @@ export interface Tool {
   founded?: string;
   headquarters?: string;
   employeeCount?: string;
+  subSectors?: string[];
+  annualCostEstimate?: AnnualCostEstimate;
+  erpIntegrations?: ERPIntegration[];
 }

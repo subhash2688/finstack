@@ -9,6 +9,12 @@ const techSaaSMidMarket: CompanyDiagnostic = {
   companyArchetype: "Mid-Market SaaS — Finance & GTM Heavy",
   archetypeDescription:
     "Companies in this archetype typically have 200–1,500 employees with rapid revenue growth outpacing back-office investment. Finance teams are lean relative to transaction volume, and GTM motions generate significant downstream data that finance must reconcile. The gap between growth velocity and operational maturity creates predictable pain points.",
+  companyIntelligence: {
+    confidenceLevel: "low",
+    confidenceReason: "Private company — using industry-level benchmarks for mid-market SaaS",
+    industryBenchmarks: "Mid-market SaaS companies typically spend 8–12% of revenue on G&A, with finance teams of 5–15 people. Invoice volumes range from 200–2,000/month, with 60–70% of AP effort spent on manual data entry and approval routing.",
+    competitiveLandscape: "The mid-market SaaS finance automation space is served by tools like Tipalti, Bill.com, Ramp, and Brex for AP; Tesorio and HighRadius for AR; and Mosaic, Pigment, and Anaplan for FP&A.",
+  },
   challenges: [
     {
       title: "Manual invoice processing at scale",
@@ -104,6 +110,12 @@ const enterpriseManufacturing: CompanyDiagnostic = {
   companyArchetype: "Enterprise Manufacturing — Ops & Finance Integration",
   archetypeDescription:
     "Large manufacturing enterprises with 5,000+ employees face unique challenges at the intersection of operational technology and financial systems. Complex supply chains, multi-entity structures, and high transaction volumes create process density that manual workflows cannot sustain. The primary opportunity is closing the gap between shop floor data and financial reporting.",
+  companyIntelligence: {
+    confidenceLevel: "low",
+    confidenceReason: "Using industry-level benchmarks for enterprise manufacturing",
+    industryBenchmarks: "Enterprise manufacturers typically process 10,000–50,000 invoices monthly with shared services centers. Finance teams of 50–200 people manage multi-entity consolidation across 10–50 legal entities. Average close cycle is 8–12 business days.",
+    competitiveLandscape: "Enterprise manufacturing finance automation is dominated by SAP, Oracle, and Coupa for procurement; BlackLine and Trintech for close management; and OneStream and Planful for consolidation and planning.",
+  },
   challenges: [
     {
       title: "Three-way match at high volume",
@@ -205,6 +217,12 @@ const healthcareMidMarket: CompanyDiagnostic = {
   companyArchetype: "Mid-Market Healthcare — Compliance & Revenue Cycle",
   archetypeDescription:
     "Healthcare organizations with 500–3,000 employees operate under intense regulatory scrutiny while managing complex revenue cycles spanning payer contracts, patient billing, and reimbursement. Finance teams must balance compliance requirements with operational efficiency, and the cost of errors extends beyond financial impact to patient care and regulatory risk.",
+  companyIntelligence: {
+    confidenceLevel: "low",
+    confidenceReason: "Using industry-level benchmarks for mid-market healthcare",
+    industryBenchmarks: "Mid-market healthcare organizations typically see 3–8% revenue leakage from claim denials and underpayments. Finance teams of 10–30 people manage revenue cycles of $50M–$500M with 20+ payer contracts. Average days in AR ranges from 35–55 days.",
+    competitiveLandscape: "Healthcare finance automation is served by Waystar, Availity, and Change Healthcare for revenue cycle; Workday and Infor for back-office finance; and nThrive and R1 RCM for outsourced revenue cycle management.",
+  },
   challenges: [
     {
       title: "Revenue cycle leakage",
@@ -300,6 +318,12 @@ const professionalServicesSMB: CompanyDiagnostic = {
   companyArchetype: "Professional Services SMB — People & Project Economics",
   archetypeDescription:
     "Professional services firms with 50–500 employees are fundamentally people businesses where project economics drive profitability. Finance operations center on billable hour tracking, project profitability, and cash flow management. Lean finance teams (often 2–5 people) handle disproportionate complexity across time-based billing, milestone invoicing, and multi-currency operations.",
+  companyIntelligence: {
+    confidenceLevel: "low",
+    confidenceReason: "Using industry-level benchmarks for professional services SMBs",
+    industryBenchmarks: "Professional services SMBs typically target 60–70% utilization rates with average project margins of 30–45%. Finance teams of 2–5 people manage 50–200 active projects with billing cycles of 15–30 days. Time-to-invoice averages 5–15 days.",
+    competitiveLandscape: "Professional services finance is served by Sage Intacct and QuickBooks for accounting; BigTime, Kantata, and Harvest for project billing; and Expensify and SAP Concur for expense management.",
+  },
   challenges: [
     {
       title: "Time-to-invoice lag",
