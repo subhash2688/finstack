@@ -1,5 +1,6 @@
 import { Engagement, LegacyEngagement, ProcessAssessment, ClientContext } from "@/types/engagement";
 import { MaturityLevel } from "@/types/workflow";
+import { TranscriptIntelligence } from "@/types/transcript";
 
 const STORAGE_KEY = "finstack-engagements";
 
@@ -195,6 +196,31 @@ export function updateMaturityRatings(
     processAssessments: engagement.processAssessments.map((pa) =>
       pa.processId === processId ? { ...pa, maturityRatings: ratings } : pa
     ),
+    updatedAt: new Date().toISOString(),
+  };
+
+  saveEngagement(updated);
+  return updated;
+}
+
+/**
+ * Update transcript intelligence for a specific process within an engagement.
+ * Also clears pendingTranscripts after analysis.
+ */
+export function updateTranscriptIntelligence(
+  engagementId: string,
+  processId: string,
+  transcriptIntelligence: TranscriptIntelligence
+): Engagement | null {
+  const engagement = getEngagement(engagementId);
+  if (!engagement) return null;
+
+  const updated = {
+    ...engagement,
+    processAssessments: engagement.processAssessments.map((pa) =>
+      pa.processId === processId ? { ...pa, transcriptIntelligence } : pa
+    ),
+    pendingTranscripts: undefined,
     updatedAt: new Date().toISOString(),
   };
 

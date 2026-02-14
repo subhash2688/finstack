@@ -232,16 +232,16 @@ function EngagementDetailSidebar({
 
   const subPages = [
     {
-      label: "Inputs",
+      label: "Intake",
       href: basePath,
       icon: FileText,
       active: pathname === basePath,
     },
     {
-      label: "Company Insights",
-      href: `${basePath}/company-intel`,
-      icon: Briefcase,
-      active: pathname === `${basePath}/company-intel`,
+      label: "Hypothesis",
+      href: `${basePath}/hypothesis`,
+      icon: Lightbulb,
+      active: pathname === `${basePath}/hypothesis`,
     },
     {
       label: "Assessment",
@@ -250,22 +250,16 @@ function EngagementDetailSidebar({
       active: pathname === `${basePath}/assessment`,
     },
     {
-      label: "Opportunity Areas",
-      href: `${basePath}/hypothesis`,
-      icon: Lightbulb,
-      active: pathname === `${basePath}/hypothesis`,
-    },
-    {
-      label: "Business Impact",
-      href: `${basePath}/findings`,
+      label: "Opportunities",
+      href: `${basePath}/opportunities`,
       icon: BarChart3,
-      active: pathname === `${basePath}/findings`,
+      active: pathname === `${basePath}/opportunities` || pathname === `${basePath}/findings`,
     },
     {
-      label: "Tool Recommendations",
-      href: `${basePath}/tools`,
+      label: "Technology",
+      href: `${basePath}/technology`,
       icon: Wrench,
-      active: pathname === `${basePath}/tools`,
+      active: pathname === `${basePath}/technology` || pathname === `${basePath}/tools`,
     },
   ];
 
@@ -437,14 +431,10 @@ export function Sidebar() {
   }
 
   // Engagement detail — /engagements/[id] or /engagements/[id]/*
+  // No sidebar — stepper + right rail handle navigation
   const engagementMatch = pathname.match(/^\/engagements\/([^/]+)/);
   if (engagementMatch && engagementMatch[1] !== "new") {
-    return (
-      <EngagementDetailSidebar
-        pathname={pathname}
-        engagementId={engagementMatch[1]}
-      />
-    );
+    return null;
   }
 
   // Engagements list — /engagements or /engagements/new

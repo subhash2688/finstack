@@ -47,6 +47,17 @@ export const DEFAULT_PROCESS_QUESTIONS: ProcessQuestion[] = [
   { key: "painPoints", label: "Key Pain Points", type: "textarea", placeholder: "Main challenges and areas for improvement..." },
 ];
 
+/**
+ * Simplified core questions used in the new engagement form (Step 3).
+ * These apply to ALL processes, replacing per-process question sets in the creation flow.
+ */
+export const CORE_PROCESS_QUESTIONS: ProcessQuestion[] = [
+  { key: "erp", label: "ERP & Systems", type: "text", placeholder: "e.g., SAP, NetSuite, Coupa, Expensify" },
+  { key: "teamSize", label: "Team Size", type: "text", placeholder: "e.g., 12" },
+  { key: "costPerPerson", label: "Avg Cost per Person", type: "text", placeholder: "e.g., $90,000" },
+  { key: "consultantNotes", label: "Additional Observations / Insights", type: "textarea", placeholder: "Any observations from interviews or initial discovery..." },
+];
+
 export const TECH_SUB_SECTORS = [
   "SaaS",
   "Hardware",

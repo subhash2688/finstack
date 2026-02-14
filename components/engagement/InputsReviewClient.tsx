@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Engagement } from "@/types/engagement";
 import { getEngagement, saveEngagement } from "@/lib/storage/engagements";
-import { FUNCTIONS } from "@/types/function";
+import { getWorkflow } from "@/lib/data/workflows";
+import { WorkflowId } from "@/types/workflow";
 import {
   PROCESS_QUESTIONS,
   DEFAULT_PROCESS_QUESTIONS,
@@ -12,69 +13,16 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { EditCompanyDialog } from "@/components/engagement/EditCompanyDialog";
 import { EditProcessContextDialog } from "@/components/engagement/EditProcessContextDialog";
-import { ClientContext } from "@/types/engagement";
-import { Pencil, Building2, Users, TrendingUp, DollarSign, ArrowRight } from "lucide-react";
+import {
+  Pencil,
+  FileText,
+  Sparkles,
+  ListChecks,
+  CircleDot,
+  CheckCircle2,
+} from "lucide-react";
 import Link from "next/link";
-// Well-known company name → domain overrides
-const DOMAIN_MAP: Record<string, string> = {
-  "datadog": "datadoghq.com",
-  "salesforce": "salesforce.com",
-  "servicenow": "servicenow.com",
-  "meta": "meta.com",
-  "alphabet": "google.com",
-  "microsoft": "microsoft.com",
-};
-
-function guessDomain(name: string): string {
-  // Normalize: "Acme Corp" → "acme", "DataDog Inc." → "datadog"
-  const cleaned = name
-    .toLowerCase()
-    .replace(/\b(inc|corp|co|ltd|llc|group|holdings|technologies|systems|software)\b\.?/g, "")
-    .replace(/[^a-z0-9]/g, "")
-    .trim();
-  return DOMAIN_MAP[cleaned] || `${cleaned}.com`;
-}
-
-function CompanyLogo({ name }: { name: string }) {
-  const [imgError, setImgError] = useState(false);
-
-  const domain = guessDomain(name);
-  const logoUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-
-  const initials = name
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
-
-  if (imgError) {
-    return (
-      <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-        <span className="text-lg font-semibold text-primary">{initials}</span>
-      </div>
-    );
-  }
-
-  /* eslint-disable @next/next/no-img-element */
-  return (
-    <img
-      src={logoUrl}
-      alt={`${name} logo`}
-      width={56}
-      height={56}
-      className="h-14 w-14 rounded-xl object-contain bg-white border p-1.5 shrink-0"
-      onError={() => setImgError(true)}
-      onLoad={(e) => {
-        // Google returns a tiny default globe for unknown domains
-        const img = e.currentTarget;
-        if (img.naturalWidth <= 16) setImgError(true);
-      }}
-    />
-  );
-}
 
 interface InputsReviewClientProps {
   engagementId: string;
@@ -83,7 +31,6 @@ interface InputsReviewClientProps {
 export function InputsReviewClient({ engagementId }: InputsReviewClientProps) {
   const router = useRouter();
   const [engagement, setEngagement] = useState<Engagement | null>(null);
-  const [showEditCompany, setShowEditCompany] = useState(false);
   const [editingProcess, setEditingProcess] = useState<{
     processId: string;
     processName: string;
@@ -97,19 +44,14 @@ export function InputsReviewClient({ engagementId }: InputsReviewClientProps) {
       return;
     }
     setEngagement(loaded);
-  }, [engagementId, router]);
 
-  const handleUpdateClientContext = (updated: ClientContext) => {
-    if (!engagement) return;
-    const updatedEngagement = {
-      ...engagement,
-      clientContext: updated,
-      updatedAt: new Date().toISOString(),
+    const handler = () => {
+      const updated = getEngagement(engagementId);
+      if (updated) setEngagement(updated);
     };
-    saveEngagement(updatedEngagement);
-    setEngagement(updatedEngagement);
-    window.dispatchEvent(new Event("engagement-updated"));
-  };
+    window.addEventListener("engagement-updated", handler);
+    return () => window.removeEventListener("engagement-updated", handler);
+  }, [engagementId, router]);
 
   const handleUpdateProcessContext = (
     processId: string,
@@ -129,102 +71,130 @@ export function InputsReviewClient({ engagementId }: InputsReviewClientProps) {
   };
 
   if (!engagement) {
-    return <div className="text-center py-12 text-muted-foreground">Loading...</div>;
+    return (
+      <div className="text-center py-12 text-muted-foreground">Loading...</div>
+    );
   }
 
   const ctx = engagement.clientContext;
-  const func = FUNCTIONS.find((f) => f.id === ctx.functionId);
+  const hasDiagnostic = !!engagement.diagnostic;
+  const hasIntel = !!engagement.companyIntel;
+  const hasTranscripts = (engagement.pendingTranscripts?.length || 0) > 0;
+  const hasAnalyzedTranscripts = engagement.processAssessments.some(
+    (pa) => pa.transcriptIntelligence?.analyses?.length
+  );
 
-  // Build attribute pills for the company
-  const companyPills: { label: string; icon?: React.ElementType }[] = [];
-  if (ctx.isPublic) {
-    companyPills.push({ label: ctx.tickerSymbol ? `Public (${ctx.tickerSymbol})` : "Public", icon: Building2 });
-  } else {
-    companyPills.push({ label: "Private", icon: Building2 });
-  }
-  if (ctx.subSector) companyPills.push({ label: ctx.subSector });
-  else if (ctx.industry) companyPills.push({ label: ctx.industry });
-  companyPills.push({ label: ctx.companySize === "smb" ? "SMB" : ctx.companySize.charAt(0).toUpperCase() + ctx.companySize.slice(1) });
-  if (!ctx.isPublic && ctx.revenue) companyPills.push({ label: ctx.revenue, icon: DollarSign });
-  if (!ctx.isPublic && ctx.revenueGrowth) companyPills.push({ label: `${ctx.revenueGrowth} YoY`, icon: TrendingUp });
-  if (!ctx.isPublic && ctx.headcount) companyPills.push({ label: `${ctx.headcount} people`, icon: Users });
+  // Compute assessment progress
+  const totalProcesses = engagement.processAssessments.length;
+  const assessedProcesses = engagement.processAssessments.filter((pa) => {
+    const ratedCount = pa.maturityRatings
+      ? Object.keys(pa.maturityRatings).length
+      : 0;
+    const workflow = getWorkflow(pa.processId as WorkflowId);
+    const totalSteps =
+      pa.generatedWorkflow?.length || workflow?.steps.length || 0;
+    return ratedCount >= totalSteps && totalSteps > 0;
+  }).length;
+
+  // Total workflow steps across all processes
+  const totalSteps = engagement.processAssessments.reduce((sum, pa) => {
+    const workflow = getWorkflow(pa.processId as WorkflowId);
+    return sum + (pa.generatedWorkflow?.length || workflow?.steps.length || 0);
+  }, 0);
+
+  // Readiness checklist
+  const readinessItems = [
+    {
+      label: "Company profile",
+      done: true,
+      detail: ctx.companyName,
+    },
+    {
+      label: "Processes selected",
+      done: totalProcesses > 0,
+      detail: `${totalProcesses} process${totalProcesses !== 1 ? "es" : ""}, ${totalSteps} steps`,
+    },
+    {
+      label: "Company intelligence",
+      done: hasIntel,
+      detail: hasIntel ? "EDGAR data loaded" : "Open Company Brief to fetch",
+    },
+    {
+      label: "AI hypothesis",
+      done: hasDiagnostic,
+      detail: hasDiagnostic ? "Generated" : "Go to Hypothesis step",
+    },
+    {
+      label: "Transcript insights",
+      done: hasAnalyzedTranscripts,
+      detail: hasTranscripts
+        ? `${engagement.pendingTranscripts!.length} pending`
+        : hasAnalyzedTranscripts
+        ? "Analyzed"
+        : "None uploaded",
+    },
+  ];
+  const readinessPct = Math.round(
+    (readinessItems.filter((r) => r.done).length / readinessItems.length) * 100
+  );
 
   return (
-    <div className="space-y-8">
-      {/* ── Company Hero ── */}
-      <div className="relative rounded-xl border bg-gradient-to-br from-card to-muted/30 p-6 sm:p-8">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => setShowEditCompany(true)}
-          className="absolute top-4 right-4 gap-1.5 text-muted-foreground hover:text-foreground"
-        >
-          <Pencil className="h-3.5 w-3.5" />
-          Edit
-        </Button>
+    <div className="space-y-6">
+      {/* ── Two-column: Process scope + Readiness ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        {/* Process Scope — 2/3 width */}
+        <div className="lg:col-span-2 space-y-3">
+          <h3 className="text-xs font-semibold tracking-wider uppercase text-muted-foreground flex items-center gap-2">
+            <ListChecks className="h-3.5 w-3.5" />
+            Scope — {totalProcesses} Process{totalProcesses !== 1 ? "es" : ""} · {totalSteps} Steps
+          </h3>
 
-        <div className="flex items-start gap-4 mb-4">
-          <CompanyLogo name={ctx.companyName} />
-          <div>
-            <p className="text-xs font-medium text-muted-foreground tracking-wider uppercase mb-1">
-              {func?.name || "Assessment"}
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-light tracking-wide">
-              {ctx.companyName}
-            </h2>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          {companyPills.map((pill, i) => {
-            const Icon = pill.icon;
-            return (
-              <Badge
-                key={i}
-                variant="secondary"
-                className="px-3 py-1 text-xs font-normal gap-1.5"
-              >
-                {Icon && <Icon className="h-3 w-3" />}
-                {pill.label}
-              </Badge>
-            );
-          })}
-        </div>
-
-        {ctx.characteristics && (
-          <p className="mt-4 text-sm text-muted-foreground border-t pt-4 leading-relaxed">
-            {ctx.characteristics}
-          </p>
-        )}
-      </div>
-
-      {/* ── Process Scope ── */}
-      <div>
-        <h3 className="text-sm font-semibold tracking-wider uppercase text-muted-foreground mb-3">
-          Scope — {engagement.processAssessments.length} Process{engagement.processAssessments.length !== 1 ? "es" : ""}
-        </h3>
-
-        <div className="space-y-3">
           {engagement.processAssessments.map((pa) => {
             const questions =
               PROCESS_QUESTIONS[pa.processId] || DEFAULT_PROCESS_QUESTIONS;
             const context = pa.context || {};
+            const workflow = getWorkflow(pa.processId as WorkflowId);
+            const stepCount =
+              pa.generatedWorkflow?.length || workflow?.steps.length || 0;
+            const ratedCount = pa.maturityRatings
+              ? Object.keys(pa.maturityRatings).length
+              : 0;
+            const isAssessed = ratedCount >= stepCount && stepCount > 0;
 
-            // Pull out key highlights as inline chips
             const highlights: { label: string; value: string }[] = [];
             for (const q of questions) {
               const val = context[q.key];
               if (!val?.trim()) continue;
-              if (q.key === "painPoints") continue; // show separately
+              if (q.key === "painPoints" || q.key === "consultantNotes")
+                continue;
               highlights.push({ label: q.label, value: val });
             }
             const painPoints = context["painPoints"]?.trim();
+            const notes = context["consultantNotes"]?.trim();
 
             return (
               <Card key={pa.processId} className="overflow-hidden">
                 <CardContent className="p-0">
-                  <div className="flex items-center justify-between px-5 py-4">
-                    <h4 className="font-medium">{pa.processName}</h4>
+                  <div className="flex items-center justify-between px-4 py-3">
+                    <div className="flex items-center gap-2.5">
+                      <h4 className="font-medium text-sm">{pa.processName}</h4>
+                      <Badge
+                        variant="outline"
+                        className="text-[10px] px-1.5 py-0 h-5 font-normal"
+                      >
+                        {stepCount} steps
+                      </Badge>
+                      {isAssessed && (
+                        <Badge className="text-[10px] px-1.5 py-0 h-5 bg-emerald-100 text-emerald-700 border-emerald-200 font-normal">
+                          Assessed
+                        </Badge>
+                      )}
+                      {!isAssessed && ratedCount > 0 && (
+                        <Badge className="text-[10px] px-1.5 py-0 h-5 bg-amber-100 text-amber-700 border-amber-200 font-normal">
+                          {ratedCount}/{stepCount} rated
+                        </Badge>
+                      )}
+                    </div>
                     <Button
                       variant="ghost"
                       size="sm"
@@ -243,26 +213,48 @@ export function InputsReviewClient({ engagementId }: InputsReviewClientProps) {
                   </div>
 
                   {highlights.length > 0 && (
-                    <div className="px-5 pb-4 flex flex-wrap gap-x-5 gap-y-2">
+                    <div className="px-4 pb-3 flex flex-wrap gap-x-4 gap-y-1.5">
                       {highlights.map((h) => (
-                        <div key={h.label} className="flex items-baseline gap-1.5">
-                          <span className="text-[11px] text-muted-foreground">{h.label}:</span>
-                          <span className="text-sm font-medium">{h.value}</span>
+                        <div
+                          key={h.label}
+                          className="flex items-baseline gap-1.5"
+                        >
+                          <span className="text-[10px] text-muted-foreground">
+                            {h.label}:
+                          </span>
+                          <span className="text-[13px] font-medium">
+                            {h.value}
+                          </span>
                         </div>
                       ))}
                     </div>
                   )}
 
                   {painPoints && (
-                    <div className="px-5 pb-4 border-t pt-3">
-                      <p className="text-xs text-muted-foreground mb-1">Pain Points</p>
-                      <p className="text-sm leading-relaxed">{painPoints}</p>
+                    <div className="px-4 pb-3 border-t pt-2.5">
+                      <p className="text-[10px] text-muted-foreground mb-0.5">
+                        Pain Points
+                      </p>
+                      <p className="text-[13px] leading-relaxed">
+                        {painPoints}
+                      </p>
                     </div>
                   )}
 
-                  {highlights.length === 0 && !painPoints && (
-                    <div className="px-5 pb-4">
-                      <p className="text-xs text-muted-foreground italic">
+                  {notes && (
+                    <div className="px-4 pb-3 border-t pt-2.5">
+                      <p className="text-[10px] text-muted-foreground mb-0.5">
+                        Consultant Notes
+                      </p>
+                      <p className="text-[13px] leading-relaxed text-muted-foreground">
+                        {notes}
+                      </p>
+                    </div>
+                  )}
+
+                  {highlights.length === 0 && !painPoints && !notes && (
+                    <div className="px-4 pb-3">
+                      <p className="text-[11px] text-muted-foreground italic">
                         No details provided — click Edit to add context
                       </p>
                     </div>
@@ -272,26 +264,108 @@ export function InputsReviewClient({ engagementId }: InputsReviewClientProps) {
             );
           })}
         </div>
+
+        {/* Engagement Readiness — 1/3 width */}
+        <div className="space-y-4">
+          <Card>
+            <CardContent className="p-4">
+              <h3 className="text-xs font-semibold tracking-wider uppercase text-muted-foreground mb-3 flex items-center gap-2">
+                <Sparkles className="h-3.5 w-3.5" />
+                Engagement Readiness
+              </h3>
+
+              {/* Progress bar */}
+              <div className="mb-3">
+                <div className="flex justify-between items-baseline mb-1">
+                  <span className="text-[11px] text-muted-foreground">
+                    {readinessItems.filter((r) => r.done).length} of{" "}
+                    {readinessItems.length} complete
+                  </span>
+                  <span className="text-xs font-semibold">{readinessPct}%</span>
+                </div>
+                <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-primary rounded-full transition-all duration-500"
+                    style={{ width: `${readinessPct}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Checklist */}
+              <div className="space-y-2">
+                {readinessItems.map((item) => (
+                  <div key={item.label} className="flex items-start gap-2">
+                    {item.done ? (
+                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
+                    ) : (
+                      <CircleDot className="h-4 w-4 text-gray-300 shrink-0 mt-0.5" />
+                    )}
+                    <div className="min-w-0">
+                      <p
+                        className={`text-[12px] font-medium ${item.done ? "text-foreground" : "text-muted-foreground"}`}
+                      >
+                        {item.label}
+                      </p>
+                      <p className="text-[10px] text-muted-foreground truncate">
+                        {item.detail}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Quick Actions */}
+          <Card>
+            <CardContent className="p-4">
+              <h3 className="text-xs font-semibold tracking-wider uppercase text-muted-foreground mb-3">
+                Next Steps
+              </h3>
+              <div className="space-y-2">
+                {!hasDiagnostic && (
+                  <Link href={`/engagements/${engagementId}/hypothesis`}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full justify-start gap-2 h-9 text-[12px]"
+                    >
+                      <Sparkles className="h-3.5 w-3.5 text-primary" />
+                      Generate Hypothesis
+                    </Button>
+                  </Link>
+                )}
+                <Link href={`/engagements/${engagementId}/assessment`}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full justify-start gap-2 h-9 text-[12px]"
+                  >
+                    <ListChecks className="h-3.5 w-3.5 text-primary" />
+                    {assessedProcesses > 0
+                      ? `Continue Assessment (${assessedProcesses}/${totalProcesses})`
+                      : "Start Assessment"}
+                  </Button>
+                </Link>
+                {hasDiagnostic && (
+                  <Link href={`/engagements/${engagementId}/hypothesis`}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full justify-start gap-2 h-9 text-[12px]"
+                    >
+                      <FileText className="h-3.5 w-3.5 text-primary" />
+                      View Hypothesis
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
-      {/* ── Next step nudge ── */}
-      <Link href={`/engagements/${engagementId}/company-intel`}>
-        <Card className="group border-dashed hover:border-primary/30 hover:bg-primary/[0.02] transition-colors cursor-pointer">
-          <CardContent className="py-5 flex items-center justify-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors">
-            Continue to Company Insights
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </CardContent>
-        </Card>
-      </Link>
-
       {/* ── Dialogs ── */}
-      <EditCompanyDialog
-        open={showEditCompany}
-        onOpenChange={setShowEditCompany}
-        clientContext={engagement.clientContext}
-        onSave={handleUpdateClientContext}
-      />
-
       {editingProcess && (
         <EditProcessContextDialog
           open={!!editingProcess}

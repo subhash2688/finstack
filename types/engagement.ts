@@ -2,6 +2,7 @@ import { WorkflowStep, MaturityLevel } from "./workflow";
 import { FunctionId } from "./function";
 import { CompanyDiagnostic, CompanyIntel } from "./diagnostic";
 import { SavingsAssumptions } from "./findings";
+import { TranscriptIntelligence } from "./transcript";
 
 /**
  * Client context captured during engagement creation
@@ -43,6 +44,7 @@ export interface ProcessAssessment {
   generatedWorkflow: WorkflowStep[]; // Tailored workflow for this process
   toolMappings: ToolMapping[]; // Tool mappings for this process
   maturityRatings?: Record<string, MaturityLevel>; // stepId → maturity level
+  transcriptIntelligence?: TranscriptIntelligence; // Transcript analysis results
   score?: number; // Optional maturity score (0-5)
   notes?: string; // Optional consultant notes
   context?: Record<string, string>; // Process-specific intake answers (e.g., erp, invoice volume)
@@ -62,6 +64,7 @@ export interface Engagement {
   companyIntel?: CompanyIntel; // Company Intelligence dashboard data (EDGAR + templates)
   processAssessments: ProcessAssessment[]; // NEW: Array of assessed processes
   customAssumptions?: SavingsAssumptions; // User-editable savings assumptions
+  pendingTranscripts?: { fileName: string; content: string }[]; // Transcripts awaiting analysis
   createdAt: string; // ISO 8601
   updatedAt: string; // ISO 8601
 }
