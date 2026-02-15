@@ -38,10 +38,10 @@ const ICON_MAP: Record<string, any> = { // eslint-disable-line
 // ─── Brand Header (shared across all modes) ───
 function BrandHeader() {
   return (
-    <div className="px-4 py-4 border-b">
-      <Link href="/" className="flex items-center gap-2.5">
-        <LighthouseIcon size={28} className="text-gray-900" />
-        <span className="text-lg font-bold tracking-tight text-gray-900">
+    <div className="px-4 py-5 border-b">
+      <Link href="/" className="flex items-center gap-3">
+        <LighthouseIcon size={36} className="text-gray-900" />
+        <span className="text-2xl font-bold tracking-tight text-gray-900">
           Lighthouse
         </span>
       </Link>
@@ -426,7 +426,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   // Homepage — no sidebar
-  if (pathname === "/") {
+  if (pathname === "/" || pathname.startsWith("/homepage-v")) {
     return null;
   }
 

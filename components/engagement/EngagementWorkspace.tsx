@@ -147,40 +147,55 @@ export function EngagementWorkspace({ engagementId }: EngagementWorkspaceProps) 
       : staticWorkflow?.steps ?? [];
 
     try {
-      // Analyze each transcript
-      const analyses: TranscriptAnalysis[] = [];
-      for (const transcript of transcripts) {
-        const response = await fetch("/api/transcripts/analyze", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            transcriptText: transcript.content,
-            workflowSteps: steps.map((s) => ({
-              id: s.id,
-              title: s.title,
-              description: s.description,
-              painPoints: s.painPoints,
-            })),
-            processName: assessment.processName,
-          }),
-        });
+      // Analyze all transcripts in parallel
+      const stepPayload = steps.map((s) => ({
+        id: s.id,
+        title: s.title,
+        description: s.description,
+        painPoints: s.painPoints,
+      }));
 
-        if (!response.ok) {
-          const err = await response.json();
-          throw new Error(err.error || "Analysis failed");
-        }
+      const totalStart = performance.now();
+      console.log(`[Transcript] Starting ${transcripts.length} transcripts in parallel`);
 
-        const result = await response.json();
-        analyses.push({
-          id: `ta_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
-          fileName: transcript.fileName,
-          analyzedAt: new Date().toISOString(),
-          stepEvidence: result.stepEvidence,
-          meta: result.meta,
-          summary: result.summary,
-          interviewParticipants: result.interviewParticipants,
-        });
-      }
+      const analyses = await Promise.all(
+        transcripts.map(async (transcript, idx) => {
+          const t0 = performance.now();
+          console.log(`[Transcript ${idx + 1}] "${transcript.fileName}" — sending (${transcript.content.length} chars)`);
+
+          const response = await fetch("/api/transcripts/analyze", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              transcriptText: transcript.content,
+              workflowSteps: stepPayload,
+              processName: assessment.processName,
+            }),
+          });
+
+          const t1 = performance.now();
+          console.log(`[Transcript ${idx + 1}] "${transcript.fileName}" — response received in ${((t1 - t0) / 1000).toFixed(1)}s (status: ${response.status})`);
+
+          if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.error || `Analysis failed for ${transcript.fileName}`);
+          }
+
+          const result = await response.json();
+          return {
+            id: `ta_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+            fileName: transcript.fileName,
+            analyzedAt: new Date().toISOString(),
+            stepEvidence: result.stepEvidence,
+            meta: result.meta,
+            summary: result.summary,
+            interviewParticipants: result.interviewParticipants,
+          } as TranscriptAnalysis;
+        })
+      );
+
+      const totalEnd = performance.now();
+      console.log(`[Transcript] All ${analyses.length} done in ${((totalEnd - totalStart) / 1000).toFixed(1)}s`);
 
       // Show review dialog for first analysis
       if (analyses.length > 0) {

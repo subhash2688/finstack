@@ -1,9 +1,9 @@
-import { ToolRecommendationsPageClient } from "@/components/engagement/ToolRecommendationsPageClient";
+import { TechnologyPageClient } from "@/components/engagement/TechnologyPageClient";
 
 export default function TechnologyPage({
   params,
 }: {
   params: { id: string };
 }) {
-  return <ToolRecommendationsPageClient engagementId={params.id} />;
+  return <TechnologyPageClient engagementId={params.id} />;
 }

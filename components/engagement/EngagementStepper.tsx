@@ -120,7 +120,7 @@ function ChevronStep({
         >
           {isCompleted ? <Check className="h-3 w-3" strokeWidth={3} /> : index + 1}
         </span>
-        <span className={`text-[11px] font-semibold whitespace-nowrap ${textCls}`}>
+        <span className={`text-sm font-medium whitespace-nowrap ${textCls}`}>
           <span className="hidden sm:inline">{step.label}</span>
           <span className="sm:hidden">{step.shortLabel}</span>
         </span>

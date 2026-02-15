@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { searchCompanies } from "@/lib/db/queries";
 import { secFetch } from "@/lib/edgar/rate-limiter";
+
+const useTurso = process.env.DATA_SOURCE !== "edgar_live";
 
 const USER_AGENT = "FinStackNavigator/1.0 (contact@finstack.dev)";
 
@@ -9,7 +12,7 @@ interface CompanyEntry {
   cik: number;
 }
 
-// Server-side cache — loaded once, stays in memory
+// Server-side cache — loaded once, stays in memory (live fallback only)
 let companyList: CompanyEntry[] | null = null;
 
 async function loadCompanies(): Promise<CompanyEntry[]> {
@@ -24,7 +27,7 @@ async function loadCompanies(): Promise<CompanyEntry[]> {
   }
 
   const data = await res.json();
-  companyList = Object.values(data).map((entry: any) => ({
+  companyList = Object.values(data).map((entry: any) => ({ // eslint-disable-line
     ticker: entry.ticker,
     title: entry.title,
     cik: entry.cik_str,
@@ -45,10 +48,16 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    // ── Turso path ──
+    if (useTurso) {
+      const results = await searchCompanies(q, 15);
+      return NextResponse.json(results);
+    }
+
+    // ── Live EDGAR fallback ──
     const companies = await loadCompanies();
     const query = q.toUpperCase();
 
-    // Score-based matching: ticker exact > ticker starts with > name contains
     const results: { entry: CompanyEntry; score: number }[] = [];
 
     for (const entry of companies) {

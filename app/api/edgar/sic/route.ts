@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getCompanyByTicker } from "@/lib/db/queries";
 import { lookupCIK, fetchCompanySIC } from "@/lib/edgar/client";
+
+const useTurso = process.env.DATA_SOURCE !== "edgar_live";
 
 /**
  * SIC code → Technology Sub-Sector mapping.
@@ -56,6 +59,27 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    // ── Turso path ──
+    if (useTurso) {
+      const company = await getCompanyByTicker(ticker);
+      if (!company) {
+        return NextResponse.json({ error: "Company not found" }, { status: 404 });
+      }
+
+      if (!company.sic) {
+        return NextResponse.json({ error: "SIC data not available" }, { status: 404 });
+      }
+
+      const subSector = mapSICToSubSector(company.sic);
+
+      return NextResponse.json({
+        sic: company.sic,
+        sicDescription: company.sic_description,
+        subSector,
+      });
+    }
+
+    // ── Live EDGAR fallback ──
     const cik = await lookupCIK(ticker);
     if (!cik) {
       return NextResponse.json({ error: "Company not found" }, { status: 404 });

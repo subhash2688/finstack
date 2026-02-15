@@ -8,8 +8,8 @@ export default function EditEngagementPage({
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-light tracking-wider mb-2">
-          EDIT ENGAGEMENT
+        <h1 className="text-3xl font-light tracking-tight mb-2">
+          Edit Engagement
         </h1>
         <p className="text-muted-foreground">
           Review and refine the generated workflow before presenting to your client

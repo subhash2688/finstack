@@ -8,7 +8,10 @@ import { getEngagement, saveEngagement } from "@/lib/storage/engagements";
 import {
   generateAIDiagnostic,
   generateRefinedDiagnostic,
+  DiagnosticEnrichment,
 } from "@/lib/ai/diagnostic-generator";
+import { computeAutomationScore, ScoringResult } from "@/lib/scoring/automation-score";
+import { computePeerMedians } from "@/lib/scoring/peer-medians";
 import { DiagnosticOverview } from "@/components/diagnostic/DiagnosticOverview";
 import { Button } from "@/components/ui/button";
 import { Loader2, RefreshCw, Sparkles, ChevronDown, ChevronUp, Info, ArrowRight } from "lucide-react";
@@ -105,6 +108,109 @@ function hasAssessmentData(engagement: Engagement): boolean {
   );
 }
 
+/**
+ * Build enrichment data from all available engagement sources.
+ */
+function buildEnrichment(eng: Engagement): DiagnosticEnrichment | undefined {
+  const enrichment: DiagnosticEnrichment = {};
+  let hasData = false;
+
+  // Company Intel (EDGAR + LLM)
+  if (eng.companyIntel) {
+    const ci = eng.companyIntel;
+    const companyIntel: DiagnosticEnrichment["companyIntel"] = {};
+    if (ci.financialProfile) { companyIntel.financialProfile = ci.financialProfile; hasData = true; }
+    if (ci.peerComparison) { companyIntel.peerComparison = ci.peerComparison; hasData = true; }
+    if (ci.leadership) { companyIntel.leadership = ci.leadership; hasData = true; }
+    if (ci.commentary) { companyIntel.commentary = ci.commentary; hasData = true; }
+    if (hasData) enrichment.companyIntel = companyIntel;
+  }
+
+  // Deterministic Scoring (Layer 1) — runs if EDGAR data is available
+  if (eng.companyIntel?.financialProfile && eng.companyIntel?.peerComparison) {
+    const fp = eng.companyIntel.financialProfile;
+    const pc = eng.companyIntel.peerComparison;
+
+    // Split peers into tiers
+    const sicPeers = pc.competitorSource === "SIC" ? pc.peers : [];
+    const tenKPeers = pc.competitorSource === "10-K" ? pc.peers : [];
+    const userPeers = pc.customPeers || [];
+
+    // Build derived metrics map for peers (from the peer data we have)
+    // Note: full derived metrics require batch-fetching profiles which happens server-side
+    // For client-side scoring, we use what's available in PeerFinancials
+
+    const peerMedians = computePeerMedians(sicPeers, tenKPeers, userPeers);
+
+    const erpName = eng.clientContext.erp
+      || eng.processAssessments.map((p) => p.context?.erp).find(Boolean)
+      || undefined;
+
+    const scoringResult = computeAutomationScore({
+      financialProfile: fp,
+      peerMedians,
+      erpName,
+      companySize: eng.clientContext.companySize,
+    });
+
+    enrichment.scoringResult = scoringResult;
+    hasData = true;
+  }
+
+  // Digital Maturity Summary (Layer 2) — if scan has been run
+  if (eng.digitalMaturityScan) {
+    const scan = eng.digitalMaturityScan;
+    const parts: string[] = [];
+    if (scan.techStack) {
+      const techs = scan.techStack.detectedTechnologies || [];
+      if (techs.length > 0) parts.push(`Tech stack: ${techs.slice(0, 8).join(", ")}`);
+      if (scan.techStack.overallTechMaturity) parts.push(`Tech maturity: Level ${scan.techStack.overallTechMaturity}/4`);
+    }
+    if (scan.maturityAssessment) {
+      parts.push(`Overall maturity: Level ${scan.maturityAssessment.overallLevel}/4 (${scan.maturityAssessment.overallLevelName})`);
+    }
+    if (scan.marketSignals?.competitivePressure) {
+      parts.push(`Competitive pressure: ${scan.marketSignals.competitivePressure}`);
+    }
+    if (parts.length > 0) {
+      enrichment.digitalMaturitySummary = parts.join("\n");
+      hasData = true;
+    }
+  }
+
+  // Transcript Evidence
+  const transcriptEvidence: DiagnosticEnrichment["transcriptEvidence"] = [];
+  for (const pa of eng.processAssessments) {
+    if (!pa.transcriptIntelligence?.analyses?.length) continue;
+    const painPoints: string[] = [];
+    const quotes: { text: string; speaker: string }[] = [];
+    const toolMentions: string[] = [];
+
+    for (const analysis of pa.transcriptIntelligence.analyses) {
+      for (const step of analysis.stepEvidence) {
+        painPoints.push(...step.painPoints);
+        for (const q of step.quotes) {
+          quotes.push({ text: q.text, speaker: q.speaker });
+        }
+      }
+      toolMentions.push(...analysis.meta.toolSystemMentions);
+    }
+
+    if (painPoints.length > 0 || quotes.length > 0) {
+      transcriptEvidence.push({
+        processId: pa.processId,
+        painPoints: painPoints.slice(0, 5),
+        quotes: quotes.slice(0, 5),
+        toolMentions: Array.from(new Set(toolMentions)),
+      });
+      hasData = true;
+    }
+  }
+  if (transcriptEvidence.length > 0) enrichment.transcriptEvidence = transcriptEvidence;
+
+  return hasData ? enrichment : undefined;
+}
+
 export function HypothesisPageClient({
   engagementId,
 }: HypothesisPageClientProps) {
@@ -140,13 +246,35 @@ export function HypothesisPageClient({
     [engagement]
   );
 
+  // Compute scoring result for display (same logic as buildEnrichment, but for the panel)
+  const scoringResult: ScoringResult | null = useMemo(() => {
+    if (!engagement?.companyIntel?.financialProfile || !engagement?.companyIntel?.peerComparison) return null;
+    const fp = engagement.companyIntel.financialProfile;
+    const pc = engagement.companyIntel.peerComparison;
+    const sicPeers = pc.competitorSource === "SIC" ? pc.peers : [];
+    const tenKPeers = pc.competitorSource === "10-K" ? pc.peers : [];
+    const userPeers = pc.customPeers || [];
+    const peerMedians = computePeerMedians(sicPeers, tenKPeers, userPeers);
+    const erpName = engagement.clientContext.erp
+      || engagement.processAssessments.map((p) => p.context?.erp).find(Boolean)
+      || undefined;
+    return computeAutomationScore({
+      financialProfile: fp,
+      peerMedians,
+      erpName,
+      companySize: engagement.clientContext.companySize,
+    });
+  }, [engagement]);
+
   const generateDiagnostic = async (eng: Engagement) => {
     setIsGenerating(true);
     setDelta(null);
     try {
+      const enrichment = buildEnrichment(eng);
       const diagnostic = await generateAIDiagnostic(
         eng.clientContext,
-        eng.processAssessments
+        eng.processAssessments,
+        enrichment
       );
       const updated = {
         ...eng,
@@ -166,11 +294,13 @@ export function HypothesisPageClient({
     setIsRefining(true);
     setDelta(null);
     try {
+      const enrichment = buildEnrichment(eng);
       const previousDiagnostic = eng.diagnostic;
       const refined = await generateRefinedDiagnostic(
         eng.clientContext,
         eng.processAssessments,
-        previousDiagnostic
+        previousDiagnostic,
+        enrichment
       );
 
       const history = [...(eng.diagnosticHistory || []), previousDiagnostic];
@@ -359,6 +489,9 @@ export function HypothesisPageClient({
         industry={engagement.clientContext.industry}
         companySize={engagement.clientContext.companySize}
         engagementId={engagement.id}
+        scoringResult={scoringResult}
+        engagement={engagement}
+        setEngagement={setEngagement}
       />
     </div>
   );

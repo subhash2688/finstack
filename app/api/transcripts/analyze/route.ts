@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAnthropicClient, callAnthropicWithRetry } from "@/lib/ai/anthropic-client";
 
-// Rate limiting: 10 requests per hour per IP
+// Rate limiting: 30 requests per hour per IP
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT = 10;
+const RATE_LIMIT = 30;
 const RATE_LIMIT_WINDOW = 60 * 60 * 1000;
 
 function checkRateLimit(ip: string): boolean {
@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
         {
-          error: "Rate limit exceeded. Maximum 10 transcript analyses per hour.",
+          error: "Rate limit exceeded. Maximum 30 transcript analyses per hour.",
           retryAfter: 3600,
         },
         { status: 429 }
@@ -73,6 +73,9 @@ export async function POST(request: NextRequest) {
           `${i + 1}. ${s.id} — "${s.title}": ${s.description}\n   Known pain points: ${s.painPoints.join("; ")}`
       )
       .join("\n");
+
+    const apiStart = Date.now();
+    console.log(`[API transcript] Starting Claude call for "${processName}" (${transcriptText.length} chars)`);
 
     const result = await callAnthropicWithRetry(async () => {
       const client = getAnthropicClient();
@@ -169,6 +172,9 @@ CRITICAL: Return ONLY valid JSON. No markdown, no explanation, just the JSON obj
 
       return parsed;
     });
+
+    const apiEnd = Date.now();
+    console.log(`[API transcript] Claude call done in ${((apiEnd - apiStart) / 1000).toFixed(1)}s`);
 
     return NextResponse.json(result);
   } catch (error) {

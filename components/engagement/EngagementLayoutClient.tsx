@@ -3,7 +3,9 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Engagement, ClientContext } from "@/types/engagement";
+import { FinancialProfile, PeerComparisonSet } from "@/types/diagnostic";
 import { getEngagement, saveEngagement } from "@/lib/storage/engagements";
+import { resolveCompanyIntelTemplate } from "@/lib/data/company-intel-templates";
 import { getWorkflow } from "@/lib/data/workflows";
 import { WorkflowId } from "@/types/workflow";
 import { FUNCTIONS } from "@/types/function";
@@ -13,8 +15,9 @@ import { CompanyBriefDrawer } from "@/components/engagement/CompanyBriefDrawer";
 import { EditCompanyDialog } from "@/components/engagement/EditCompanyDialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+import { Pencil, Download } from "lucide-react";
 import { LighthouseIcon } from "@/components/ui/lighthouse-icon";
+import { ExportDeckDialog } from "@/components/engagement/ExportDeckDialog";
 import Link from "next/link";
 
 interface EngagementLayoutClientProps {
@@ -114,6 +117,7 @@ export function EngagementLayoutClient({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [railCollapsed, setRailCollapsed] = useState(false);
   const [showEditCompany, setShowEditCompany] = useState(false);
+  const [showExportDeck, setShowExportDeck] = useState(false);
 
   const loadEngagement = () => {
     const loaded = getEngagement(engagementId);
@@ -124,6 +128,77 @@ export function EngagementLayoutClient({
     setEngagement(loaded);
   };
 
+  // Eagerly fetch EDGAR data (fast via Turso) on mount for public companies.
+  // This populates the right rail immediately without waiting for user to open Full Brief.
+  // Slow AI data (commentary, leadership) stays lazy — loaded on Full Brief click.
+  const eagerFetchEdgar = async (eng: Engagement) => {
+    const ctx = eng.clientContext;
+    if (!ctx.isPublic || !ctx.tickerSymbol) return;
+
+    // Skip if we already have fresh EDGAR financials
+    if (eng.companyIntel?.financialProfile?.source === "edgar" && eng.companyIntel?.financialProfile?.balanceSheet) return;
+
+    const ticker = ctx.tickerSymbol;
+
+    try {
+      // Fetch financials first (instant via Turso)
+      const finRes = await fetch(`/api/edgar/financials?ticker=${encodeURIComponent(ticker)}`);
+      if (!finRes.ok) return;
+      const financialProfile: FinancialProfile = await finRes.json();
+
+      const targetRevenue = financialProfile.yearlyData?.[0]?.revenue;
+
+      // Fetch peers in parallel (also instant via Turso)
+      const peersRes = await fetch(`/api/edgar/peers?ticker=${encodeURIComponent(ticker)}${targetRevenue ? `&revenue=${targetRevenue}` : ""}`);
+      let peerComparison: PeerComparisonSet | undefined;
+      if (peersRes.ok) {
+        const peersData = await peersRes.json();
+        peerComparison = {
+          targetTicker: ticker,
+          peers: peersData.peers || [],
+          generatedAt: new Date().toISOString(),
+          competitorSource: "SIC" as const,
+        };
+      }
+
+      // Build headcount from EDGAR employee data
+      const template = resolveCompanyIntelTemplate(ctx.industry, ctx.companySize);
+      const headcount = { ...template.headcount };
+      if (financialProfile.employeeCount) {
+        headcount.total = financialProfile.employeeCount;
+        headcount.totalFormatted = financialProfile.employeeCount.toLocaleString();
+        if (financialProfile.revenuePerEmployee) {
+          headcount.revenuePerEmployee = `$${Math.round(financialProfile.revenuePerEmployee)}K`;
+        }
+        headcount.insight = `${financialProfile.employeeCount.toLocaleString()} employees reported in most recent SEC 10-K filing.`;
+      }
+
+      // Merge into existing companyIntel (preserve any commentary/leadership already cached)
+      const current = getEngagement(eng.id);
+      if (!current) return;
+
+      const updated: Engagement = {
+        ...current,
+        companyIntel: {
+          ...current.companyIntel,
+          confidenceLevel: "high",
+          confidenceReason: `Financial data from SEC EDGAR 10-K filings (${ticker})`,
+          financialProfile,
+          headcount,
+          peerComparison: current.companyIntel?.peerComparison || peerComparison,
+          generatedAt: current.companyIntel?.generatedAt || new Date().toISOString(),
+        },
+        updatedAt: new Date().toISOString(),
+      };
+
+      saveEngagement(updated);
+      setEngagement(updated);
+      window.dispatchEvent(new Event("engagement-updated"));
+    } catch (err) {
+      console.warn("Eager EDGAR fetch failed (non-blocking):", err);
+    }
+  };
+
   useEffect(() => {
     loadEngagement();
     const handler = () => loadEngagement();
@@ -131,6 +206,14 @@ export function EngagementLayoutClient({
     return () => window.removeEventListener("engagement-updated", handler);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [engagementId]);
+
+  // Trigger eager EDGAR fetch once engagement is loaded
+  useEffect(() => {
+    if (engagement) {
+      eagerFetchEdgar(engagement);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [engagement?.id]);
 
   const handleUpdateClientContext = (updated: ClientContext) => {
     if (!engagement) return;
@@ -267,6 +350,13 @@ export function EngagementLayoutClient({
             <Pencil className="h-3.5 w-3.5" />
             Edit
           </button>
+          <button
+            onClick={() => setShowExportDeck(true)}
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5 ml-1"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Export Deck
+          </button>
         </div>
 
         {/* Stepper */}
@@ -304,6 +394,13 @@ export function EngagementLayoutClient({
         onOpenChange={setShowEditCompany}
         clientContext={ctx}
         onSave={handleUpdateClientContext}
+      />
+
+      {/* Export deck dialog */}
+      <ExportDeckDialog
+        open={showExportDeck}
+        onOpenChange={setShowExportDeck}
+        engagement={engagement}
       />
     </div>
   );

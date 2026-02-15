@@ -1,0 +1,19 @@
+{
+  "name": "lighthouse-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Import scripts for Lighthouse EDGAR data pipeline",
+  "scripts": {
+    "migrate": "npx tsx migrate-schema.ts",
+    "import": "npx tsx import-edgar.ts"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "dotenv": "^16.4.0",
+    "yauzl": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/yauzl": "^2.10.0",
+    "tsx": "^4.7.0"
+  }
+}

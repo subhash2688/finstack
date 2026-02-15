@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getFinancialProfile } from "@/lib/db/queries";
 import { lookupCIK, fetchCompanyFacts, extractFinancials } from "@/lib/edgar/client";
+
+const useTurso = process.env.DATA_SOURCE !== "edgar_live";
 
 export async function GET(request: NextRequest) {
   const ticker = request.nextUrl.searchParams.get("ticker");
@@ -12,6 +15,19 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    // ── Turso path ──
+    if (useTurso) {
+      const profile = await getFinancialProfile(ticker);
+      if (!profile) {
+        return NextResponse.json(
+          { error: `No financial data found for ${ticker}` },
+          { status: 404 }
+        );
+      }
+      return NextResponse.json(profile);
+    }
+
+    // ── Live EDGAR fallback ──
     const cik = await lookupCIK(ticker);
     if (!cik) {
       return NextResponse.json(

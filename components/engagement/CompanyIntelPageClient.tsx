@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Engagement } from "@/types/engagement";
-import { PeerComparisonSet } from "@/types/diagnostic";
+import { PeerComparisonSet, PeerFinancials, LeadershipProfile, CompanyCommentaryData } from "@/types/diagnostic";
 import { getEngagement, saveEngagement } from "@/lib/storage/engagements";
 import { generateCompanyIntel } from "@/lib/ai/diagnostic-generator";
 import { CompanyIntelDashboard } from "@/components/diagnostic/company-intel/CompanyIntelDashboard";
@@ -15,20 +15,29 @@ interface CompanyIntelPageClientProps {
 }
 
 /**
- * Check if cached companyIntel is stale and needs full re-fetching.
- * NOTE: Missing peerComparison is handled separately via incremental fetch,
- * NOT here — a full re-gen can lose previously good EDGAR data if the API is temporarily down.
+ * Check if we need a FULL re-gen (missing EDGAR data or old schema).
+ * Missing commentary/leadership is handled by background fetch, not a full re-gen.
  */
-function isCompanyIntelStale(eng: Engagement): boolean {
+function needsFullReGen(eng: Engagement): boolean {
+  const cached = eng.companyIntel;
+  if (!cached) return true;
+  // Old schema fields → full re-gen
+  if (cached.operationalProfile || cached.peerBenchmark || cached.competitivePosition) return true;
+  // Public company without EDGAR financials → full re-gen
+  if (eng.clientContext.isPublic && eng.clientContext.tickerSymbol && cached.financialProfile?.source !== "edgar") return true;
+  // EDGAR data missing balance sheet → full re-gen
+  if (eng.clientContext.isPublic && eng.clientContext.tickerSymbol && cached.financialProfile?.source === "edgar" && !cached.financialProfile?.balanceSheet) return true;
+  return false;
+}
+
+/**
+ * Check if commentary/leadership is missing and needs a background fetch.
+ */
+function needsCommentaryFetch(eng: Engagement): boolean {
+  if (!eng.clientContext.isPublic || !eng.clientContext.tickerSymbol) return false;
   const cached = eng.companyIntel;
   if (!cached) return false;
-  if (cached.operationalProfile || cached.peerBenchmark || cached.competitivePosition) return true;
-  if (eng.clientContext.isPublic && eng.clientContext.tickerSymbol && cached.financialProfile?.source !== "edgar") return true;
-  if (eng.clientContext.isPublic && eng.clientContext.tickerSymbol) {
-    if (!cached.leadership && !cached.commentary) return true;
-    if (cached.financialProfile?.source === "edgar" && !cached.financialProfile?.balanceSheet) return true;
-  }
-  return false;
+  return !cached.leadership && !cached.commentary;
 }
 
 /**
@@ -73,6 +82,27 @@ async function fetchPeerComparison(ticker: string, revenue?: number): Promise<Pe
   return null;
 }
 
+/**
+ * Fetch commentary + leadership from Claude API in the background.
+ * Returns the data without blocking — caller merges into engagement.
+ */
+async function fetchCommentaryInBackground(
+  companyName: string,
+  ticker: string
+): Promise<{ leadership?: LeadershipProfile; commentary?: CompanyCommentaryData } | null> {
+  try {
+    const res = await fetch("/api/company-commentary", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ companyName, tickerSymbol: ticker }),
+    });
+    if (!res.ok) return null;
+    return res.json();
+  } catch {
+    return null;
+  }
+}
+
 export function CompanyIntelPageClient({
   engagementId,
 }: CompanyIntelPageClientProps) {
@@ -80,6 +110,23 @@ export function CompanyIntelPageClient({
   const [engagement, setEngagement] = useState<Engagement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [commentaryLoading, setCommentaryLoading] = useState(false);
+
+  const mergeAndSave = useCallback((updates: Partial<Engagement["companyIntel"]>) => {
+    const latest = getEngagement(engagementId);
+    if (!latest || !latest.companyIntel) return;
+    const updated: Engagement = {
+      ...latest,
+      companyIntel: {
+        ...latest.companyIntel,
+        ...updates,
+      },
+      updatedAt: new Date().toISOString(),
+    };
+    saveEngagement(updated);
+    setEngagement(updated);
+    window.dispatchEvent(new Event("engagement-updated"));
+  }, [engagementId]);
 
   useEffect(() => {
     const eng = getEngagement(engagementId);
@@ -89,45 +136,52 @@ export function CompanyIntelPageClient({
     }
     setEngagement(eng);
 
-    if (eng.companyIntel && !isCompanyIntelStale(eng)) {
-      setLoaded(true);
-      // Incremental peer fetch: if cached intel exists but peers are missing, fetch them separately
-      if (
-        eng.clientContext.isPublic &&
-        eng.clientContext.tickerSymbol &&
-        eng.companyIntel &&
-        (!eng.companyIntel.peerComparison || eng.companyIntel.peerComparison.peers.length === 0)
-      ) {
-        const ticker = eng.clientContext.tickerSymbol;
-        const revenue = eng.companyIntel.financialProfile?.yearlyData?.[0]?.revenue;
-        fetchPeerComparison(ticker, revenue).then((peerComparison) => {
-          if (peerComparison && peerComparison.peers.length > 0) {
-            // Re-read from storage to avoid stale closure
-            const latest = getEngagement(engagementId);
-            if (!latest) return;
-            const updated: Engagement = {
-              ...latest,
-              companyIntel: {
-                ...latest.companyIntel!,
-                peerComparison,
-              },
-              updatedAt: new Date().toISOString(),
-            };
-            saveEngagement(updated);
-            setEngagement(updated);
-            window.dispatchEvent(new Event("engagement-updated"));
-          }
-        });
-      }
-    } else {
-      // Auto-fetch on mount
+    if (needsFullReGen(eng)) {
+      // No EDGAR data at all — full generation needed
       loadCompanyIntel(eng);
+      return;
+    }
+
+    // We have EDGAR data — show it immediately
+    setLoaded(true);
+
+    // Background: fetch missing peers
+    if (
+      eng.clientContext.isPublic &&
+      eng.clientContext.tickerSymbol &&
+      eng.companyIntel &&
+      (!eng.companyIntel.peerComparison || eng.companyIntel.peerComparison.peers.length === 0)
+    ) {
+      const ticker = eng.clientContext.tickerSymbol;
+      const revenue = eng.companyIntel.financialProfile?.yearlyData?.[0]?.revenue;
+      fetchPeerComparison(ticker, revenue).then((peerComparison) => {
+        if (peerComparison && peerComparison.peers.length > 0) {
+          mergeAndSave({ peerComparison });
+        }
+      });
+    }
+
+    // Background: fetch missing commentary/leadership (Claude AI — slow, ~15s)
+    if (needsCommentaryFetch(eng) && eng.clientContext.tickerSymbol) {
+      setCommentaryLoading(true);
+      fetchCommentaryInBackground(
+        eng.clientContext.companyName,
+        eng.clientContext.tickerSymbol
+      ).then((result) => {
+        if (result) {
+          mergeAndSave({
+            leadership: result.leadership,
+            commentary: result.commentary,
+          });
+        }
+        setCommentaryLoading(false);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [engagementId, router]);
 
   const loadCompanyIntel = async (eng: Engagement) => {
-    if (eng.companyIntel && !isCompanyIntelStale(eng)) {
+    if (eng.companyIntel && !needsFullReGen(eng)) {
       setLoaded(true);
       return;
     }
@@ -172,23 +226,54 @@ export function CompanyIntelPageClient({
 
   if (engagement.companyIntel) {
     return (
-      <CompanyIntelDashboard
-        intel={engagement.companyIntel}
-        companyName={engagement.clientContext.companyName}
-        tickerSymbol={engagement.clientContext.tickerSymbol}
-        onFunctionalHeadcountChange={(entries) => {
-          const updated: Engagement = {
-            ...engagement,
-            companyIntel: {
-              ...engagement.companyIntel!,
-              functionalHeadcount: entries,
-            },
-            updatedAt: new Date().toISOString(),
-          };
-          saveEngagement(updated);
-          setEngagement(updated);
-        }}
-      />
+      <>
+        <CompanyIntelDashboard
+          intel={engagement.companyIntel}
+          companyName={engagement.clientContext.companyName}
+          tickerSymbol={engagement.clientContext.tickerSymbol}
+          onFunctionalHeadcountChange={(entries) => {
+            const updated: Engagement = {
+              ...engagement,
+              companyIntel: {
+                ...engagement.companyIntel!,
+                functionalHeadcount: entries,
+              },
+              updatedAt: new Date().toISOString(),
+            };
+            saveEngagement(updated);
+            setEngagement(updated);
+          }}
+          onPeerChange={(customPeers: PeerFinancials[], removedTickers: string[]) => {
+            const latest = getEngagement(engagementId);
+            if (!latest || !latest.companyIntel) return;
+            const updated: Engagement = {
+              ...latest,
+              companyIntel: {
+                ...latest.companyIntel,
+                peerComparison: {
+                  ...(latest.companyIntel.peerComparison ?? {
+                    targetTicker: latest.clientContext.tickerSymbol ?? "",
+                    peers: [],
+                    generatedAt: new Date().toISOString(),
+                  }),
+                  customPeers,
+                  removedTickers,
+                },
+              },
+              updatedAt: new Date().toISOString(),
+            };
+            saveEngagement(updated);
+            setEngagement(updated);
+            window.dispatchEvent(new Event("engagement-updated"));
+          }}
+        />
+        {commentaryLoading && (
+          <div className="flex items-center gap-2 text-sm text-muted-foreground mt-4 px-1">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Loading AI insights (leadership, market commentary)...
+          </div>
+        )}
+      </>
     );
   }
 

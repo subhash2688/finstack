@@ -46,7 +46,7 @@
 | F3 | Post-creation editing | Edit company info, process intake from engagement workspace | P1 |
 | F4 | Add Process modal | Wire up "Add Process" button in EngagementWorkspace | P1 |
 | F6 | Expand to non-Finance functions | Enable GTM, R&D, HR, Legal as workflows are built | P2 |
-| F9 | Export to PDF/PowerPoint | Client deliverable generation | P2 |
+| F9 | Refined Deck Export (PowerPoint) | Infrastructure built (pptxgenjs, section builders, export dialog). Needs: polished slide templates, better content density, AlixPartners-quality visual design, reference mock decks for layout/styling. Use new mock versions as reference. | P1 |
 | F10 | Multi-user collaboration | Shared engagements across team members | P3 |
 
 ---

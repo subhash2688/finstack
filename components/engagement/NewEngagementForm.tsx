@@ -152,11 +152,47 @@ export function NewEngagementForm() {
     companyName: "",
     industry: "Technology",
     subSector: "",
-    isPublic: false,
+    isPublic: true,
     tickerSymbol: "",
     companySize: "mid-market",
   });
   const [sicInfo, setSicInfo] = useState<{ sic: string; sicDescription: string } | null>(null);
+  const [enriching, setEnriching] = useState(false);
+  const [enrichResult, setEnrichResult] = useState<{ description?: string; headquarters?: string; founded?: string; website?: string; actualSubSector?: string } | null>(null);
+
+  const handleEnrichCompany = async () => {
+    if (!formData.companyName.trim() || enriching) return;
+    setEnriching(true);
+    setEnrichResult(null);
+    try {
+      const res = await fetch("/api/company-enrich", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ companyName: formData.companyName.trim() }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      const data = await res.json();
+      // Auto-fill fields that are currently empty
+      setFormData((prev) => ({
+        ...prev,
+        revenue: prev.revenue || data.revenue || "",
+        revenueGrowth: prev.revenueGrowth || data.revenueGrowth || "",
+        headcount: prev.headcount || data.headcount || "",
+        subSector: prev.subSector || data.subSector || "",
+      }));
+      setEnrichResult({
+        description: data.description,
+        headquarters: data.headquarters,
+        founded: data.founded,
+        website: data.website,
+        actualSubSector: data.actualSubSector || undefined,
+      });
+    } catch {
+      // Silently fail — user can still fill manually
+    } finally {
+      setEnriching(false);
+    }
+  };
 
   // Step 2
   const [selectedFunction, setSelectedFunction] = useState<FunctionType | null>(null);
@@ -328,13 +364,7 @@ export function NewEngagementForm() {
   // ════════════════════════════════════════
   // Shared layout wrapper
   // ════════════════════════════════════════
-  const SplitLayout = ({
-    form,
-    context,
-  }: {
-    form: React.ReactNode;
-    context: React.ReactNode;
-  }) => (
+  const splitLayout = (form: React.ReactNode, context: React.ReactNode) => (
     <div className="max-w-[1100px] mx-auto">
       {stepNav}
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-6">
@@ -354,27 +384,25 @@ export function NewEngagementForm() {
       ? formData.companyName.split(" ").map((w) => w[0]).join("").substring(0, 2).toUpperCase()
       : "";
 
-    return (
-      <SplitLayout
-        form={
+    return splitLayout(
           <div className="border rounded-xl bg-card p-6 space-y-6">
             {/* Public / Private */}
             <div>
               <label className="block text-sm font-medium mb-2">Company Type *</label>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { value: false, label: "Private" },
                   { value: true, label: "Public" },
+                  { value: false, label: "Private" },
                 ].map((opt) => (
                   <button
                     key={String(opt.value)}
                     type="button"
                     onClick={() => {
-                      setFormData({
-                        ...formData,
+                      setFormData((prev) => ({
+                        ...prev,
                         isPublic: opt.value,
-                        tickerSymbol: opt.value ? formData.tickerSymbol : "",
-                      });
+                        tickerSymbol: opt.value ? prev.tickerSymbol : "",
+                      }));
                       if (!opt.value) setSicInfo(null);
                     }}
                     className={`flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border text-sm font-medium transition-colors ${
@@ -420,7 +448,7 @@ export function NewEngagementForm() {
               <input
                 type="text"
                 value={formData.companyName}
-                onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
+                onChange={(e) => setFormData((prev) => ({ ...prev, companyName: e.target.value }))}
                 className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20"
                 placeholder={formData.isPublic ? "Auto-filled from selection above" : "Acme Corp"}
               />
@@ -429,17 +457,50 @@ export function NewEngagementForm() {
             {/* Private company financials */}
             {!formData.isPublic && (
               <div className="space-y-4 p-4 border rounded-lg bg-muted/30">
-                <p className="text-sm font-medium">Company Financials</p>
-                <p className="text-xs text-muted-foreground -mt-2">
-                  Help us build a baseline profile for the assessment
-                </p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium">Company Financials</p>
+                    <p className="text-xs text-muted-foreground">
+                      Help us build a baseline profile for the assessment
+                    </p>
+                  </div>
+                  {!enrichResult && formData.companyName.trim().length >= 2 && (
+                    <button
+                      type="button"
+                      onClick={handleEnrichCompany}
+                      disabled={enriching}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs text-muted-foreground hover:text-primary hover:bg-primary/5 rounded-md transition-colors disabled:opacity-50"
+                    >
+                      {enriching ? (
+                        <><Loader2 className="h-3 w-3 animate-spin" /> Looking up...</>
+                      ) : (
+                        <><Sparkles className="h-3 w-3" /> Auto-fill with AI</>
+                      )}
+                    </button>
+                  )}
+                  {enrichResult && (
+                    <Badge variant="outline" className="text-[10px] text-primary border-primary/30">AI-enriched</Badge>
+                  )}
+                </div>
+
+                {/* Enrichment result — company description */}
+                {enrichResult?.description && (
+                  <div className="p-3 bg-primary/5 border border-primary/10 rounded-lg">
+                    <p className="text-xs text-foreground/80">{enrichResult.description}</p>
+                    <div className="flex flex-wrap gap-3 mt-2 text-[10px] text-muted-foreground">
+                      {enrichResult.headquarters && <span>HQ: {enrichResult.headquarters}</span>}
+                      {enrichResult.founded && <span>Founded: {enrichResult.founded}</span>}
+                      {enrichResult.website && <span>{enrichResult.website}</span>}
+                    </div>
+                  </div>
+                )}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-medium mb-1">Annual Revenue</label>
                     <input
                       type="text"
                       value={formData.revenue || ""}
-                      onChange={(e) => setFormData({ ...formData, revenue: e.target.value })}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, revenue: e.target.value }))}
                       className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
                       placeholder="e.g., $50M"
                     />
@@ -449,7 +510,7 @@ export function NewEngagementForm() {
                     <input
                       type="text"
                       value={formData.revenueGrowth || ""}
-                      onChange={(e) => setFormData({ ...formData, revenueGrowth: e.target.value })}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, revenueGrowth: e.target.value }))}
                       className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
                       placeholder="e.g., 25%"
                     />
@@ -460,7 +521,7 @@ export function NewEngagementForm() {
                   <input
                     type="text"
                     value={formData.headcount || ""}
-                    onChange={(e) => setFormData({ ...formData, headcount: e.target.value })}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, headcount: e.target.value }))}
                     className="w-full px-3 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
                     placeholder="e.g., 250"
                   />
@@ -476,7 +537,7 @@ export function NewEngagementForm() {
                   <button
                     key={sector}
                     type="button"
-                    onClick={() => setFormData({ ...formData, subSector: sector })}
+                    onClick={() => setFormData((prev) => ({ ...prev, subSector: sector }))}
                     className={`px-4 py-2.5 rounded-lg border text-sm font-medium transition-colors ${
                       formData.subSector === sector
                         ? "bg-primary text-primary-foreground border-primary"
@@ -492,6 +553,16 @@ export function NewEngagementForm() {
                   Auto-detected from SEC filings (SIC {sicInfo.sic})
                 </p>
               )}
+              {enrichResult?.actualSubSector && enrichResult.actualSubSector !== formData.subSector && (
+                <p className="text-xs text-amber-600 mt-2">
+                  This company operates in <span className="font-semibold">{enrichResult.actualSubSector}</span>, which isn&apos;t listed above — mapped to the closest match.
+                </p>
+              )}
+              {enrichResult?.actualSubSector && enrichResult.actualSubSector === formData.subSector && (
+                <p className="text-xs text-primary mt-2">
+                  Auto-detected: {enrichResult.actualSubSector}
+                </p>
+              )}
             </div>
 
             <Button
@@ -503,8 +574,7 @@ export function NewEngagementForm() {
               Continue to Function Selection
             </Button>
           </div>
-        }
-        context={
+        ,
           <div className="space-y-4">
             {/* Company preview card */}
             {formData.companyName ? (
@@ -610,8 +680,6 @@ export function NewEngagementForm() {
               </div>
             </div>
           </div>
-        }
-      />
     );
   }
 
@@ -619,9 +687,7 @@ export function NewEngagementForm() {
   // Step 2: Function & Process Selection
   // ════════════════════════════════════════
   if (step === "function-selection") {
-    return (
-      <SplitLayout
-        form={
+    return splitLayout(
           <div className="border rounded-xl bg-card p-6 space-y-8">
             {/* Function Grid */}
             <div>
@@ -718,8 +784,7 @@ export function NewEngagementForm() {
               Continue to Process Details
             </Button>
           </div>
-        }
-        context={
+        ,
           <div className="space-y-4">
             {/* Company summary card */}
             <div className="border rounded-xl bg-card p-5">
@@ -800,17 +865,13 @@ export function NewEngagementForm() {
               </div>
             </div>
           </div>
-        }
-      />
     );
   }
 
   // ════════════════════════════════════════
   // Step 3: Process Details + Transcripts
   // ════════════════════════════════════════
-  return (
-    <SplitLayout
-      form={
+  return splitLayout(
         <div className="border rounded-xl bg-card p-6 space-y-6">
           {/* Transcript Upload — first */}
           <div className="space-y-3 p-4 border rounded-lg bg-muted/20">
@@ -898,8 +959,7 @@ export function NewEngagementForm() {
             )}
           </Button>
         </div>
-      }
-      context={
+      ,
         <div className="space-y-4">
           {/* Transcript extraction preview */}
           {lastExtraction && (pendingTranscripts.length > 0) ? (
@@ -1005,7 +1065,5 @@ export function NewEngagementForm() {
             )}
           </div>
         </div>
-      }
-    />
   );
 }

@@ -3,6 +3,8 @@ import { FunctionId } from "./function";
 import { CompanyDiagnostic, CompanyIntel } from "./diagnostic";
 import { SavingsAssumptions } from "./findings";
 import { TranscriptIntelligence } from "./transcript";
+import { TechnologyAnalysis, MarketIntelligence } from "./technology";
+import { DigitalMaturityScan } from "./digital-maturity";
 
 /**
  * Client context captured during engagement creation
@@ -64,6 +66,9 @@ export interface Engagement {
   companyIntel?: CompanyIntel; // Company Intelligence dashboard data (EDGAR + templates)
   processAssessments: ProcessAssessment[]; // NEW: Array of assessed processes
   customAssumptions?: SavingsAssumptions; // User-editable savings assumptions
+  technologyAnalysis?: TechnologyAnalysis; // Cached AI technology analysis (build vs buy, case studies)
+  marketIntelligence?: MarketIntelligence; // Cached market intelligence (benchmarks, trends)
+  digitalMaturityScan?: DigitalMaturityScan; // Cached digital maturity scan results
   pendingTranscripts?: { fileName: string; content: string }[]; // Transcripts awaiting analysis
   createdAt: string; // ISO 8601
   updatedAt: string; // ISO 8601

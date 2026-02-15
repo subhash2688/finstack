@@ -1,28 +1,23 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
-import { CompanyIntel, FunctionalHeadcountEntry, PeerFinancials, FinancialProfile } from "@/types/diagnostic";
+import { useState, useEffect, useCallback } from "react";
+import { CompanyIntel, FunctionalHeadcountEntry, PeerFinancials, FinancialProfile, YearlyFinancial } from "@/types/diagnostic";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { Building2, Database, Info, Search, X, Loader2 } from "lucide-react";
+import { Building2, Database, Info } from "lucide-react";
 import { FinancialOverview } from "./FinancialOverview";
 import { DerivedMetricsPanel } from "./DerivedMetricsPanel";
 import { HeadcountBreakdown } from "./HeadcountBreakdown";
 import { PeerComparisonTable } from "./PeerComparisonTable";
 import { ExecutiveTeam } from "./ExecutiveTeam";
 import { CompanyCommentary } from "./CompanyCommentary";
-import { PeerExpenseChart } from "./PeerExpenseChart";
+import { PeerBenchmarkGrid } from "./PeerBenchmarkGrid";
 
 interface CompanyIntelDashboardProps {
   intel: CompanyIntel;
   companyName: string;
   tickerSymbol?: string;
   onFunctionalHeadcountChange?: (entries: FunctionalHeadcountEntry[]) => void;
-}
-
-interface CompanySearchResult {
-  ticker: string;
-  name: string;
+  onPeerChange?: (customPeers: PeerFinancials[], removedTickers: string[]) => void;
 }
 
 const confidenceBadgeStyles: Record<CompanyIntel["confidenceLevel"], string> = {
@@ -59,6 +54,7 @@ export function CompanyIntelDashboard({
   companyName,
   tickerSymbol,
   onFunctionalHeadcountChange,
+  onPeerChange,
 }: CompanyIntelDashboardProps) {
   const hasEdgar = intel.financialProfile?.source === "edgar";
   const hasFinancials = hasEdgar && (intel.financialProfile?.yearlyData?.length ?? 0) > 0;
@@ -69,65 +65,56 @@ export function CompanyIntelDashboard({
   const hasCommentary = !!intel.commentary;
 
   // Custom peer state
-  const [customPeers, setCustomPeers] = useState<PeerFinancials[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<CompanySearchResult[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [customPeers, setCustomPeers] = useState<PeerFinancials[]>(
+    () => intel.peerComparison?.customPeers ?? []
+  );
+  const [removedPeers, setRemovedPeers] = useState<Set<string>>(
+    () => new Set(intel.peerComparison?.removedTickers ?? [])
+  );
   const [isFetchingPeer, setIsFetchingPeer] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
 
-  // Close dropdown on outside click
+  // Enriched multi-year data for peers (fetched from Turso profiles)
+  const [peerProfiles, setPeerProfiles] = useState<Record<string, YearlyFinancial[]>>({});
+
+  const enrichPeers = useCallback(async (tickers: string[]) => {
+    const toFetch = tickers.filter((t) => !peerProfiles[t]);
+    if (toFetch.length === 0) return;
+
+    const results: Record<string, YearlyFinancial[]> = {};
+    await Promise.all(
+      toFetch.map(async (ticker) => {
+        try {
+          const res = await fetch(`/api/edgar/financials?ticker=${encodeURIComponent(ticker)}`);
+          if (res.ok) {
+            const profile: FinancialProfile = await res.json();
+            if (profile.yearlyData?.length > 0) {
+              results[ticker] = profile.yearlyData;
+            }
+          }
+        } catch {
+          // ignore
+        }
+      })
+    );
+    if (Object.keys(results).length > 0) {
+      setPeerProfiles((prev) => ({ ...prev, ...results }));
+    }
+  }, [peerProfiles]);
+
+  // Fetch multi-year profiles for auto-detected + custom peers
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        setShowDropdown(false);
-      }
+    const allPeerTickers = [
+      ...(intel.peerComparison?.peers ?? []).filter((p) => !p.isPrivate).map((p) => p.ticker),
+      ...customPeers.filter((p) => !p.isPrivate).map((p) => p.ticker),
+    ];
+    if (allPeerTickers.length > 0) {
+      enrichPeers(allPeerTickers);
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [intel.peerComparison?.peers, customPeers]);
 
-  // Debounced search
-  const searchCompanies = useCallback(async (query: string) => {
-    if (query.length < 2) {
-      setSearchResults([]);
-      setShowDropdown(false);
-      return;
-    }
-    setIsSearching(true);
-    try {
-      const res = await fetch(`/api/edgar/companies?q=${encodeURIComponent(query)}`);
-      if (res.ok) {
-        const data: CompanySearchResult[] = await res.json();
-        // Filter out already-added tickers and the target ticker
-        const existingTickers = new Set([
-          ...(customPeers.map((p) => p.ticker.toUpperCase())),
-          ...(tickerSymbol ? [tickerSymbol.toUpperCase()] : []),
-        ]);
-        const filtered = data.filter((r) => !existingTickers.has(r.ticker.toUpperCase()));
-        setSearchResults(filtered.slice(0, 8));
-        setShowDropdown(filtered.length > 0);
-      }
-    } catch {
-      // ignore search errors
-    } finally {
-      setIsSearching(false);
-    }
-  }, [customPeers, tickerSymbol]);
-
-  const handleSearchInput = (value: string) => {
-    setSearchQuery(value);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => searchCompanies(value), 300);
-  };
-
-  const addCustomPeer = async (result: CompanySearchResult) => {
+  const addCustomPeer = async (result: { ticker: string; name: string }) => {
     if (customPeers.length >= 5) return;
-    setShowDropdown(false);
-    setSearchQuery("");
-    setSearchResults([]);
     setIsFetchingPeer(true);
 
     try {
@@ -136,7 +123,9 @@ export function CompanyIntelDashboard({
         const profile: FinancialProfile = await res.json();
         const peer = financialProfileToPeerFinancials(result.ticker, result.name, profile);
         if (peer) {
-          setCustomPeers((prev) => [...prev, peer]);
+          const updated = [...customPeers, peer];
+          setCustomPeers(updated);
+          onPeerChange?.(updated, Array.from(removedPeers));
         }
       }
     } catch {
@@ -146,8 +135,19 @@ export function CompanyIntelDashboard({
     }
   };
 
-  const removeCustomPeer = (ticker: string) => {
-    setCustomPeers((prev) => prev.filter((p) => p.ticker !== ticker));
+  // Remove an auto-detected or custom peer
+  const handleRemovePeer = (ticker: string) => {
+    if (customPeers.some((p) => p.ticker === ticker)) {
+      const updated = customPeers.filter((p) => p.ticker !== ticker);
+      setCustomPeers(updated);
+      onPeerChange?.(updated, Array.from(removedPeers));
+      return;
+    }
+    // Auto-detected peer — add to removed set
+    const updated = new Set(removedPeers);
+    updated.add(ticker);
+    setRemovedPeers(updated);
+    onPeerChange?.(customPeers, Array.from(updated));
   };
 
   // Build target financials for peer comparison table
@@ -164,6 +164,8 @@ export function CompanyIntelDashboard({
         gaAsPercent: intel.financialProfile.yearlyData[0].expenses?.find(e => e.category === "G&A")?.asPercentOfRevenue,
       }
     : undefined;
+
+  const targetYearlyData = intel.financialProfile?.yearlyData ?? [];
 
   return (
     <div className="space-y-6">
@@ -200,112 +202,47 @@ export function CompanyIntelDashboard({
         <DerivedMetricsPanel metrics={intel.financialProfile!.derivedMetrics} />
       )}
 
-      {/* 3. Peer Comparison Table — show if auto-peers or custom peers exist */}
+      {/* 3. Revenue Growth Benchmark Grid */}
+      {hasFinancials && targetFinancials && targetYearlyData.length > 0 && (
+        <PeerBenchmarkGrid
+          targetFinancials={targetFinancials}
+          targetYearlyData={targetYearlyData}
+          peers={intel.peerComparison?.peers ?? []}
+          customPeers={customPeers}
+          removedTickers={removedPeers}
+          onRemovePeer={handleRemovePeer}
+          onAddPeer={tickerSymbol ? addCustomPeer : undefined}
+          isFetchingPeer={isFetchingPeer}
+          peerProfiles={peerProfiles}
+        />
+      )}
+
+      {/* 4. Peer Comparison Table — show if auto-peers or custom peers exist */}
       {(hasPeerComparison || customPeers.length > 0) && tickerSymbol && (
         <PeerComparisonTable
           comparison={intel.peerComparison ?? { targetTicker: tickerSymbol, peers: [], generatedAt: new Date().toISOString() }}
           targetTicker={tickerSymbol}
           targetFinancials={targetFinancials}
           customPeers={customPeers}
+          removedTickers={removedPeers}
+          onRemovePeer={handleRemovePeer}
+          onAddPeer={addCustomPeer}
+          isFetchingPeer={isFetchingPeer}
+          latestFiscalYear={targetYearlyData[0]?.year}
         />
       )}
 
-      {/* 3b. Expense-to-Revenue Chart — show if auto-peers or custom peers exist */}
-      {(hasPeerComparison || customPeers.length > 0) && targetFinancials && (
-        <PeerExpenseChart
-          targetFinancials={targetFinancials}
-          peers={intel.peerComparison?.peers ?? []}
-          customPeers={customPeers}
-        />
-      )}
-
-      {/* 3c. Custom Ticker Picker — always show for public companies with a ticker */}
-      {tickerSymbol && (
-        <div className="rounded-lg border p-4 space-y-3">
-          <div className="flex items-center gap-2">
-            <Search className="h-4 w-4 text-muted-foreground" />
-            <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-              Add Custom Comparison
-            </h4>
-            <span className="text-[10px] text-muted-foreground">
-              ({customPeers.length}/5)
-            </span>
-          </div>
-
-          {/* Selected custom peers as removable badges */}
-          {customPeers.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              {customPeers.map((peer) => (
-                <Badge
-                  key={peer.ticker}
-                  variant="outline"
-                  className="text-xs pl-2 pr-1 py-0.5 bg-violet-50 text-violet-700 border-violet-200 flex items-center gap-1"
-                >
-                  {peer.ticker}
-                  <button
-                    onClick={() => removeCustomPeer(peer.ticker)}
-                    className="hover:bg-violet-200 rounded-full p-0.5 transition-colors"
-                  >
-                    <X className="h-3 w-3" />
-                  </button>
-                </Badge>
-              ))}
-            </div>
-          )}
-
-          {/* Search input */}
-          {customPeers.length < 5 && (
-            <div ref={searchRef} className="relative">
-              <div className="relative">
-                <Input
-                  type="text"
-                  placeholder="Search by ticker or company name..."
-                  value={searchQuery}
-                  onChange={(e) => handleSearchInput(e.target.value)}
-                  onFocus={() => { if (searchResults.length > 0) setShowDropdown(true); }}
-                  className="h-8 text-xs pr-8"
-                  disabled={isFetchingPeer}
-                />
-                {(isSearching || isFetchingPeer) && (
-                  <Loader2 className="h-3.5 w-3.5 absolute right-2.5 top-2 animate-spin text-muted-foreground" />
-                )}
-              </div>
-
-              {/* Dropdown results */}
-              {showDropdown && searchResults.length > 0 && (
-                <div className="absolute z-50 top-full mt-1 w-full bg-white border rounded-md shadow-lg max-h-48 overflow-y-auto">
-                  {searchResults.map((result) => (
-                    <button
-                      key={result.ticker}
-                      className="w-full text-left px-3 py-2 text-xs hover:bg-muted/50 flex items-center gap-2 border-b last:border-b-0"
-                      onClick={() => addCustomPeer(result)}
-                    >
-                      <span className="font-semibold text-primary w-12">{result.ticker}</span>
-                      <span className="text-muted-foreground truncate">{result.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
-          <p className="text-[10px] text-muted-foreground">
-            Add up to 5 public company tickers for side-by-side comparison. Data from SEC EDGAR.
-          </p>
-        </div>
-      )}
-
-      {/* 4. Executive Team */}
+      {/* 5. Executive Team */}
       {hasLeadership && intel.leadership && (
         <ExecutiveTeam leadership={intel.leadership} companyName={companyName} />
       )}
 
-      {/* 5. Company Commentary */}
+      {/* 6. Company Commentary */}
       {hasCommentary && intel.commentary && (
         <CompanyCommentary commentary={intel.commentary} />
       )}
 
-      {/* 6. Headcount (enhanced with editable functional breakdown) */}
+      {/* 7. Headcount (enhanced with editable functional breakdown) */}
       {hasHeadcount && intel.headcount && (
         <HeadcountBreakdown
           headcount={intel.headcount}
