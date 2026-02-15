@@ -24,6 +24,10 @@ const CATEGORY_STYLES: Record<
     label: "Scale",
     className: "bg-amber-100 text-amber-800 border-amber-300",
   },
+  positive: {
+    label: "Strength",
+    className: "bg-emerald-100 text-emerald-800 border-emerald-300",
+  },
 };
 
 interface ChallengeCardProps {

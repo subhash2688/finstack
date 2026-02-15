@@ -38,10 +38,10 @@ const ICON_MAP: Record<string, any> = { // eslint-disable-line
 // ─── Brand Header (shared across all modes) ───
 function BrandHeader() {
   return (
-    <div className="px-4 py-4 border-b">
-      <Link href="/" className="flex items-center gap-2.5">
-        <LighthouseIcon size={28} className="text-gray-900" />
-        <span className="text-lg font-bold tracking-tight text-gray-900">
+    <div className="px-4 py-5 border-b">
+      <Link href="/" className="flex items-center gap-3">
+        <LighthouseIcon size={36} className="text-gray-900" />
+        <span className="text-2xl font-bold tracking-tight text-gray-900">
           Lighthouse
         </span>
       </Link>
@@ -232,16 +232,16 @@ function EngagementDetailSidebar({
 
   const subPages = [
     {
-      label: "Inputs",
+      label: "Intake",
       href: basePath,
       icon: FileText,
       active: pathname === basePath,
     },
     {
-      label: "Company Insights",
-      href: `${basePath}/company-intel`,
-      icon: Briefcase,
-      active: pathname === `${basePath}/company-intel`,
+      label: "Hypothesis",
+      href: `${basePath}/hypothesis`,
+      icon: Lightbulb,
+      active: pathname === `${basePath}/hypothesis`,
     },
     {
       label: "Assessment",
@@ -250,22 +250,16 @@ function EngagementDetailSidebar({
       active: pathname === `${basePath}/assessment`,
     },
     {
-      label: "Opportunity Areas",
-      href: `${basePath}/hypothesis`,
-      icon: Lightbulb,
-      active: pathname === `${basePath}/hypothesis`,
-    },
-    {
-      label: "Business Impact",
-      href: `${basePath}/findings`,
+      label: "Opportunities",
+      href: `${basePath}/opportunities`,
       icon: BarChart3,
-      active: pathname === `${basePath}/findings`,
+      active: pathname === `${basePath}/opportunities` || pathname === `${basePath}/findings`,
     },
     {
-      label: "Tool Recommendations",
-      href: `${basePath}/tools`,
+      label: "Technology",
+      href: `${basePath}/technology`,
       icon: Wrench,
-      active: pathname === `${basePath}/tools`,
+      active: pathname === `${basePath}/technology` || pathname === `${basePath}/tools`,
     },
   ];
 
@@ -432,19 +426,15 @@ export function Sidebar() {
   const pathname = usePathname();
 
   // Homepage — no sidebar
-  if (pathname === "/") {
+  if (pathname === "/" || pathname.startsWith("/homepage-v")) {
     return null;
   }
 
   // Engagement detail — /engagements/[id] or /engagements/[id]/*
+  // No sidebar — stepper + right rail handle navigation
   const engagementMatch = pathname.match(/^\/engagements\/([^/]+)/);
   if (engagementMatch && engagementMatch[1] !== "new") {
-    return (
-      <EngagementDetailSidebar
-        pathname={pathname}
-        engagementId={engagementMatch[1]}
-      />
-    );
+    return null;
   }
 
   // Engagements list — /engagements or /engagements/new

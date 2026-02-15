@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option F: Hexagonal Grid Wave</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow-x: hidden; }
+  .hero {
+    position: relative; min-height: 100vh; background: linear-gradient(to bottom, #f9fafb, #fff);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .hero-content {
+    position: relative; z-index: 10; text-align: center; max-width: 700px; padding: 40px;
+  }
+  .hero-content h1 { font-size: 48px; font-weight: 700; color: #111; line-height: 1.15; margin-bottom: 16px; }
+  .hero-content h1 span { color: #00B140; }
+  .hero-content p { font-size: 16px; color: #6b7280; line-height: 1.6; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  .dark-section {
+    position: relative; min-height: 100vh; background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .dark-section .hero-content h1 { color: #fff; }
+  .dark-section .hero-content p { color: #9ca3af; }
+  .label {
+    position: fixed; top: 20px; left: 20px; background: #00B140; color: #fff;
+    padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; z-index: 100;
+  }
+</style>
+</head>
+<body>
+<div class="label">Option F: Hexagonal Grid Wave</div>
+
+<section class="hero">
+  <canvas id="c1"></canvas>
+  <div class="hero-content">
+    <h1>The intelligence layer<br><span>for enterprise transformation.</span></h1>
+    <p>Lighthouse integrates peer benchmarks, financial signals, and capability mapping to identify where AI drives the highest-return enterprise transformations.</p>
+  </div>
+</section>
+
+<section class="dark-section">
+  <canvas id="c2"></canvas>
+  <div class="hero-content">
+    <h1>A Structured <span>Intelligence Cycle</span></h1>
+    <p>Every engagement flows through a defensible five-step transformation framework — from intake to board-ready output.</p>
+  </div>
+</section>
+
+<script>
+function initHex(canvasId, opts = {}) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const isDark = opts.dark || false;
+  let W, H;
+  let time = 0;
+  const HEX_SIZE = 28;
+  const hexes = [];
+  const ripples = [];
+
+  function resize() {
+    const dpr = devicePixelRatio;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    buildGrid();
+  }
+
+  function buildGrid() {
+    hexes.length = 0;
+    const w = HEX_SIZE * 2;
+    const h = Math.sqrt(3) * HEX_SIZE;
+    const cols = Math.ceil(W / (w * 0.75)) + 2;
+    const rows = Math.ceil(H / h) + 2;
+
+    for (let row = -1; row < rows; row++) {
+      for (let col = -1; col < cols; col++) {
+        const x = col * w * 0.75;
+        const y = row * h + (col % 2 === 1 ? h / 2 : 0);
+        hexes.push({
+          x, y, col, row,
+          brightness: 0,
+          targetBrightness: 0,
+          phase: Math.random() * Math.PI * 2,
+        });
+      }
+    }
+  }
+
+  function hexPath(cx, cy, size) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI / 3) * i - Math.PI / 6;
+      const x = cx + size * Math.cos(angle);
+      const y = cy + size * Math.sin(angle);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+  }
+
+  function update() {
+    time += 0.016;
+
+    // Spawn ripples periodically
+    if (Math.random() < 0.015) {
+      ripples.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        radius: 0,
+        speed: 80 + Math.random() * 120,
+        maxRadius: 300 + Math.random() * 300,
+        birth: time,
+      });
+    }
+
+    // Update ripples
+    for (let i = ripples.length - 1; i >= 0; i--) {
+      ripples[i].radius += ripples[i].speed * 0.016;
+      if (ripples[i].radius > ripples[i].maxRadius) ripples.splice(i, 1);
+    }
+
+    // Update hex brightness based on ripples and waves
+    for (const hex of hexes) {
+      let brightness = 0;
+
+      // Ambient wave
+      brightness += (Math.sin(hex.x * 0.008 + time * 0.5) * Math.cos(hex.y * 0.006 + time * 0.3) + 1) * 0.15;
+
+      // Ripple contributions
+      for (const rip of ripples) {
+        const dx = hex.x - rip.x, dy = hex.y - rip.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const ringDist = Math.abs(dist - rip.radius);
+        if (ringDist < 40) {
+          const fade = 1 - rip.radius / rip.maxRadius;
+          brightness += (1 - ringDist / 40) * fade * 0.7;
+        }
+      }
+
+      hex.targetBrightness = Math.min(1, brightness);
+      hex.brightness += (hex.targetBrightness - hex.brightness) * 0.1;
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    for (const hex of hexes) {
+      const baseOpacity = isDark ? 0.04 : 0.02;
+      const activeOpacity = isDark ? 0.25 : 0.12;
+      const opacity = baseOpacity + hex.brightness * (activeOpacity - baseOpacity);
+
+      // Hex outline
+      hexPath(hex.x, hex.y, HEX_SIZE - 1);
+      ctx.strokeStyle = `rgba(0,177,64,${opacity})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Fill for bright hexes
+      if (hex.brightness > 0.3) {
+        hexPath(hex.x, hex.y, HEX_SIZE - 1);
+        const fillOp = (hex.brightness - 0.3) * (isDark ? 0.1 : 0.04);
+        ctx.fillStyle = `rgba(0,177,64,${fillOp})`;
+        ctx.fill();
+      }
+
+      // Center dot for very bright hexes
+      if (hex.brightness > 0.5) {
+        ctx.beginPath();
+        ctx.arc(hex.x, hex.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,177,64,${hex.brightness * (isDark ? 0.4 : 0.2)})`;
+        ctx.fill();
+      }
+    }
+
+    // Ripple center glow
+    for (const rip of ripples) {
+      const fade = 1 - rip.radius / rip.maxRadius;
+      if (fade > 0) {
+        const g = ctx.createRadialGradient(rip.x, rip.y, 0, rip.x, rip.y, 60);
+        g.addColorStop(0, `rgba(0,177,64,${fade * (isDark ? 0.2 : 0.08)})`);
+        g.addColorStop(1, 'rgba(0,177,64,0)');
+        ctx.beginPath();
+        ctx.arc(rip.x, rip.y, 60, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
+    }
+  }
+
+  function loop() { update(); draw(); requestAnimationFrame(loop); }
+  window.addEventListener('resize', resize);
+  resize();
+  loop();
+}
+
+initHex('c1', { dark: false });
+initHex('c2', { dark: true });
+</script>
+</body>
+</html>

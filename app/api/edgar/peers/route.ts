@@ -1,15 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getCompanyByTicker, findPeersBySIC } from "@/lib/db/queries";
 import { lookupCIK, fetchCompanyFacts, extractFinancials, fetchCompanySIC } from "@/lib/edgar/client";
 import { secFetch } from "@/lib/edgar/rate-limiter";
 import { PeerFinancials } from "@/types/diagnostic";
 
+const useTurso = process.env.DATA_SOURCE !== "edgar_live";
+
 const USER_AGENT = "FinStackNavigator/1.0 (contact@finstack.dev)";
 
 /**
- * GET /api/edgar/peers?ticker=AAPL
+ * GET /api/edgar/peers?ticker=AAPL&revenue=394328
  *
- * Finds peer companies by SIC code, fetches their financials from EDGAR.
- * Returns up to 5 peers with comparable revenue.
+ * Finds peer companies by SIC code, returns up to 20 peers with comparable revenue.
+ *
+ * Turso: 1 SQL query (<500ms, deterministic)
+ * Live:  88+ EDGAR API calls (30-60s, random sampling)
  */
 export async function GET(request: NextRequest) {
   const ticker = request.nextUrl.searchParams.get("ticker");
@@ -20,7 +25,29 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // 1. Look up target CIK and SIC
+    const targetRevenue = targetRevenueStr ? parseFloat(targetRevenueStr) : undefined;
+
+    // ── Turso path: 1 SQL query ──
+    if (useTurso) {
+      const company = await getCompanyByTicker(ticker);
+      if (!company) {
+        return NextResponse.json({ error: `Ticker ${ticker} not found` }, { status: 404 });
+      }
+
+      if (!company.sic) {
+        return NextResponse.json({ error: "Could not determine SIC code" }, { status: 404 });
+      }
+
+      const result = await findPeersBySIC(company.sic, targetRevenue, ticker, 20);
+
+      return NextResponse.json({
+        peers: result.peers,
+        sic: result.sic,
+        sicDescription: result.sicDescription,
+      });
+    }
+
+    // ── Live EDGAR fallback: 88+ API calls ──
     const cik = await lookupCIK(ticker);
     if (!cik) {
       return NextResponse.json({ error: `Ticker ${ticker} not found` }, { status: 404 });
@@ -30,12 +57,6 @@ export async function GET(request: NextRequest) {
     if (!companyInfo?.sic) {
       return NextResponse.json({ error: "Could not determine SIC code" }, { status: 404 });
     }
-
-    // 2. Find companies with same SIC via EDGAR full-text search
-    const searchUrl = `https://efts.sec.gov/LATEST/search-index?q=%22${companyInfo.sic}%22&dateRange=custom&startdt=2023-01-01&forms=10-K&from=0&size=20`;
-    // Alternative: Use the company tickers file and check SIC for each
-    // Since EDGAR search-index doesn't directly support SIC filtering well,
-    // we use the submissions endpoint to check SIC for candidate companies.
 
     // Fetch full tickers list
     const tickerRes = await secFetch("https://www.sec.gov/files/company_tickers.json", {
@@ -48,22 +69,18 @@ export async function GET(request: NextRequest) {
 
     const allTickers = await tickerRes.json();
     const candidates: { ticker: string; cik: string }[] = [];
-
-    // Collect some candidate CIKs to check
     const entries = Object.values(allTickers) as { ticker: string; cik_str: number; title: string }[];
 
-    // Take a sample of tickers to check SIC (we can't check all 10K+ companies)
-    // Strategy: check up to 50 random companies to find SIC matches
+    // Random sample to find SIC matches
     const shuffled = entries.sort(() => Math.random() - 0.5).slice(0, 80);
 
-    // Check SIC for each candidate in parallel (batched)
     const batchSize = 10;
     for (let i = 0; i < shuffled.length && candidates.length < 8; i += batchSize) {
       const batch = shuffled.slice(i, i + batchSize);
       const results = await Promise.allSettled(
         batch.map(async (entry) => {
           const candidateCik = String(entry.cik_str).padStart(10, "0");
-          if (candidateCik === cik) return null; // Skip self
+          if (candidateCik === cik) return null;
 
           const info = await fetchCompanySIC(candidateCik);
           if (info?.sic === companyInfo.sic) {
@@ -84,8 +101,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ peers: [], sic: companyInfo.sic, sicDescription: companyInfo.sicDescription });
     }
 
-    // 3. Fetch financials for peers (in parallel, up to 5)
-    const peerCandidates = candidates.slice(0, 5);
+    // Fetch financials for peers
+    const peerCandidates = candidates.slice(0, 20);
     const peerResults = await Promise.allSettled(
       peerCandidates.map(async (candidate) => {
         const facts = await fetchCompanyFacts(candidate.cik);
@@ -99,7 +116,7 @@ export async function GET(request: NextRequest) {
 
         const peerData: PeerFinancials = {
           ticker: candidate.ticker,
-          companyName: candidate.ticker, // Will be enriched if needed
+          companyName: candidate.ticker,
           revenue: latest.revenue,
           revenueGrowth: latest.revenueGrowth,
           grossMargin: latest.grossMargin,
@@ -120,8 +137,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    // Sort by revenue proximity to target if available
-    const targetRevenue = targetRevenueStr ? parseFloat(targetRevenueStr) : undefined;
+    // Sort by revenue proximity
     if (targetRevenue) {
       peers.sort((a, b) => {
         const aDiff = Math.abs((a.revenue || 0) - targetRevenue);
@@ -131,7 +147,7 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json({
-      peers: peers.slice(0, 5),
+      peers: peers.slice(0, 20),
       sic: companyInfo.sic,
       sicDescription: companyInfo.sicDescription,
     });

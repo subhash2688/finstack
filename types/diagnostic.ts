@@ -9,9 +9,9 @@
 import { FunctionId } from "./function";
 
 /**
- * Category of a diagnostic challenge
+ * Category of a diagnostic challenge or executive summary theme
  */
-export type ChallengeCategory = "operational" | "cost" | "data-quality" | "scale";
+export type ChallengeCategory = "operational" | "cost" | "data-quality" | "scale" | "positive";
 
 /**
  * Expected leverage level for a priority area
@@ -229,6 +229,7 @@ export interface PeerComparisonSet {
   targetTicker: string;
   peers: PeerFinancials[];
   customPeers?: PeerFinancials[];
+  removedTickers?: string[];
   generatedAt: string;
   competitorSource?: "10-K" | "SIC";
 }
@@ -257,11 +258,32 @@ export interface CompanyIntel {
 }
 
 /**
+ * Executive Summary — rich structured brief for the hypothesis page hero
+ */
+export interface ExecutiveSummaryTheme {
+  label: string;
+  category: ChallengeCategory;
+}
+
+export interface OpportunityTheme {
+  theme: string;
+  rationale: string;
+}
+
+export interface ExecutiveSummary {
+  themes: ExecutiveSummaryTheme[];
+  situation: string;
+  keyFindings: string[];
+  opportunityThemes: OpportunityTheme[];
+}
+
+/**
  * The full company-level diagnostic output
  */
 export interface CompanyDiagnostic {
   companyArchetype: string;
   archetypeDescription: string;
+  executiveSummary?: ExecutiveSummary;
   companyIntelligence?: CompanyIntelligence;
   challenges: DiagnosticChallenge[];
   aiApplicability: AIApplicabilitySplit;

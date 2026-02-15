@@ -19,11 +19,10 @@ interface EngagementStepperProps {
   onStepClick?: (stepId: string) => void;
 }
 
-// AlixPartners green gradient — light to dark across 6 steps
+// AlixPartners green gradient — light to dark across 5 steps
 const STEP_COLORS = [
   { bg: "#8DC63F", text: "white", border: "#7CB342" },  // Lime green
-  { bg: "#5FAD41", text: "white", border: "#4E9C39" },  // Medium-light green
-  { bg: "#3D9B40", text: "white", border: "#2E8B37" },  // Medium green
+  { bg: "#4CAF50", text: "white", border: "#43A047" },  // Medium-light green
   { bg: "#00B140", text: "white", border: "#009935" },  // AlixPartners primary
   { bg: "#1B7A3D", text: "white", border: "#156B34" },  // Dark green
   { bg: "#145C30", text: "white", border: "#0E4D27" },  // Forest green
@@ -38,12 +37,14 @@ function ChevronStep({
   total,
   isFirst,
   isLast,
+  onClick,
 }: {
   step: StepDef;
   index: number;
   total: number;
   isFirst: boolean;
   isLast: boolean;
+  onClick?: () => void;
 }) {
   const isActive = step.status === "active";
   const isCompleted = step.status === "completed";
@@ -119,7 +120,7 @@ function ChevronStep({
         >
           {isCompleted ? <Check className="h-3 w-3" strokeWidth={3} /> : index + 1}
         </span>
-        <span className={`text-[11px] font-semibold whitespace-nowrap ${textCls}`}>
+        <span className={`text-sm font-medium whitespace-nowrap ${textCls}`}>
           <span className="hidden sm:inline">{step.label}</span>
           <span className="sm:hidden">{step.shortLabel}</span>
         </span>
@@ -139,7 +140,10 @@ function ChevronStep({
   }
 
   return (
-    <div className={`flex-1 min-w-0 ${isClickable ? "cursor-pointer" : "cursor-not-allowed"}`}>
+    <div
+      className={`flex-1 min-w-0 ${isClickable ? "cursor-pointer" : "cursor-not-allowed"}`}
+      onClick={() => { if (isClickable && onClick) onClick(); }}
+    >
       {inner}
     </div>
   );
@@ -157,6 +161,7 @@ export function EngagementStepper({ steps, onStepClick }: EngagementStepperProps
             total={steps.length}
             isFirst={i === 0}
             isLast={i === steps.length - 1}
+            onClick={onStepClick ? () => onStepClick(s.id) : undefined}
           />
         ))}
       </div>

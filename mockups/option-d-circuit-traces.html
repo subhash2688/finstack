@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option D: Circuit Board Traces</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow-x: hidden; }
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #f9fafb, #fff);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .hero-content {
+    position: relative; z-index: 10; text-align: center; max-width: 700px; padding: 40px;
+  }
+  .hero-content h1 { font-size: 48px; font-weight: 700; color: #111; line-height: 1.15; margin-bottom: 16px; }
+  .hero-content h1 span { color: #00B140; }
+  .hero-content p { font-size: 16px; color: #6b7280; line-height: 1.6; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  .dark-section {
+    position: relative; min-height: 100vh; background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .dark-section .hero-content h1 { color: #fff; }
+  .dark-section .hero-content p { color: #9ca3af; }
+  .label {
+    position: fixed; top: 20px; left: 20px; background: #00B140; color: #fff;
+    padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; z-index: 100;
+  }
+</style>
+</head>
+<body>
+<div class="label">Option D: Circuit Board Traces</div>
+
+<section class="hero">
+  <canvas id="c1"></canvas>
+  <div class="hero-content">
+    <h1>The intelligence layer<br><span>for enterprise transformation.</span></h1>
+    <p>Lighthouse integrates peer benchmarks, financial signals, and capability mapping to identify where AI drives the highest-return enterprise transformations.</p>
+  </div>
+</section>
+
+<section class="dark-section">
+  <canvas id="c2"></canvas>
+  <div class="hero-content">
+    <h1>A Structured <span>Intelligence Cycle</span></h1>
+    <p>Every engagement flows through a defensible five-step transformation framework — from intake to board-ready output.</p>
+  </div>
+</section>
+
+<script>
+function initCircuit(canvasId, opts = {}) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const isDark = opts.dark || false;
+  let W, H;
+  const GRID = 40;
+  const traces = [];
+  const signals = [];
+
+  function resize() {
+    const dpr = devicePixelRatio;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    buildTraces();
+  }
+
+  function snap(v) { return Math.round(v / GRID) * GRID; }
+
+  function buildTraces() {
+    traces.length = 0;
+    const count = 35;
+    for (let i = 0; i < count; i++) {
+      const path = [];
+      let x = snap(Math.random() * W);
+      let y = snap(Math.random() * H);
+      path.push({ x, y });
+      const segments = 4 + Math.floor(Math.random() * 6);
+      for (let s = 0; s < segments; s++) {
+        // Alternate horizontal and vertical
+        if (s % 2 === 0) {
+          x += (Math.random() > 0.5 ? 1 : -1) * GRID * (2 + Math.floor(Math.random() * 6));
+        } else {
+          y += (Math.random() > 0.5 ? 1 : -1) * GRID * (2 + Math.floor(Math.random() * 6));
+        }
+        x = Math.max(0, Math.min(W, snap(x)));
+        y = Math.max(0, Math.min(H, snap(y)));
+        path.push({ x, y });
+      }
+      traces.push({ path, width: 1 + Math.random() * 0.5 });
+    }
+  }
+
+  function totalLength(path) {
+    let len = 0;
+    for (let i = 1; i < path.length; i++) {
+      len += Math.abs(path[i].x - path[i-1].x) + Math.abs(path[i].y - path[i-1].y);
+    }
+    return len;
+  }
+
+  function pointAt(path, t) {
+    const total = totalLength(path);
+    let target = t * total;
+    for (let i = 1; i < path.length; i++) {
+      const segLen = Math.abs(path[i].x - path[i-1].x) + Math.abs(path[i].y - path[i-1].y);
+      if (target <= segLen) {
+        const frac = segLen > 0 ? target / segLen : 0;
+        return {
+          x: path[i-1].x + (path[i].x - path[i-1].x) * frac,
+          y: path[i-1].y + (path[i].y - path[i-1].y) * frac,
+        };
+      }
+      target -= segLen;
+    }
+    return path[path.length - 1];
+  }
+
+  function spawn() {
+    const ti = Math.floor(Math.random() * traces.length);
+    signals.push({
+      trace: ti,
+      t: 0,
+      speed: 0.003 + Math.random() * 0.005,
+      size: 2 + Math.random() * 2,
+    });
+  }
+
+  function update() {
+    if (Math.random() < 0.08) spawn();
+    for (let i = signals.length - 1; i >= 0; i--) {
+      signals[i].t += signals[i].speed;
+      if (signals[i].t > 1) signals.splice(i, 1);
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Grid dots
+    const dotOp = isDark ? 0.06 : 0.03;
+    for (let x = 0; x <= W; x += GRID) {
+      for (let y = 0; y <= H; y += GRID) {
+        ctx.beginPath();
+        ctx.arc(x, y, 1, 0, Math.PI * 2);
+        ctx.fillStyle = isDark ? `rgba(0,177,64,${dotOp})` : `rgba(0,0,0,${dotOp})`;
+        ctx.fill();
+      }
+    }
+
+    // Traces
+    for (const trace of traces) {
+      ctx.beginPath();
+      for (let i = 0; i < trace.path.length; i++) {
+        const p = trace.path[i];
+        if (i === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+      ctx.strokeStyle = isDark ? 'rgba(0,177,64,0.07)' : 'rgba(0,177,64,0.04)';
+      ctx.lineWidth = trace.width;
+      ctx.stroke();
+
+      // Junction dots
+      for (const p of trace.path) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = isDark ? 'rgba(0,177,64,0.12)' : 'rgba(0,177,64,0.06)';
+        ctx.fill();
+      }
+    }
+
+    // Signals
+    for (const sig of signals) {
+      const trace = traces[sig.trace];
+      if (!trace) continue;
+      const pt = pointAt(trace.path, sig.t);
+
+      // Glow
+      const g = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, 20);
+      g.addColorStop(0, isDark ? 'rgba(0,177,64,0.4)' : 'rgba(0,177,64,0.2)');
+      g.addColorStop(1, 'rgba(0,177,64,0)');
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 20, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+
+      // Core
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, sig.size, 0, Math.PI * 2);
+      ctx.fillStyle = '#00B140';
+      ctx.globalAlpha = isDark ? 0.7 : 0.4;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function loop() { update(); draw(); requestAnimationFrame(loop); }
+  window.addEventListener('resize', resize);
+  resize();
+  loop();
+}
+
+initCircuit('c1', { dark: false });
+initCircuit('c2', { dark: true });
+</script>
+</body>
+</html>

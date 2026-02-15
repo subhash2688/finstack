@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option E: Topographic Landscape</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow-x: hidden; }
+  .hero {
+    position: relative; min-height: 100vh; background: linear-gradient(to bottom, #f9fafb, #fff);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .hero-content {
+    position: relative; z-index: 10; text-align: center; max-width: 700px; padding: 40px;
+  }
+  .hero-content h1 { font-size: 48px; font-weight: 700; color: #111; line-height: 1.15; margin-bottom: 16px; }
+  .hero-content h1 span { color: #00B140; }
+  .hero-content p { font-size: 16px; color: #6b7280; line-height: 1.6; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  .dark-section {
+    position: relative; min-height: 100vh; background: #0a0a0a;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .dark-section .hero-content h1 { color: #fff; }
+  .dark-section .hero-content p { color: #9ca3af; }
+  .label {
+    position: fixed; top: 20px; left: 20px; background: #00B140; color: #fff;
+    padding: 8px 16px; border-radius: 8px; font-size: 14px; font-weight: 600; z-index: 100;
+  }
+</style>
+</head>
+<body>
+<div class="label">Option E: Topographic Landscape</div>
+
+<section class="hero">
+  <canvas id="c1"></canvas>
+  <div class="hero-content">
+    <h1>The intelligence layer<br><span>for enterprise transformation.</span></h1>
+    <p>Lighthouse integrates peer benchmarks, financial signals, and capability mapping to identify where AI drives the highest-return enterprise transformations.</p>
+  </div>
+</section>
+
+<section class="dark-section">
+  <canvas id="c2"></canvas>
+  <div class="hero-content">
+    <h1>A Structured <span>Intelligence Cycle</span></h1>
+    <p>Every engagement flows through a defensible five-step transformation framework — from intake to board-ready output.</p>
+  </div>
+</section>
+
+<script>
+function initTopo(canvasId, opts = {}) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const isDark = opts.dark || false;
+  let W, H;
+  let time = 0;
+
+  // Perlin-like noise using multiple sine waves
+  const octaves = [];
+  for (let i = 0; i < 6; i++) {
+    octaves.push({
+      freqX: 0.002 + Math.random() * 0.004,
+      freqY: 0.002 + Math.random() * 0.004,
+      freqT: 0.0003 + Math.random() * 0.0005,
+      amp: 1 / (i + 1),
+      phaseX: Math.random() * 100,
+      phaseY: Math.random() * 100,
+    });
+  }
+
+  function noise(x, y, t) {
+    let val = 0;
+    for (const o of octaves) {
+      val += Math.sin((x * o.freqX + o.phaseX) + t * o.freqT) *
+             Math.cos((y * o.freqY + o.phaseY) + t * o.freqT * 1.3) * o.amp;
+    }
+    return val;
+  }
+
+  function resize() {
+    const dpr = devicePixelRatio;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function draw() {
+    time++;
+    ctx.clearRect(0, 0, W, H);
+
+    const LEVELS = 12;
+    const STEP = 6; // pixel resolution for marching
+    const lineOpacity = isDark ? 0.12 : 0.05;
+
+    // Compute height field
+    const cols = Math.ceil(W / STEP) + 1;
+    const rows = Math.ceil(H / STEP) + 1;
+    const field = new Float32Array(cols * rows);
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        field[r * cols + c] = noise(c * STEP, r * STEP, time);
+      }
+    }
+
+    // Marching squares for contour lines
+    for (let level = 0; level < LEVELS; level++) {
+      const threshold = -1 + (2 * level) / (LEVELS - 1);
+      const isHighlight = level === Math.floor(LEVELS * 0.7);
+
+      ctx.beginPath();
+
+      for (let r = 0; r < rows - 1; r++) {
+        for (let c = 0; c < cols - 1; c++) {
+          const tl = field[r * cols + c];
+          const tr = field[r * cols + c + 1];
+          const br = field[(r + 1) * cols + c + 1];
+          const bl = field[(r + 1) * cols + c];
+
+          const x = c * STEP, y = r * STEP;
+
+          // Binary index
+          let idx = 0;
+          if (tl >= threshold) idx |= 8;
+          if (tr >= threshold) idx |= 4;
+          if (br >= threshold) idx |= 2;
+          if (bl >= threshold) idx |= 1;
+
+          // Interpolation helpers
+          function lerp(v1, v2, a, b) {
+            const t = (threshold - v1) / (v2 - v1);
+            return a + t * (b - a);
+          }
+
+          const top = { x: lerp(tl, tr, x, x + STEP), y };
+          const right = { x: x + STEP, y: lerp(tr, br, y, y + STEP) };
+          const bottom = { x: lerp(bl, br, x, x + STEP), y: y + STEP };
+          const left = { x, y: lerp(tl, bl, y, y + STEP) };
+
+          function line(a, b) {
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+          }
+
+          switch (idx) {
+            case 1: case 14: line(left, bottom); break;
+            case 2: case 13: line(bottom, right); break;
+            case 3: case 12: line(left, right); break;
+            case 4: case 11: line(top, right); break;
+            case 5: line(top, left); line(bottom, right); break;
+            case 6: case 9: line(top, bottom); break;
+            case 7: case 8: line(top, left); break;
+            case 10: line(top, right); line(left, bottom); break;
+          }
+        }
+      }
+
+      if (isHighlight) {
+        ctx.strokeStyle = isDark ? `rgba(0,177,64,${lineOpacity * 2.5})` : `rgba(0,177,64,${lineOpacity * 2})`;
+        ctx.lineWidth = 1.5;
+      } else {
+        ctx.strokeStyle = isDark ? `rgba(0,177,64,${lineOpacity})` : `rgba(0,177,64,${lineOpacity})`;
+        ctx.lineWidth = 0.8;
+      }
+      ctx.stroke();
+    }
+
+    // Peak markers (local maxima get a subtle glow)
+    for (let r = 2; r < rows - 2; r += 8) {
+      for (let c = 2; c < cols - 2; c += 8) {
+        const v = field[r * cols + c];
+        if (v > 0.6) {
+          const px = c * STEP, py = r * STEP;
+          const g = ctx.createRadialGradient(px, py, 0, px, py, 30);
+          g.addColorStop(0, isDark ? 'rgba(0,177,64,0.15)' : 'rgba(0,177,64,0.08)');
+          g.addColorStop(1, 'rgba(0,177,64,0)');
+          ctx.beginPath();
+          ctx.arc(px, py, 30, 0, Math.PI * 2);
+          ctx.fillStyle = g;
+          ctx.fill();
+        }
+      }
+    }
+  }
+
+  function loop() { draw(); requestAnimationFrame(loop); }
+  window.addEventListener('resize', resize);
+  resize();
+  loop();
+}
+
+initTopo('c1', { dark: false });
+initTopo('c2', { dark: true });
+</script>
+</body>
+</html>

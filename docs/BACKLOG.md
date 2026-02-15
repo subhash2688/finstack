@@ -1,4 +1,4 @@
-# Product Backlog — Sprint Assigned
+# Product Backlog — Lighthouse AI Platform
 
 > **Last updated**: February 2026
 > **Sprint model**: 2-week sprints, story points (1/2/3/5/8/13)
@@ -6,105 +6,47 @@
 
 ---
 
-## Sprint 0: Cleanup & Documentation (Current)
+## Sprint 6: Transcript Intelligence (Current)
 
 | # | Story | Points | Status |
 |---|-------|--------|--------|
-| 0.1 | Rewrite README.md, create TECH_ARCHITECTURE.md, consolidate docs | 2 | done |
-| 0.2 | Run npm audit, document results | 1 | done |
-| 0.3 | Delete orphaned components (CompanyIntelligenceBrief, OperationalMetrics, PeerBenchmark, CompetitivePosition) | 1 | done |
-| 0.4 | Update CLAUDE.md with new architecture decisions | 1 | done |
+| 6.1 | Transcript upload UI — file picker + drag-drop on engagement assessment page | 3 | todo |
+| 6.2 | `/api/transcripts/analyze` — Claude-powered transcript parsing → structured findings | 8 | todo |
+| 6.3 | Auto-extract: pain points, maturity signals, volumes, ERP mentions, team size, workarounds | 5 | todo |
+| 6.4 | Transcript findings review panel — preview extracted insights before applying | 5 | todo |
+| 6.5 | Auto-populate maturity ratings from transcript signals | 3 | todo |
+| 6.6 | Evidence quotes — link each finding to source quote with timestamp | 3 | todo |
+| 6.7 | Coverage tracker — show which process steps have transcript evidence vs gaps | 3 | todo |
 
-**Sprint total**: 5 points
-
----
-
-## Sprint 1: Homepage Redesign — Two Paths
-
-| # | Story | Points | Status |
-|---|-------|--------|--------|
-| 1.1 | Rewrite homepage with two-path hub (Engagements vs Process Explorer) | 5 | todo |
-| 1.2 | Create /explore route, redirect /dashboard → /explore | 3 | todo |
-| 1.3 | Update Sidebar — add Home link, rename sections | 2 | todo |
-| 1.4 | Create PathCard.tsx + RecentEngagements.tsx components | 3 | todo |
-
-**Sprint total**: 13 points
+**Sprint total**: 30 points (likely 2 sprints)
 
 ---
 
-## Sprint 3: Company Intelligence Overhaul (runs before Sprint 2)
-
-| # | Story | Points | Status |
-|---|-------|--------|--------|
-| 3.1 | EDGAR balance sheet expansion — instant values + derived metrics (DSO, DPO, inventory turns, current ratio) | 8 | todo |
-| 3.2 | Expense trend direction indicators in FinancialOverview | 3 | todo |
-| 3.3 | Competitor comparison — SIC-based peer lookup + EDGAR financials for up to 5 peers | 13 | todo |
-| 3.4 | Executive team via Claude LLM with "AI Analysis" caveat | 5 | todo |
-| 3.5 | Product segments & market commentary via Claude LLM | 5 | todo |
-| 3.6 | Enhanced headcount — editable functional breakdown with industry ratio guidance | 5 | todo |
-| 3.7 | Update CompanyIntelDashboard layout with new sections | 3 | todo |
-| 3.8 | Data source transparency badges on all data points | 2 | todo |
-
-**Sprint total**: 44 points (likely 2-3 sprints)
-
----
-
-## Sprint 2: Process Explorer as Dynamic Knowledge Base
-
-| # | Story | Points | Status |
-|---|-------|--------|--------|
-| 2.1 | Create sub-sector taxonomy data (SubSectorConfig per industry) | 5 | todo |
-| 2.2 | Context selectors on Explorer (Company Size + Sub-Industry pickers, URL params) | 5 | todo |
-| 2.3 | Function-level tool heatmap drill-down (/explore/[functionId]) | 8 | todo |
-| 2.4 | Enrich 42+ vendor entries with subSectors tags | 3 | todo |
-| 2.5 | Context-aware filtering in tool data + VendorHeatmap | 5 | todo |
-
-**Sprint total**: 26 points
-
----
-
-## Sprint 4: Diagnostic Transparency & Editable ROI
-
-| # | Story | Points | Status |
-|---|-------|--------|--------|
-| 4.1 | Create SavingsAssumptions type, add to Engagement | 2 | todo |
-| 4.2 | Modify savings-calculator.ts to accept custom assumptions | 3 | todo |
-| 4.3 | AssumptionsPanel component (collapsible, real-time recalculation) | 5 | todo |
-| 4.4 | FormulaExplainer component (worked example) | 3 | todo |
-| 4.5 | Show % impact alongside $ impact for every step | 3 | todo |
-| 4.6 | Tool cost sizing — pricing data + net ROI display | 5 | todo |
-
-**Sprint total**: 21 points
-
----
-
-## Sprint 5: System-Aware Prompting + ERP Compatibility
-
-| # | Story | Points | Status |
-|---|-------|--------|--------|
-| 5.1 | Create ERP intelligence database (ERPSignal per system) | 3 | todo |
-| 5.2 | Inject ERP signals into diagnostic prompt | 3 | todo |
-| 5.3 | Add ERPIntegration type to tools, enrich tool JSONs | 5 | todo |
-| 5.4 | ERP-aware tool recommendation boosting + badges | 3 | todo |
-| 5.5 | Enhance copilot context with assumptions + findings data | 3 | todo |
-
-**Sprint total**: 17 points
-
----
-
-## Parking Lot (Future — not sprint-assigned)
+## Backlog (Prioritized)
 
 | # | Story | Description | Priority |
 |---|-------|-------------|----------|
-| F1 | Pain points → workflow prioritization | Feed intake pain points into LLM to reorder workflow steps | P2 |
-| F2 | On-demand workflow generation from explorer | Generate tailored workflow when clicking "Explore Process" with context | P2 |
+| B1 | Benchmark range indicators | Visual KPI positioning vs industry ranges — horizontal track with worst/best bookends, shaded 25th-75th band, diamond marker for company value. KPIs: finance cost/revenue, AP cost/invoice, offshoring %, headcount/$B revenue, DPO, DSO, close cycle, auto-match rate | P1 |
+| B2 | Context-aware copilot upgrade | Feed copilot full engagement context (financials, maturity, benchmarks, ERP, headcount). Enable consulting-quality answers with data citations | P1 |
+| B3 | Auto executive summary | One-click generation of client-ready 1-page summary: company overview, benchmarks vs peers, maturity heatmap, top 3 interventions with ROI | P1 |
+| B4 | Tech stack detection via job postings | Scrape LinkedIn Jobs / Greenhouse / Lever for current openings mentioning finance tools. Map to known vendor database | P2 |
+| B5 | LinkedIn headcount intelligence | Finance org sizing from LinkedIn — count heads by function (AP, AR, FP&A, Treasury). Fully loaded cost model using BLS salary benchmarks x burden rate | P2 |
+| B6 | Pre-engagement maturity predictor | AI estimates maturity per process step based on company size, ERP, tech stack, headcount ratios — before any interviews happen | P2 |
+| B7 | Smart diagnostic questionnaire | Adaptive interview guide — AI picks next question based on previous answers, ERP context, and maturity signals | P2 |
+| B8 | Vendor fit scoring with AI reasoning | AI explains WHY each tool fits: ERP integration, volume match, pain point alignment. Side-by-side comparison with trade-off analysis | P2 |
+| B9 | Multi-engagement pattern recognition | Cross-engagement analytics: common bottlenecks, ERP migration impact, industry trends dashboard | P3 |
+| B10 | AI interview prep | Pre-meeting brief: suggested questions based on known data, areas to probe based on diagnostic gaps, comparable case studies | P3 |
+
+---
+
+## Parking Lot (Legacy — Carry Forward)
+
+| # | Story | Description | Priority |
+|---|-------|-------------|----------|
 | F3 | Post-creation editing | Edit company info, process intake from engagement workspace | P1 |
 | F4 | Add Process modal | Wire up "Add Process" button in EngagementWorkspace | P1 |
-| F5 | Process context display | Show intake answers on process cards and workflow page | P1 |
 | F6 | Expand to non-Finance functions | Enable GTM, R&D, HR, Legal as workflows are built | P2 |
-| F7 | Persist form state across refresh | Save draft state to localStorage during engagement creation | P2 |
-| F8 | Business performance benchmarking | Collect actual metrics (DSO, close time) and benchmark vs industry | P2 |
-| F9 | Export to PDF/PowerPoint | Client deliverable generation | P2 |
+| F9 | Refined Deck Export (PowerPoint) | Infrastructure built (pptxgenjs, section builders, export dialog). Needs: polished slide templates, better content density, AlixPartners-quality visual design, reference mock decks for layout/styling. Use new mock versions as reference. | P1 |
 | F10 | Multi-user collaboration | Shared engagements across team members | P3 |
 
 ---
@@ -113,7 +55,11 @@
 
 | # | Story | Sprint | Completed |
 |---|-------|--------|-----------|
-| 3-old | Context-aware AI diagnostic | Pre-sprint | Feb 2026 |
-| 4-old | EDGAR API integration (public companies) | Pre-sprint | Feb 2026 |
-| 5-old | Company financial dashboard | Pre-sprint | Feb 2026 |
-| 6-old | Ticker symbol auto-lookup | Pre-sprint | Feb 2026 |
+| 0.1-0.4 | Cleanup & documentation | Sprint 0 | Feb 2026 |
+| 1.1-1.4 | Homepage redesign — two-path hub | Sprint 1 | Feb 2026 |
+| 2.1-2.5 | Process Explorer as dynamic knowledge base | Sprint 2 | Feb 2026 |
+| 3.1-3.8 | Company Intelligence overhaul (EDGAR + LLM) | Sprint 3 | Feb 2026 |
+| 4.1-4.6 | Diagnostic transparency & editable ROI | Sprint 4 | Feb 2026 |
+| 5.1-5.5 | System-aware prompting + ERP compatibility | Sprint 5 | Feb 2026 |
+| 5.6 | Competitive insights — vertical per-company chart, 10-K competitor extraction, custom ticker picker | Sprint 5.5 | Feb 2026 |
+| 5.7 | SEC EDGAR rate limiter (secFetch) | Sprint 5.5 | Feb 2026 |

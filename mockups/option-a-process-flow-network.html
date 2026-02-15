@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option A: Process Flow Network</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow-x: hidden; }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #f9fafb, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 700px;
+    padding: 40px;
+  }
+  .hero-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero-content h1 span { color: #00B140; }
+  .hero-content p { font-size: 16px; color: #6b7280; line-height: 1.6; }
+
+  /* ─── Process Flow Network Canvas ─── */
+  canvas#flowNetwork {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  /* ─── Dark section ─── */
+  .dark-section {
+    position: relative;
+    min-height: 100vh;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .dark-section .hero-content h1 { color: #fff; }
+  .dark-section .hero-content p { color: #9ca3af; }
+
+  canvas#flowNetworkDark {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #00B140;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div class="label">Option A: Process Flow Network</div>
+
+<!-- Light section -->
+<section class="hero">
+  <canvas id="flowNetwork"></canvas>
+  <div class="hero-content">
+    <h1>The intelligence layer<br><span>for enterprise transformation.</span></h1>
+    <p>Lighthouse integrates peer benchmarks, financial signals, and capability mapping to identify where AI drives the highest-return enterprise transformations.</p>
+  </div>
+</section>
+
+<!-- Dark section -->
+<section class="dark-section">
+  <canvas id="flowNetworkDark"></canvas>
+  <div class="hero-content">
+    <h1>A Structured <span>Intelligence Cycle</span></h1>
+    <p>Every engagement flows through a defensible five-step transformation framework — from intake to board-ready output.</p>
+  </div>
+</section>
+
+<script>
+function initFlowNetwork(canvasId, opts = {}) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const isDark = opts.dark || false;
+
+  let width, height;
+  const nodes = [];
+  const pulses = [];
+  const NODE_COUNT = 28;
+  const CONNECTION_DIST = 200;
+  const PULSE_SPEED = 0.8;
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    width = canvas.width = rect.width * devicePixelRatio;
+    height = canvas.height = rect.height * devicePixelRatio;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  // Process-themed node labels
+  const labels = [
+    'Invoice', 'Approval', 'Match', 'Payment', 'Reconcile',
+    'Forecast', 'Budget', 'Close', 'Report', 'Audit',
+    'Vendor', 'Contract', 'Onboard', 'Assess', 'Deploy',
+    'Intake', 'Classify', 'Route', 'Validate', 'Archive',
+    'Signal', 'Analyze', 'Score', 'Benchmark', 'Export',
+    'Diagnose', 'Quantify', 'Optimize'
+  ];
+
+  function createNodes() {
+    nodes.length = 0;
+    for (let i = 0; i < NODE_COUNT; i++) {
+      nodes.push({
+        x: Math.random() * (width / devicePixelRatio),
+        y: Math.random() * (height / devicePixelRatio),
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: 3 + Math.random() * 3,
+        label: labels[i % labels.length],
+        pulsePhase: Math.random() * Math.PI * 2,
+      });
+    }
+  }
+
+  function spawnPulse() {
+    if (nodes.length < 2) return;
+    const from = Math.floor(Math.random() * nodes.length);
+    let to = from;
+    while (to === from) to = Math.floor(Math.random() * nodes.length);
+    const a = nodes[from], b = nodes[to];
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < CONNECTION_DIST * 1.5) {
+      pulses.push({ from, to, progress: 0, speed: PULSE_SPEED / dist });
+    }
+  }
+
+  function update() {
+    const w = width / devicePixelRatio;
+    const h = height / devicePixelRatio;
+    for (const node of nodes) {
+      node.x += node.vx;
+      node.y += node.vy;
+      if (node.x < 0 || node.x > w) node.vx *= -1;
+      if (node.y < 0 || node.y > h) node.vy *= -1;
+      node.pulsePhase += 0.02;
+    }
+
+    for (let i = pulses.length - 1; i >= 0; i--) {
+      pulses[i].progress += pulses[i].speed;
+      if (pulses[i].progress > 1) pulses.splice(i, 1);
+    }
+
+    if (Math.random() < 0.03) spawnPulse();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width / devicePixelRatio, height / devicePixelRatio);
+
+    const baseLineColor = isDark ? 'rgba(0,177,64,' : 'rgba(0,177,64,';
+    const baseNodeColor = isDark ? 'rgba(0,177,64,' : 'rgba(0,177,64,';
+    const labelColor = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)';
+
+    // Draw connections
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECTION_DIST) {
+          const opacity = (1 - dist / CONNECTION_DIST) * (isDark ? 0.15 : 0.08);
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = baseLineColor + opacity + ')';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw pulses (traveling dots along connections)
+    for (const pulse of pulses) {
+      const a = nodes[pulse.from], b = nodes[pulse.to];
+      const x = a.x + (b.x - a.x) * pulse.progress;
+      const y = a.y + (b.y - a.y) * pulse.progress;
+      const glow = ctx.createRadialGradient(x, y, 0, x, y, 12);
+      glow.addColorStop(0, isDark ? 'rgba(0,177,64,0.6)' : 'rgba(0,177,64,0.4)');
+      glow.addColorStop(1, 'rgba(0,177,64,0)');
+      ctx.beginPath();
+      ctx.arc(x, y, 12, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(x, y, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#00B140';
+      ctx.fill();
+    }
+
+    // Draw nodes
+    for (const node of nodes) {
+      const pulse = Math.sin(node.pulsePhase) * 0.3 + 0.7;
+      const opacity = (isDark ? 0.3 : 0.15) * pulse;
+
+      // Glow
+      const glow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, node.radius * 4);
+      glow.addColorStop(0, baseNodeColor + opacity + ')');
+      glow.addColorStop(1, 'rgba(0,177,64,0)');
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius * 4, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      // Core dot
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+      ctx.fillStyle = baseNodeColor + (isDark ? 0.4 : 0.2) * pulse + ')';
+      ctx.fill();
+
+      // Label
+      ctx.font = '9px -apple-system, sans-serif';
+      ctx.fillStyle = labelColor;
+      ctx.textAlign = 'center';
+      ctx.fillText(node.label, node.x, node.y + node.radius + 12);
+    }
+  }
+
+  function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('resize', () => {
+    resize();
+    createNodes();
+  });
+
+  resize();
+  createNodes();
+  loop();
+}
+
+initFlowNetwork('flowNetwork', { dark: false });
+initFlowNetwork('flowNetworkDark', { dark: true });
+</script>
+</body>
+</html>

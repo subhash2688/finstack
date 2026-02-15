@@ -3,6 +3,27 @@ import { CompanyDiagnostic, CompanyIntelligence, CompanyIntel, FinancialProfile,
 import { MaturityLevel } from "@/types/workflow";
 import { MOCK_PROFILES, resolveProfileKey } from "@/lib/data/mock-diagnostics";
 import { resolveCompanyIntelTemplate } from "@/lib/data/company-intel-templates";
+import { ScoringResult } from "@/lib/scoring/automation-score";
+
+/**
+ * Enrichment data passed to the diagnostic API for deep personalization.
+ */
+export interface DiagnosticEnrichment {
+  companyIntel?: {
+    financialProfile?: FinancialProfile;
+    peerComparison?: PeerComparisonSet;
+    leadership?: LeadershipProfile;
+    commentary?: CompanyCommentaryData;
+  };
+  transcriptEvidence?: {
+    processId: string;
+    painPoints: string[];
+    quotes: { text: string; speaker: string }[];
+    toolMentions: string[];
+  }[];
+  scoringResult?: ScoringResult;
+  digitalMaturitySummary?: string;
+}
 
 /**
  * Generate an AI-powered diagnostic by calling the API route.
@@ -10,7 +31,8 @@ import { resolveCompanyIntelTemplate } from "@/lib/data/company-intel-templates"
  */
 export async function generateAIDiagnostic(
   clientContext: ClientContext,
-  processAssessments: Pick<ProcessAssessment, "processId" | "processName" | "context">[]
+  processAssessments: Pick<ProcessAssessment, "processId" | "processName" | "context">[],
+  enrichment?: DiagnosticEnrichment
 ): Promise<CompanyDiagnostic> {
   try {
     const response = await fetch("/api/diagnostics/generate", {
@@ -23,6 +45,10 @@ export async function generateAIDiagnostic(
           processName: p.processName,
           context: p.context,
         })),
+        ...(enrichment?.companyIntel ? { companyIntel: enrichment.companyIntel } : {}),
+        ...(enrichment?.transcriptEvidence ? { transcriptEvidence: enrichment.transcriptEvidence } : {}),
+        ...(enrichment?.scoringResult ? { scoringResult: enrichment.scoringResult } : {}),
+        ...(enrichment?.digitalMaturitySummary ? { digitalMaturitySummary: enrichment.digitalMaturitySummary } : {}),
       }),
     });
 
@@ -129,7 +155,8 @@ export interface MaturityDataEntry {
 export async function generateRefinedDiagnostic(
   clientContext: ClientContext,
   processAssessments: ProcessAssessment[],
-  existingDiagnostic: CompanyDiagnostic
+  existingDiagnostic: CompanyDiagnostic,
+  enrichment?: DiagnosticEnrichment
 ): Promise<CompanyDiagnostic> {
   // Build maturity data from process assessments
   const maturityData: MaturityDataEntry[] = processAssessments
@@ -159,6 +186,10 @@ export async function generateRefinedDiagnostic(
         })),
         maturityData,
         isRefinement: true,
+        ...(enrichment?.companyIntel ? { companyIntel: enrichment.companyIntel } : {}),
+        ...(enrichment?.transcriptEvidence ? { transcriptEvidence: enrichment.transcriptEvidence } : {}),
+        ...(enrichment?.scoringResult ? { scoringResult: enrichment.scoringResult } : {}),
+        ...(enrichment?.digitalMaturitySummary ? { digitalMaturitySummary: enrichment.digitalMaturitySummary } : {}),
       }),
     });
 

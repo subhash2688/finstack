@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Option C: Maturity Radar / Capability Mesh</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow-x: hidden; }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #f9fafb, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 700px;
+    padding: 40px;
+  }
+  .hero-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #111;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero-content h1 span { color: #00B140; }
+  .hero-content p { font-size: 16px; color: #6b7280; line-height: 1.6; }
+
+  canvas#radar {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .dark-section {
+    position: relative;
+    min-height: 100vh;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .dark-section .hero-content h1 { color: #fff; }
+  .dark-section .hero-content p { color: #9ca3af; }
+
+  canvas#radarDark {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .label {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #00B140;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<div class="label">Option C: Maturity Radar / Capability Mesh</div>
+
+<section class="hero">
+  <canvas id="radar"></canvas>
+  <div class="hero-content">
+    <h1>The intelligence layer<br><span>for enterprise transformation.</span></h1>
+    <p>Lighthouse integrates peer benchmarks, financial signals, and capability mapping to identify where AI drives the highest-return enterprise transformations.</p>
+  </div>
+</section>
+
+<section class="dark-section">
+  <canvas id="radarDark"></canvas>
+  <div class="hero-content">
+    <h1>A Structured <span>Intelligence Cycle</span></h1>
+    <p>Every engagement flows through a defensible five-step transformation framework — from intake to board-ready output.</p>
+  </div>
+</section>
+
+<script>
+function initRadar(canvasId, opts = {}) {
+  const canvas = document.getElementById(canvasId);
+  const ctx = canvas.getContext('2d');
+  const isDark = opts.dark || false;
+
+  let width, height, cx, cy, maxRadius;
+  const RING_COUNT = 6;
+  const SPOKE_COUNT = 8;
+  const POINT_COUNT = SPOKE_COUNT;
+
+  // Capability labels for each spoke
+  const spokeLabels = [
+    'Invoice Processing', 'Approval Routing', 'Vendor Management', 'Cash Forecasting',
+    'Reconciliation', 'Compliance', 'Reporting', 'Analytics'
+  ];
+
+  // Maturity levels for rings
+  const ringLabels = ['Manual', 'Basic', 'Defined', 'Managed', 'Optimized', 'Autonomous'];
+
+  // Data points — current state and target state
+  const currentValues = [];
+  const targetValues = [];
+  const pulses = [];
+  let time = 0;
+
+  function resize() {
+    const dpr = devicePixelRatio;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    cx = width / 2;
+    cy = height / 2;
+    maxRadius = Math.min(width, height) * 0.38;
+
+    // Initialize data points
+    if (currentValues.length === 0) {
+      for (let i = 0; i < POINT_COUNT; i++) {
+        currentValues.push({
+          value: 0.3 + Math.random() * 0.35,
+          targetValue: 0.3 + Math.random() * 0.35,
+          speed: 0.002 + Math.random() * 0.003,
+        });
+        targetValues.push({
+          value: 0.6 + Math.random() * 0.35,
+          targetValue: 0.6 + Math.random() * 0.35,
+          speed: 0.001 + Math.random() * 0.002,
+        });
+      }
+    }
+  }
+
+  function spokeAngle(i) {
+    return (i / SPOKE_COUNT) * Math.PI * 2 - Math.PI / 2;
+  }
+
+  function polarToXY(angle, radius) {
+    return {
+      x: cx + Math.cos(angle) * radius,
+      y: cy + Math.sin(angle) * radius,
+    };
+  }
+
+  function update() {
+    time += 0.016;
+
+    // Slowly shift data point values
+    for (const pt of currentValues) {
+      const diff = pt.targetValue - pt.value;
+      pt.value += diff * pt.speed * 2;
+      if (Math.abs(diff) < 0.005) {
+        pt.targetValue = 0.25 + Math.random() * 0.4;
+      }
+    }
+    for (const pt of targetValues) {
+      const diff = pt.targetValue - pt.value;
+      pt.value += diff * pt.speed * 2;
+      if (Math.abs(diff) < 0.005) {
+        pt.targetValue = 0.55 + Math.random() * 0.4;
+      }
+    }
+
+    // Spawn radar sweep pulses
+    if (Math.random() < 0.008) {
+      pulses.push({ radius: 0, speed: 0.8 + Math.random() * 0.5, opacity: 1 });
+    }
+
+    // Update pulses
+    for (let i = pulses.length - 1; i >= 0; i--) {
+      pulses[i].radius += pulses[i].speed;
+      pulses[i].opacity = 1 - (pulses[i].radius / maxRadius);
+      if (pulses[i].radius > maxRadius) pulses.splice(i, 1);
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    const lineColor = isDark ? 'rgba(0,177,64,' : 'rgba(0,177,64,';
+    const textColor = isDark ? 'rgba(255,255,255,' : 'rgba(0,0,0,';
+
+    // Draw concentric rings
+    for (let r = 1; r <= RING_COUNT; r++) {
+      const radius = (r / RING_COUNT) * maxRadius;
+      const opacity = isDark ? 0.08 : 0.04;
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.strokeStyle = lineColor + opacity + ')';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Ring label
+      if (r <= ringLabels.length) {
+        ctx.font = '8px -apple-system, sans-serif';
+        ctx.fillStyle = textColor + (isDark ? '0.15)' : '0.08)');
+        ctx.textAlign = 'left';
+        ctx.fillText(ringLabels[r - 1], cx + 4, cy - radius + 10);
+      }
+    }
+
+    // Draw spokes
+    for (let s = 0; s < SPOKE_COUNT; s++) {
+      const angle = spokeAngle(s);
+      const end = polarToXY(angle, maxRadius);
+      const opacity = isDark ? 0.08 : 0.04;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(end.x, end.y);
+      ctx.strokeStyle = lineColor + opacity + ')';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Spoke label
+      const labelPt = polarToXY(angle, maxRadius + 14);
+      ctx.font = '9px -apple-system, sans-serif';
+      ctx.fillStyle = textColor + (isDark ? '0.2)' : '0.1)');
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(spokeLabels[s], labelPt.x, labelPt.y);
+    }
+
+    // Draw expanding pulse rings (radar sweep)
+    for (const pulse of pulses) {
+      const opacity = pulse.opacity * (isDark ? 0.15 : 0.06);
+      ctx.beginPath();
+      ctx.arc(cx, cy, pulse.radius, 0, Math.PI * 2);
+      ctx.strokeStyle = lineColor + opacity + ')';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    // Draw "current state" polygon (red/amber tint)
+    ctx.beginPath();
+    for (let i = 0; i < POINT_COUNT; i++) {
+      const angle = spokeAngle(i);
+      const r = currentValues[i].value * maxRadius;
+      const pt = polarToXY(angle, r);
+      if (i === 0) ctx.moveTo(pt.x, pt.y);
+      else ctx.lineTo(pt.x, pt.y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = isDark ? 'rgba(239,68,68,0.06)' : 'rgba(239,68,68,0.03)';
+    ctx.fill();
+    ctx.strokeStyle = isDark ? 'rgba(239,68,68,0.25)' : 'rgba(239,68,68,0.12)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Draw current state dots
+    for (let i = 0; i < POINT_COUNT; i++) {
+      const angle = spokeAngle(i);
+      const r = currentValues[i].value * maxRadius;
+      const pt = polarToXY(angle, r);
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+      ctx.fillStyle = isDark ? 'rgba(239,68,68,0.5)' : 'rgba(239,68,68,0.3)';
+      ctx.fill();
+    }
+
+    // Draw "target state" polygon (green)
+    ctx.beginPath();
+    for (let i = 0; i < POINT_COUNT; i++) {
+      const angle = spokeAngle(i);
+      const r = targetValues[i].value * maxRadius;
+      const pt = polarToXY(angle, r);
+      if (i === 0) ctx.moveTo(pt.x, pt.y);
+      else ctx.lineTo(pt.x, pt.y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = isDark ? 'rgba(0,177,64,0.08)' : 'rgba(0,177,64,0.04)';
+    ctx.fill();
+    ctx.strokeStyle = isDark ? 'rgba(0,177,64,0.3)' : 'rgba(0,177,64,0.15)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Draw target state dots with glow
+    for (let i = 0; i < POINT_COUNT; i++) {
+      const angle = spokeAngle(i);
+      const r = targetValues[i].value * maxRadius;
+      const pt = polarToXY(angle, r);
+
+      // Glow
+      const glow = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, 10);
+      glow.addColorStop(0, isDark ? 'rgba(0,177,64,0.3)' : 'rgba(0,177,64,0.15)');
+      glow.addColorStop(1, 'rgba(0,177,64,0)');
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 10, 0, Math.PI * 2);
+      ctx.fillStyle = glow;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = isDark ? 'rgba(0,177,64,0.6)' : 'rgba(0,177,64,0.35)';
+      ctx.fill();
+    }
+
+    // Draw transformation arrows (current → target)
+    for (let i = 0; i < POINT_COUNT; i++) {
+      const angle = spokeAngle(i);
+      const r1 = currentValues[i].value * maxRadius;
+      const r2 = targetValues[i].value * maxRadius;
+      const pt1 = polarToXY(angle, r1);
+      const pt2 = polarToXY(angle, r2);
+
+      // Animated dash traveling from current to target
+      const dashProgress = (time * 0.3 + i * 0.5) % 1;
+      const dx = pt2.x - pt1.x, dy = pt2.y - pt1.y;
+      const dotX = pt1.x + dx * dashProgress;
+      const dotY = pt1.y + dy * dashProgress;
+
+      ctx.beginPath();
+      ctx.arc(dotX, dotY, 2, 0, Math.PI * 2);
+      ctx.fillStyle = isDark ? 'rgba(0,177,64,0.5)' : 'rgba(0,177,64,0.25)';
+      ctx.fill();
+    }
+
+    // Center label
+    ctx.font = 'bold 10px -apple-system, sans-serif';
+    ctx.fillStyle = textColor + (isDark ? '0.2)' : '0.1)');
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('MATURITY', cx, cy - 6);
+    ctx.fillText('ASSESSMENT', cx, cy + 6);
+  }
+
+  function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  loop();
+}
+
+initRadar('radar', { dark: false });
+initRadar('radarDark', { dark: true });
+</script>
+</body>
+</html>

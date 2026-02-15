@@ -1,0 +1,38 @@
+name: Import EDGAR Data
+
+on:
+  schedule:
+    - cron: '0 8 * * 1' # Monday 8 AM UTC
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install script dependencies
+        working-directory: scripts
+        run: npm install
+
+      - name: Run schema migration
+        working-directory: scripts
+        env:
+          TURSO_DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+        run: npx tsx migrate-schema.ts
+
+      - name: Run EDGAR import
+        working-directory: scripts
+        env:
+          TURSO_DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+        run: npx tsx import-edgar.ts
